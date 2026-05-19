@@ -25,7 +25,7 @@ import {
   mockVoiceCommands,
 } from "@/data/elitenav/mockNavigationEvents";
 import { STATUS_META, progressPct } from "@/utils/elitenav";
-import type { CoPilotMessage, DispatchSyncEvent, DriverStatusKey } from "@/types/elitenav";
+import type { CoPilotMessage, CoPilotTranscriptEntry, DispatchSyncEvent, DriverStatusKey, VoiceCommand } from "@/types/elitenav";
 import { Play, Square } from "lucide-react";
 
 interface Props {
