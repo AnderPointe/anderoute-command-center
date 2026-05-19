@@ -30,7 +30,7 @@ function AdminDashboard() {
           ?.must_change_password,
       );
       if (mustChange) {
-        navigate({ to: "/admin/change-password" });
+        navigate({ to: "/admin-change-password" });
         return;
       }
       await supabase.rpc("bootstrap_demo_membership");

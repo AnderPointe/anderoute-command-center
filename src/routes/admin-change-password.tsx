@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { KeyRound } from "lucide-react";
 
-export const Route = createFileRoute("/admin/change-password")({
+export const Route = createFileRoute("/admin-change-password")({
   head: () => ({ meta: [{ title: "Change password — Anderoute Admin" }] }),
   component: ChangePasswordPage,
 });
