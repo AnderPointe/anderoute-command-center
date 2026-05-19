@@ -273,32 +273,63 @@ export function EliteNavScreen() {
           {/* Turn card */}
           {driving && (
             <motion.button
-              initial={{ y: -8, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+              initial={{ y: -8, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
               onClick={() => setTurnsOpen(true)}
               className={cn(
-                "absolute left-3 right-3 rounded-2xl bg-sidebar text-sidebar-foreground border border-sidebar-border shadow-[var(--shadow-lg)] text-left",
+                "absolute left-3 right-3 rounded-2xl text-left overflow-hidden",
+                "bg-gradient-to-br from-sidebar to-sidebar/90 text-sidebar-foreground",
+                "border border-sidebar-border shadow-[var(--shadow-lg)] ring-1 ring-teal/15",
                 safetyMode ? "top-14 p-4" : "top-14 p-3",
               )}
             >
+              {/* Lane guidance strip */}
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-teal/0 via-teal to-orange" />
               <div className="flex items-center gap-3">
-                <div className="grid place-items-center rounded-xl bg-teal text-teal-foreground"
-                  style={{ width: safetyMode ? 56 : 44, height: safetyMode ? 56 : 44 }}>
+                <div
+                  className="relative grid place-items-center rounded-2xl bg-gradient-to-br from-teal to-info text-teal-foreground shadow-[var(--shadow-md)]"
+                  style={{ width: safetyMode ? 60 : 46, height: safetyMode ? 60 : 46 }}
+                >
                   <Icon className={safetyMode ? "size-7" : "size-5"} />
+                  <span className="absolute inset-0 rounded-2xl bg-teal-foreground/10 animate-pulse" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className={cn("font-semibold leading-tight", safetyMode ? "text-lg" : "text-sm")}>
-                    {current.instruction}
+                  <div className="flex items-baseline gap-2">
+                    <div className={cn("font-semibold leading-tight truncate", safetyMode ? "text-lg" : "text-sm")}>
+                      {current.instruction}
+                    </div>
+                    <div className="ml-auto shrink-0 inline-flex items-baseline gap-0.5">
+                      <span className={cn("font-bold tabular-nums text-teal", safetyMode ? "text-xl" : "text-base")}>
+                        {current.distance.replace(/[^0-9.]/g, "") || "0.3"}
+                      </span>
+                      <span className="text-[10px] text-sidebar-foreground/60 uppercase">mi</span>
+                    </div>
                   </div>
-                  <div className="text-[11px] text-sidebar-foreground/70 mt-0.5">
-                    {current.street} · in {current.distance}
+                  <div className="text-[11px] text-sidebar-foreground/65 mt-0.5 truncate">
+                    on {current.street}
+                  </div>
+                  {/* Lane diagram */}
+                  <div className="mt-1.5 flex items-center gap-1">
+                    {[0, 1, 2, 3].map((i) => (
+                      <span
+                        key={i}
+                        className={cn(
+                          "h-1 flex-1 rounded-full",
+                          i === 0 || i === 1 ? "bg-teal" : "bg-sidebar-foreground/15",
+                        )}
+                      />
+                    ))}
                   </div>
                 </div>
-                <ChevronUp className="size-4 opacity-60" />
+                <ChevronUp className="size-4 opacity-50 shrink-0" />
               </div>
               {next && (
-                <div className="mt-2 pt-2 border-t border-sidebar-border/60 text-[11px] text-sidebar-foreground/70 flex items-center justify-between">
-                  <span>Then · {next.instruction}</span>
-                  <span className="tabular-nums">{next.distance}</span>
+                <div className="mt-2.5 pt-2 border-t border-sidebar-border/60 text-[11px] text-sidebar-foreground/70 flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-1.5 truncate">
+                    <span className="text-[9px] uppercase tracking-widest text-sidebar-foreground/50">Then</span>
+                    <span className="truncate">{next.instruction}</span>
+                  </span>
+                  <span className="tabular-nums shrink-0">{next.distance}</span>
                 </div>
               )}
             </motion.button>
