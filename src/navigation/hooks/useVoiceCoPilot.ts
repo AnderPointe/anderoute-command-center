@@ -84,7 +84,10 @@ export function useVoiceCoPilot(opts: Options) {
 
       if (intent === "unknown" || intent === "copilot.ask") {
         try {
-          const ai = await resolveIntent({ data: { transcript: t } });
+          const ai = (await resolveIntent({ data: { transcript: t } })) as {
+            intent: string;
+            spoken_response: string;
+          };
           intent = ai.intent as VoiceIntent;
           spoken = ai.spoken_response;
           source = "ai";
