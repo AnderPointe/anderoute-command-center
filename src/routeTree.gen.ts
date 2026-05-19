@@ -30,6 +30,7 @@ import { Route as DriverNavigationRouteImport } from './routes/driver.navigation
 import { Route as DriverElitenavRouteImport } from './routes/driver.elitenav'
 import { Route as DriverEliteNavRouteImport } from './routes/driver.elite-nav'
 import { Route as DriverDeliveriesRouteImport } from './routes/driver.deliveries'
+import { Route as AdminChangePasswordRouteImport } from './routes/admin.change-password'
 
 const VehiclesRoute = VehiclesRouteImport.update({
   id: '/vehicles',
@@ -136,10 +137,15 @@ const DriverDeliveriesRoute = DriverDeliveriesRouteImport.update({
   path: '/driver/deliveries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminChangePasswordRoute = AdminChangePasswordRouteImport.update({
+  id: '/change-password',
+  path: '/change-password',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/admin/change-password': typeof AdminChangePasswordRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/elitenav': typeof DriverElitenavRoute
@@ -162,7 +169,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/admin/change-password': typeof AdminChangePasswordRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/elitenav': typeof DriverElitenavRoute
@@ -186,7 +194,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/admin/change-password': typeof AdminChangePasswordRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/elitenav': typeof DriverElitenavRoute
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/admin/change-password'
     | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/elitenav'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/admin/change-password'
     | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/elitenav'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/admin/change-password'
     | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/elitenav'
@@ -281,7 +293,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AlertsRoute: typeof AlertsRoute
   AnalyticsRoute: typeof AnalyticsRoute
@@ -452,12 +464,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverDeliveriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/change-password': {
+      id: '/admin/change-password'
+      path: '/change-password'
+      fullPath: '/admin/change-password'
+      preLoaderRoute: typeof AdminChangePasswordRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminChangePasswordRoute: typeof AdminChangePasswordRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminChangePasswordRoute: AdminChangePasswordRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AlertsRoute: AlertsRoute,
   AnalyticsRoute: AnalyticsRoute,
@@ -481,3 +510,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
