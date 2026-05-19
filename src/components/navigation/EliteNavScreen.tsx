@@ -264,12 +264,34 @@ export function EliteNavScreen({ onExit }: Props) {
       {/* Side panel — hidden in safety mode */}
       {!safety && (
         <div className="absolute right-3 top-32 z-20 hidden w-[340px] space-y-3 lg:block">
+          {/* Phase 2 — Realtime telemetry strip */}
+          <div className="rounded-2xl border border-white/10 bg-[#0a1218]/85 p-3 backdrop-blur-xl space-y-2">
+            <div className="flex items-center justify-between">
+              <DriverSyncIndicator connected={routeStarted && gpsActive} lastSyncedAt={lastSyncedAt} />
+              <LiveETAUpdater etaMinutes={etaMin} deltaMin={etaDelta} />
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              <GPSStatusBadge active={gpsActive} stale={false} />
+              <TrackingModeBadge mode={trackingMode} />
+              <BatteryStatusBadge level={batteryLevel} />
+              <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] text-slate-300">
+                hdg {Math.round(headingDeg)}°
+              </span>
+            </div>
+            <RouteProgressLiveBar
+              progressPct={pct}
+              totalMiles={mockRoute.totalMiles}
+              remainingMiles={remainingMiles}
+            />
+            <DriverPrivacyNotice />
+          </div>
+
           <ETACard
             etaMinutes={etaMin}
             remainingMiles={remainingMiles}
             currentSpeed={speed}
             speedLimit={65}
-            delayMin={etaMin - mockRoute.etaMinutes}
+            delayMin={etaDelta}
             deliveryWindow="Today · 18:00 – 19:30 CT"
             trafficLabel="Moderate"
           />
