@@ -51,10 +51,11 @@ function maneuverFromBearing(prev: number, next: number): ManeuverType {
   return "turn-slight-left";
 }
 
-export class MockNavigationProvider extends BaseNavigationProvider {
+export class MockNavigationProvider extends BaseNavigationProvider implements MockNavigationControls {
   readonly id = "mock" as const;
   readonly supportsTruckRouting = true; // mock pretends to validate
   readonly supportsVoiceInstructions = true;
+  readonly isMock = true as const;
 
   private timer: number | null = null;
   private route: RouteResult | null = null;
