@@ -2479,7 +2479,21 @@ export type Database = {
     Enums: {
       alert_severity: "low" | "medium" | "high" | "critical"
       alert_status: "open" | "acknowledged" | "resolved"
-      app_role: "owner" | "admin" | "dispatcher" | "driver"
+      app_role:
+        | "owner"
+        | "admin"
+        | "dispatcher"
+        | "driver"
+        | "platform_owner"
+        | "platform_support"
+        | "company_owner"
+        | "company_admin"
+        | "billing_admin"
+        | "dispatcher_manager"
+        | "mechanic"
+        | "customer_admin"
+        | "customer_user"
+        | "viewer"
       app_state: "foreground" | "background" | "inactive" | "unknown"
       audit_event_type:
         | "tracking_started"
@@ -2686,7 +2700,22 @@ export const Constants = {
     Enums: {
       alert_severity: ["low", "medium", "high", "critical"],
       alert_status: ["open", "acknowledged", "resolved"],
-      app_role: ["owner", "admin", "dispatcher", "driver"],
+      app_role: [
+        "owner",
+        "admin",
+        "dispatcher",
+        "driver",
+        "platform_owner",
+        "platform_support",
+        "company_owner",
+        "company_admin",
+        "billing_admin",
+        "dispatcher_manager",
+        "mechanic",
+        "customer_admin",
+        "customer_user",
+        "viewer",
+      ],
       app_state: ["foreground", "background", "inactive", "unknown"],
       audit_event_type: [
         "tracking_started",
