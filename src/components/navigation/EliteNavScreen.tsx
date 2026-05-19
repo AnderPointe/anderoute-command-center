@@ -393,6 +393,17 @@ export function EliteNavScreen({ onExit }: Props) {
           onExit?.();
         }}
       />
+      <LocationPermissionModal
+        open={showPermission}
+        onAllow={() => {
+          setConsent(true);
+          setShowPermission(false);
+          setRouteStarted(true);
+          setSafety(true);
+          setStatus("en_route_pickup");
+        }}
+        onDeny={() => setShowPermission(false)}
+      />
     </div>
   );
 }
