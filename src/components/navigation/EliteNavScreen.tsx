@@ -287,7 +287,10 @@ export function EliteNavScreen({ onExit }: Props) {
         onClose={() => { setShowCoPilot(false); setCoPilotListening(false); }}
         feed={coPilotFeed}
         commands={mockVoiceCommands}
-        onCommand={handleVoice}
+        onCommand={(c) => handleVoice(c, "quick")}
+        transcript={transcript}
+        onReplayCommand={(t) => handleVoice({ id: t.id, label: t.label, utterance: t.utterance }, t.source)}
+        onClearTranscript={() => setTranscript([])}
       />
       <DriverStatusControl
         open={showStatus}
