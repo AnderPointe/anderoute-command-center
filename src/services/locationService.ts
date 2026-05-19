@@ -17,7 +17,7 @@ import type { DriverLiveState } from "@/types/location";
 export async function recordLocationEvent(
   evt: Omit<DriverLocationEvent, "id" | "created_at"> & { recorded_at?: string },
 ) {
-  const { error } = await supabase.from("driver_location_events").insert({
+  const row: any = {
     company_id: evt.company_id,
     driver_id: evt.driver_id,
     lat: evt.latitude,
@@ -39,7 +39,8 @@ export async function recordLocationEvent(
     remaining_miles: evt.remaining_miles ?? null,
     event_source: evt.event_source,
     recorded_at: evt.recorded_at ?? new Date().toISOString(),
-  });
+  };
+  const { error } = await supabase.from("driver_location_events").insert(row);
   if (error) console.warn("[location] insert failed", error.message);
 }
 
@@ -47,14 +48,9 @@ export async function upsertDriverLiveState(state: Partial<DriverLiveState> & {
   driver_id: string;
   company_id: string;
 }) {
+  const row: any = { ...state, updated_at: new Date().toISOString() };
   const { error } = await supabase
     .from("driver_live_state")
-    .upsert(
-      {
-        ...state,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "driver_id" },
-    );
+    .upsert(row, { onConflict: "driver_id" });
   if (error) console.warn("[live_state] upsert failed", error.message);
 }
