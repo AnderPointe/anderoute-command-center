@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock } from "lucide-react";
+import { ShieldCheck, Lock, ParkingSquare } from "lucide-react";
 
 export function SafetyModeOverlay({ active }: { active: boolean }) {
   if (!active) return null;
   return (
-    <div className="pointer-events-none absolute left-1/2 top-3 z-30 -translate-x-1/2">
+    <div className="pointer-events-none absolute left-1/2 top-3 z-30 flex -translate-x-1/2 flex-col items-center gap-1.5">
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -19,11 +19,20 @@ export function SafetyModeOverlay({ active }: { active: boolean }) {
           />
           <ShieldCheck className="h-3.5 w-3.5 text-teal-200" />
         </span>
-        <span className="font-semibold uppercase tracking-wider text-teal-100">Safety Mode</span>
+        <span className="font-semibold uppercase tracking-wider text-teal-100">Driver Safety Mode</span>
         <span className="h-3 w-px bg-teal-400/40" />
         <span className="inline-flex items-center gap-1 text-teal-200/80">
-          <Lock className="h-3 w-3" /> Hands-free · large UI · controls locked while moving
+          <Lock className="h-3 w-3" /> Hands-free · voice-first · controls locked while moving
         </span>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25 }}
+        className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-950/60 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-slate-400 backdrop-blur"
+      >
+        <ParkingSquare className="h-3 w-3 text-slate-500" />
+        Parked mode unlocks full controls
       </motion.div>
     </div>
   );
