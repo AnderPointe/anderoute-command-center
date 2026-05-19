@@ -95,14 +95,24 @@ function EdiDashboard() {
         </Card>
 
         <Card className="p-5">
-          <h2 className="text-sm font-semibold mb-2 uppercase tracking-wider text-muted-foreground">EDI workflow</h2>
-          <ol className="text-sm space-y-1 text-muted-foreground list-decimal list-inside">
-            <li>Receive 204 load tender → parse → create shipment_request</li>
-            <li>Send 997 functional acknowledgment</li>
-            <li>Convert to load → reply with 990 (accept/decline)</li>
-            <li>Stream 214 shipment status messages (pickup, in-transit, delivered)</li>
-            <li>Send 210 invoice on POD completion</li>
-            <li>Retry on transmission errors with exponential backoff</li>
+          <h2 className="text-sm font-semibold mb-3 uppercase tracking-wider text-muted-foreground">EDI workflow</h2>
+          <ol className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+            {[
+              { code: "204", label: "Load tender in",   tone: "text-teal-300" },
+              { code: "997", label: "Functional ack",   tone: "text-slate-300" },
+              { code: "990", label: "Accept / decline", tone: "text-emerald-300" },
+              { code: "214", label: "Status stream",    tone: "text-blue-300" },
+              { code: "210", label: "Invoice out",      tone: "text-amber-300" },
+              { code: "↻",   label: "Retry w/ backoff", tone: "text-muted-foreground" },
+            ].map((s, i) => (
+              <li key={s.code} className="rounded-md border border-white/5 bg-white/[0.02] p-3">
+                <div className="flex items-center justify-between">
+                  <span className={`font-mono text-base font-semibold ${s.tone}`}>{s.code}</span>
+                  <span className="text-[10px] text-muted-foreground">step {i + 1}</span>
+                </div>
+                <div className="mt-1 text-[11px] text-muted-foreground">{s.label}</div>
+              </li>
+            ))}
           </ol>
         </Card>
       </div>
