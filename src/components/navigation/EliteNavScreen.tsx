@@ -71,7 +71,7 @@ export function EliteNavScreen({ onExit }: Props) {
       setSyncEvents((prev) => [
         {
           id: `d_${Date.now()}`,
-          type: "gps",
+          type: "gps" as const,
           message: `GPS ping · ${(32.78 + Math.random() * 0.05).toFixed(3)}, ${(-96.8 + Math.random() * 0.05).toFixed(3)}`,
           at: "now",
         },
