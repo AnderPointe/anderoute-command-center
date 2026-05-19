@@ -329,34 +329,41 @@ export function EliteNavScreen() {
         </div>
 
         {/* ETA / Remaining strip */}
-        <div className="grid grid-cols-4 divide-x divide-border border-b border-border">
-          <Stat label="ETA" value={`${eta}m`} />
-          <Stat label="Remaining" value={`${remainingMi} mi`} />
-          <Stat label="Drive Time" value={`${Math.max(1, Math.round(eta * 0.95))}m`} />
-          <Stat label="Window" value="2h 14m" tone="success" />
+        <div className="grid grid-cols-4 divide-x divide-border border-b border-border bg-gradient-to-b from-surface-2/40 to-transparent">
+          <Stat label="ETA" value={`${eta}m`} delta={driving ? "-2m" : undefined} deltaTone="success" />
+          <Stat label="Remaining" value={`${remainingMi} mi`} sub={driving ? `~${Math.round(eta * 0.95)} min` : undefined} />
+          <Stat label="Avg Speed" value={`${Math.max(0, Math.min(72, speed))} mph`} sub="Limit 65" />
+          <Stat label="Window" value="2h 14m" tone="success" sub="On schedule" />
         </div>
 
         {/* Driving / Action body */}
         {driving ? (
           <div className="p-4 space-y-3">
             {/* Quick chips */}
-            <div className="flex items-center gap-2 overflow-x-auto -mx-1 px-1 pb-1">
+            <div className="flex items-center gap-2 overflow-x-auto -mx-1 px-1 pb-1 scrollbar-thin">
               <Chip onClick={() => setRouteIntelOpen(true)} icon={<Activity className="size-3.5" />}>Route Intelligence</Chip>
-              <Chip icon={<CloudSun className="size-3.5" />}>Weather Clear</Chip>
-              <Chip tone="warning" icon={<AlertTriangle className="size-3.5" />}>1 risk</Chip>
-              <Chip icon={<Fuel className="size-3.5" />}>312 mi range</Chip>
+              <Chip icon={<CloudSun className="size-3.5" />}>Weather Clear · 71°F</Chip>
+              <Chip tone="warning" icon={<AlertTriangle className="size-3.5" />}>1 risk · low bridge</Chip>
+              <Chip icon={<Fuel className="size-3.5" />}>312 mi range · ~$112</Chip>
+              <Chip icon={<Coffee className="size-3.5" />}>Break · in 1h 42m</Chip>
             </div>
 
-            {/* CDL safety card */}
-            <div className="rounded-xl border border-border bg-surface-2 p-3">
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold flex items-center gap-1.5">
-                <ShieldCheck className="size-3 text-teal" /> CDL Truck-Safe Routing Active
+            {/* CDL safety card — promoted to premium tile */}
+            <div className="relative overflow-hidden rounded-xl border border-teal/30 bg-gradient-to-br from-teal/10 via-surface-2 to-surface-2 p-3 shadow-[var(--shadow-sm)]">
+              <div className="absolute -top-12 -right-12 size-32 rounded-full bg-teal/20 blur-2xl pointer-events-none" />
+              <div className="relative flex items-center justify-between">
+                <div className="text-[10px] uppercase tracking-widest font-semibold flex items-center gap-1.5 text-teal">
+                  <ShieldCheck className="size-3.5" /> CDL Truck-Safe Routing
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[9px] uppercase tracking-widest font-bold bg-success/15 text-success border border-success/30">
+                  Active
+                </span>
               </div>
-              <div className="grid grid-cols-2 gap-2 mt-2 text-[11px]">
-                <SafetyRow ok label="Low bridge avoided" />
-                <SafetyRow ok label="Weight restrictions" />
-                <SafetyRow ok label="Hazmat policy" />
-                <SafetyRow label="Tight turn ahead" tone="warning" />
+              <div className="relative grid grid-cols-2 gap-x-3 gap-y-1.5 mt-2.5 text-[11px]">
+                <SafetyRow ok label="Low bridge avoided · 13'9\"" />
+                <SafetyRow ok label="Weight restrictions clear" />
+                <SafetyRow ok label="Hazmat policy verified" />
+                <SafetyRow label="Tight turn in 1.4 mi" tone="warning" />
               </div>
             </div>
 
@@ -389,13 +396,8 @@ export function EliteNavScreen() {
           </div>
         )}
 
-        {/* Dispatch sync footer */}
-        <div className="border-t border-border bg-surface-2/60 px-4 py-2 flex items-center gap-2 text-[10px] uppercase tracking-widest text-muted-foreground">
-          <span className="relative inline-flex size-2 rounded-full bg-success">
-            <span className="absolute inset-0 rounded-full bg-success/60 animate-ping" />
-          </span>
-          Synced with dispatch · {sync[0]?.message}
-        </div>
+        {/* Dispatch sync ticker footer */}
+        <DispatchSyncTicker events={sync} />
       </PhoneFrame>
 
       {/* CoPilot panel */}
