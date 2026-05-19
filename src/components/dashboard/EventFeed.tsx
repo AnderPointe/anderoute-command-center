@@ -12,32 +12,39 @@ const events = [
 
 export function EventFeed() {
   return (
-    <div className="rounded-xl border border-border bg-card">
+    <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-sm)]">
       <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-        <h3 className="font-semibold flex items-center gap-2">
-          <Activity className="size-4 text-teal" /> Real-Time Activity
-        </h3>
-        <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+        <div>
+          <h3 className="font-semibold flex items-center gap-2">
+            <Activity className="size-4 text-teal" /> Operations Stream
+          </h3>
+          <p className="text-[11px] text-muted-foreground mt-0.5">Live driver, load and exception events</p>
+        </div>
+        <span className="inline-flex items-center gap-1.5 text-[11px] text-success font-medium">
           <span className="size-1.5 rounded-full bg-success animate-pulse" /> Live
         </span>
       </div>
-      <ul className="p-2 max-h-[420px] overflow-y-auto">
+      <ul className="p-2 max-h-[440px] overflow-y-auto">
         {events.map((e, i) => {
           const Icon = e.icon;
           return (
-            <li key={i} className="flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-secondary/50">
-              <div
-                className="size-7 rounded-md grid place-items-center shrink-0"
-                style={{
-                  backgroundColor: `color-mix(in oklab, ${e.color} 14%, transparent)`,
-                  color: e.color,
-                }}
-              >
-                <Icon className="size-3.5" />
+            <li key={i} className="relative flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-secondary/50 transition-colors">
+              <div className="relative flex flex-col items-center">
+                <div
+                  className="size-7 rounded-lg grid place-items-center shrink-0"
+                  style={{
+                    backgroundColor: `color-mix(in oklab, ${e.color} 14%, transparent)`,
+                    color: e.color,
+                    boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${e.color} 25%, transparent)`,
+                  }}
+                >
+                  <Icon className="size-3.5" />
+                </div>
+                {i < events.length - 1 && <span className="w-px flex-1 bg-border mt-1 min-h-3" />}
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm leading-snug">{e.text}</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">{e.time} ago</p>
+              <div className="flex-1 min-w-0 pb-1">
+                <p className="text-[13px] leading-snug text-foreground/90">{e.text}</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5 tabular-nums">{e.time} ago</p>
               </div>
             </li>
           );
