@@ -490,6 +490,57 @@ export type Database = {
         }
         Relationships: []
       }
+      driver_push_tokens: {
+        Row: {
+          app_version: string | null
+          company_id: string
+          created_at: string
+          device_id: string | null
+          device_model: string | null
+          driver_id: string
+          id: string
+          last_seen_at: string
+          locale: string | null
+          platform: string | null
+          provider: string
+          revoked_at: string | null
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          app_version?: string | null
+          company_id: string
+          created_at?: string
+          device_id?: string | null
+          device_model?: string | null
+          driver_id: string
+          id?: string
+          last_seen_at?: string
+          locale?: string | null
+          platform?: string | null
+          provider: string
+          revoked_at?: string | null
+          token: string
+          updated_at?: string
+        }
+        Update: {
+          app_version?: string | null
+          company_id?: string
+          created_at?: string
+          device_id?: string | null
+          device_model?: string | null
+          driver_id?: string
+          id?: string
+          last_seen_at?: string
+          locale?: string | null
+          platform?: string | null
+          provider?: string
+          revoked_at?: string | null
+          token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       driver_status_events: {
         Row: {
           company_id: string
@@ -708,6 +759,54 @@ export type Database = {
           recorded_at?: string
           route_id?: string
           source?: string
+        }
+        Relationships: []
+      }
+      in_vehicle_sessions: {
+        Row: {
+          app_template: string | null
+          company_id: string
+          connected_at: string
+          created_at: string
+          disconnected_at: string | null
+          driver_id: string
+          id: string
+          last_event_at: string
+          session_id: string
+          surface: string
+          updated_at: string
+          vehicle_make: string | null
+          vehicle_model: string | null
+        }
+        Insert: {
+          app_template?: string | null
+          company_id: string
+          connected_at?: string
+          created_at?: string
+          disconnected_at?: string | null
+          driver_id: string
+          id?: string
+          last_event_at?: string
+          session_id: string
+          surface: string
+          updated_at?: string
+          vehicle_make?: string | null
+          vehicle_model?: string | null
+        }
+        Update: {
+          app_template?: string | null
+          company_id?: string
+          connected_at?: string
+          created_at?: string
+          disconnected_at?: string | null
+          driver_id?: string
+          id?: string
+          last_event_at?: string
+          session_id?: string
+          surface?: string
+          updated_at?: string
+          vehicle_make?: string | null
+          vehicle_model?: string | null
         }
         Relationships: []
       }
@@ -1113,6 +1212,80 @@ export type Database = {
           vehicle_id?: string | null
         }
         Relationships: []
+      }
+      notification_events: {
+        Row: {
+          body: string
+          category: string
+          company_id: string
+          created_at: string
+          delivered_at: string | null
+          driver_id: string
+          error: string | null
+          id: string
+          opened_at: string | null
+          payload: Json
+          priority: string
+          provider: string | null
+          push_token_id: string | null
+          related_intelligence_id: string | null
+          related_load_id: string | null
+          sent_at: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          category: string
+          company_id: string
+          created_at?: string
+          delivered_at?: string | null
+          driver_id: string
+          error?: string | null
+          id?: string
+          opened_at?: string | null
+          payload?: Json
+          priority?: string
+          provider?: string | null
+          push_token_id?: string | null
+          related_intelligence_id?: string | null
+          related_load_id?: string | null
+          sent_at?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          category?: string
+          company_id?: string
+          created_at?: string
+          delivered_at?: string | null
+          driver_id?: string
+          error?: string | null
+          id?: string
+          opened_at?: string | null
+          payload?: Json
+          priority?: string
+          provider?: string | null
+          push_token_id?: string | null
+          related_intelligence_id?: string | null
+          related_load_id?: string | null
+          sent_at?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_events_push_token_id_fkey"
+            columns: ["push_token_id"]
+            isOneToOne: false
+            referencedRelation: "driver_push_tokens"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {

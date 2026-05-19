@@ -27,6 +27,7 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as DriverNotificationsLabRouteImport } from './routes/driver.notifications-lab'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
 import { Route as DriverNavLabRouteImport } from './routes/driver.nav-lab'
 import { Route as DriverElitenavRouteImport } from './routes/driver.elitenav'
@@ -124,6 +125,11 @@ const DriverIndexRoute = DriverIndexRouteImport.update({
   path: '/driver/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DriverNotificationsLabRoute = DriverNotificationsLabRouteImport.update({
+  id: '/driver/notifications-lab',
+  path: '/driver/notifications-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DriverNavigationRoute = DriverNavigationRouteImport.update({
   id: '/driver/navigation',
   path: '/driver/navigation',
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/driver/elitenav': typeof DriverElitenavRoute
   '/driver/nav-lab': typeof DriverNavLabRoute
   '/driver/navigation': typeof DriverNavigationRoute
+  '/driver/notifications-lab': typeof DriverNotificationsLabRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -205,6 +212,7 @@ export interface FileRoutesByTo {
   '/driver/elitenav': typeof DriverElitenavRoute
   '/driver/nav-lab': typeof DriverNavLabRoute
   '/driver/navigation': typeof DriverNavigationRoute
+  '/driver/notifications-lab': typeof DriverNotificationsLabRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -232,6 +240,7 @@ export interface FileRoutesById {
   '/driver/elitenav': typeof DriverElitenavRoute
   '/driver/nav-lab': typeof DriverNavLabRoute
   '/driver/navigation': typeof DriverNavigationRoute
+  '/driver/notifications-lab': typeof DriverNotificationsLabRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -260,6 +269,7 @@ export interface FileRouteTypes {
     | '/driver/elitenav'
     | '/driver/nav-lab'
     | '/driver/navigation'
+    | '/driver/notifications-lab'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -286,6 +296,7 @@ export interface FileRouteTypes {
     | '/driver/elitenav'
     | '/driver/nav-lab'
     | '/driver/navigation'
+    | '/driver/notifications-lab'
     | '/driver'
   id:
     | '__root__'
@@ -312,6 +323,7 @@ export interface FileRouteTypes {
     | '/driver/elitenav'
     | '/driver/nav-lab'
     | '/driver/navigation'
+    | '/driver/notifications-lab'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -339,6 +351,7 @@ export interface RootRouteChildren {
   DriverElitenavRoute: typeof DriverElitenavRoute
   DriverNavLabRoute: typeof DriverNavLabRoute
   DriverNavigationRoute: typeof DriverNavigationRoute
+  DriverNotificationsLabRoute: typeof DriverNotificationsLabRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -470,6 +483,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/driver/notifications-lab': {
+      id: '/driver/notifications-lab'
+      path: '/driver/notifications-lab'
+      fullPath: '/driver/notifications-lab'
+      preLoaderRoute: typeof DriverNotificationsLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/driver/navigation': {
       id: '/driver/navigation'
       path: '/driver/navigation'
@@ -539,6 +559,7 @@ const rootRouteChildren: RootRouteChildren = {
   DriverElitenavRoute: DriverElitenavRoute,
   DriverNavLabRoute: DriverNavLabRoute,
   DriverNavigationRoute: DriverNavigationRoute,
+  DriverNotificationsLabRoute: DriverNotificationsLabRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
