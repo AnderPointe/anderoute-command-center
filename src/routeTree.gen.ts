@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VehiclesRouteImport } from './routes/vehicles'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ShipmentsRouteImport } from './routes/shipments'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RoutesRouteImport } from './routes/routes'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as LoadsRouteImport } from './routes/loads'
 import { Route as FuelRouteImport } from './routes/fuel'
 import { Route as DriversRouteImport } from './routes/drivers'
@@ -27,6 +29,11 @@ import { Route as DriverNavigationRouteImport } from './routes/driver.navigation
 const VehiclesRoute = VehiclesRouteImport.update({
   id: '/vehicles',
   path: '/vehicles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShipmentsRoute = ShipmentsRouteImport.update({
@@ -47,6 +54,11 @@ const RoutesRoute = RoutesRouteImport.update({
 const MapRoute = MapRouteImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoadsRoute = LoadsRouteImport.update({
@@ -103,10 +115,12 @@ export interface FileRoutesByFullPath {
   '/drivers': typeof DriversRoute
   '/fuel': typeof FuelRoute
   '/loads': typeof LoadsRoute
+  '/login': typeof LoginRoute
   '/map': typeof MapRoute
   '/routes': typeof RoutesRoute
   '/settings': typeof SettingsRoute
   '/shipments': typeof ShipmentsRoute
+  '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
@@ -119,10 +133,12 @@ export interface FileRoutesByTo {
   '/drivers': typeof DriversRoute
   '/fuel': typeof FuelRoute
   '/loads': typeof LoadsRoute
+  '/login': typeof LoginRoute
   '/map': typeof MapRoute
   '/routes': typeof RoutesRoute
   '/settings': typeof SettingsRoute
   '/shipments': typeof ShipmentsRoute
+  '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver': typeof DriverIndexRoute
@@ -136,10 +152,12 @@ export interface FileRoutesById {
   '/drivers': typeof DriversRoute
   '/fuel': typeof FuelRoute
   '/loads': typeof LoadsRoute
+  '/login': typeof LoginRoute
   '/map': typeof MapRoute
   '/routes': typeof RoutesRoute
   '/settings': typeof SettingsRoute
   '/shipments': typeof ShipmentsRoute
+  '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
@@ -154,10 +172,12 @@ export interface FileRouteTypes {
     | '/drivers'
     | '/fuel'
     | '/loads'
+    | '/login'
     | '/map'
     | '/routes'
     | '/settings'
     | '/shipments'
+    | '/signup'
     | '/vehicles'
     | '/driver/navigation'
     | '/driver/'
@@ -170,10 +190,12 @@ export interface FileRouteTypes {
     | '/drivers'
     | '/fuel'
     | '/loads'
+    | '/login'
     | '/map'
     | '/routes'
     | '/settings'
     | '/shipments'
+    | '/signup'
     | '/vehicles'
     | '/driver/navigation'
     | '/driver'
@@ -186,10 +208,12 @@ export interface FileRouteTypes {
     | '/drivers'
     | '/fuel'
     | '/loads'
+    | '/login'
     | '/map'
     | '/routes'
     | '/settings'
     | '/shipments'
+    | '/signup'
     | '/vehicles'
     | '/driver/navigation'
     | '/driver/'
@@ -203,10 +227,12 @@ export interface RootRouteChildren {
   DriversRoute: typeof DriversRoute
   FuelRoute: typeof FuelRoute
   LoadsRoute: typeof LoadsRoute
+  LoginRoute: typeof LoginRoute
   MapRoute: typeof MapRoute
   RoutesRoute: typeof RoutesRoute
   SettingsRoute: typeof SettingsRoute
   ShipmentsRoute: typeof ShipmentsRoute
+  SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
   DriverNavigationRoute: typeof DriverNavigationRoute
   DriverIndexRoute: typeof DriverIndexRoute
@@ -219,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/vehicles'
       fullPath: '/vehicles'
       preLoaderRoute: typeof VehiclesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shipments': {
@@ -247,6 +280,13 @@ declare module '@tanstack/react-router' {
       path: '/map'
       fullPath: '/map'
       preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/loads': {
@@ -323,10 +363,12 @@ const rootRouteChildren: RootRouteChildren = {
   DriversRoute: DriversRoute,
   FuelRoute: FuelRoute,
   LoadsRoute: LoadsRoute,
+  LoginRoute: LoginRoute,
   MapRoute: MapRoute,
   RoutesRoute: RoutesRoute,
   SettingsRoute: SettingsRoute,
   ShipmentsRoute: ShipmentsRoute,
+  SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
   DriverNavigationRoute: DriverNavigationRoute,
   DriverIndexRoute: DriverIndexRoute,
@@ -334,13 +376,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
