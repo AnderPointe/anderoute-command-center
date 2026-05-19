@@ -32,6 +32,7 @@ import { Route as DriverNavLabRouteImport } from './routes/driver.nav-lab'
 import { Route as DriverElitenavRouteImport } from './routes/driver.elitenav'
 import { Route as DriverEliteNavRouteImport } from './routes/driver.elite-nav'
 import { Route as DriverDeliveriesRouteImport } from './routes/driver.deliveries'
+import { Route as DriverCopilotLabRouteImport } from './routes/driver.copilot-lab'
 
 const VehiclesRoute = VehiclesRouteImport.update({
   id: '/vehicles',
@@ -148,6 +149,11 @@ const DriverDeliveriesRoute = DriverDeliveriesRouteImport.update({
   path: '/driver/deliveries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DriverCopilotLabRoute = DriverCopilotLabRouteImport.update({
+  id: '/driver/copilot-lab',
+  path: '/driver/copilot-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -167,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/copilot-lab': typeof DriverCopilotLabRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/elitenav': typeof DriverElitenavRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/copilot-lab': typeof DriverCopilotLabRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/elitenav': typeof DriverElitenavRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/copilot-lab': typeof DriverCopilotLabRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/elitenav': typeof DriverElitenavRoute
@@ -245,6 +254,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/copilot-lab'
     | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/elitenav'
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/copilot-lab'
     | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/elitenav'
@@ -295,6 +306,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/copilot-lab'
     | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/elitenav'
@@ -321,6 +333,7 @@ export interface RootRouteChildren {
   ShipmentsRoute: typeof ShipmentsRoute
   SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
+  DriverCopilotLabRoute: typeof DriverCopilotLabRoute
   DriverDeliveriesRoute: typeof DriverDeliveriesRoute
   DriverEliteNavRoute: typeof DriverEliteNavRoute
   DriverElitenavRoute: typeof DriverElitenavRoute
@@ -492,6 +505,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverDeliveriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/driver/copilot-lab': {
+      id: '/driver/copilot-lab'
+      path: '/driver/copilot-lab'
+      fullPath: '/driver/copilot-lab'
+      preLoaderRoute: typeof DriverCopilotLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -513,6 +533,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShipmentsRoute: ShipmentsRoute,
   SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
+  DriverCopilotLabRoute: DriverCopilotLabRoute,
   DriverDeliveriesRoute: DriverDeliveriesRoute,
   DriverEliteNavRoute: DriverEliteNavRoute,
   DriverElitenavRoute: DriverElitenavRoute,

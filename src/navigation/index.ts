@@ -31,3 +31,12 @@ export * from "./utils/navigationState";
 export * from "./utils/routeValidation";
 export { isMockProvider } from "./types/providers";
 export type { MockNavigationControls } from "./types/providers";
+
+// Phase 4 — Voice + CoPilot
+export * from "./types/voice";
+export { getVoiceProvider, resetVoiceProvider, isMockVoiceProvider } from "./voice/registry";
+export { MockVoiceProvider } from "./voice/MockVoiceProvider";
+export { WebSpeechVoiceProvider } from "./voice/WebSpeechVoiceProvider";
+export { VOICE_INTENTS, detectIntentLocally, intentCategory } from "./voice/intentRegistry";
+export { executeVoiceIntent, type VoiceExecutionContext, type VoiceExecutionResult } from "./services/voiceCommandHandler";
+export { copilotResolveIntent, copilotRouteIntelligence, type RouteIntelligenceInsight } from "./services/copilot.functions";
