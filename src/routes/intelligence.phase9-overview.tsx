@@ -14,16 +14,15 @@ export const Route = createFileRoute("/intelligence/phase9-overview")({
 });
 
 const AREAS = [
-  { to: "/intelligence/overview",        icon: Brain,            title: "AI Operations Intelligence",   tags: ["Hub"],                  tone: "violet" },
-  { to: "/intelligence/risk",            icon: ShieldAlert,      title: "Predictive Risk Engine",       tags: ["Delay", "Compliance"],  tone: "rose"   },
-  { to: "/intelligence/recommendations", icon: Sparkles,         title: "AI Recommendation Center",     tags: ["Explainable", "HITL"],  tone: "violet" },
-  { to: "/intelligence/dispatch",        icon: BotMessageSquare, title: "Autonomous Dispatch Assistant",tags: ["Chat", "Approve"],      tone: "indigo" },
-  { to: "/intelligence/executive",       icon: LineChart,        title: "Executive Intelligence",       tags: ["Health", "Forecast"],   tone: "blue"   },
-  { to: "/intelligence/capacity",        icon: Gauge,            title: "Capacity Forecasting",         tags: ["Drivers", "Vehicles"],  tone: "teal"   },
-  { to: "/intelligence/handoff",         icon: ClipboardList,    title: "Shift Handoff Assistant",      tags: ["Summary"],              tone: "emerald"},
-  { to: "/intelligence/customers",       icon: Users,            title: "Customer Impact",              tags: ["VIP", "Comms"],         tone: "amber"  },
-  { to: "/intelligence/alerts",          icon: BellRing,         title: "AI-Prioritized Alerts",        tags: ["Impact score"],         tone: "orange" },
-  { to: "/intelligence/governance",      icon: ScrollText,       title: "AI Governance",                tags: ["Safety", "Audit"],      tone: "slate"  },
+  { to: "/intelligence/overview",        icon: Brain,            area: "AI Operations Intelligence", result: "Main predictive operations command center",                   tone: "violet" },
+  { to: "/intelligence/risk",            icon: ShieldAlert,      area: "Predictive Risk",            result: "Delay, ETA, GPS, route, customer, vehicle, compliance risk",  tone: "rose"   },
+  { to: "/intelligence/recommendations", icon: Sparkles,         area: "AI Recommendations",         result: "Suggested dispatcher actions with confidence and explanation", tone: "violet" },
+  { to: "/intelligence/recommendations", icon: BotMessageSquare, area: "Human Approval",             result: "Approval workflow for high-impact actions",                   tone: "indigo" },
+  { to: "/intelligence/executive",       icon: LineChart,        area: "Executive Dashboard",        result: "Operations health, risk forecast, customer impact, AI summary", tone: "blue" },
+  { to: "/intelligence/eta-confidence",  icon: Gauge,            area: "ETA Confidence",             result: "Explains ETA reliability and delivery risk",                  tone: "teal"   },
+  { to: "/intelligence/capacity",        icon: Gauge,            area: "Capacity Forecasting",       result: "Driver, vehicle, workload, and coverage forecast",            tone: "emerald"},
+  { to: "/intelligence/handoff",         icon: ClipboardList,    area: "Shift Handoff",              result: "AI-generated operational handoff summary",                    tone: "amber"  },
+  { to: "/intelligence/governance",      icon: ScrollText,       area: "AI Governance",              result: "Audit logs, safety rules, cost controls, RBAC boundaries",    tone: "slate"  },
 ] as const;
 
 const TONE: Record<string, string> = {
@@ -60,16 +59,14 @@ function Phase9Overview() {
         </header>
 
         <section className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {AREAS.map(({ to, icon: Icon, title, tags, tone }) => (
-            <Link key={to} to={to}>
+          {AREAS.map(({ to, icon: Icon, area, result, tone }) => (
+            <Link key={area} to={to}>
               <Card className={`h-full border bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04] ${TONE[tone]}`}>
                 <div className="flex items-center gap-2">
                   <Icon className="size-4" />
-                  <h3 className="text-sm font-medium text-foreground">{title}</h3>
+                  <h3 className="text-sm font-medium text-foreground">{area}</h3>
                 </div>
-                <div className="mt-2 flex flex-wrap gap-1 text-[10px]">
-                  {tags.map((t) => <span key={t} className="rounded border border-white/10 px-2 py-0.5 text-muted-foreground">{t}</span>)}
-                </div>
+                <p className="mt-2 text-xs text-muted-foreground">{result}</p>
               </Card>
             </Link>
           ))}
