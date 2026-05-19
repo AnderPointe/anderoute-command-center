@@ -26,7 +26,12 @@ function ExecutivePage() {
             <LineChart className="size-5 text-blue-300" />
             <h1 className="text-xl font-semibold">Executive Intelligence</h1>
             <Badge variant="outline" className="border-blue-500/40 text-blue-200">CoPilot Executive mode</Badge>
+            <MockBadge />
           </div>
+          <p className="max-w-2xl text-xs text-muted-foreground">
+            Daily executive briefing with operations health, on-time forecast, revenue exposure,
+            and the top three actions CoPilot suggests for the next shift.
+          </p>
           <IntelligenceNav />
         </header>
 
