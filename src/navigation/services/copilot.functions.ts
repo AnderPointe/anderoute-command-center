@@ -24,7 +24,7 @@ interface IntentOutput {
   intent: string;
   confidence: number;
   spoken_response: string;
-  parameters?: Record<string, unknown>;
+  parameters?: Record<string, string | number | boolean | null> | null;
 }
 
 const ALLOWED_INTENTS = [
