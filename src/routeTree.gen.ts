@@ -34,9 +34,15 @@ import { Route as SettingsProductionMonitoringRouteImport } from './routes/setti
 import { Route as SettingsProductionRouteImport } from './routes/settings.production'
 import { Route as SettingsEmailTemplatesRouteImport } from './routes/settings.email-templates'
 import { Route as SettingsBillingRouteImport } from './routes/settings.billing'
+import { Route as SecurityOverviewRouteImport } from './routes/security.overview'
+import { Route as SecurityCenterRouteImport } from './routes/security.center'
 import { Route as RatingQuoteRouteImport } from './routes/rating.quote'
 import { Route as PortalNewRequestRouteImport } from './routes/portal.new-request'
 import { Route as OptimizationCenterRouteImport } from './routes/optimization.center'
+import { Route as OpsObservabilityRouteImport } from './routes/ops.observability'
+import { Route as OpsIncidentsRouteImport } from './routes/ops.incidents'
+import { Route as OpsDatabaseRouteImport } from './routes/ops.database'
+import { Route as OpsCenterRouteImport } from './routes/ops.center'
 import { Route as IntegrationsWebhooksRouteImport } from './routes/integrations.webhooks'
 import { Route as IntegrationsHubRouteImport } from './routes/integrations.hub'
 import { Route as IntegrationsHealthRouteImport } from './routes/integrations.health'
@@ -54,6 +60,7 @@ import { Route as DriverDeliveriesRouteImport } from './routes/driver.deliveries
 import { Route as DriverCopilotLabRouteImport } from './routes/driver.copilot-lab'
 import { Route as DispatchCommandCenterRouteImport } from './routes/dispatch.command-center'
 import { Route as DataImportExportRouteImport } from './routes/data.import-export'
+import { Route as ComplianceSoc2RouteImport } from './routes/compliance.soc2'
 import { Route as AdminPlatformRouteImport } from './routes/admin.platform'
 
 const VehiclesRoute = VehiclesRouteImport.update({
@@ -182,6 +189,16 @@ const SettingsBillingRoute = SettingsBillingRouteImport.update({
   path: '/billing',
   getParentRoute: () => SettingsRoute,
 } as any)
+const SecurityOverviewRoute = SecurityOverviewRouteImport.update({
+  id: '/security/overview',
+  path: '/security/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityCenterRoute = SecurityCenterRouteImport.update({
+  id: '/security/center',
+  path: '/security/center',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RatingQuoteRoute = RatingQuoteRouteImport.update({
   id: '/rating/quote',
   path: '/rating/quote',
@@ -195,6 +212,26 @@ const PortalNewRequestRoute = PortalNewRequestRouteImport.update({
 const OptimizationCenterRoute = OptimizationCenterRouteImport.update({
   id: '/optimization/center',
   path: '/optimization/center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpsObservabilityRoute = OpsObservabilityRouteImport.update({
+  id: '/ops/observability',
+  path: '/ops/observability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpsIncidentsRoute = OpsIncidentsRouteImport.update({
+  id: '/ops/incidents',
+  path: '/ops/incidents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpsDatabaseRoute = OpsDatabaseRouteImport.update({
+  id: '/ops/database',
+  path: '/ops/database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpsCenterRoute = OpsCenterRouteImport.update({
+  id: '/ops/center',
+  path: '/ops/center',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntegrationsWebhooksRoute = IntegrationsWebhooksRouteImport.update({
@@ -282,6 +319,11 @@ const DataImportExportRoute = DataImportExportRouteImport.update({
   path: '/data/import-export',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComplianceSoc2Route = ComplianceSoc2RouteImport.update({
+  id: '/compliance/soc2',
+  path: '/compliance/soc2',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPlatformRoute = AdminPlatformRouteImport.update({
   id: '/platform',
   path: '/platform',
@@ -309,6 +351,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
   '/admin/platform': typeof AdminPlatformRoute
+  '/compliance/soc2': typeof ComplianceSoc2Route
   '/data/import-export': typeof DataImportExportRoute
   '/dispatch/command-center': typeof DispatchCommandCenterRoute
   '/driver/copilot-lab': typeof DriverCopilotLabRoute
@@ -326,9 +369,15 @@ export interface FileRoutesByFullPath {
   '/integrations/health': typeof IntegrationsHealthRoute
   '/integrations/hub': typeof IntegrationsHubRoute
   '/integrations/webhooks': typeof IntegrationsWebhooksRoute
+  '/ops/center': typeof OpsCenterRoute
+  '/ops/database': typeof OpsDatabaseRoute
+  '/ops/incidents': typeof OpsIncidentsRoute
+  '/ops/observability': typeof OpsObservabilityRoute
   '/optimization/center': typeof OptimizationCenterRoute
   '/portal/new-request': typeof PortalNewRequestRoute
   '/rating/quote': typeof RatingQuoteRoute
+  '/security/center': typeof SecurityCenterRoute
+  '/security/overview': typeof SecurityOverviewRoute
   '/settings/billing': typeof SettingsBillingRoute
   '/settings/email-templates': typeof SettingsEmailTemplatesRoute
   '/settings/production': typeof SettingsProductionRoute
@@ -357,6 +406,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
   '/admin/platform': typeof AdminPlatformRoute
+  '/compliance/soc2': typeof ComplianceSoc2Route
   '/data/import-export': typeof DataImportExportRoute
   '/dispatch/command-center': typeof DispatchCommandCenterRoute
   '/driver/copilot-lab': typeof DriverCopilotLabRoute
@@ -374,9 +424,15 @@ export interface FileRoutesByTo {
   '/integrations/health': typeof IntegrationsHealthRoute
   '/integrations/hub': typeof IntegrationsHubRoute
   '/integrations/webhooks': typeof IntegrationsWebhooksRoute
+  '/ops/center': typeof OpsCenterRoute
+  '/ops/database': typeof OpsDatabaseRoute
+  '/ops/incidents': typeof OpsIncidentsRoute
+  '/ops/observability': typeof OpsObservabilityRoute
   '/optimization/center': typeof OptimizationCenterRoute
   '/portal/new-request': typeof PortalNewRequestRoute
   '/rating/quote': typeof RatingQuoteRoute
+  '/security/center': typeof SecurityCenterRoute
+  '/security/overview': typeof SecurityOverviewRoute
   '/settings/billing': typeof SettingsBillingRoute
   '/settings/email-templates': typeof SettingsEmailTemplatesRoute
   '/settings/production': typeof SettingsProductionRoute
@@ -406,6 +462,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
   '/admin/platform': typeof AdminPlatformRoute
+  '/compliance/soc2': typeof ComplianceSoc2Route
   '/data/import-export': typeof DataImportExportRoute
   '/dispatch/command-center': typeof DispatchCommandCenterRoute
   '/driver/copilot-lab': typeof DriverCopilotLabRoute
@@ -423,9 +480,15 @@ export interface FileRoutesById {
   '/integrations/health': typeof IntegrationsHealthRoute
   '/integrations/hub': typeof IntegrationsHubRoute
   '/integrations/webhooks': typeof IntegrationsWebhooksRoute
+  '/ops/center': typeof OpsCenterRoute
+  '/ops/database': typeof OpsDatabaseRoute
+  '/ops/incidents': typeof OpsIncidentsRoute
+  '/ops/observability': typeof OpsObservabilityRoute
   '/optimization/center': typeof OptimizationCenterRoute
   '/portal/new-request': typeof PortalNewRequestRoute
   '/rating/quote': typeof RatingQuoteRoute
+  '/security/center': typeof SecurityCenterRoute
+  '/security/overview': typeof SecurityOverviewRoute
   '/settings/billing': typeof SettingsBillingRoute
   '/settings/email-templates': typeof SettingsEmailTemplatesRoute
   '/settings/production': typeof SettingsProductionRoute
@@ -456,6 +519,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/vehicles'
     | '/admin/platform'
+    | '/compliance/soc2'
     | '/data/import-export'
     | '/dispatch/command-center'
     | '/driver/copilot-lab'
@@ -473,9 +537,15 @@ export interface FileRouteTypes {
     | '/integrations/health'
     | '/integrations/hub'
     | '/integrations/webhooks'
+    | '/ops/center'
+    | '/ops/database'
+    | '/ops/incidents'
+    | '/ops/observability'
     | '/optimization/center'
     | '/portal/new-request'
     | '/rating/quote'
+    | '/security/center'
+    | '/security/overview'
     | '/settings/billing'
     | '/settings/email-templates'
     | '/settings/production'
@@ -504,6 +574,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/vehicles'
     | '/admin/platform'
+    | '/compliance/soc2'
     | '/data/import-export'
     | '/dispatch/command-center'
     | '/driver/copilot-lab'
@@ -521,9 +592,15 @@ export interface FileRouteTypes {
     | '/integrations/health'
     | '/integrations/hub'
     | '/integrations/webhooks'
+    | '/ops/center'
+    | '/ops/database'
+    | '/ops/incidents'
+    | '/ops/observability'
     | '/optimization/center'
     | '/portal/new-request'
     | '/rating/quote'
+    | '/security/center'
+    | '/security/overview'
     | '/settings/billing'
     | '/settings/email-templates'
     | '/settings/production'
@@ -552,6 +629,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/vehicles'
     | '/admin/platform'
+    | '/compliance/soc2'
     | '/data/import-export'
     | '/dispatch/command-center'
     | '/driver/copilot-lab'
@@ -569,9 +647,15 @@ export interface FileRouteTypes {
     | '/integrations/health'
     | '/integrations/hub'
     | '/integrations/webhooks'
+    | '/ops/center'
+    | '/ops/database'
+    | '/ops/incidents'
+    | '/ops/observability'
     | '/optimization/center'
     | '/portal/new-request'
     | '/rating/quote'
+    | '/security/center'
+    | '/security/overview'
     | '/settings/billing'
     | '/settings/email-templates'
     | '/settings/production'
@@ -600,6 +684,7 @@ export interface RootRouteChildren {
   ShipmentsRoute: typeof ShipmentsRoute
   SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
+  ComplianceSoc2Route: typeof ComplianceSoc2Route
   DataImportExportRoute: typeof DataImportExportRoute
   DriverCopilotLabRoute: typeof DriverCopilotLabRoute
   DriverDeliveriesRoute: typeof DriverDeliveriesRoute
@@ -616,8 +701,14 @@ export interface RootRouteChildren {
   IntegrationsHealthRoute: typeof IntegrationsHealthRoute
   IntegrationsHubRoute: typeof IntegrationsHubRoute
   IntegrationsWebhooksRoute: typeof IntegrationsWebhooksRoute
+  OpsCenterRoute: typeof OpsCenterRoute
+  OpsDatabaseRoute: typeof OpsDatabaseRoute
+  OpsIncidentsRoute: typeof OpsIncidentsRoute
+  OpsObservabilityRoute: typeof OpsObservabilityRoute
   OptimizationCenterRoute: typeof OptimizationCenterRoute
   RatingQuoteRoute: typeof RatingQuoteRoute
+  SecurityCenterRoute: typeof SecurityCenterRoute
+  SecurityOverviewRoute: typeof SecurityOverviewRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -798,6 +889,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsBillingRouteImport
       parentRoute: typeof SettingsRoute
     }
+    '/security/overview': {
+      id: '/security/overview'
+      path: '/security/overview'
+      fullPath: '/security/overview'
+      preLoaderRoute: typeof SecurityOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security/center': {
+      id: '/security/center'
+      path: '/security/center'
+      fullPath: '/security/center'
+      preLoaderRoute: typeof SecurityCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rating/quote': {
       id: '/rating/quote'
       path: '/rating/quote'
@@ -817,6 +922,34 @@ declare module '@tanstack/react-router' {
       path: '/optimization/center'
       fullPath: '/optimization/center'
       preLoaderRoute: typeof OptimizationCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ops/observability': {
+      id: '/ops/observability'
+      path: '/ops/observability'
+      fullPath: '/ops/observability'
+      preLoaderRoute: typeof OpsObservabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ops/incidents': {
+      id: '/ops/incidents'
+      path: '/ops/incidents'
+      fullPath: '/ops/incidents'
+      preLoaderRoute: typeof OpsIncidentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ops/database': {
+      id: '/ops/database'
+      path: '/ops/database'
+      fullPath: '/ops/database'
+      preLoaderRoute: typeof OpsDatabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ops/center': {
+      id: '/ops/center'
+      path: '/ops/center'
+      fullPath: '/ops/center'
+      preLoaderRoute: typeof OpsCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/integrations/webhooks': {
@@ -938,6 +1071,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DataImportExportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compliance/soc2': {
+      id: '/compliance/soc2'
+      path: '/compliance/soc2'
+      fullPath: '/compliance/soc2'
+      preLoaderRoute: typeof ComplianceSoc2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/platform': {
       id: '/admin/platform'
       path: '/platform'
@@ -1021,6 +1161,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShipmentsRoute: ShipmentsRoute,
   SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
+  ComplianceSoc2Route: ComplianceSoc2Route,
   DataImportExportRoute: DataImportExportRoute,
   DriverCopilotLabRoute: DriverCopilotLabRoute,
   DriverDeliveriesRoute: DriverDeliveriesRoute,
@@ -1037,8 +1178,14 @@ const rootRouteChildren: RootRouteChildren = {
   IntegrationsHealthRoute: IntegrationsHealthRoute,
   IntegrationsHubRoute: IntegrationsHubRoute,
   IntegrationsWebhooksRoute: IntegrationsWebhooksRoute,
+  OpsCenterRoute: OpsCenterRoute,
+  OpsDatabaseRoute: OpsDatabaseRoute,
+  OpsIncidentsRoute: OpsIncidentsRoute,
+  OpsObservabilityRoute: OpsObservabilityRoute,
   OptimizationCenterRoute: OptimizationCenterRoute,
   RatingQuoteRoute: RatingQuoteRoute,
+  SecurityCenterRoute: SecurityCenterRoute,
+  SecurityOverviewRoute: SecurityOverviewRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
