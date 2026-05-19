@@ -35,36 +35,36 @@ function CapacityPage() {
 
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-medium">Hourly capacity (mock forecast)</h3>
-          <div className="mt-3 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="text-left text-xs text-muted-foreground">
-                <tr>
-                  <th className="py-2 pr-3">Hour</th>
-                  <th className="py-2 pr-3">Drivers</th>
-                  <th className="py-2 pr-3">Vehicles</th>
-                  <th className="py-2 pr-3">Expected deliveries</th>
-                  <th className="py-2 pr-3">Expected delays</th>
-                  <th className="py-2 pr-3">Demand (placeholder)</th>
-                  <th className="py-2 pr-3">Dispatcher load</th>
-                  <th className="py-2 pr-3">Coverage</th>
-                </tr>
-              </thead>
-              <tbody className="text-xs">
-                {slots.map((s) => (
-                  <tr key={s.hour} className={`border-t border-white/5 ${s.coverage_gap ? "bg-amber-500/5" : ""}`}>
-                    <td className="py-2 pr-3 font-medium">{s.hour}</td>
-                    <td className="py-2 pr-3">{s.available_drivers}</td>
-                    <td className="py-2 pr-3">{s.available_vehicles}</td>
-                    <td className="py-2 pr-3">{s.expected_deliveries}</td>
-                    <td className="py-2 pr-3 text-amber-300">{s.expected_delays}</td>
-                    <td className="py-2 pr-3 text-muted-foreground">{s.demand_placeholder}</td>
-                    <td className="py-2 pr-3">{s.dispatcher_workload}%</td>
-                    <td className="py-2 pr-3">{s.coverage_gap ? <span className="text-amber-300">gap</span> : <span className="text-emerald-300">ok</span>}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-4 space-y-2">
+            {slots.map((s) => {
+              const utilization = Math.min(100, Math.round((s.expected_deliveries / Math.max(1, s.available_drivers)) * 100));
+              const tone = s.coverage_gap ? "bg-rose-400/80" : utilization > 80 ? "bg-amber-400/80" : "bg-emerald-400/80";
+              return (
+                <div key={s.hour} className={`rounded border p-2 ${s.coverage_gap ? "border-amber-500/30 bg-amber-500/5" : "border-white/10 bg-black/20"}`}>
+                  <div className="flex items-center gap-3 text-xs">
+                    <div className="w-14 font-medium">{s.hour}</div>
+                    <div className="flex-1 h-2 rounded bg-white/5 overflow-hidden">
+                      <div className={`h-full ${tone}`} style={{ width: `${utilization}%` }} />
+                    </div>
+                    <div className="w-12 text-right text-muted-foreground">{utilization}%</div>
+                    <div className="hidden md:flex gap-4 text-[11px] text-muted-foreground">
+                      <span>🚚 {s.available_drivers} drivers</span>
+                      <span>🚛 {s.available_vehicles} veh</span>
+                      <span>📦 {s.expected_deliveries} del</span>
+                      <span className={s.expected_delays > 0 ? "text-amber-300" : ""}>⏱ {s.expected_delays} delays</span>
+                      <span>👤 {s.dispatcher_workload}% disp</span>
+                    </div>
+                    {s.coverage_gap && (
+                      <Badge variant="outline" className="border-amber-500/30 text-amber-300 text-[10px]">gap</Badge>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
+          <p className="mt-3 text-[10px] text-muted-foreground">
+            Utilization = expected deliveries ÷ available drivers. Mock forecast only.
+          </p>
         </Card>
       </div>
     </AppShell>

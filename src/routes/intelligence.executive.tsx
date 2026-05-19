@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AppShell } from "@/components/layout/AppShell";
 import { IntelligenceNav } from "@/components/intelligence/IntelligenceNav";
+import { MockBadge } from "@/components/intelligence/MockBadge";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LineChart, TrendingUp } from "lucide-react";
@@ -25,7 +26,12 @@ function ExecutivePage() {
             <LineChart className="size-5 text-blue-300" />
             <h1 className="text-xl font-semibold">Executive Intelligence</h1>
             <Badge variant="outline" className="border-blue-500/40 text-blue-200">CoPilot Executive mode</Badge>
+            <MockBadge />
           </div>
+          <p className="max-w-2xl text-xs text-muted-foreground">
+            Daily executive briefing with operations health, on-time forecast, revenue exposure,
+            and the top three actions CoPilot suggests for the next shift.
+          </p>
           <IntelligenceNav />
         </header>
 
@@ -47,15 +53,22 @@ function ExecutivePage() {
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-medium">Operations health components</h3>
           <div className="mt-3 space-y-2">
-            {health.components.map((c) => (
-              <div key={c.label} className="flex items-center gap-3 text-sm">
-                <div className="w-44 text-muted-foreground">{c.label}</div>
-                <div className="flex-1 h-1.5 rounded bg-white/5 overflow-hidden">
-                  <div className="h-full bg-emerald-400/70" style={{ width: `${c.value}%` }} />
+            {health.components.map((c) => {
+              const bar =
+                c.status === "excellent" ? "bg-emerald-400/80" :
+                c.status === "stable"    ? "bg-teal-400/70" :
+                c.status === "watch"     ? "bg-amber-400/80" :
+                                           "bg-rose-400/80";
+              return (
+                <div key={c.label} className="flex items-center gap-3 text-sm">
+                  <div className="w-44 text-muted-foreground">{c.label}</div>
+                  <div className="flex-1 h-1.5 rounded bg-white/5 overflow-hidden">
+                    <div className={`h-full ${bar}`} style={{ width: `${c.value}%` }} />
+                  </div>
+                  <div className="w-20 text-right text-xs text-muted-foreground capitalize">{c.value} · {c.status}</div>
                 </div>
-                <div className="w-12 text-right text-xs text-muted-foreground">{c.value}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Card>
 
