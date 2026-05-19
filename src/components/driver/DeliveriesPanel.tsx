@@ -269,7 +269,14 @@ function PODCard({
               Dispatch hasn’t marked this delivery as received yet.
             </p>
             {showConfirmButton && (
-              <Button size="sm" onClick={onConfirm} disabled={confirming}>
+              <Button
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onConfirm();
+                }}
+                disabled={confirming}
+              >
                 {confirming ? "Confirming…" : "Mark received"}
               </Button>
             )}
