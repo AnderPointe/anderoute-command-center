@@ -26,6 +26,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
 import { Route as DriverEliteNavRouteImport } from './routes/driver.elite-nav'
+import { Route as DriverDeliveriesRouteImport } from './routes/driver.deliveries'
 
 const VehiclesRoute = VehiclesRouteImport.update({
   id: '/vehicles',
@@ -112,6 +113,11 @@ const DriverEliteNavRoute = DriverEliteNavRouteImport.update({
   path: '/driver/elite-nav',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DriverDeliveriesRoute = DriverDeliveriesRouteImport.update({
+  id: '/driver/deliveries',
+  path: '/driver/deliveries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver': typeof DriverIndexRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/navigation'
     | '/driver/'
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/navigation'
     | '/driver'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/deliveries'
     | '/driver/elite-nav'
     | '/driver/navigation'
     | '/driver/'
@@ -246,6 +258,7 @@ export interface RootRouteChildren {
   ShipmentsRoute: typeof ShipmentsRoute
   SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
+  DriverDeliveriesRoute: typeof DriverDeliveriesRoute
   DriverEliteNavRoute: typeof DriverEliteNavRoute
   DriverNavigationRoute: typeof DriverNavigationRoute
   DriverIndexRoute: typeof DriverIndexRoute
@@ -372,6 +385,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverEliteNavRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/driver/deliveries': {
+      id: '/driver/deliveries'
+      path: '/driver/deliveries'
+      fullPath: '/driver/deliveries'
+      preLoaderRoute: typeof DriverDeliveriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -390,6 +410,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShipmentsRoute: ShipmentsRoute,
   SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
+  DriverDeliveriesRoute: DriverDeliveriesRoute,
   DriverEliteNavRoute: DriverEliteNavRoute,
   DriverNavigationRoute: DriverNavigationRoute,
   DriverIndexRoute: DriverIndexRoute,
@@ -397,3 +418,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
