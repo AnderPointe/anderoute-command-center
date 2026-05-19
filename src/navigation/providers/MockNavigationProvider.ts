@@ -15,7 +15,7 @@ import type {
   VoiceInstructionEvent,
 } from "../types/navigation";
 import { BaseNavigationProvider } from "./NavigationProvider";
-import type { RouteResult } from "../types/providers";
+import type { MockNavigationControls, RouteResult } from "../types/providers";
 import type { RouteRequest } from "../types/truckRouting";
 
 const MI_TO_M = 1609.34;
@@ -51,10 +51,11 @@ function maneuverFromBearing(prev: number, next: number): ManeuverType {
   return "turn-slight-left";
 }
 
-export class MockNavigationProvider extends BaseNavigationProvider {
+export class MockNavigationProvider extends BaseNavigationProvider implements MockNavigationControls {
   readonly id = "mock" as const;
   readonly supportsTruckRouting = true; // mock pretends to validate
   readonly supportsVoiceInstructions = true;
+  readonly isMock = true as const;
 
   private timer: number | null = null;
   private route: RouteResult | null = null;
@@ -254,6 +255,18 @@ export class MockNavigationProvider extends BaseNavigationProvider {
       { latitude: g[idx][1] + 0.01, longitude: g[idx][0] + 0.01 },
       120,
     );
+  }
+
+  /** Dev helper — jump the puck forward by N simulated seconds. */
+  fastForward(seconds: number) {
+    if (!this.route) return;
+    const ticks = Math.max(1, Math.round(seconds / 1.5));
+    for (let i = 0; i < ticks; i++) this.tick();
+  }
+
+  /** Dev helper — change the simulated cruise speed. */
+  setSpeedMph(mph: number) {
+    this.speedMph = Math.max(5, Math.min(85, mph));
   }
 }
 
