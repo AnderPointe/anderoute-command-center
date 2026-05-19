@@ -56,7 +56,7 @@ function AdminLoginPage() {
     }
 
     setLoading(false);
-    navigate({ to: "/" });
+    navigate({ to: "/admin" });
   };
 
   return (
