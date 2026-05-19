@@ -25,6 +25,7 @@ import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
+import { Route as DriverElitenavRouteImport } from './routes/driver.elitenav'
 import { Route as DriverEliteNavRouteImport } from './routes/driver.elite-nav'
 import { Route as DriverDeliveriesRouteImport } from './routes/driver.deliveries'
 
@@ -108,6 +109,11 @@ const DriverNavigationRoute = DriverNavigationRouteImport.update({
   path: '/driver/navigation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DriverElitenavRoute = DriverElitenavRouteImport.update({
+  id: '/driver/elitenav',
+  path: '/driver/elitenav',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DriverEliteNavRoute = DriverEliteNavRouteImport.update({
   id: '/driver/elite-nav',
   path: '/driver/elite-nav',
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/vehicles': typeof VehiclesRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
+  '/driver/elitenav': typeof DriverElitenavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -156,6 +163,7 @@ export interface FileRoutesByTo {
   '/vehicles': typeof VehiclesRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
+  '/driver/elitenav': typeof DriverElitenavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver': typeof DriverIndexRoute
 }
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/vehicles': typeof VehiclesRoute
   '/driver/deliveries': typeof DriverDeliveriesRoute
   '/driver/elite-nav': typeof DriverEliteNavRoute
+  '/driver/elitenav': typeof DriverElitenavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -199,6 +208,7 @@ export interface FileRouteTypes {
     | '/vehicles'
     | '/driver/deliveries'
     | '/driver/elite-nav'
+    | '/driver/elitenav'
     | '/driver/navigation'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/vehicles'
     | '/driver/deliveries'
     | '/driver/elite-nav'
+    | '/driver/elitenav'
     | '/driver/navigation'
     | '/driver'
   id:
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/vehicles'
     | '/driver/deliveries'
     | '/driver/elite-nav'
+    | '/driver/elitenav'
     | '/driver/navigation'
     | '/driver/'
   fileRoutesById: FileRoutesById
@@ -260,6 +272,7 @@ export interface RootRouteChildren {
   VehiclesRoute: typeof VehiclesRoute
   DriverDeliveriesRoute: typeof DriverDeliveriesRoute
   DriverEliteNavRoute: typeof DriverEliteNavRoute
+  DriverElitenavRoute: typeof DriverElitenavRoute
   DriverNavigationRoute: typeof DriverNavigationRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
@@ -378,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverNavigationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/driver/elitenav': {
+      id: '/driver/elitenav'
+      path: '/driver/elitenav'
+      fullPath: '/driver/elitenav'
+      preLoaderRoute: typeof DriverElitenavRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/driver/elite-nav': {
       id: '/driver/elite-nav'
       path: '/driver/elite-nav'
@@ -412,9 +432,20 @@ const rootRouteChildren: RootRouteChildren = {
   VehiclesRoute: VehiclesRoute,
   DriverDeliveriesRoute: DriverDeliveriesRoute,
   DriverEliteNavRoute: DriverEliteNavRoute,
+  DriverElitenavRoute: DriverElitenavRoute,
   DriverNavigationRoute: DriverNavigationRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
