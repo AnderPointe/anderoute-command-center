@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
+import { PODDetailDrawer } from "./PODDetailDrawer";
 
 /**
  * Driver-facing Deliveries panel.
