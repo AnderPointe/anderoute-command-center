@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Navigation, MapPin, Gauge, Clock, AlertTriangle, Phone, Mic,
+  Navigation, MapPin, Gauge, AlertTriangle, Phone, Mic,
   Radio, ShieldCheck, Fuel, Snowflake, Truck, Check, PackageCheck,
   ArrowUpRight, ArrowUpLeft, ArrowUp, CornerDownLeft, CornerDownRight,
   ChevronUp, ChevronDown, X, Sparkles, Waves, Activity, AlertOctagon,
@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import {
   eliteVehicleProfile, eliteManeuvers, initialCoPilotFeed,
