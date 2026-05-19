@@ -42,6 +42,7 @@ const nav = [
     { to: "/driver", label: "Load Offer", icon: Smartphone },
     { to: "/driver/navigation", label: "In-Trip Nav", icon: Navigation },
     { to: "/driver/elite-nav", label: "EliteNav + CoPilot", icon: Activity },
+    { to: "/driver/deliveries", label: "Deliveries", icon: PackageCheck },
   ]},
   { group: "System", items: [
     { to: "/settings", label: "Settings", icon: Settings },
