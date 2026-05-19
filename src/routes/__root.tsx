@@ -116,7 +116,40 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AuthProvider>
+        <AuthGate>
+          <Outlet />
+        </AuthGate>
+      </AuthProvider>
     </QueryClientProvider>
   );
+}
+
+const PUBLIC_PATHS = new Set(["/login", "/signup"]);
+
+function AuthGate({ children }: { children: React.ReactNode }) {
+  const { session, loading } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const router = useRouter();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      qc.invalidateQueries();
+      router.invalidate();
+    });
+    return () => subscription.unsubscribe();
+  }, [qc, router]);
+
+  useEffect(() => {
+    if (loading) return;
+    const isPublic = PUBLIC_PATHS.has(location.pathname);
+    if (!session && !isPublic) navigate({ to: "/login" });
+  }, [loading, session, location.pathname, navigate]);
+
+  if (loading) {
+    return <div className="flex min-h-screen items-center justify-center bg-background text-sm text-muted-foreground">Loading…</div>;
+  }
+  return <>{children}</>;
 }
