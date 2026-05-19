@@ -151,3 +151,15 @@ function ExplainRow({ label, value, tone }: { label: string; value: string; tone
     </div>
   );
 }
+
+function Stat({ icon: Icon, tone, label, value, sub }: { icon: any; tone: string; label: string; value: string | number; sub: string }) {
+  return (
+    <Card className="border-white/10 bg-white/[0.02] p-4">
+      <div className="flex items-center gap-2 text-xs uppercase text-muted-foreground">
+        <Icon className={`size-3.5 ${tone}`} /> {label}
+      </div>
+      <div className={`mt-1 text-2xl font-semibold ${tone}`}>{value}</div>
+      <div className="text-xs text-muted-foreground">{sub}</div>
+    </Card>
+  );
+}
