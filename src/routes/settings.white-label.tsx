@@ -31,6 +31,7 @@ function WhiteLabelSettings() {
   return (
     <AppShell>
       <div className="p-4 md:p-6 space-y-6">
+        <EnterpriseNav />
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">White-Label Branding</h1>
           <p className="text-sm text-muted-foreground mt-0.5">Customize logo, colors, custom domain, and email branding for your enterprise deployment.</p>
