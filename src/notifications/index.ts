@@ -16,6 +16,15 @@ export {
   etaArrivalNotification,
 } from "./services/notificationTriggers";
 export { sendNotification } from "./services/notificationService";
+export {
+  type NotificationPreferences,
+  DEFAULT_PREFS,
+  loadPreferences,
+  savePreferences,
+  shouldPresent,
+} from "./services/notificationPreferences";
+export { resolveDeeplink, type NotificationLike } from "./services/notificationRouter";
 
 export { usePushRegistration } from "./hooks/usePushRegistration";
 export { useNotificationCenter, type NotificationEvent } from "./hooks/useNotificationCenter";
+export { useNotificationPreferences } from "./hooks/useNotificationPreferences";
