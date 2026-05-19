@@ -94,3 +94,19 @@ export interface TruckRouteValidator {
     profile: TruckRouteProfile,
   ): Promise<TruckRouteValidationResult>;
 }
+
+/**
+ * Optional capability surfaced by the Mock provider only. Real SDK adapters
+ * MUST NOT implement this — production code branches on this interface to
+ * gate dev-only affordances (simulate off-route, fast-forward, etc.).
+ */
+export interface MockNavigationControls {
+  readonly isMock: true;
+  simulateOffRoute(): void;
+  fastForward(seconds: number): void;
+  setSpeedMph(mph: number): void;
+}
+
+export function isMockProvider(p: NavigationProvider): p is NavigationProvider & MockNavigationControls {
+  return (p as NavigationProvider & Partial<MockNavigationControls>).isMock === true;
+}
