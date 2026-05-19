@@ -27,6 +27,7 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as SettingsProductionRouteImport } from './routes/settings.production'
 import { Route as DriverNotificationsLabRouteImport } from './routes/driver.notifications-lab'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
 import { Route as DriverNavLabRouteImport } from './routes/driver.nav-lab'
@@ -125,6 +126,11 @@ const DriverIndexRoute = DriverIndexRouteImport.update({
   path: '/driver/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsProductionRoute = SettingsProductionRouteImport.update({
+  id: '/production',
+  path: '/production',
+  getParentRoute: () => SettingsRoute,
+} as any)
 const DriverNotificationsLabRoute = DriverNotificationsLabRouteImport.update({
   id: '/driver/notifications-lab',
   path: '/driver/notifications-lab',
@@ -175,7 +181,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/map': typeof MapRoute
   '/routes': typeof RoutesRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof SettingsRouteWithChildren
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/driver/nav-lab': typeof DriverNavLabRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/notifications-lab': typeof DriverNotificationsLabRoute
+  '/settings/production': typeof SettingsProductionRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -202,7 +209,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/map': typeof MapRoute
   '/routes': typeof RoutesRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof SettingsRouteWithChildren
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
@@ -213,6 +220,7 @@ export interface FileRoutesByTo {
   '/driver/nav-lab': typeof DriverNavLabRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/notifications-lab': typeof DriverNotificationsLabRoute
+  '/settings/production': typeof SettingsProductionRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -230,7 +238,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/map': typeof MapRoute
   '/routes': typeof RoutesRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof SettingsRouteWithChildren
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
@@ -241,6 +249,7 @@ export interface FileRoutesById {
   '/driver/nav-lab': typeof DriverNavLabRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/notifications-lab': typeof DriverNotificationsLabRoute
+  '/settings/production': typeof SettingsProductionRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -270,6 +279,7 @@ export interface FileRouteTypes {
     | '/driver/nav-lab'
     | '/driver/navigation'
     | '/driver/notifications-lab'
+    | '/settings/production'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -297,6 +307,7 @@ export interface FileRouteTypes {
     | '/driver/nav-lab'
     | '/driver/navigation'
     | '/driver/notifications-lab'
+    | '/settings/production'
     | '/driver'
   id:
     | '__root__'
@@ -324,6 +335,7 @@ export interface FileRouteTypes {
     | '/driver/nav-lab'
     | '/driver/navigation'
     | '/driver/notifications-lab'
+    | '/settings/production'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -341,7 +353,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   MapRoute: typeof MapRoute
   RoutesRoute: typeof RoutesRoute
-  SettingsRoute: typeof SettingsRoute
+  SettingsRoute: typeof SettingsRouteWithChildren
   ShipmentsRoute: typeof ShipmentsRoute
   SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
@@ -483,6 +495,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings/production': {
+      id: '/settings/production'
+      path: '/production'
+      fullPath: '/settings/production'
+      preLoaderRoute: typeof SettingsProductionRouteImport
+      parentRoute: typeof SettingsRoute
+    }
     '/driver/notifications-lab': {
       id: '/driver/notifications-lab'
       path: '/driver/notifications-lab'
@@ -535,6 +554,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface SettingsRouteChildren {
+  SettingsProductionRoute: typeof SettingsProductionRoute
+}
+
+const SettingsRouteChildren: SettingsRouteChildren = {
+  SettingsProductionRoute: SettingsProductionRoute,
+}
+
+const SettingsRouteWithChildren = SettingsRoute._addFileChildren(
+  SettingsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
@@ -549,7 +580,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   MapRoute: MapRoute,
   RoutesRoute: RoutesRoute,
-  SettingsRoute: SettingsRoute,
+  SettingsRoute: SettingsRouteWithChildren,
   ShipmentsRoute: ShipmentsRoute,
   SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
