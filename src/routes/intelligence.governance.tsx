@@ -51,19 +51,32 @@ function GovernancePage() {
           <Card className="border-white/10 bg-white/[0.02] p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-sm font-medium"><DollarSign className="size-4 text-amber-300" /> AI cost & usage (placeholder)</div>
-              <div className="text-xs text-muted-foreground">${total_cost_placeholder.toFixed(2)} of ${budget_placeholder}</div>
+              <div className="text-xs text-muted-foreground">${total_cost_placeholder.toFixed(2)} of ${budget_placeholder} · {Math.round((total_cost_placeholder / budget_placeholder) * 100)}%</div>
             </div>
-            <div className="mt-3 space-y-2 text-xs">
-              {usage.map((u) => (
-                <div key={u.feature} className="flex items-center gap-2">
-                  <div className="w-36 text-muted-foreground">{u.feature}</div>
-                  <div className="flex-1 h-1.5 rounded bg-white/5 overflow-hidden">
-                    <div className="h-full bg-violet-400/70" style={{ width: `${u.budget_pct}%` }} />
+            <div className="mt-2 h-1.5 w-full rounded bg-white/5 overflow-hidden">
+              <div className={`h-full ${total_cost_placeholder / budget_placeholder > 0.9 ? "bg-rose-400/80" : total_cost_placeholder / budget_placeholder > 0.7 ? "bg-amber-400/80" : "bg-emerald-400/80"}`} style={{ width: `${Math.min(100, (total_cost_placeholder / budget_placeholder) * 100)}%` }} />
+            </div>
+            <div className="mt-4 space-y-2 text-xs">
+              {usage.map((u) => {
+                const tone = u.budget_pct > 80 ? "bg-rose-400/80" : u.budget_pct > 50 ? "bg-amber-400/80" : "bg-violet-400/70";
+                return (
+                  <div key={u.feature} className="flex items-center gap-2">
+                    <div className="w-36 text-muted-foreground">{u.feature}</div>
+                    <div className="flex-1 h-1.5 rounded bg-white/5 overflow-hidden">
+                      <div className={`h-full ${tone}`} style={{ width: `${u.budget_pct}%` }} />
+                    </div>
+                    <div className="w-28 text-right text-muted-foreground">
+                      ${u.cost_placeholder.toFixed(1)} · {u.calls_24h} calls
+                      {u.budget_pct > 80 && <AlertTriangle className="inline ml-1 size-3 text-rose-300" />}
+                    </div>
                   </div>
-                  <div className="w-24 text-right text-muted-foreground">${u.cost_placeholder.toFixed(1)} · {u.calls_24h} calls</div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+            <p className="mt-3 text-[10px] text-muted-foreground">
+              Per-tenant budgets enforced server-side. Cost ceilings auto-throttle non-critical AI calls before
+              hard cutoff.
+            </p>
           </Card>
 
           <Card className="border-white/10 bg-white/[0.02] p-4 lg:col-span-2">
