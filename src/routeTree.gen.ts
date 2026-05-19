@@ -25,6 +25,7 @@ import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
+import { Route as DriverEliteNavRouteImport } from './routes/driver.elite-nav'
 
 const VehiclesRoute = VehiclesRouteImport.update({
   id: '/vehicles',
@@ -106,6 +107,11 @@ const DriverNavigationRoute = DriverNavigationRouteImport.update({
   path: '/driver/navigation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DriverEliteNavRoute = DriverEliteNavRouteImport.update({
+  id: '/driver/elite-nav',
+  path: '/driver/elite-nav',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver': typeof DriverIndexRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/shipments': typeof ShipmentsRoute
   '/signup': typeof SignupRoute
   '/vehicles': typeof VehiclesRoute
+  '/driver/elite-nav': typeof DriverEliteNavRoute
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/elite-nav'
     | '/driver/navigation'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/elite-nav'
     | '/driver/navigation'
     | '/driver'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/signup'
     | '/vehicles'
+    | '/driver/elite-nav'
     | '/driver/navigation'
     | '/driver/'
   fileRoutesById: FileRoutesById
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   ShipmentsRoute: typeof ShipmentsRoute
   SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
+  DriverEliteNavRoute: typeof DriverEliteNavRoute
   DriverNavigationRoute: typeof DriverNavigationRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
@@ -352,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverNavigationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/driver/elite-nav': {
+      id: '/driver/elite-nav'
+      path: '/driver/elite-nav'
+      fullPath: '/driver/elite-nav'
+      preLoaderRoute: typeof DriverEliteNavRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -370,9 +390,20 @@ const rootRouteChildren: RootRouteChildren = {
   ShipmentsRoute: ShipmentsRoute,
   SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
+  DriverEliteNavRoute: DriverEliteNavRoute,
   DriverNavigationRoute: DriverNavigationRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
