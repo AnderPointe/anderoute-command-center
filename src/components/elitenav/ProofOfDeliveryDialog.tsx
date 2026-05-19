@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Camera, X, Eraser, Check, Upload, Loader2, PenLine, ImagePlus, CheckCircle2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -238,88 +238,89 @@ interface SignaturePadHandle {
   toBlob: () => Promise<Blob>;
 }
 
-const SignaturePad = (() => {
-  // forwardRef inline
-  const { forwardRef, useImperativeHandle } = require("react") as typeof import("react");
-  return forwardRef<SignaturePadHandle>((_props, ref) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const drawing = useRef(false);
-    const dirty = useRef(false);
-    const last = useRef<{ x: number; y: number } | null>(null);
+const SignaturePad = forwardRef<SignaturePadHandle>((_props, ref) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const drawing = useRef(false);
+  const dirty = useRef(false);
+  const last = useRef<{ x: number; y: number } | null>(null);
 
-    useEffect(() => {
-      const canvas = canvasRef.current!;
-      const resize = () => {
-        const rect = canvas.getBoundingClientRect();
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-        const ctx = canvas.getContext("2d")!;
-        ctx.scale(dpr, dpr);
-        ctx.lineWidth = 2;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--foreground") || "#000";
-      };
-      resize();
-      const ro = new ResizeObserver(resize);
-      ro.observe(canvas);
-      return () => ro.disconnect();
-    }, []);
-
-    const pos = (e: React.PointerEvent) => {
-      const r = canvasRef.current!.getBoundingClientRect();
-      return { x: e.clientX - r.left, y: e.clientY - r.top };
+  useEffect(() => {
+    const canvas = canvasRef.current!;
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      const ctx = canvas.getContext("2d")!;
+      ctx.scale(dpr, dpr);
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      const fg = getComputedStyle(document.documentElement).getPropertyValue("--foreground").trim();
+      ctx.strokeStyle = fg || "#0f172a";
     };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    return () => ro.disconnect();
+  }, []);
 
-    const onDown = (e: React.PointerEvent) => {
-      e.currentTarget.setPointerCapture(e.pointerId);
-      drawing.current = true;
-      last.current = pos(e);
-    };
-    const onMove = (e: React.PointerEvent) => {
-      if (!drawing.current) return;
-      const p = pos(e);
-      const ctx = canvasRef.current!.getContext("2d")!;
-      ctx.beginPath();
-      ctx.moveTo(last.current!.x, last.current!.y);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-      last.current = p;
-      dirty.current = true;
-    };
-    const onUp = () => { drawing.current = false; last.current = null; };
+  const pos = (e: React.PointerEvent) => {
+    const r = canvasRef.current!.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  };
+  const onDown = (e: React.PointerEvent) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    drawing.current = true;
+    last.current = pos(e);
+  };
+  const onMove = (e: React.PointerEvent) => {
+    if (!drawing.current) return;
+    const p = pos(e);
+    const ctx = canvasRef.current!.getContext("2d")!;
+    ctx.beginPath();
+    ctx.moveTo(last.current!.x, last.current!.y);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    last.current = p;
+    dirty.current = true;
+  };
+  const onUp = () => { drawing.current = false; last.current = null; };
 
-    useImperativeHandle(ref, () => ({
-      clear: () => {
-        const c = canvasRef.current!;
-        c.getContext("2d")!.clearRect(0, 0, c.width, c.height);
-        dirty.current = false;
-      },
-      isEmpty: () => !dirty.current,
-      toDataURL: async () => canvasRef.current!.toDataURL("image/png"),
-      toBlob: () =>
-        new Promise<Blob>((resolve, reject) => {
-          canvasRef.current!.toBlob(
-            (b) => (b ? resolve(b) : reject(new Error("Failed to capture signature"))),
-            "image/png",
-          );
-        }),
-    }));
+  useImperativeHandle(ref, () => ({
+    clear: () => {
+      const c = canvasRef.current!;
+      const ctx = c.getContext("2d")!;
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.restore();
+      dirty.current = false;
+    },
+    isEmpty: () => !dirty.current,
+    toDataURL: async () => canvasRef.current!.toDataURL("image/png"),
+    toBlob: () =>
+      new Promise<Blob>((resolve, reject) => {
+        canvasRef.current!.toBlob(
+          (b) => (b ? resolve(b) : reject(new Error("Failed to capture signature"))),
+          "image/png",
+        );
+      }),
+  }));
 
-    return (
-      <div className={cn("rounded-md border border-border bg-surface-2 relative h-36 overflow-hidden")}>
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full touch-none cursor-crosshair"
-          onPointerDown={onDown}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerLeave={onUp}
-        />
-        <div className="absolute left-3 right-3 bottom-2 border-t border-dashed border-muted-foreground/30 pointer-events-none" />
-        <div className="absolute left-3 bottom-3 text-[10px] uppercase tracking-widest text-muted-foreground pointer-events-none">×</div>
-      </div>
-    );
-  });
-})();
+  return (
+    <div className={cn("rounded-md border border-border bg-surface-2 relative h-36 overflow-hidden")}>
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full touch-none cursor-crosshair"
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerLeave={onUp}
+      />
+      <div className="absolute left-3 right-3 bottom-2 border-t border-dashed border-muted-foreground/30 pointer-events-none" />
+      <div className="absolute left-3 bottom-3 text-[10px] uppercase tracking-widest text-muted-foreground pointer-events-none">×</div>
+    </div>
+  );
+});
+SignaturePad.displayName = "SignaturePad";
