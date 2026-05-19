@@ -165,19 +165,31 @@ function PODCard({
   showConfirmButton,
   onConfirm,
   confirming,
+  onOpen,
 }: {
   pod: ProofOfDeliveryRow;
   load: LoadRow | null;
   showConfirmButton: boolean;
   onConfirm: () => void;
   confirming: boolean;
+  onOpen?: () => void;
 }) {
   const confirmed = pod.dispatch_confirmed;
   return (
     <li>
       <Card
+        role={onOpen ? "button" : undefined}
+        tabIndex={onOpen ? 0 : undefined}
+        onClick={onOpen}
+        onKeyDown={(e) => {
+          if (onOpen && (e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            onOpen();
+          }
+        }}
         className={cn(
           "overflow-hidden border bg-card/60 p-4 backdrop-blur transition-colors",
+          onOpen && "cursor-pointer hover:bg-card focus:outline-none focus:ring-2 focus:ring-ring",
           confirmed
             ? "border-emerald-500/30"
             : "border-amber-500/30",
