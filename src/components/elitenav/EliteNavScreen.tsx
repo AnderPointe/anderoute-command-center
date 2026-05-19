@@ -765,13 +765,86 @@ function MapChip({ children, active, onClick }: { children: React.ReactNode; act
   );
 }
 
-function Stat({ label, value, tone }: { label: string; value: string; tone?: "success" | "warning" }) {
+function Stat({
+  label,
+  value,
+  tone,
+  sub,
+  delta,
+  deltaTone,
+}: {
+  label: string;
+  value: string;
+  tone?: "success" | "warning";
+  sub?: string;
+  delta?: string;
+  deltaTone?: "success" | "warning" | "danger";
+}) {
   return (
     <div className="p-3 text-center">
       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
-      <div className={cn("text-sm font-semibold mt-0.5 tabular-nums",
-        tone === "success" && "text-success", tone === "warning" && "text-warning")}>
-        {value}
+      <div className="flex items-baseline justify-center gap-1 mt-0.5">
+        <span
+          className={cn(
+            "text-sm font-semibold tabular-nums",
+            tone === "success" && "text-success",
+            tone === "warning" && "text-warning",
+          )}
+        >
+          {value}
+        </span>
+        {delta && (
+          <span
+            className={cn(
+              "text-[9px] font-semibold tabular-nums",
+              deltaTone === "success" && "text-success",
+              deltaTone === "warning" && "text-warning",
+              deltaTone === "danger" && "text-destructive",
+            )}
+          >
+            {delta}
+          </span>
+        )}
+      </div>
+      {sub && <div className="text-[9px] text-muted-foreground mt-0.5">{sub}</div>}
+    </div>
+  );
+}
+
+function DispatchSyncTicker({ events }: { events: DispatchSyncEvent[] }) {
+  const items = events.slice(0, 6);
+  return (
+    <div className="relative border-t border-border bg-gradient-to-b from-surface-2/70 to-surface-2/40 px-3 py-2 overflow-hidden">
+      <div className="flex items-center gap-3 text-[10px] uppercase tracking-widest">
+        <div className="shrink-0 inline-flex items-center gap-1.5 text-success font-semibold">
+          <span className="relative inline-flex size-2 rounded-full bg-success">
+            <span className="absolute inset-0 rounded-full bg-success/60 animate-ping" />
+          </span>
+          Dispatch Sync
+        </div>
+        <div className="flex-1 min-w-0 overflow-hidden mask-fade">
+          <div className="marquee-track inline-flex whitespace-nowrap gap-6 text-muted-foreground">
+            {[...items, ...items].map((e, i) => (
+              <span key={`${e.id}-${i}`} className="inline-flex items-center gap-1.5">
+                <span
+                  className="size-1 rounded-full"
+                  style={{
+                    background:
+                      e.type === "status"
+                        ? "var(--teal)"
+                        : e.type === "delay"
+                        ? "var(--warning)"
+                        : e.type === "pod"
+                        ? "var(--orange)"
+                        : "var(--muted-foreground)",
+                  }}
+                />
+                <span className="normal-case tracking-normal text-[11px]">{e.message}</span>
+                <span className="opacity-60">· {e.timestamp}</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
