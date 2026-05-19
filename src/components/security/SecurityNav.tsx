@@ -1,17 +1,18 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
-  Shield, ShieldCheck, FileCheck2, Wrench, Activity, AlertTriangle, Database,
+  Shield, ShieldCheck, FileCheck2, Wrench, Activity, AlertTriangle, Database, UserCheck,
 } from "lucide-react";
 
 /** Phase 8 — Unified sub-navigation across security/compliance/ops surfaces. */
 const ITEMS = [
-  { to: "/security/overview",   label: "Overview",      icon: Shield },
+  { to: "/security/overview",   label: "Overview",        icon: Shield },
   { to: "/security/center",     label: "Security Center", icon: ShieldCheck },
-  { to: "/compliance/soc2",     label: "SOC 2",         icon: FileCheck2 },
-  { to: "/ops/center",          label: "Operations",    icon: Wrench },
-  { to: "/ops/observability",   label: "Observability", icon: Activity },
-  { to: "/ops/incidents",       label: "Incidents",     icon: AlertTriangle },
-  { to: "/ops/database",        label: "Database",      icon: Database },
+  { to: "/security/privacy",    label: "Privacy",         icon: UserCheck },
+  { to: "/compliance/soc2",     label: "SOC 2",           icon: FileCheck2 },
+  { to: "/ops/center",          label: "Operations",      icon: Wrench },
+  { to: "/ops/observability",   label: "Observability",   icon: Activity },
+  { to: "/ops/incidents",       label: "Incidents",       icon: AlertTriangle },
+  { to: "/ops/database",        label: "Database",        icon: Database },
 ] as const;
 
 export function SecurityNav() {

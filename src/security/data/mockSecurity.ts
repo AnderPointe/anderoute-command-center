@@ -229,3 +229,108 @@ export function readinessScore(): number {
   const sum = CONTROLS.reduce((acc, c) => acc + weight[c.status], 0);
   return Math.round((sum / total) * 100);
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Phase 8 polish — RLS coverage, tenant isolation, driver privacy, edge fn
+// boundaries, executive summary. Pure data; consumed by useSecurityData hooks.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface RlsRow {
+  table: string; enabled: boolean; policies: number;
+  scope: "company" | "user" | "customer" | "platform" | "public";
+  coverage: "full" | "partial" | "gap"; note: string;
+}
+export const RLS_COVERAGE: RlsRow[] = [
+  { table: "profiles",              enabled: true, policies: 4, scope: "user",     coverage: "full",    note: "Self-read; admin-update via has_role." },
+  { table: "user_roles",            enabled: true, policies: 3, scope: "company",  coverage: "full",    note: "Membership writes restricted to owner/admin." },
+  { table: "companies",             enabled: true, policies: 3, scope: "company",  coverage: "full",    note: "is_company_member gate." },
+  { table: "drivers",               enabled: true, policies: 5, scope: "company",  coverage: "full",    note: "Driver sees self; dispatcher sees own company." },
+  { table: "vehicles",              enabled: true, policies: 4, scope: "company",  coverage: "full",    note: "company_id RLS." },
+  { table: "loads",                 enabled: true, policies: 5, scope: "company",  coverage: "full",    note: "Customer scope via customer_users." },
+  { table: "driver_locations",      enabled: true, policies: 4, scope: "company",  coverage: "full",    note: "Hot table; aggregated after 30d." },
+  { table: "navigation_events",     enabled: true, policies: 3, scope: "company",  coverage: "full",    note: "Driver self + dispatcher." },
+  { table: "notifications",         enabled: true, policies: 3, scope: "user",     coverage: "full",    note: "Strict per-user." },
+  { table: "customer_users",        enabled: true, policies: 3, scope: "customer", coverage: "full",    note: "customer_ids_for_user definer." },
+  { table: "shipment_requests",     enabled: true, policies: 4, scope: "customer", coverage: "full",    note: "Portal scope." },
+  { table: "documents",             enabled: true, policies: 3, scope: "company",  coverage: "partial", note: "List endpoint needs explicit company filter — finding f1." },
+  { table: "audit_log_events",      enabled: true, policies: 2, scope: "company",  coverage: "full",    note: "Admin read; insert via definer fn." },
+  { table: "api_keys",              enabled: true, policies: 3, scope: "company",  coverage: "full",    note: "Hash never exposed." },
+  { table: "api_request_logs",      enabled: true, policies: 2, scope: "company",  coverage: "full",    note: "Owner/admin read only." },
+  { table: "webhook_subscriptions", enabled: true, policies: 3, scope: "company",  coverage: "full",    note: "webhooks.manage scope required." },
+  { table: "webhook_delivery_logs", enabled: true, policies: 2, scope: "company",  coverage: "full",    note: "Owner/admin read; insert via service role." },
+  { table: "edi_transactions",      enabled: true, policies: 3, scope: "company",  coverage: "full",    note: "Partner-scoped." },
+  { table: "security_findings",     enabled: true, policies: 2, scope: "company",  coverage: "full",    note: "Resolve gated by owner/platform_owner." },
+  { table: "compliance_evidence",   enabled: true, policies: 2, scope: "company",  coverage: "full",    note: "Insert by company members; review by compliance role." },
+  { table: "support_access_events", enabled: true, policies: 2, scope: "platform", coverage: "full",    note: "Time-boxed, auto-revoke." },
+  { table: "driver_consent_events", enabled: true, policies: 2, scope: "user",     coverage: "full",    note: "Driver-self only; immutable history." },
+];
+
+export interface IsolationTest {
+  id: string; scenario: string; attacker: string; target: string;
+  expected: "deny" | "allow"; actual: "deny" | "allow"; status: "pass" | "fail";
+}
+export const ISOLATION_TESTS: IsolationTest[] = [
+  { id: "ti1",  scenario: "Customer A reads Customer B shipment",    attacker: "customer.user@A", target: "shipment_requests of B",     expected: "deny",  actual: "deny",  status: "pass" },
+  { id: "ti2",  scenario: "Dispatcher of Co.1 reads Co.2 driver",     attacker: "dispatcher@1",    target: "drivers of Co.2",            expected: "deny",  actual: "deny",  status: "pass" },
+  { id: "ti3",  scenario: "Driver A reads Driver B locations",        attacker: "driver.A",        target: "driver_locations of B",      expected: "deny",  actual: "deny",  status: "pass" },
+  { id: "ti4",  scenario: "Anon hits /api/loads",                     attacker: "anon",            target: "loads",                      expected: "deny",  actual: "deny",  status: "pass" },
+  { id: "ti5",  scenario: "Co.1 admin lists documents (cross-tenant)",attacker: "admin@1",         target: "documents (all)",            expected: "deny",  actual: "allow", status: "fail" },
+  { id: "ti6",  scenario: "Customer reads own POD",                   attacker: "customer.user@A", target: "documents of own shipment",  expected: "allow", actual: "allow", status: "pass" },
+  { id: "ti7",  scenario: "Platform owner reads vendor reviews",      attacker: "platform_owner",  target: "vendor_risk_reviews",        expected: "allow", actual: "allow", status: "pass" },
+  { id: "ti8",  scenario: "Support session past expiry",              attacker: "support@x",       target: "company X data",             expected: "deny",  actual: "deny",  status: "pass" },
+  { id: "ti9",  scenario: "API key without scope hits webhooks",      attacker: "partner key",     target: "webhook_subscriptions",      expected: "deny",  actual: "deny",  status: "pass" },
+  { id: "ti10", scenario: "Revoked customer_user reads portal",       attacker: "ex-customer",     target: "shipment_requests",          expected: "deny",  actual: "deny",  status: "pass" },
+];
+
+export interface PrivacyControl {
+  key: string; label: string;
+  state: "on" | "off" | "opt-in" | "locked";
+  scope: "driver" | "company" | "platform"; note: string;
+}
+export const PRIVACY_CONTROLS: PrivacyControl[] = [
+  { key: "bg_location",       label: "Background location while on-duty", state: "opt-in", scope: "driver",   note: "Default off. Driver must accept; revocable any time." },
+  { key: "offduty_loc",       label: "Off-duty location tracking",        state: "off",    scope: "driver",   note: "Hard-disabled when status = off_duty." },
+  { key: "active_indicator",  label: "Live-tracking indicator visible",   state: "on",     scope: "driver",   note: "Always-on UI badge while location stream is active." },
+  { key: "voice_transcripts", label: "Voice transcript storage",          state: "opt-in", scope: "driver",   note: "Off by default; per-session toggle." },
+  { key: "raw_audio",         label: "Raw audio retention",               state: "locked", scope: "platform", note: "Permanently disabled; cannot be enabled by any role." },
+  { key: "share_with_cust",   label: "Share driver name with customer",   state: "on",     scope: "company",  note: "Configurable per company; default on." },
+  { key: "telematics",        label: "Vehicle telematics ingest",         state: "opt-in", scope: "company",  note: "Requires fleet admin opt-in + driver disclosure." },
+  { key: "crash_pii",         label: "Crash logs include user identifiers", state: "off",  scope: "platform", note: "Sentry scrubber strips email, phone, address." },
+  { key: "ai_training",       label: "Allow data to train AI models",     state: "off",    scope: "platform", note: "Hard-disabled; provider DPA prohibits training." },
+];
+
+export interface EdgeFnBoundary {
+  name: string; kind: "server-fn" | "server-route" | "edge-function";
+  trust: "user" | "service" | "external"; scope: string; notes: string;
+}
+export const EDGE_FN_BOUNDARIES: EdgeFnBoundary[] = [
+  { name: "getMyDashboard",              kind: "server-fn",     trust: "user",     scope: "requireSupabaseAuth",  notes: "RLS as user." },
+  { name: "rotateApiKey",                kind: "server-fn",     trust: "user",     scope: "owner/admin only",     notes: "is_platform_owner OR company owner." },
+  { name: "createComplianceEvidence",    kind: "server-fn",     trust: "user",     scope: "company member",       notes: "Insert under company_id." },
+  { name: "runIsolationTest",            kind: "server-fn",     trust: "service",  scope: "platform_owner only",  notes: "Admin client; isolated runner." },
+  { name: "enforceRetention",            kind: "server-fn",     trust: "service",  scope: "scheduled",            notes: "Wraps cleanup jobs; audit trail." },
+  { name: "generateComplianceReport",    kind: "server-fn",     trust: "user",     scope: "compliance role",      notes: "Signed URL output." },
+  { name: "/api/public/webhooks/stripe", kind: "edge-function", trust: "external", scope: "HMAC verified",        notes: "Edge only because Stripe needs stable URL." },
+  { name: "/api/public/webhooks/edi",    kind: "edge-function", trust: "external", scope: "partner mTLS + HMAC",  notes: "EDI VAN partner-initiated push." },
+  { name: "/api/public/health",          kind: "server-route",  trust: "external", scope: "anonymous",            notes: "No PII; static status only." },
+  { name: "cron-retention",              kind: "edge-function", trust: "service",  scope: "pg_cron only",         notes: "DB-adjacent cleanup." },
+];
+
+export interface ExecMetric { key: string; label: string; value: string; tone: "ok" | "warn" | "fail" | "info"; sub?: string }
+export function executiveSummary(): ExecMetric[] {
+  const open = FINDINGS.filter((f) => f.status !== "resolved").length;
+  const crit = FINDINGS.filter((f) => (f.severity === "critical" || f.severity === "high") && f.status !== "resolved").length;
+  const ackPct = Math.round(
+    (POLICIES.reduce((a, p) => a + p.acks, 0) / POLICIES.reduce((a, p) => a + p.total, 0)) * 100,
+  );
+  const audited = CONTROLS.filter((c) => c.status === "operating" || c.status === "ready_for_audit").length;
+  const isoFail = ISOLATION_TESTS.filter((t) => t.status === "fail").length;
+  return [
+    { key: "readiness", label: "SOC 2 readiness",     value: `${readinessScore()} / 100`, tone: "ok", sub: `${audited}/${CONTROLS.length} controls operating` },
+    { key: "findings",  label: "Open findings",       value: String(open),                  tone: crit > 0 ? "warn" : "ok", sub: `${crit} critical/high` },
+    { key: "isolation", label: "Tenant isolation",    value: `${ISOLATION_TESTS.length - isoFail}/${ISOLATION_TESTS.length}`, tone: isoFail > 0 ? "warn" : "ok", sub: `${isoFail} failing scenarios` },
+    { key: "mttr",      label: "Sev1/2 MTTR (30d)",   value: "42 min",                      tone: "ok", sub: "target ≤ 60 min" },
+    { key: "uptime",    label: "API uptime (30d)",    value: "99.97%",                      tone: "ok", sub: "SLO 99.9%" },
+    { key: "policies",  label: "Policy attestation",  value: `${ackPct}%`,                  tone: ackPct >= 90 ? "ok" : "warn", sub: `${POLICIES.length} policies tracked` },
+  ];
+}

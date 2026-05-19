@@ -41,6 +41,21 @@ function IncidentsPage() {
           <Button variant="outline" size="sm">Declare incident</Button>
         </div>
 
+        {/* MTTR / MTTA strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {[
+            { label: "Active incidents",  value: String(incidents.filter((i) => i.status !== "resolved").length), tone: "text-amber-300" },
+            { label: "MTTA (30d)",        value: "4 min",  tone: "text-emerald-300" },
+            { label: "Sev1/2 MTTR (30d)", value: "42 min", tone: "text-emerald-300" },
+            { label: "Postmortems on-time", value: "100%", tone: "text-emerald-300" },
+          ].map((s) => (
+            <Card key={s.label} className="p-3">
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{s.label}</div>
+              <div className={`mt-1 text-xl font-semibold tabular-nums ${s.tone}`}>{s.value}</div>
+            </Card>
+          ))}
+        </div>
+
         {/* Workflow strip */}
         <Card className="p-4">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Incident workflow</h2>
