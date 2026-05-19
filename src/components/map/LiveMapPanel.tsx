@@ -129,6 +129,31 @@ export function LiveMapPanel({
             })}
       </svg>
 
+      {/* Phase 2 — Realtime driver overlay (driver_live_state) */}
+      {companyId && liveList.length > 0 && (
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {liveList.map((s) => {
+            if (s.current_latitude == null || s.current_longitude == null) return null;
+            const p = project(s.current_latitude, s.current_longitude);
+            return (
+              <g key={s.driver_id} style={{ pointerEvents: "auto" }} transform={`translate(${p.x * 100} ${p.y * 100}) scale(0.15)`}>
+                <DriverLiveMarker
+                  x={0}
+                  y={0}
+                  heading={s.heading ?? 0}
+                  status={(s.driver_status ?? "available") as DriverStatusKey}
+                  fresh={!s.is_gps_stale}
+                  stale={s.is_gps_stale}
+                  onClick={() => onSelectLiveDriver?.(s)}
+                />
+              </g>
+            );
+          })}
+        </svg>
+      )}
+
+
+
       {/* Top toolbar */}
       <div className="relative z-10 flex flex-wrap items-center gap-2 p-3">
         <div className="flex flex-wrap items-center gap-1 bg-popover/85 backdrop-blur-md rounded-lg border border-border p-1 shadow-[var(--shadow-sm)]">
