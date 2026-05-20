@@ -16,7 +16,7 @@ function Page() {
       title="Customer Portal Stabilization"
       blurb="Tracking clarity, ETA, POD visibility, and mobile polish for the customer-facing portal."
     >
-      <ChecklistCard group={PORTAL_STABILIZATION} />
+      <ChecklistCard group={PORTAL_STABILIZATION} hint="ETA timezone fix and mobile polish are the most-requested customer asks." />
     </V1Page>
   );
 }

@@ -14,9 +14,9 @@ function Page() {
     <V1Page
       icon={<Smartphone className="size-6 text-indigo-300" />}
       title="Driver App Stabilization"
-      blurb="Focused UX, GPS, and POD polish tasks distilled from pilot driver feedback."
+      blurb="Focused UX, GPS, and POD polish distilled from pilot driver feedback. Items linked to pilot feedback IDs map directly to /v1/feedback."
     >
-      <ChecklistCard group={DRIVER_STABILIZATION} />
+      <ChecklistCard group={DRIVER_STABILIZATION} hint="Close every open item before V1 GA. Notes reference pilot feedback / bug IDs." />
     </V1Page>
   );
 }

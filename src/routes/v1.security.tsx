@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
 import { V1Page } from "@/components/v1/V1Page";
+import { StatTile } from "@/components/v1/StatTile";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SECURITY_REVIEW } from "@/v1/data/mockPhase14";
@@ -12,14 +13,22 @@ export const Route = createFileRoute("/v1/security")({
 
 function Page() {
   const ok = SECURITY_REVIEW.filter((s) => s.ok).length;
+  const open = SECURITY_REVIEW.length - ok;
+  const pct = Math.round((ok / SECURITY_REVIEW.length) * 100);
   return (
     <V1Page
       icon={<ShieldCheck className="size-6 text-indigo-300" />}
       title="V1 Security Review"
-      blurb={`${ok}/${SECURITY_REVIEW.length} controls cleared. RLS, role gating, storage, secrets, audit logging.`}
+      blurb="RLS, role gating, GPS consent, storage policies, secret hygiene, audit logging, and input validation."
     >
+      <div className="grid gap-3 md:grid-cols-3">
+        <StatTile label="Controls cleared" value={`${ok}/${SECURITY_REVIEW.length}`} tone={pct >= 95 ? "good" : "warn"} />
+        <StatTile label="Coverage" value={`${pct}%`} tone={pct >= 95 ? "good" : "warn"} />
+        <StatTile label="Open items" value={open} tone={open ? "warn" : "good"} hint={open ? "remediate before GA" : "GA cleared"} />
+      </div>
       <Card className="border-white/10 bg-white/[0.02] p-4">
-        <div className="space-y-2">
+        <h2 className="text-sm font-semibold">Security control checklist</h2>
+        <div className="mt-3 space-y-2">
           {SECURITY_REVIEW.map((s) => (
             <div key={s.id} className="flex items-center justify-between rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-sm">
               <div>
