@@ -110,7 +110,6 @@ import { Route as DispatchCommandCenterRouteImport } from './routes/dispatch.com
 import { Route as DataImportExportRouteImport } from './routes/data.import-export'
 import { Route as ComplianceSoc2RouteImport } from './routes/compliance.soc2'
 import { Route as BuildPhase12OverviewRouteImport } from './routes/build.phase12-overview'
-import { Route as PilotPhase13OverviewRouteImport } from './routes/pilot.phase13-overview'
 import { Route as AdminPlatformRouteImport } from './routes/admin.platform'
 
 const VehiclesRoute = VehiclesRouteImport.update({
@@ -622,11 +621,6 @@ const BuildPhase12OverviewRoute = BuildPhase12OverviewRouteImport.update({
   path: '/build/phase12-overview',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PilotPhase13OverviewRoute = PilotPhase13OverviewRouteImport.update({
-  id: '/pilot/phase13-overview',
-  path: '/pilot/phase13-overview',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminPlatformRoute = AdminPlatformRouteImport.update({
   id: '/platform',
   path: '/platform',
@@ -655,7 +649,6 @@ export interface FileRoutesByFullPath {
   '/vehicles': typeof VehiclesRoute
   '/admin/platform': typeof AdminPlatformRoute
   '/build/phase12-overview': typeof BuildPhase12OverviewRoute
-  '/pilot/phase13-overview': typeof PilotPhase13OverviewRoute
   '/compliance/soc2': typeof ComplianceSoc2Route
   '/data/import-export': typeof DataImportExportRoute
   '/dispatch/command-center': typeof DispatchCommandCenterRoute
@@ -760,7 +753,6 @@ export interface FileRoutesByTo {
   '/vehicles': typeof VehiclesRoute
   '/admin/platform': typeof AdminPlatformRoute
   '/build/phase12-overview': typeof BuildPhase12OverviewRoute
-  '/pilot/phase13-overview': typeof PilotPhase13OverviewRoute
   '/compliance/soc2': typeof ComplianceSoc2Route
   '/data/import-export': typeof DataImportExportRoute
   '/dispatch/command-center': typeof DispatchCommandCenterRoute
@@ -866,7 +858,6 @@ export interface FileRoutesById {
   '/vehicles': typeof VehiclesRoute
   '/admin/platform': typeof AdminPlatformRoute
   '/build/phase12-overview': typeof BuildPhase12OverviewRoute
-  '/pilot/phase13-overview': typeof PilotPhase13OverviewRoute
   '/compliance/soc2': typeof ComplianceSoc2Route
   '/data/import-export': typeof DataImportExportRoute
   '/dispatch/command-center': typeof DispatchCommandCenterRoute
@@ -1026,7 +1017,6 @@ export interface FileRouteTypes {
     | '/mvp/demo-script'
     | '/mvp/feature-matrix'
     | '/mvp/overview'
-    | '/pilot/phase13-overview'
     | '/mvp/pilot'
     | '/mvp/qa'
     | '/mvp/release'
@@ -1131,7 +1121,6 @@ export interface FileRouteTypes {
     | '/mvp/demo-script'
     | '/mvp/feature-matrix'
     | '/mvp/overview'
-    | '/pilot/phase13-overview'
     | '/mvp/pilot'
     | '/mvp/qa'
     | '/mvp/release'
@@ -1236,7 +1225,6 @@ export interface FileRouteTypes {
     | '/mvp/demo-script'
     | '/mvp/feature-matrix'
     | '/mvp/overview'
-    | '/pilot/phase13-overview'
     | '/mvp/pilot'
     | '/mvp/qa'
     | '/mvp/release'
@@ -1288,7 +1276,6 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   VehiclesRoute: typeof VehiclesRoute
   BuildPhase12OverviewRoute: typeof BuildPhase12OverviewRoute
-  PilotPhase13OverviewRoute: typeof PilotPhase13OverviewRoute
   ComplianceSoc2Route: typeof ComplianceSoc2Route
   DataImportExportRoute: typeof DataImportExportRoute
   DriverCopilotLabRoute: typeof DriverCopilotLabRoute
@@ -2074,13 +2061,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuildPhase12OverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pilot/phase13-overview': {
-      id: '/pilot/phase13-overview'
-      path: '/pilot/phase13-overview'
-      fullPath: '/pilot/phase13-overview'
-      preLoaderRoute: typeof PilotPhase13OverviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/platform': {
       id: '/admin/platform'
       path: '/platform'
@@ -2165,7 +2145,6 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   VehiclesRoute: VehiclesRoute,
   BuildPhase12OverviewRoute: BuildPhase12OverviewRoute,
-  PilotPhase13OverviewRoute: PilotPhase13OverviewRoute,
   ComplianceSoc2Route: ComplianceSoc2Route,
   DataImportExportRoute: DataImportExportRoute,
   DriverCopilotLabRoute: DriverCopilotLabRoute,
