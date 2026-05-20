@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppShell } from "@/components/layout/AppShell";
 import { LaunchNav } from "@/components/launch/LaunchNav";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { HELP_TOPICS } from "@/launch/data/mockLaunch";
 import { BookOpen, HelpCircle } from "lucide-react";
 
