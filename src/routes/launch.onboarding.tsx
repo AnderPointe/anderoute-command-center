@@ -4,7 +4,7 @@ import { LaunchNav } from "@/components/launch/LaunchNav";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ONBOARDING_STAGES } from "@/launch/data/mockLaunch";
+import { ONBOARDING_STAGES, ONBOARDING_PHASES } from "@/launch/data/mockLaunch";
 import { ClipboardCheck, CheckCircle2, Circle } from "lucide-react";
 
 export const Route = createFileRoute("/launch/onboarding")({
