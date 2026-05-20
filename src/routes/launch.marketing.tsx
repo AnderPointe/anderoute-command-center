@@ -3,7 +3,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { LaunchNav } from "@/components/launch/LaunchNav";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { POSITIONING, TAGLINES } from "@/launch/data/mockLaunch";
+import { POSITIONING, TAGLINES, VALUE_PILLARS, PROOF_POINTS } from "@/launch/data/mockLaunch";
 import { Megaphone } from "lucide-react";
 
 export const Route = createFileRoute("/launch/marketing")({
