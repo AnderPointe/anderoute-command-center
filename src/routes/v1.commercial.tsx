@@ -14,9 +14,9 @@ function Page() {
     <V1Page
       icon={<Banknote className="size-6 text-indigo-300" />}
       title="Commercial Readiness"
-      blurb="Pricing, support model, references, ROI story, and security/privacy materials for sales motion."
+      blurb="Pricing, support model, references, ROI story, and security/privacy materials for the V1 sales motion."
     >
-      <ChecklistCard group={{ id: "cm", title: "Commercial checks", items: COMMERCIAL_CHECKS }} />
+      <ChecklistCard group={{ id: "cm", title: "Commercial checks", items: COMMERCIAL_CHECKS }} hint="Customer references and ROI story unlock outbound." />
     </V1Page>
   );
 }
