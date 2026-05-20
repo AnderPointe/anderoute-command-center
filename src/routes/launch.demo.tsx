@@ -6,8 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { DEMO_STEPS, DEMO_PERSONAS } from "@/launch/data/mockLaunch";
-import { PlayCircle, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
+import { DEMO_STEPS, DEMO_PERSONAS, DEMO_KEY_MOMENTS } from "@/launch/data/mockLaunch";
+import { PlayCircle, RotateCcw, ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 export const Route = createFileRoute("/launch/demo")({
   head: () => ({ meta: [{ title: "Demo Mode — Anderoute" }] }),
