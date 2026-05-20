@@ -13,10 +13,10 @@ function Page() {
   return (
     <V1Page
       icon={<UserPlus className="size-6 text-indigo-300" />}
-      title="V1 Onboarding Improvements"
-      blurb="Cleaner onboarding flow informed by the pilot: company, users, drivers, vehicles, customers, training."
+      title="V1 Onboarding"
+      blurb="Cleaner onboarding flow informed by the pilot: company, users, drivers, vehicles, customers, training, go-live."
     >
-      <ChecklistCard group={{ id: "ob", title: "Onboarding tasks", items: ONBOARDING_TASKS }} />
+      <ChecklistCard group={{ id: "ob", title: "Onboarding playbook", items: ONBOARDING_TASKS }} hint="Run end-to-end per new customer." />
     </V1Page>
   );
 }
