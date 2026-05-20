@@ -29,6 +29,12 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as V1PrioritizationRouteImport } from './routes/v1.prioritization'
+import { Route as V1OverviewRouteImport } from './routes/v1.overview'
+import { Route as V1MetricsRouteImport } from './routes/v1.metrics'
+import { Route as V1FeedbackRouteImport } from './routes/v1.feedback'
+import { Route as V1CutlineRouteImport } from './routes/v1.cutline'
+import { Route as V1BugsRouteImport } from './routes/v1.bugs'
 import { Route as SettingsWhiteLabelRouteImport } from './routes/settings.white-label'
 import { Route as SettingsProductionMonitoringRouteImport } from './routes/settings.production-monitoring'
 import { Route as SettingsProductionRouteImport } from './routes/settings.production'
@@ -234,6 +240,36 @@ const IndexRoute = IndexRouteImport.update({
 const DriverIndexRoute = DriverIndexRouteImport.update({
   id: '/driver/',
   path: '/driver/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V1PrioritizationRoute = V1PrioritizationRouteImport.update({
+  id: '/v1/prioritization',
+  path: '/v1/prioritization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V1OverviewRoute = V1OverviewRouteImport.update({
+  id: '/v1/overview',
+  path: '/v1/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V1MetricsRoute = V1MetricsRouteImport.update({
+  id: '/v1/metrics',
+  path: '/v1/metrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V1FeedbackRoute = V1FeedbackRouteImport.update({
+  id: '/v1/feedback',
+  path: '/v1/feedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V1CutlineRoute = V1CutlineRouteImport.update({
+  id: '/v1/cutline',
+  path: '/v1/cutline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V1BugsRoute = V1BugsRouteImport.update({
+  id: '/v1/bugs',
+  path: '/v1/bugs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsWhiteLabelRoute = SettingsWhiteLabelRouteImport.update({
@@ -897,6 +933,12 @@ export interface FileRoutesByFullPath {
   '/settings/production': typeof SettingsProductionRoute
   '/settings/production-monitoring': typeof SettingsProductionMonitoringRoute
   '/settings/white-label': typeof SettingsWhiteLabelRoute
+  '/v1/bugs': typeof V1BugsRoute
+  '/v1/cutline': typeof V1CutlineRoute
+  '/v1/feedback': typeof V1FeedbackRoute
+  '/v1/metrics': typeof V1MetricsRoute
+  '/v1/overview': typeof V1OverviewRoute
+  '/v1/prioritization': typeof V1PrioritizationRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -1025,6 +1067,12 @@ export interface FileRoutesByTo {
   '/settings/production': typeof SettingsProductionRoute
   '/settings/production-monitoring': typeof SettingsProductionMonitoringRoute
   '/settings/white-label': typeof SettingsWhiteLabelRoute
+  '/v1/bugs': typeof V1BugsRoute
+  '/v1/cutline': typeof V1CutlineRoute
+  '/v1/feedback': typeof V1FeedbackRoute
+  '/v1/metrics': typeof V1MetricsRoute
+  '/v1/overview': typeof V1OverviewRoute
+  '/v1/prioritization': typeof V1PrioritizationRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -1154,6 +1202,12 @@ export interface FileRoutesById {
   '/settings/production': typeof SettingsProductionRoute
   '/settings/production-monitoring': typeof SettingsProductionMonitoringRoute
   '/settings/white-label': typeof SettingsWhiteLabelRoute
+  '/v1/bugs': typeof V1BugsRoute
+  '/v1/cutline': typeof V1CutlineRoute
+  '/v1/feedback': typeof V1FeedbackRoute
+  '/v1/metrics': typeof V1MetricsRoute
+  '/v1/overview': typeof V1OverviewRoute
+  '/v1/prioritization': typeof V1PrioritizationRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -1284,6 +1338,12 @@ export interface FileRouteTypes {
     | '/settings/production'
     | '/settings/production-monitoring'
     | '/settings/white-label'
+    | '/v1/bugs'
+    | '/v1/cutline'
+    | '/v1/feedback'
+    | '/v1/metrics'
+    | '/v1/overview'
+    | '/v1/prioritization'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -1412,6 +1472,12 @@ export interface FileRouteTypes {
     | '/settings/production'
     | '/settings/production-monitoring'
     | '/settings/white-label'
+    | '/v1/bugs'
+    | '/v1/cutline'
+    | '/v1/feedback'
+    | '/v1/metrics'
+    | '/v1/overview'
+    | '/v1/prioritization'
     | '/driver'
   id:
     | '__root__'
@@ -1540,6 +1606,12 @@ export interface FileRouteTypes {
     | '/settings/production'
     | '/settings/production-monitoring'
     | '/settings/white-label'
+    | '/v1/bugs'
+    | '/v1/cutline'
+    | '/v1/feedback'
+    | '/v1/metrics'
+    | '/v1/overview'
+    | '/v1/prioritization'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -1661,6 +1733,12 @@ export interface RootRouteChildren {
   SecurityOverviewRoute: typeof SecurityOverviewRoute
   SecurityPhase8OverviewRoute: typeof SecurityPhase8OverviewRoute
   SecurityPrivacyRoute: typeof SecurityPrivacyRoute
+  V1BugsRoute: typeof V1BugsRoute
+  V1CutlineRoute: typeof V1CutlineRoute
+  V1FeedbackRoute: typeof V1FeedbackRoute
+  V1MetricsRoute: typeof V1MetricsRoute
+  V1OverviewRoute: typeof V1OverviewRoute
+  V1PrioritizationRoute: typeof V1PrioritizationRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -1804,6 +1882,48 @@ declare module '@tanstack/react-router' {
       path: '/driver'
       fullPath: '/driver/'
       preLoaderRoute: typeof DriverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v1/prioritization': {
+      id: '/v1/prioritization'
+      path: '/v1/prioritization'
+      fullPath: '/v1/prioritization'
+      preLoaderRoute: typeof V1PrioritizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v1/overview': {
+      id: '/v1/overview'
+      path: '/v1/overview'
+      fullPath: '/v1/overview'
+      preLoaderRoute: typeof V1OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v1/metrics': {
+      id: '/v1/metrics'
+      path: '/v1/metrics'
+      fullPath: '/v1/metrics'
+      preLoaderRoute: typeof V1MetricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v1/feedback': {
+      id: '/v1/feedback'
+      path: '/v1/feedback'
+      fullPath: '/v1/feedback'
+      preLoaderRoute: typeof V1FeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v1/cutline': {
+      id: '/v1/cutline'
+      path: '/v1/cutline'
+      fullPath: '/v1/cutline'
+      preLoaderRoute: typeof V1CutlineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v1/bugs': {
+      id: '/v1/bugs'
+      path: '/v1/bugs'
+      fullPath: '/v1/bugs'
+      preLoaderRoute: typeof V1BugsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/white-label': {
@@ -2722,6 +2842,12 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityOverviewRoute: SecurityOverviewRoute,
   SecurityPhase8OverviewRoute: SecurityPhase8OverviewRoute,
   SecurityPrivacyRoute: SecurityPrivacyRoute,
+  V1BugsRoute: V1BugsRoute,
+  V1CutlineRoute: V1CutlineRoute,
+  V1FeedbackRoute: V1FeedbackRoute,
+  V1MetricsRoute: V1MetricsRoute,
+  V1OverviewRoute: V1OverviewRoute,
+  V1PrioritizationRoute: V1PrioritizationRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
