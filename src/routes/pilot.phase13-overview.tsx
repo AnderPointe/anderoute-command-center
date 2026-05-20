@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { AppShell } from "@/components/layout/AppShell";
+import { PilotNav } from "@/components/pilot/PilotNav";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -38,6 +39,7 @@ function Phase13Overview() {
   return (
     <AppShell>
       <div className="space-y-6">
+        <PilotNav />
         <header className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="border-teal-500/40 text-teal-300">Phase 13</Badge>
