@@ -107,3 +107,20 @@ function Sales() {
     </AppShell>
   );
 }
+
+const TONES: Record<string, string> = {
+  emerald: "border-emerald-500/30 text-emerald-200",
+  rose:    "border-rose-500/30 text-rose-200",
+  teal:    "border-teal-500/30 text-teal-200",
+};
+
+function Block({ title, tone, items }: { title: string; tone: string; items: string[] }) {
+  return (
+    <div className={`rounded border bg-white/[0.01] p-3 ${TONES[tone]}`}>
+      <div className="text-xs font-medium uppercase tracking-wider">{title}</div>
+      <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+        {items.map((i) => <li key={i}>· {i}</li>)}
+      </ul>
+    </div>
+  );
+}
