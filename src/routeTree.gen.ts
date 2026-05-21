@@ -29,6 +29,31 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as V55SecurityExecRouteImport } from './routes/v55.security-exec'
+import { Route as V55ScopeRouteImport } from './routes/v55.scope'
+import { Route as V55RoadmapRouteImport } from './routes/v55.roadmap'
+import { Route as V55RisksRouteImport } from './routes/v55.risks'
+import { Route as V55RetentionRouteImport } from './routes/v55.retention'
+import { Route as V55ReportsRouteImport } from './routes/v55.reports'
+import { Route as V55ReliabilityRouteImport } from './routes/v55.reliability'
+import { Route as V55ProductLinesRouteImport } from './routes/v55.product-lines'
+import { Route as V55PartnershipsRouteImport } from './routes/v55.partnerships'
+import { Route as V55PartnerEcosystemRouteImport } from './routes/v55.partner-ecosystem'
+import { Route as V55OverviewRouteImport } from './routes/v55.overview'
+import { Route as V55OperatingModelRouteImport } from './routes/v55.operating-model'
+import { Route as V55NarrativeRouteImport } from './routes/v55.narrative'
+import { Route as V55MonetizationRouteImport } from './routes/v55.monetization'
+import { Route as V55MoatsRouteImport } from './routes/v55.moats'
+import { Route as V55MarketplaceEconRouteImport } from './routes/v55.marketplace-econ'
+import { Route as V55LeadershipRouteImport } from './routes/v55.leadership'
+import { Route as V55EvidenceRouteImport } from './routes/v55.evidence'
+import { Route as V55DemoRouteImport } from './routes/v55.demo'
+import { Route as V55DefensibilityRouteImport } from './routes/v55.defensibility'
+import { Route as V55DataRoomRouteImport } from './routes/v55.data-room'
+import { Route as V55CompetitiveRouteImport } from './routes/v55.competitive'
+import { Route as V55CadenceRouteImport } from './routes/v55.cadence'
+import { Route as V55BoardRouteImport } from './routes/v55.board'
+import { Route as V55AccountsRouteImport } from './routes/v55.accounts'
 import { Route as V5TrustSafetyRouteImport } from './routes/v5.trust-safety'
 import { Route as V5SupportRouteImport } from './routes/v5.support'
 import { Route as V5SupplyDemandRouteImport } from './routes/v5.supply-demand'
@@ -473,6 +498,131 @@ const IndexRoute = IndexRouteImport.update({
 const DriverIndexRoute = DriverIndexRouteImport.update({
   id: '/driver/',
   path: '/driver/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55SecurityExecRoute = V55SecurityExecRouteImport.update({
+  id: '/v55/security-exec',
+  path: '/v55/security-exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55ScopeRoute = V55ScopeRouteImport.update({
+  id: '/v55/scope',
+  path: '/v55/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55RoadmapRoute = V55RoadmapRouteImport.update({
+  id: '/v55/roadmap',
+  path: '/v55/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55RisksRoute = V55RisksRouteImport.update({
+  id: '/v55/risks',
+  path: '/v55/risks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55RetentionRoute = V55RetentionRouteImport.update({
+  id: '/v55/retention',
+  path: '/v55/retention',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55ReportsRoute = V55ReportsRouteImport.update({
+  id: '/v55/reports',
+  path: '/v55/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55ReliabilityRoute = V55ReliabilityRouteImport.update({
+  id: '/v55/reliability',
+  path: '/v55/reliability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55ProductLinesRoute = V55ProductLinesRouteImport.update({
+  id: '/v55/product-lines',
+  path: '/v55/product-lines',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55PartnershipsRoute = V55PartnershipsRouteImport.update({
+  id: '/v55/partnerships',
+  path: '/v55/partnerships',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55PartnerEcosystemRoute = V55PartnerEcosystemRouteImport.update({
+  id: '/v55/partner-ecosystem',
+  path: '/v55/partner-ecosystem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55OverviewRoute = V55OverviewRouteImport.update({
+  id: '/v55/overview',
+  path: '/v55/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55OperatingModelRoute = V55OperatingModelRouteImport.update({
+  id: '/v55/operating-model',
+  path: '/v55/operating-model',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55NarrativeRoute = V55NarrativeRouteImport.update({
+  id: '/v55/narrative',
+  path: '/v55/narrative',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55MonetizationRoute = V55MonetizationRouteImport.update({
+  id: '/v55/monetization',
+  path: '/v55/monetization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55MoatsRoute = V55MoatsRouteImport.update({
+  id: '/v55/moats',
+  path: '/v55/moats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55MarketplaceEconRoute = V55MarketplaceEconRouteImport.update({
+  id: '/v55/marketplace-econ',
+  path: '/v55/marketplace-econ',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55LeadershipRoute = V55LeadershipRouteImport.update({
+  id: '/v55/leadership',
+  path: '/v55/leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55EvidenceRoute = V55EvidenceRouteImport.update({
+  id: '/v55/evidence',
+  path: '/v55/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55DemoRoute = V55DemoRouteImport.update({
+  id: '/v55/demo',
+  path: '/v55/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55DefensibilityRoute = V55DefensibilityRouteImport.update({
+  id: '/v55/defensibility',
+  path: '/v55/defensibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55DataRoomRoute = V55DataRoomRouteImport.update({
+  id: '/v55/data-room',
+  path: '/v55/data-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55CompetitiveRoute = V55CompetitiveRouteImport.update({
+  id: '/v55/competitive',
+  path: '/v55/competitive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55CadenceRoute = V55CadenceRouteImport.update({
+  id: '/v55/cadence',
+  path: '/v55/cadence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55BoardRoute = V55BoardRouteImport.update({
+  id: '/v55/board',
+  path: '/v55/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V55AccountsRoute = V55AccountsRouteImport.update({
+  id: '/v55/accounts',
+  path: '/v55/accounts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V5TrustSafetyRoute = V5TrustSafetyRouteImport.update({
@@ -2572,6 +2722,31 @@ export interface FileRoutesByFullPath {
   '/v5/supply-demand': typeof V5SupplyDemandRoute
   '/v5/support': typeof V5SupportRoute
   '/v5/trust-safety': typeof V5TrustSafetyRoute
+  '/v55/accounts': typeof V55AccountsRoute
+  '/v55/board': typeof V55BoardRoute
+  '/v55/cadence': typeof V55CadenceRoute
+  '/v55/competitive': typeof V55CompetitiveRoute
+  '/v55/data-room': typeof V55DataRoomRoute
+  '/v55/defensibility': typeof V55DefensibilityRoute
+  '/v55/demo': typeof V55DemoRoute
+  '/v55/evidence': typeof V55EvidenceRoute
+  '/v55/leadership': typeof V55LeadershipRoute
+  '/v55/marketplace-econ': typeof V55MarketplaceEconRoute
+  '/v55/moats': typeof V55MoatsRoute
+  '/v55/monetization': typeof V55MonetizationRoute
+  '/v55/narrative': typeof V55NarrativeRoute
+  '/v55/operating-model': typeof V55OperatingModelRoute
+  '/v55/overview': typeof V55OverviewRoute
+  '/v55/partner-ecosystem': typeof V55PartnerEcosystemRoute
+  '/v55/partnerships': typeof V55PartnershipsRoute
+  '/v55/product-lines': typeof V55ProductLinesRoute
+  '/v55/reliability': typeof V55ReliabilityRoute
+  '/v55/reports': typeof V55ReportsRoute
+  '/v55/retention': typeof V55RetentionRoute
+  '/v55/risks': typeof V55RisksRoute
+  '/v55/roadmap': typeof V55RoadmapRoute
+  '/v55/scope': typeof V55ScopeRoute
+  '/v55/security-exec': typeof V55SecurityExecRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -2939,6 +3114,31 @@ export interface FileRoutesByTo {
   '/v5/supply-demand': typeof V5SupplyDemandRoute
   '/v5/support': typeof V5SupportRoute
   '/v5/trust-safety': typeof V5TrustSafetyRoute
+  '/v55/accounts': typeof V55AccountsRoute
+  '/v55/board': typeof V55BoardRoute
+  '/v55/cadence': typeof V55CadenceRoute
+  '/v55/competitive': typeof V55CompetitiveRoute
+  '/v55/data-room': typeof V55DataRoomRoute
+  '/v55/defensibility': typeof V55DefensibilityRoute
+  '/v55/demo': typeof V55DemoRoute
+  '/v55/evidence': typeof V55EvidenceRoute
+  '/v55/leadership': typeof V55LeadershipRoute
+  '/v55/marketplace-econ': typeof V55MarketplaceEconRoute
+  '/v55/moats': typeof V55MoatsRoute
+  '/v55/monetization': typeof V55MonetizationRoute
+  '/v55/narrative': typeof V55NarrativeRoute
+  '/v55/operating-model': typeof V55OperatingModelRoute
+  '/v55/overview': typeof V55OverviewRoute
+  '/v55/partner-ecosystem': typeof V55PartnerEcosystemRoute
+  '/v55/partnerships': typeof V55PartnershipsRoute
+  '/v55/product-lines': typeof V55ProductLinesRoute
+  '/v55/reliability': typeof V55ReliabilityRoute
+  '/v55/reports': typeof V55ReportsRoute
+  '/v55/retention': typeof V55RetentionRoute
+  '/v55/risks': typeof V55RisksRoute
+  '/v55/roadmap': typeof V55RoadmapRoute
+  '/v55/scope': typeof V55ScopeRoute
+  '/v55/security-exec': typeof V55SecurityExecRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -3307,6 +3507,31 @@ export interface FileRoutesById {
   '/v5/supply-demand': typeof V5SupplyDemandRoute
   '/v5/support': typeof V5SupportRoute
   '/v5/trust-safety': typeof V5TrustSafetyRoute
+  '/v55/accounts': typeof V55AccountsRoute
+  '/v55/board': typeof V55BoardRoute
+  '/v55/cadence': typeof V55CadenceRoute
+  '/v55/competitive': typeof V55CompetitiveRoute
+  '/v55/data-room': typeof V55DataRoomRoute
+  '/v55/defensibility': typeof V55DefensibilityRoute
+  '/v55/demo': typeof V55DemoRoute
+  '/v55/evidence': typeof V55EvidenceRoute
+  '/v55/leadership': typeof V55LeadershipRoute
+  '/v55/marketplace-econ': typeof V55MarketplaceEconRoute
+  '/v55/moats': typeof V55MoatsRoute
+  '/v55/monetization': typeof V55MonetizationRoute
+  '/v55/narrative': typeof V55NarrativeRoute
+  '/v55/operating-model': typeof V55OperatingModelRoute
+  '/v55/overview': typeof V55OverviewRoute
+  '/v55/partner-ecosystem': typeof V55PartnerEcosystemRoute
+  '/v55/partnerships': typeof V55PartnershipsRoute
+  '/v55/product-lines': typeof V55ProductLinesRoute
+  '/v55/reliability': typeof V55ReliabilityRoute
+  '/v55/reports': typeof V55ReportsRoute
+  '/v55/retention': typeof V55RetentionRoute
+  '/v55/risks': typeof V55RisksRoute
+  '/v55/roadmap': typeof V55RoadmapRoute
+  '/v55/scope': typeof V55ScopeRoute
+  '/v55/security-exec': typeof V55SecurityExecRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -3676,6 +3901,31 @@ export interface FileRouteTypes {
     | '/v5/supply-demand'
     | '/v5/support'
     | '/v5/trust-safety'
+    | '/v55/accounts'
+    | '/v55/board'
+    | '/v55/cadence'
+    | '/v55/competitive'
+    | '/v55/data-room'
+    | '/v55/defensibility'
+    | '/v55/demo'
+    | '/v55/evidence'
+    | '/v55/leadership'
+    | '/v55/marketplace-econ'
+    | '/v55/moats'
+    | '/v55/monetization'
+    | '/v55/narrative'
+    | '/v55/operating-model'
+    | '/v55/overview'
+    | '/v55/partner-ecosystem'
+    | '/v55/partnerships'
+    | '/v55/product-lines'
+    | '/v55/reliability'
+    | '/v55/reports'
+    | '/v55/retention'
+    | '/v55/risks'
+    | '/v55/roadmap'
+    | '/v55/scope'
+    | '/v55/security-exec'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -4043,6 +4293,31 @@ export interface FileRouteTypes {
     | '/v5/supply-demand'
     | '/v5/support'
     | '/v5/trust-safety'
+    | '/v55/accounts'
+    | '/v55/board'
+    | '/v55/cadence'
+    | '/v55/competitive'
+    | '/v55/data-room'
+    | '/v55/defensibility'
+    | '/v55/demo'
+    | '/v55/evidence'
+    | '/v55/leadership'
+    | '/v55/marketplace-econ'
+    | '/v55/moats'
+    | '/v55/monetization'
+    | '/v55/narrative'
+    | '/v55/operating-model'
+    | '/v55/overview'
+    | '/v55/partner-ecosystem'
+    | '/v55/partnerships'
+    | '/v55/product-lines'
+    | '/v55/reliability'
+    | '/v55/reports'
+    | '/v55/retention'
+    | '/v55/risks'
+    | '/v55/roadmap'
+    | '/v55/scope'
+    | '/v55/security-exec'
     | '/driver'
   id:
     | '__root__'
@@ -4410,6 +4685,31 @@ export interface FileRouteTypes {
     | '/v5/supply-demand'
     | '/v5/support'
     | '/v5/trust-safety'
+    | '/v55/accounts'
+    | '/v55/board'
+    | '/v55/cadence'
+    | '/v55/competitive'
+    | '/v55/data-room'
+    | '/v55/defensibility'
+    | '/v55/demo'
+    | '/v55/evidence'
+    | '/v55/leadership'
+    | '/v55/marketplace-econ'
+    | '/v55/moats'
+    | '/v55/monetization'
+    | '/v55/narrative'
+    | '/v55/operating-model'
+    | '/v55/overview'
+    | '/v55/partner-ecosystem'
+    | '/v55/partnerships'
+    | '/v55/product-lines'
+    | '/v55/reliability'
+    | '/v55/reports'
+    | '/v55/retention'
+    | '/v55/risks'
+    | '/v55/roadmap'
+    | '/v55/scope'
+    | '/v55/security-exec'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -4770,6 +5070,31 @@ export interface RootRouteChildren {
   V5SupplyDemandRoute: typeof V5SupplyDemandRoute
   V5SupportRoute: typeof V5SupportRoute
   V5TrustSafetyRoute: typeof V5TrustSafetyRoute
+  V55AccountsRoute: typeof V55AccountsRoute
+  V55BoardRoute: typeof V55BoardRoute
+  V55CadenceRoute: typeof V55CadenceRoute
+  V55CompetitiveRoute: typeof V55CompetitiveRoute
+  V55DataRoomRoute: typeof V55DataRoomRoute
+  V55DefensibilityRoute: typeof V55DefensibilityRoute
+  V55DemoRoute: typeof V55DemoRoute
+  V55EvidenceRoute: typeof V55EvidenceRoute
+  V55LeadershipRoute: typeof V55LeadershipRoute
+  V55MarketplaceEconRoute: typeof V55MarketplaceEconRoute
+  V55MoatsRoute: typeof V55MoatsRoute
+  V55MonetizationRoute: typeof V55MonetizationRoute
+  V55NarrativeRoute: typeof V55NarrativeRoute
+  V55OperatingModelRoute: typeof V55OperatingModelRoute
+  V55OverviewRoute: typeof V55OverviewRoute
+  V55PartnerEcosystemRoute: typeof V55PartnerEcosystemRoute
+  V55PartnershipsRoute: typeof V55PartnershipsRoute
+  V55ProductLinesRoute: typeof V55ProductLinesRoute
+  V55ReliabilityRoute: typeof V55ReliabilityRoute
+  V55ReportsRoute: typeof V55ReportsRoute
+  V55RetentionRoute: typeof V55RetentionRoute
+  V55RisksRoute: typeof V55RisksRoute
+  V55RoadmapRoute: typeof V55RoadmapRoute
+  V55ScopeRoute: typeof V55ScopeRoute
+  V55SecurityExecRoute: typeof V55SecurityExecRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -4913,6 +5238,181 @@ declare module '@tanstack/react-router' {
       path: '/driver'
       fullPath: '/driver/'
       preLoaderRoute: typeof DriverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/security-exec': {
+      id: '/v55/security-exec'
+      path: '/v55/security-exec'
+      fullPath: '/v55/security-exec'
+      preLoaderRoute: typeof V55SecurityExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/scope': {
+      id: '/v55/scope'
+      path: '/v55/scope'
+      fullPath: '/v55/scope'
+      preLoaderRoute: typeof V55ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/roadmap': {
+      id: '/v55/roadmap'
+      path: '/v55/roadmap'
+      fullPath: '/v55/roadmap'
+      preLoaderRoute: typeof V55RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/risks': {
+      id: '/v55/risks'
+      path: '/v55/risks'
+      fullPath: '/v55/risks'
+      preLoaderRoute: typeof V55RisksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/retention': {
+      id: '/v55/retention'
+      path: '/v55/retention'
+      fullPath: '/v55/retention'
+      preLoaderRoute: typeof V55RetentionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/reports': {
+      id: '/v55/reports'
+      path: '/v55/reports'
+      fullPath: '/v55/reports'
+      preLoaderRoute: typeof V55ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/reliability': {
+      id: '/v55/reliability'
+      path: '/v55/reliability'
+      fullPath: '/v55/reliability'
+      preLoaderRoute: typeof V55ReliabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/product-lines': {
+      id: '/v55/product-lines'
+      path: '/v55/product-lines'
+      fullPath: '/v55/product-lines'
+      preLoaderRoute: typeof V55ProductLinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/partnerships': {
+      id: '/v55/partnerships'
+      path: '/v55/partnerships'
+      fullPath: '/v55/partnerships'
+      preLoaderRoute: typeof V55PartnershipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/partner-ecosystem': {
+      id: '/v55/partner-ecosystem'
+      path: '/v55/partner-ecosystem'
+      fullPath: '/v55/partner-ecosystem'
+      preLoaderRoute: typeof V55PartnerEcosystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/overview': {
+      id: '/v55/overview'
+      path: '/v55/overview'
+      fullPath: '/v55/overview'
+      preLoaderRoute: typeof V55OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/operating-model': {
+      id: '/v55/operating-model'
+      path: '/v55/operating-model'
+      fullPath: '/v55/operating-model'
+      preLoaderRoute: typeof V55OperatingModelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/narrative': {
+      id: '/v55/narrative'
+      path: '/v55/narrative'
+      fullPath: '/v55/narrative'
+      preLoaderRoute: typeof V55NarrativeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/monetization': {
+      id: '/v55/monetization'
+      path: '/v55/monetization'
+      fullPath: '/v55/monetization'
+      preLoaderRoute: typeof V55MonetizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/moats': {
+      id: '/v55/moats'
+      path: '/v55/moats'
+      fullPath: '/v55/moats'
+      preLoaderRoute: typeof V55MoatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/marketplace-econ': {
+      id: '/v55/marketplace-econ'
+      path: '/v55/marketplace-econ'
+      fullPath: '/v55/marketplace-econ'
+      preLoaderRoute: typeof V55MarketplaceEconRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/leadership': {
+      id: '/v55/leadership'
+      path: '/v55/leadership'
+      fullPath: '/v55/leadership'
+      preLoaderRoute: typeof V55LeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/evidence': {
+      id: '/v55/evidence'
+      path: '/v55/evidence'
+      fullPath: '/v55/evidence'
+      preLoaderRoute: typeof V55EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/demo': {
+      id: '/v55/demo'
+      path: '/v55/demo'
+      fullPath: '/v55/demo'
+      preLoaderRoute: typeof V55DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/defensibility': {
+      id: '/v55/defensibility'
+      path: '/v55/defensibility'
+      fullPath: '/v55/defensibility'
+      preLoaderRoute: typeof V55DefensibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/data-room': {
+      id: '/v55/data-room'
+      path: '/v55/data-room'
+      fullPath: '/v55/data-room'
+      preLoaderRoute: typeof V55DataRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/competitive': {
+      id: '/v55/competitive'
+      path: '/v55/competitive'
+      fullPath: '/v55/competitive'
+      preLoaderRoute: typeof V55CompetitiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/cadence': {
+      id: '/v55/cadence'
+      path: '/v55/cadence'
+      fullPath: '/v55/cadence'
+      preLoaderRoute: typeof V55CadenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/board': {
+      id: '/v55/board'
+      path: '/v55/board'
+      fullPath: '/v55/board'
+      preLoaderRoute: typeof V55BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v55/accounts': {
+      id: '/v55/accounts'
+      path: '/v55/accounts'
+      fullPath: '/v55/accounts'
+      preLoaderRoute: typeof V55AccountsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v5/trust-safety': {
@@ -7743,6 +8243,31 @@ const rootRouteChildren: RootRouteChildren = {
   V5SupplyDemandRoute: V5SupplyDemandRoute,
   V5SupportRoute: V5SupportRoute,
   V5TrustSafetyRoute: V5TrustSafetyRoute,
+  V55AccountsRoute: V55AccountsRoute,
+  V55BoardRoute: V55BoardRoute,
+  V55CadenceRoute: V55CadenceRoute,
+  V55CompetitiveRoute: V55CompetitiveRoute,
+  V55DataRoomRoute: V55DataRoomRoute,
+  V55DefensibilityRoute: V55DefensibilityRoute,
+  V55DemoRoute: V55DemoRoute,
+  V55EvidenceRoute: V55EvidenceRoute,
+  V55LeadershipRoute: V55LeadershipRoute,
+  V55MarketplaceEconRoute: V55MarketplaceEconRoute,
+  V55MoatsRoute: V55MoatsRoute,
+  V55MonetizationRoute: V55MonetizationRoute,
+  V55NarrativeRoute: V55NarrativeRoute,
+  V55OperatingModelRoute: V55OperatingModelRoute,
+  V55OverviewRoute: V55OverviewRoute,
+  V55PartnerEcosystemRoute: V55PartnerEcosystemRoute,
+  V55PartnershipsRoute: V55PartnershipsRoute,
+  V55ProductLinesRoute: V55ProductLinesRoute,
+  V55ReliabilityRoute: V55ReliabilityRoute,
+  V55ReportsRoute: V55ReportsRoute,
+  V55RetentionRoute: V55RetentionRoute,
+  V55RisksRoute: V55RisksRoute,
+  V55RoadmapRoute: V55RoadmapRoute,
+  V55ScopeRoute: V55ScopeRoute,
+  V55SecurityExecRoute: V55SecurityExecRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
