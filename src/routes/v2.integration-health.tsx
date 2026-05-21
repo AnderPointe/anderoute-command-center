@@ -54,6 +54,12 @@ function Page() {
                   <div>errors: {p.errorPct}%</div>
                 </div>
                 {p.note && <div className="mt-1 text-xs text-muted-foreground">{p.note}</div>}
+                {PROVIDER_TREND_24H[p.name] && (
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wide text-muted-foreground">p95 24h</span>
+                    <MiniSpark data={PROVIDER_TREND_24H[p.name]} />
+                  </div>
+                )}
               </div>
             ))}
           </div>
