@@ -17,12 +17,12 @@ export const Route = createFileRoute("/v65/regional-compliance")({
         </Card>
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <SimpleTable rows={regions} columns={[
-            { key: "region",           label: "Region" },
-            { key: "country",          label: "Country" },
-            { key: "research_status",  label: "Research",  render: (r) => <StatusPill status={r.research_status} /> },
-            { key: "privacy_status",   label: "Privacy" },
-            { key: "transport_status", label: "Transport" },
-            { key: "risk",             label: "Risk",      render: (r) => <StatusPill status={r.risk} /> },
+            { key: "region",    label: "Region" },
+            { key: "country",   label: "Country" },
+            { key: "research",  label: "Research", render: (r) => <StatusPill status={r.research} /> },
+            { key: "privacy",   label: "Privacy" },
+            { key: "transport", label: "Transport" },
+            { key: "risk",      label: "Risk",     render: (r) => <StatusPill status={r.risk} /> },
           ]} />
         </Card>
       </V65Page>
