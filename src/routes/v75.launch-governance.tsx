@@ -1,17 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Crown } from "lucide-react";
 import { V75Page } from "@/components/v75/V75Page";
-import { SimpleTable, StatusPill } from "@/components/v75/ui-bits";
+import { SimpleTable, StatusPill, KpiGrid } from "@/components/v75/ui-bits";
 import { Card } from "@/components/ui/card";
 import { useExecutiveGlobalLaunchGovernance } from "@/v75/hooks";
 
 export const Route = createFileRoute("/v75/launch-governance")({
   head: () => ({ meta: [{ title: "Executive Global Launch Governance · V7.5 · Anderoute" }] }),
   component: () => {
-    const { approvals } = useExecutiveGlobalLaunchGovernance();
+    const { approvals, summary } = useExecutiveGlobalLaunchGovernance();
     return (
       <V75Page icon={<Crown className="size-6 text-indigo-300" />} title="Executive Global Launch Governance"
         blurb="Approval queue: country launch, regional marketplace, regulated customer go-live, international partner launch, data residency / financial / compliance / support exceptions.">
+        <KpiGrid cols={4} items={[
+          { label: "Pending",       value: summary.pending, sub: "Awaiting exec" },
+          { label: "Approved",      value: summary.approved },
+          { label: "Oldest pending", value: `${summary.oldest_days_open}d`, sub: "Open" },
+          { label: "Next review",    value: summary.next_review },
+        ]} />
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <SimpleTable rows={approvals as any} columns={[
             { key: "title",  label: "Request" },
