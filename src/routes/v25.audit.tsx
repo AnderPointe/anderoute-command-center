@@ -26,6 +26,15 @@ export const Route = createFileRoute("/v25/audit")({
           </tbody>
         </table>
       </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Export runs</h2>
+        <table className="mt-3 w-full text-sm">
+          <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground"><tr><th className="p-2">At</th><th className="p-2">Actor</th><th className="p-2">Filter</th><th className="p-2">Format</th><th className="p-2">Rows</th><th className="p-2">Status</th></tr></thead>
+          <tbody>{AUDIT_EXPORT_RUNS.map((r) => (
+            <tr key={r.id} className="border-t border-white/10"><td className="p-2 text-xs text-muted-foreground">{r.at}</td><td className="p-2 font-mono text-xs">{r.actor}</td><td className="p-2 text-xs">{r.filter}</td><td className="p-2"><Badge variant="outline" className="border-sky-500/30 text-sky-300">{r.format}</Badge></td><td className="p-2 font-mono text-xs">{r.rows.toLocaleString()}</td><td className="p-2"><Badge variant="outline" className={r.status === "done" ? "border-emerald-500/30 text-emerald-300" : "border-amber-500/30 text-amber-300"}>{r.status}</Badge></td></tr>
+          ))}</tbody>
+        </table>
+      </Card>
     </V25Page>
   ),
 });
