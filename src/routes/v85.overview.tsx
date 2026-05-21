@@ -12,6 +12,7 @@ export const Route = createFileRoute("/v85/overview")({
     const c = H.useInternationalControlMaturity();
     const headline = H.useV85ExecHeadline();
     const overlays = H.useV85ExecutionOverlays().slice(0, 6);
+    const boundary = H.useV85BackendBoundary();
     return (
       <V85Page icon={<Gauge className="size-6 text-fuchsia-300" />} title="Anderoute V8.5 — Global Enterprise Operating Discipline" blurb="Mature international controls, marketplace financial optimization, board governance, country accountability, and long-term platform stewardship. No final audit / SOC 2 / autonomous claims.">
         <ExecBanner h={headline} />
@@ -23,6 +24,11 @@ export const Route = createFileRoute("/v85/overview")({
         </div>
         <KpiGrid cols={4} items={d.domains.slice(0,8).map(x=>({label:x.domain,value:x.score,sub:`owner: ${x.owner}`}))} />
         <OverlayStrip items={overlays as any} title="Executive overlays — top 6" />
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Backend boundary — server fn vs server route vs edge function</h3>
+          <p className="mt-1 text-xs text-muted-foreground">Internal V8.5 logic uses TanStack <code>createServerFn</code>. External webhooks live under <code>/api/public/*</code>. No new edge functions in V8.5.</p>
+          <SimpleTable rows={boundary as any} columns={[{key:"kind",label:"Kind"},{key:"name",label:"Name"},{key:"caller",label:"Caller"},{key:"auth",label:"Auth"}]} />
+        </Card>
       </V85Page>);
   },
 });
