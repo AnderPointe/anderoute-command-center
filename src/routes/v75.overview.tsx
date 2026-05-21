@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Gauge } from "lucide-react";
 import { V75Page } from "@/components/v75/V75Page";
-import { ScoreCard, KpiGrid, SimpleTable, StatusPill } from "@/components/v75/ui-bits";
+import { ScoreCard, KpiGrid, SimpleTable, StatusPill, ExecBanner } from "@/components/v75/ui-bits";
 import { Card } from "@/components/ui/card";
-import { useV75Scope, useGlobalExpansionExecution, useAdvancedFinancialAuditReadiness, useGlobalMarketplaceDiscipline, useExecutiveGlobalLaunchGovernance } from "@/v75/hooks";
+import { useV75Scope, useGlobalExpansionExecution, useAdvancedFinancialAuditReadiness, useGlobalMarketplaceDiscipline, useExecutiveGlobalLaunchGovernance, useV75ExecHeadline } from "@/v75/hooks";
 
 export const Route = createFileRoute("/v75/overview")({
   head: () => ({ meta: [{ title: "V7.5 Overview · Anderoute" }] }),
