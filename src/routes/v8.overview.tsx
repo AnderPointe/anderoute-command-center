@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Gauge } from "lucide-react";
 import { V8Page } from "@/components/v8/V8Page";
-import { ScoreCard, KpiGrid, ExecBanner, SimpleTable, StatusPill } from "@/components/v8/ui-bits";
+import { ScoreCard, KpiGrid, ExecBanner, SimpleTable, StatusPill, OverlayStrip } from "@/components/v8/ui-bits";
 import { Card } from "@/components/ui/card";
 import {
   useV8Scope, useGlobalOperatingNetworkScale, useFinancialControlMaturity,
   useAdvancedComplianceExecution, useExecutiveStrategicGovernance, useV8ExecHeadline,
+  useV8ExecutionOverlays,
 } from "@/v8/hooks";
 
 export const Route = createFileRoute("/v8/overview")({
