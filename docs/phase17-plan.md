@@ -1,27 +1,40 @@
-# Phase 17 — V2 plan (preview)
+# Phase 17 — V2 plan
 
-V2 builds on V1.5 to deliver AI Operations Intelligence, an optimization
-engine, EDI beta, API marketplace beta, advanced reporting, and enterprise
-controls. Out of scope for Phase 16.
+V2 moves Anderoute from V1.5 production logistics into an intelligent
+operations platform. Routes live under `/v2/*`.
 
-## Scope
-1. **AI Operations Intelligence** — replace rules-based CoPilot with model-backed
-   reasoning over operational state; structured outputs; guardrails.
-2. **Optimization engine** — load-to-driver assignment, multi-stop optimization,
-   slack-aware re-planning. Off-route + reroute graduates from placeholder.
-3. **EDI beta** — 204, 990, 214, 210 inbound/outbound; trading partner config.
-4. **API marketplace beta** — public REST + webhook subscriptions; rate limits;
-   key rotation; tenant-scoped sandbox.
-5. **Advanced reporting** — cohort, retention, profitability; scheduled exports.
-6. **Enterprise controls** — SSO/SAML, audit log export, granular role matrix,
-   per-tenant data residency hints, custom domain white-label.
+## In scope
+- AI Operations Intelligence dashboard
+- Predictive risk scoring (delivery, pickup, GPS, route, customer, integration, billing, EDI, webhook)
+- Optimization engine (driver-for-load scoring, ranking, suggested assignment, reassignment)
+- Suggested driver assignment workflow
+- Human approval workflow for all high-impact AI actions
+- CoPilot V2 intelligence (context-aware rules + drafts + shift handoff + exec summary)
+- Customer impact intelligence
+- Executive intelligence dashboard
+- Advanced reporting (16 reports)
+- EDI beta (204 / 990 / 214 / 210 / 997 placeholders)
+- API marketplace beta (keys, scopes, rotation, request logs)
+- Expanded webhook system (17 events, retry queue, payload preview)
+- Integration health dashboard
+- Enterprise controls (permissions, audits, retention, feature flags)
+- Customer portal V2 insights
 
-## Out of scope until later
-SOC 2 automation, Android Auto, CarPlay, full background native turn-by-turn.
+## Deferred (out of V2)
+Fully autonomous dispatch, Android Auto, CarPlay, full SOC 2 evidence
+automation, full EDI production certification, white-label custom domains,
+advanced ML model training, multi-constraint optimization, carrier marketplace.
 
-## Architecture notes
-- AI calls go through Lovable AI Gateway (`LOVABLE_API_KEY`) inside server fns.
-- Optimization engine runs as background server fn jobs; expensive compute is
-  queued and idempotent. No in-process globals (server is stateless).
-- EDI runs as parser server fns + `api/public/*` intake routes for partner POSTs.
-- Marketplace surface uses signed JWT API keys per company.
+## Schema additions
+See `docs/phase17-schema.sql`.
+
+## RLS examples
+See `docs/phase17-rls.sql`.
+
+## Edge functions
+See `docs/phase17-edge-function-plan.md`.
+
+## Phase 18
+See `docs/phase18-plan.md` — Enterprise V2.5: production EDI, API monetization,
+advanced optimization, advanced AI, white-label domains, enterprise security
+controls, larger fleet scaling.
