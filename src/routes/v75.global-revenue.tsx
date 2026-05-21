@@ -1,17 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DollarSign } from "lucide-react";
 import { V75Page } from "@/components/v75/V75Page";
-import { SimpleTable, StatusPill } from "@/components/v75/ui-bits";
+import { SimpleTable, StatusPill, KpiGrid } from "@/components/v75/ui-bits";
 import { Card } from "@/components/ui/card";
 import { useGlobalRevenueControls } from "@/v75/hooks";
 
 export const Route = createFileRoute("/v75/global-revenue")({
   head: () => ({ meta: [{ title: "Global Revenue Controls · V7.5 · Anderoute" }] }),
   component: () => {
-    const { countries } = useGlobalRevenueControls();
+    const { countries, summary } = useGlobalRevenueControls();
     return (
       <V75Page icon={<DollarSign className="size-6 text-indigo-300" />} title="Global Revenue Control Execution"
         blurb="Country-by-country billing readiness: currency, tax, processor, invoice localization, subscription/usage/marketplace/API controls.">
+        <KpiGrid cols={4} items={summary.map(s => ({ label: s.country, value: `${s.readiness}%`, sub: "Billing readiness" }))} />
+
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <SimpleTable rows={countries as any} columns={[
             { key: "country", label: "Country" },

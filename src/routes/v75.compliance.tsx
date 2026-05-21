@@ -1,17 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FileCheck2 } from "lucide-react";
 import { V75Page } from "@/components/v75/V75Page";
-import { SimpleTable, StatusPill } from "@/components/v75/ui-bits";
+import { SimpleTable, StatusPill, KpiGrid } from "@/components/v75/ui-bits";
 import { Card } from "@/components/ui/card";
 import { useGlobalComplianceControlExecution } from "@/v75/hooks";
 
 export const Route = createFileRoute("/v75/compliance")({
   head: () => ({ meta: [{ title: "Global Compliance Control Execution · V7.5 · Anderoute" }] }),
   component: () => {
-    const { controls } = useGlobalComplianceControlExecution();
+    const { controls, summary } = useGlobalComplianceControlExecution();
     return (
       <V75Page icon={<FileCheck2 className="size-6 text-indigo-300" />} title="Global Compliance Control Execution"
         blurb="Per-control owner, region, evidence needed/collected, test status, exception, remediation, next review, executive escalation.">
+        <KpiGrid cols={4} items={[
+          { label: "Passing",     value: summary.passing },
+          { label: "In progress", value: summary.in_progress },
+          { label: "Escalated",   value: summary.escalated, sub: "Exec review" },
+          { label: "Evidence missing", value: summary.evidence_missing },
+        ]} />
+
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <SimpleTable rows={controls as any} columns={[
             { key: "control",            label: "Control" },
