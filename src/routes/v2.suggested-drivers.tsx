@@ -6,6 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { OPT_LOAD, OPT_CANDIDATES, confidenceBand } from "@/v2/data/mockPhase17";
 
+export const Route = createFileRoute("/v2/suggested-drivers")({
+  head: () => ({ meta: [{ title: "Suggested Drivers · Anderoute" }] }),
+  component: Page,
+});
+
 const toneClass: Record<string, string> = {
   good: "border-emerald-500/30 text-emerald-300",
   info: "border-sky-500/30 text-sky-300",

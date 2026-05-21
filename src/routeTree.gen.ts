@@ -30,7 +30,6 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
 import { Route as V2WebhooksRouteImport } from './routes/v2.webhooks'
-import { Route as V2SuggestedDriversRouteImport } from './routes/v2.suggested-drivers'
 import { Route as V2SecurityRouteImport } from './routes/v2.security'
 import { Route as V2ScopeRouteImport } from './routes/v2.scope'
 import { Route as V2RiskRouteImport } from './routes/v2.risk'
@@ -330,11 +329,6 @@ const DriverIndexRoute = DriverIndexRouteImport.update({
 const V2WebhooksRoute = V2WebhooksRouteImport.update({
   id: '/v2/webhooks',
   path: '/v2/webhooks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const V2SuggestedDriversRoute = V2SuggestedDriversRouteImport.update({
-  id: '/v2/suggested-drivers',
-  path: '/v2/suggested-drivers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V2SecurityRoute = V2SecurityRouteImport.update({
@@ -1532,7 +1526,6 @@ export interface FileRoutesByFullPath {
   '/v2/risk': typeof V2RiskRoute
   '/v2/scope': typeof V2ScopeRoute
   '/v2/security': typeof V2SecurityRoute
-  '/v2/suggested-drivers': typeof V2SuggestedDriversRoute
   '/v2/webhooks': typeof V2WebhooksRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -1751,7 +1744,6 @@ export interface FileRoutesByTo {
   '/v2/risk': typeof V2RiskRoute
   '/v2/scope': typeof V2ScopeRoute
   '/v2/security': typeof V2SecurityRoute
-  '/v2/suggested-drivers': typeof V2SuggestedDriversRoute
   '/v2/webhooks': typeof V2WebhooksRoute
   '/driver': typeof DriverIndexRoute
 }
@@ -1971,7 +1963,6 @@ export interface FileRoutesById {
   '/v2/risk': typeof V2RiskRoute
   '/v2/scope': typeof V2ScopeRoute
   '/v2/security': typeof V2SecurityRoute
-  '/v2/suggested-drivers': typeof V2SuggestedDriversRoute
   '/v2/webhooks': typeof V2WebhooksRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -2192,7 +2183,6 @@ export interface FileRouteTypes {
     | '/v2/risk'
     | '/v2/scope'
     | '/v2/security'
-    | '/v2/suggested-drivers'
     | '/v2/webhooks'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
@@ -2411,7 +2401,6 @@ export interface FileRouteTypes {
     | '/v2/risk'
     | '/v2/scope'
     | '/v2/security'
-    | '/v2/suggested-drivers'
     | '/v2/webhooks'
     | '/driver'
   id:
@@ -2630,7 +2619,6 @@ export interface FileRouteTypes {
     | '/v2/risk'
     | '/v2/scope'
     | '/v2/security'
-    | '/v2/suggested-drivers'
     | '/v2/webhooks'
     | '/driver/'
   fileRoutesById: FileRoutesById
@@ -2842,7 +2830,6 @@ export interface RootRouteChildren {
   V2RiskRoute: typeof V2RiskRoute
   V2ScopeRoute: typeof V2ScopeRoute
   V2SecurityRoute: typeof V2SecurityRoute
-  V2SuggestedDriversRoute: typeof V2SuggestedDriversRoute
   V2WebhooksRoute: typeof V2WebhooksRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
@@ -2994,13 +2981,6 @@ declare module '@tanstack/react-router' {
       path: '/v2/webhooks'
       fullPath: '/v2/webhooks'
       preLoaderRoute: typeof V2WebhooksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/v2/suggested-drivers': {
-      id: '/v2/suggested-drivers'
-      path: '/v2/suggested-drivers'
-      fullPath: '/v2/suggested-drivers'
-      preLoaderRoute: typeof V2SuggestedDriversRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v2/security': {
@@ -4631,7 +4611,6 @@ const rootRouteChildren: RootRouteChildren = {
   V2RiskRoute: V2RiskRoute,
   V2ScopeRoute: V2ScopeRoute,
   V2SecurityRoute: V2SecurityRoute,
-  V2SuggestedDriversRoute: V2SuggestedDriversRoute,
   V2WebhooksRoute: V2WebhooksRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
