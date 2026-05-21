@@ -3,7 +3,7 @@ import { KeyRound } from "lucide-react";
 import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { API_SCOPES } from "@/v2/data/mockPhase17";
+import { API_SCOPES, API_RATE_LIMITS } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/api-marketplace")({
   head: () => ({ meta: [{ title: "API Marketplace · Anderoute" }] }),
