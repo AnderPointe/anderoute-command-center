@@ -81,6 +81,18 @@ function Page() {
           </table>
         </div>
       </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Key lifecycle</h2>
+        <div className="mt-3 grid gap-2 md:grid-cols-5">
+          {API_KEY_LIFECYCLE.map((s) => (
+            <div key={s.step} className="rounded-md border border-white/10 bg-black/20 p-3 text-xs">
+              <div className="flex items-center gap-2"><Badge variant="outline" className="border-violet-500/40 text-violet-300">{s.step}</Badge> <span className="font-medium">{s.label}</span></div>
+              <div className="mt-1 text-muted-foreground">{s.detail}</div>
+            </div>
+          ))}
+        </div>
+      </Card>
     </V2Page>
   );
 }
