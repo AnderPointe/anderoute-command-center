@@ -4,7 +4,7 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { RISK_ROWS } from "@/v2/data/mockPhase17";
+import { RISK_ROWS, RISK_FACTORS } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/risk")({
   head: () => ({ meta: [{ title: "Predictive Risk · Anderoute" }] }),
