@@ -3,7 +3,7 @@ import { MapPinned } from "lucide-react";
 import { V25Page } from "@/components/v25/V25Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { COMPANY_LOCATIONS, REGION_PERFORMANCE } from "@/v25/data/mockPhase18";
+import { COMPANY_LOCATIONS, REGION_PERFORMANCE, LOCATION_OPS_MATRIX } from "@/v25/data/mockPhase18";
 
 export const Route = createFileRoute("/v25/locations")({
   head: () => ({ meta: [{ title: "Multi-location Operations · Anderoute" }] }),
