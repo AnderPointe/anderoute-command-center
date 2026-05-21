@@ -30,7 +30,11 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
 import { Route as V45ScopeRouteImport } from './routes/v45.scope'
+import { Route as V45PlaybooksMarketplaceRouteImport } from './routes/v45.playbooks-marketplace'
 import { Route as V45OverviewRouteImport } from './routes/v45.overview'
+import { Route as V45MarketplaceOpsRouteImport } from './routes/v45.marketplace-ops'
+import { Route as V45DisputesRouteImport } from './routes/v45.disputes'
+import { Route as V45CarrierQualityRouteImport } from './routes/v45.carrier-quality'
 import { Route as V45AutomationRouteImport } from './routes/v45.automation'
 import { Route as V45ApprovalsRouteImport } from './routes/v45.approvals'
 import { Route as V4SupportRouteImport } from './routes/v4.support'
@@ -432,9 +436,29 @@ const V45ScopeRoute = V45ScopeRouteImport.update({
   path: '/v45/scope',
   getParentRoute: () => rootRouteImport,
 } as any)
+const V45PlaybooksMarketplaceRoute = V45PlaybooksMarketplaceRouteImport.update({
+  id: '/v45/playbooks-marketplace',
+  path: '/v45/playbooks-marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const V45OverviewRoute = V45OverviewRouteImport.update({
   id: '/v45/overview',
   path: '/v45/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V45MarketplaceOpsRoute = V45MarketplaceOpsRouteImport.update({
+  id: '/v45/marketplace-ops',
+  path: '/v45/marketplace-ops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V45DisputesRoute = V45DisputesRouteImport.update({
+  id: '/v45/disputes',
+  path: '/v45/disputes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V45CarrierQualityRoute = V45CarrierQualityRouteImport.update({
+  id: '/v45/carrier-quality',
+  path: '/v45/carrier-quality',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V45AutomationRoute = V45AutomationRouteImport.update({
@@ -2234,7 +2258,11 @@ export interface FileRoutesByFullPath {
   '/v4/support': typeof V4SupportRoute
   '/v45/approvals': typeof V45ApprovalsRoute
   '/v45/automation': typeof V45AutomationRoute
+  '/v45/carrier-quality': typeof V45CarrierQualityRoute
+  '/v45/disputes': typeof V45DisputesRoute
+  '/v45/marketplace-ops': typeof V45MarketplaceOpsRoute
   '/v45/overview': typeof V45OverviewRoute
+  '/v45/playbooks-marketplace': typeof V45PlaybooksMarketplaceRoute
   '/v45/scope': typeof V45ScopeRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -2553,7 +2581,11 @@ export interface FileRoutesByTo {
   '/v4/support': typeof V4SupportRoute
   '/v45/approvals': typeof V45ApprovalsRoute
   '/v45/automation': typeof V45AutomationRoute
+  '/v45/carrier-quality': typeof V45CarrierQualityRoute
+  '/v45/disputes': typeof V45DisputesRoute
+  '/v45/marketplace-ops': typeof V45MarketplaceOpsRoute
   '/v45/overview': typeof V45OverviewRoute
+  '/v45/playbooks-marketplace': typeof V45PlaybooksMarketplaceRoute
   '/v45/scope': typeof V45ScopeRoute
   '/driver': typeof DriverIndexRoute
 }
@@ -2873,7 +2905,11 @@ export interface FileRoutesById {
   '/v4/support': typeof V4SupportRoute
   '/v45/approvals': typeof V45ApprovalsRoute
   '/v45/automation': typeof V45AutomationRoute
+  '/v45/carrier-quality': typeof V45CarrierQualityRoute
+  '/v45/disputes': typeof V45DisputesRoute
+  '/v45/marketplace-ops': typeof V45MarketplaceOpsRoute
   '/v45/overview': typeof V45OverviewRoute
+  '/v45/playbooks-marketplace': typeof V45PlaybooksMarketplaceRoute
   '/v45/scope': typeof V45ScopeRoute
   '/driver/': typeof DriverIndexRoute
 }
@@ -3194,7 +3230,11 @@ export interface FileRouteTypes {
     | '/v4/support'
     | '/v45/approvals'
     | '/v45/automation'
+    | '/v45/carrier-quality'
+    | '/v45/disputes'
+    | '/v45/marketplace-ops'
     | '/v45/overview'
+    | '/v45/playbooks-marketplace'
     | '/v45/scope'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
@@ -3513,7 +3553,11 @@ export interface FileRouteTypes {
     | '/v4/support'
     | '/v45/approvals'
     | '/v45/automation'
+    | '/v45/carrier-quality'
+    | '/v45/disputes'
+    | '/v45/marketplace-ops'
     | '/v45/overview'
+    | '/v45/playbooks-marketplace'
     | '/v45/scope'
     | '/driver'
   id:
@@ -3832,7 +3876,11 @@ export interface FileRouteTypes {
     | '/v4/support'
     | '/v45/approvals'
     | '/v45/automation'
+    | '/v45/carrier-quality'
+    | '/v45/disputes'
+    | '/v45/marketplace-ops'
     | '/v45/overview'
+    | '/v45/playbooks-marketplace'
     | '/v45/scope'
     | '/driver/'
   fileRoutesById: FileRoutesById
@@ -4144,7 +4192,11 @@ export interface RootRouteChildren {
   V4SupportRoute: typeof V4SupportRoute
   V45ApprovalsRoute: typeof V45ApprovalsRoute
   V45AutomationRoute: typeof V45AutomationRoute
+  V45CarrierQualityRoute: typeof V45CarrierQualityRoute
+  V45DisputesRoute: typeof V45DisputesRoute
+  V45MarketplaceOpsRoute: typeof V45MarketplaceOpsRoute
   V45OverviewRoute: typeof V45OverviewRoute
+  V45PlaybooksMarketplaceRoute: typeof V45PlaybooksMarketplaceRoute
   V45ScopeRoute: typeof V45ScopeRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
@@ -4298,11 +4350,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof V45ScopeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v45/playbooks-marketplace': {
+      id: '/v45/playbooks-marketplace'
+      path: '/v45/playbooks-marketplace'
+      fullPath: '/v45/playbooks-marketplace'
+      preLoaderRoute: typeof V45PlaybooksMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/v45/overview': {
       id: '/v45/overview'
       path: '/v45/overview'
       fullPath: '/v45/overview'
       preLoaderRoute: typeof V45OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v45/marketplace-ops': {
+      id: '/v45/marketplace-ops'
+      path: '/v45/marketplace-ops'
+      fullPath: '/v45/marketplace-ops'
+      preLoaderRoute: typeof V45MarketplaceOpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v45/disputes': {
+      id: '/v45/disputes'
+      path: '/v45/disputes'
+      fullPath: '/v45/disputes'
+      preLoaderRoute: typeof V45DisputesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v45/carrier-quality': {
+      id: '/v45/carrier-quality'
+      path: '/v45/carrier-quality'
+      fullPath: '/v45/carrier-quality'
+      preLoaderRoute: typeof V45CarrierQualityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v45/automation': {
@@ -6733,7 +6813,11 @@ const rootRouteChildren: RootRouteChildren = {
   V4SupportRoute: V4SupportRoute,
   V45ApprovalsRoute: V45ApprovalsRoute,
   V45AutomationRoute: V45AutomationRoute,
+  V45CarrierQualityRoute: V45CarrierQualityRoute,
+  V45DisputesRoute: V45DisputesRoute,
+  V45MarketplaceOpsRoute: V45MarketplaceOpsRoute,
   V45OverviewRoute: V45OverviewRoute,
+  V45PlaybooksMarketplaceRoute: V45PlaybooksMarketplaceRoute,
   V45ScopeRoute: V45ScopeRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
