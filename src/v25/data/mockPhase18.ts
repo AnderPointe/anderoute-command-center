@@ -628,3 +628,30 @@ export const ENTERPRISE_REPORT_KPIS = [
   { id: "kpi5", label: "Driver utilization",     value: "83%",    delta: "+1.5pp", tone: "good" },
   { id: "kpi6", label: "Customer comm approvals",value: "147",    delta: "+22",    tone: "info" },
 ];
+
+/** Phase 18 polish — Per-module execution overlays for V2.5 enterprise readiness.
+ *  Each overlay surfaces the role, focus, and next decision for an enterprise area. */
+export const V25_EXECUTION_OVERLAYS = [
+  { id: "edi",          area: "Production EDI",            role: "Integrations lead", focus: "Hold 996.2% success while ramping 211/212/856 from placeholder.", next: "Approve 856 mapping draft for Acme + run partner test cycle." },
+  { id: "edi-partners", area: "EDI partner setup",         role: "Integrations lead", focus: "Move 2 partners from test → prod; close error backlog on Mercury.", next: "Sign off transport checklist for Mercury AS2 cert rotation." },
+  { id: "edi-mappings", area: "EDI mapping manager",       role: "Integrations dev",  focus: "Version pinning across 204/990/214 to keep partner-specific tweaks isolated.", next: "Promote v3 mapping for Acme-204 after fixture suite green." },
+  { id: "edi-monitor",  area: "EDI error handling",        role: "Ops",               focus: "Retry backlog under 25; investigate spike on Sterling 997 ack gap.", next: "Open ticket on Sterling control-number gap and pause auto-retry." },
+  { id: "api-monetize", area: "API monetization",          role: "Product / Finance", focus: "Overage billing event flow; tier upgrade for 2 high-usage tenants.", next: "Send Pro→Scale upgrade quote to top overage customer." },
+  { id: "api-gateway",  area: "API gateway security",      role: "Platform",          focus: "Rate-limit + key-scope coverage on every public endpoint.", next: "Add IP allowlist to keys with webhooks.manage scope." },
+  { id: "optimization", area: "Advanced optimization",     role: "Dispatch lead",     focus: "Multi-load + deadhead suggestions need human approval on every accept.", next: "Review top 3 weekly suggestions; approve only if ETA conf ≥ 90%." },
+  { id: "scenarios",    area: "Scenario planning",         role: "Ops planner",       focus: "What-if scenarios remain advisory; never auto-apply to live plan.", next: "Run weekly fuel + driver-shortage what-if; share to leadership." },
+  { id: "copilot",      area: "CoPilot V2.5",              role: "Dispatcher",        focus: "Summaries clearly labeled; EDI / API / optimization explainers.", next: "Add 'why this suggestion' link to every optimization summary." },
+  { id: "comms",        area: "Customer comm approvals",   role: "CS lead",           focus: "Drafts queued; dispatcher approval required before send.", next: "Approve 12 pending drafts; reject 1 stale ETA reply." },
+  { id: "white-label",  area: "White-label portal",        role: "CS lead",           focus: "Branding, support routing, email template per tenant.", next: "Lock Acme branding kit + verify support email re-route." },
+  { id: "domain",       area: "Custom domain setup",       role: "Platform",          focus: "DNS verification + SSL placeholder; no auto-issuance yet.", next: "Verify track.acme.com DNS + queue SSL request manually." },
+  { id: "fleet-scale",  area: "Fleet scaling",             role: "Ops",               focus: "Scaling tiers 25 → 1k+ with capacity headroom checks.", next: "Pre-flight sharding plan for GPS event volume." },
+  { id: "map-cluster",  area: "Advanced map clustering",   role: "Dispatcher",        focus: "Cluster perf at 1k+ vehicles; tile cache warmup.", next: "Enable LOD-3 clustering for SoCal region by default." },
+  { id: "locations",    area: "Multi-location operations", role: "Ops director",      focus: "HQ / yard / terminal / warehouse / region distribution matrix.", next: "Rebalance Atlanta Terminal idle drivers (6) → Houston." },
+  { id: "security",     area: "Enterprise security V2.5",  role: "Security",          focus: "RBAC matrix + RLS examples documented; not yet SOC 2 certified.", next: "Schedule quarterly access review; export audit pack." },
+  { id: "retention",    area: "Data retention",            role: "Privacy",           focus: "12 policies live; 4 under legal hold; 2 pending cleanup.", next: "Run scheduled cleanup window 2026-05-22 02:00." },
+  { id: "reliability",  area: "Integration reliability",   role: "Integrations",      focus: "Retry backlog, credential expiry, SLA tracking per connector.", next: "Rotate Stripe-test creds before expiry; backfill webhook retries." },
+  { id: "audit",        area: "Advanced audit export",     role: "Compliance",        focus: "Filtered CSV/JSON exports; PDF placeholder only.", next: "Deliver Acme 90-day audit export (queued run ax4)." },
+  { id: "onboarding",   area: "Enterprise onboarding",     role: "CSM",               focus: "13-step wizard → go-live; 1 integrations blocker.", next: "Unblock integrations owner on Acme SFTP credential." },
+  { id: "reports",      area: "Enterprise reports",        role: "Exec team",         focus: "14 reports; EDI success -0.3pp warns; revenue +8.4%.", next: "Investigate EDI dip with partner test runs before review." },
+] as const;
+

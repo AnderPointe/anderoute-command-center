@@ -4,7 +4,8 @@ import { V25Page } from "@/components/v25/V25Page";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { V25_READINESS, v25ReadinessScore } from "@/v25/data/mockPhase18";
+import { V25_READINESS, v25ReadinessScore, V25_EXECUTION_OVERLAYS } from "@/v25/data/mockPhase18";
+import { OverlayStrip } from "@/components/v25/ui-bits";
 
 export const Route = createFileRoute("/v25/overview")({
   head: () => ({ meta: [{ title: "V2.5 Overview · Anderoute" }] }),
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/v25/overview")({
           ))}
         </div>
       </Card>
+      <OverlayStrip title="V2.5 enterprise execution overlays" items={V25_EXECUTION_OVERLAYS.slice(0, 9)} />
     </V25Page>
   ),
 });
