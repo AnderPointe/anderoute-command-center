@@ -3,13 +3,21 @@ import { Handshake } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { STRATEGIC_PARTNERSHIPS } from "@/v35/data/mockPhase20";
+import { STRATEGIC_PARTNERSHIPS, PARTNERSHIP_STAGES } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/partnerships")({
   head: () => ({ meta: [{ title: "Strategic Partnerships · Anderoute V3.5" }] }),
   component: () => (
     <V35Page icon={<Handshake className="size-6 text-amber-300" />} title="Strategic Partnership Management"
       blurb="Integration, commercial, security, and launch readiness across the strategic partner pipeline.">
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Partnership stages</h3>
+        <div className="mt-2 flex flex-wrap gap-1.5">{PARTNERSHIP_STAGES.map((s, i) => (
+          <Badge key={s} variant="outline" className="border-white/15 text-xs text-muted-foreground">
+            <span className="mr-1 font-mono text-amber-300">{i + 1}</span>{s}
+          </Badge>
+        ))}</div>
+      </Card>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <table className="w-full text-sm">
           <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground"><tr><th className="p-1">Partner</th><th className="p-1">Integration</th><th className="p-1">Commercial</th><th className="p-1">Security</th><th className="p-1">Launch</th><th className="p-1">Revenue opp.</th></tr></thead>

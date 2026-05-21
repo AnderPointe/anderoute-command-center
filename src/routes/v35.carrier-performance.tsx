@@ -2,13 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Trophy } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
-import { CARRIER_PERFORMANCE } from "@/v35/data/mockPhase20";
+import { CARRIER_PERFORMANCE, PERFORMANCE_SCORE_WEIGHTS } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/carrier-performance")({
   head: () => ({ meta: [{ title: "Carrier Performance · Anderoute V3.5" }] }),
   component: () => (
     <V35Page icon={<Trophy className="size-6 text-amber-300" />} title="Carrier Performance Score"
-      blurb="On-time pickup/delivery, acceptance, cancellation, POD completion, and composite score.">
+      blurb="On-time pickup/delivery, acceptance, cancellation, POD completion, and composite score with transparent weights.">
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Score weights</h3>
+        <div className="mt-2 grid gap-1.5 text-sm md:grid-cols-3">{PERFORMANCE_SCORE_WEIGHTS.map((w) => (
+          <div key={w.factor} className="flex justify-between rounded border border-white/10 bg-black/20 px-2 py-1"><span>{w.factor}</span><span className="font-mono text-xs text-amber-300">{Math.round(w.weight * 100)}%</span></div>
+        ))}</div>
+      </Card>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <table className="w-full text-sm">
           <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">

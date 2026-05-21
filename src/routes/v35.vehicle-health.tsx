@@ -4,7 +4,7 @@ import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { VEHICLE_HEALTH } from "@/v35/data/mockPhase20";
+import { VEHICLE_HEALTH, VEHICLE_MAINTENANCE_QUEUE } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/vehicle-health")({
   head: () => ({ meta: [{ title: "Vehicle Health · Anderoute V3.5" }] }),
@@ -26,6 +26,17 @@ export const Route = createFileRoute("/v35/vehicle-health")({
           </Card>
         ))}
       </div>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Maintenance queue</h3>
+        <ul className="mt-2 space-y-1 text-sm">{VEHICLE_MAINTENANCE_QUEUE.map((m, i) => (
+          <li key={i} className="flex items-center justify-between rounded border border-white/10 bg-black/20 px-2 py-1.5">
+            <span className="font-mono text-xs text-muted-foreground mr-2">{m.vehicle}</span>
+            <span className="flex-1">{m.task}</span>
+            <span className="font-mono text-xs text-muted-foreground mr-2">{m.due}</span>
+            <Badge variant="outline" className={m.severity === "high" ? "border-rose-500/40 text-rose-300" : m.severity === "warn" ? "border-amber-500/40 text-amber-300" : "border-sky-500/40 text-sky-300"}>{m.severity}</Badge>
+          </li>
+        ))}</ul>
+      </Card>
     </V35Page>
   ),
 });

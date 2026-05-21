@@ -347,3 +347,165 @@ export const DEMO_FLOW = [
   "Regional coverage gap appears in West Texas.",
   "Carrier network recommendation suggests adding hotshot carriers in West TX.",
 ];
+
+// ---- Phase 20 polish (extended placeholders) -------------------------------
+
+export const MONETIZATION_KPIS = {
+  mrr: 22340, carrier_mrr: 4720, api_mrr: 1960, take_rate: 0.018,
+  arpu: 158, ltv_placeholder: 4200, gross_margin: 0.78, fee_revenue_mtd: 2840,
+};
+
+export const CARRIER_FUNNEL = [
+  { stage: "Invited",      count: 312 },
+  { stage: "Registered",   count: 218 },
+  { stage: "Submitted",    count: 184 },
+  { stage: "Verified",     count: 121 },
+  { stage: "First award",  count: 84  },
+  { stage: "Repeat award", count: 57  },
+];
+
+export const VERIFICATION_SLA = [
+  { stage: "submitted → in_review",     target_h: 24, p50_h: 9,  p95_h: 22 },
+  { stage: "in_review → decision",      target_h: 48, p50_h: 18, p95_h: 41 },
+  { stage: "needs_more_info → response",target_h: 72, p50_h: 26, p95_h: 65 },
+];
+
+export const COMPLIANCE_CALENDAR = [
+  { week: "W22", insurance: 2, w9: 1, authority: 0, safety: 1 },
+  { week: "W23", insurance: 1, w9: 0, authority: 1, safety: 0 },
+  { week: "W24", insurance: 3, w9: 1, authority: 0, safety: 2 },
+  { week: "W25", insurance: 0, w9: 2, authority: 1, safety: 1 },
+];
+
+export const PERFORMANCE_SCORE_WEIGHTS = [
+  { factor: "On-time pickup",   weight: 0.20 },
+  { factor: "On-time delivery", weight: 0.25 },
+  { factor: "Acceptance rate",  weight: 0.15 },
+  { factor: "Cancellation rate",weight: 0.15 },
+  { factor: "POD completion",   weight: 0.15 },
+  { factor: "Customer rating",  weight: 0.10 },
+];
+
+export const SETTLEMENT_PIPELINE = [
+  { stage: "POD received",     count: 28, value: 41200 },
+  { stage: "Awaiting approval",count: 11, value: 18400 },
+  { stage: "Approved",         count: 9,  value: 14820 },
+  { stage: "Ready for payment",count: 6,  value: 9840  },
+  { stage: "Disputed",         count: 2,  value: 3995  },
+];
+
+export const SETTLEMENT_AGING = [
+  { bucket: "0–7d",   count: 22, value: 38420 },
+  { bucket: "8–14d",  count: 11, value: 16200 },
+  { bucket: "15–30d", count: 5,  value: 7820  },
+  { bucket: "30d+",   count: 1,  value: 1995  },
+];
+
+export const PARTNER_PORTAL_MODULES = [
+  { module: "Overview",       status: "live" },
+  { module: "Opportunities",  status: "live" },
+  { module: "Integration",    status: "live" },
+  { module: "Co-marketing",   status: "beta" },
+  { module: "Support",        status: "live" },
+  { module: "Billing",        status: "placeholder" },
+  { module: "Certification",  status: "beta" },
+];
+
+export const PARTNERSHIP_STAGES = [
+  "Discovery","Mutual NDA","Technical fit","Security review","Commercial terms","Co-sell motion","Joint GTM","Renewal",
+];
+
+export const VEHICLE_MAINTENANCE_QUEUE = [
+  { vehicle: "BT-310", task: "Catalyst inspection (P0420)", due: "in 7d",  severity: "high" },
+  { vehicle: "HS-118", task: "Telematics sync recovery",     due: "in 2d",  severity: "warn" },
+  { vehicle: "CV-221", task: "Idle coaching review",         due: "in 14d", severity: "info" },
+];
+
+export const DRIVER_COACHING_PLAN = [
+  { driver: "Anthony Reed", focus: "Speeding + idle", sessions: 2, status: "scheduled" },
+  { driver: "Marcus Hill",  focus: "Refresher",       sessions: 0, status: "no_action" },
+];
+
+export const COMPLIANCE_AUTOMATION_RULES = [
+  { rule: "Insurance expiring < 14d",  action: "Email carrier + flag dispatcher", status: "active" },
+  { rule: "W-9 missing",               action: "Block payment + notify admin",    status: "active" },
+  { rule: "Authority placeholder fail",action: "Hold awards + open task",         status: "active" },
+  { rule: "Safety rating > satisfactory placeholder", action: "Manual review",    status: "placeholder" },
+];
+
+export const CERT_TIMELINE = [
+  { milestone: "Readiness assessment",   date: "2026-03-01", status: "done"        },
+  { milestone: "Control implementation", date: "2026-05-15", status: "in_progress" },
+  { milestone: "Internal audit",         date: "2026-07-01", status: "scheduled"   },
+  { milestone: "External audit window",  date: "2026-08-15", status: "scheduled"   },
+];
+
+export const QUESTIONNAIRE_AUTOMATION_STATS = {
+  library_coverage: 0.78, ai_drafted: 0.42, human_reviewed: 1.0, avg_turnaround_days: 3.4,
+};
+
+export const VENDOR_PACKET_BLOCKS = [
+  { block: "Cover letter",      source: "template" },
+  { block: "Security overview", source: "library"  },
+  { block: "Privacy overview",  source: "library"  },
+  { block: "Subprocessors",     source: "placeholder" },
+  { block: "Insurance COI",     source: "placeholder" },
+  { block: "Reference customers", source: "manual" },
+];
+
+export const PROCUREMENT_RISK = [
+  { customer: "Westbrook Manufacturing", risk: "low",    blocker: "—" },
+  { customer: "Northstar Foods",         risk: "medium", blocker: "DPA placeholder" },
+  { customer: "Apex Supply Co.",          risk: "medium", blocker: "Insurance COI placeholder" },
+];
+
+export const API_OVERAGE_ALERTS = [
+  { partner: "DispatchSyncX", projected_overage: 240500, action: "Auto-upgrade prompt" },
+  { partner: "BrokerBridge",  projected_overage: 1200,   action: "Notify" },
+];
+
+export const CUSTOMER_SUCCESS_PLAYS = [
+  { play: "QBR scheduling",      target: "All Enterprise", status: "active" },
+  { play: "Adoption coaching",   target: "Adoption < 70%", status: "active" },
+  { play: "Renewal motion 90d",  target: "Renewal < 90d",  status: "active" },
+  { play: "Expansion intro",     target: "Health > 80",    status: "active" },
+];
+
+export const COMMERCIAL_OPS_TRENDS = [
+  { week: "W20", mrr: 21100, churn: 1, expansion: 1200 },
+  { week: "W21", mrr: 21600, churn: 0, expansion: 1900 },
+  { week: "W22", mrr: 21950, churn: 1, expansion: 2400 },
+  { week: "W23", mrr: 22340, churn: 0, expansion: 2900 },
+];
+
+export const REGION_RECOMMENDATIONS = [
+  { region: "West TX",  rec: "Recruit 4 hotshot carriers (gap)",       owner: "Carrier ops" },
+  { region: "Mountain", rec: "Recruit 3 reefer carriers (gap)",        owner: "Carrier ops" },
+  { region: "Pacific NW", rec: "Pilot premium listings for shippers",  owner: "Commercial" },
+];
+
+export const PLATFORM_REVENUE_MONTHLY = [
+  { month: "Feb", saas: 168200, marketplace: 12200, api: 7400, impl: 8000 },
+  { month: "Mar", saas: 172100, marketplace: 14100, api: 8900, impl: 12000 },
+  { month: "Apr", saas: 178400, marketplace: 16200, api: 10100, impl: 18000 },
+  { month: "May", saas: 184200, marketplace: 18420, api: 11710, impl: 24000 },
+];
+
+export const RLS_POLICY_EXAMPLES = [
+  { table: "carrier_verification_records", policy: "company_id = current_company() AND has_role(auth.uid(), company_id, 'company_admin')" },
+  { table: "carrier_subscriptions",        policy: "company_id = current_company()" },
+  { table: "marketplace_revenue_events",   policy: "is_platform_owner(auth.uid())" },
+  { table: "partner_api_usage",            policy: "partner_id = current_partner() OR is_platform_owner(auth.uid())" },
+  { table: "settlements",                  policy: "company_id = current_company() AND has_role(auth.uid(),company_id,'company_admin')" },
+  { table: "vendor_packets",               policy: "company_id = current_company()" },
+];
+
+export const EDGE_FUNCTION_BOUNDARY = [
+  { fn: "carrier-verify-submit",     runtime: "TanStack server fn",    reason: "Auth-bound write" },
+  { fn: "marketplace-award-load",    runtime: "TanStack server fn",    reason: "Auth + business rules" },
+  { fn: "settlement-approve",        runtime: "TanStack server fn",    reason: "Approval-gated mutation" },
+  { fn: "stripe-webhook",            runtime: "Supabase Edge Function",reason: "External signed webhook" },
+  { fn: "samsara-webhook",           runtime: "Supabase Edge Function",reason: "Provider push" },
+  { fn: "questionnaire-ai-draft",    runtime: "TanStack server fn",    reason: "Streamed LLM, gated by review" },
+  { fn: "vendor-packet-render-pdf",  runtime: "TanStack server fn",    reason: "Internal render" },
+];

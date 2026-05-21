@@ -3,13 +3,13 @@ import { MapPinned } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { REGIONAL_METRICS } from "@/v35/data/mockPhase20";
+import { REGIONAL_METRICS, REGION_RECOMMENDATIONS } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/multi-region")({
   head: () => ({ meta: [{ title: "Multi-Region Operations · Anderoute V3.5" }] }),
   component: () => (
     <V35Page icon={<MapPinned className="size-6 text-amber-300" />} title="Multi-Region Operations"
-      blurb="Drivers, loads, carriers, and on-time performance per region, with coverage-gap detection.">
+      blurb="Drivers, loads, carriers, and on-time performance per region, with coverage-gap recommendations.">
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <table className="w-full text-sm">
           <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground"><tr><th className="p-1">Region</th><th className="p-1">Drivers</th><th className="p-1">Loads</th><th className="p-1">Carriers</th><th className="p-1">On-time</th><th className="p-1">Coverage</th></tr></thead>
@@ -22,8 +22,14 @@ export const Route = createFileRoute("/v35/multi-region")({
           ))}</tbody>
         </table>
       </Card>
-      <Card className="border-amber-500/30 bg-amber-500/[0.04] p-3 text-sm text-amber-100/90">
-        Recommendation: add hotshot carriers in West TX and Mountain regions to close coverage gap.
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Recommendations</h3>
+        <ul className="mt-2 space-y-1 text-sm">{REGION_RECOMMENDATIONS.map((r) => (
+          <li key={r.region} className="flex items-center justify-between rounded border border-white/10 bg-black/20 px-2 py-1.5">
+            <span><span className="font-mono text-xs text-amber-300 mr-2">{r.region}</span>{r.rec}</span>
+            <Badge variant="outline" className="border-sky-500/40 text-sky-300">{r.owner}</Badge>
+          </li>
+        ))}</ul>
       </Card>
     </V35Page>
   ),

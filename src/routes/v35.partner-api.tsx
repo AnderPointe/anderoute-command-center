@@ -3,13 +3,13 @@ import { KeyRound } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { API_PLANS, API_PARTNERS } from "@/v35/data/mockPhase20";
+import { API_PLANS, API_PARTNERS, API_OVERAGE_ALERTS } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/partner-api")({
   head: () => ({ meta: [{ title: "Partner API · Anderoute V3.5" }] }),
   component: () => (
     <V35Page icon={<KeyRound className="size-6 text-amber-300" />} title="Partner API Monetization"
-      blurb="Partner API plans, usage, overage billing, and SLA tier. Developer key management is admin-gated.">
+      blurb="Partner API plans, usage, overage billing, SLA tier, and proactive overage alerts.">
       <div className="grid gap-3 md:grid-cols-3">{API_PLANS.map((p) => (
         <Card key={p.name} className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="font-semibold">{p.name}</h3>
@@ -28,6 +28,15 @@ export const Route = createFileRoute("/v35/partner-api")({
             <tr key={p.id} className="border-t border-white/10"><td className="p-1">{p.partner}</td><td className="p-1">{p.plan}</td><td className="p-1 font-mono">{p.used.toLocaleString()}</td><td className="p-1 font-mono">{p.overage > 0 ? <Badge variant="outline" className="border-amber-500/40 text-amber-300">+{p.overage.toLocaleString()}</Badge> : "—"}</td><td className="p-1 font-mono">${p.revenue}</td></tr>
           ))}</tbody>
         </table>
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Overage alerts</h3>
+        <ul className="mt-2 space-y-1 text-sm">{API_OVERAGE_ALERTS.map((a) => (
+          <li key={a.partner} className="flex items-center justify-between rounded border border-white/10 bg-black/20 px-2 py-1.5">
+            <span>{a.partner} — projected +{a.projected_overage.toLocaleString()}</span>
+            <Badge variant="outline" className="border-amber-500/40 text-amber-300">{a.action}</Badge>
+          </li>
+        ))}</ul>
       </Card>
     </V35Page>
   ),

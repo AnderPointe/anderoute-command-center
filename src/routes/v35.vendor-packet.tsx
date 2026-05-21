@@ -3,18 +3,27 @@ import { FileText } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PACKET_SECTIONS, VENDOR_PACKETS } from "@/v35/data/mockPhase20";
+import { PACKET_SECTIONS, VENDOR_PACKETS, VENDOR_PACKET_BLOCKS } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/vendor-packet")({
   head: () => ({ meta: [{ title: "Vendor Review Packet · Anderoute V3.5" }] }),
   component: () => (
     <V35Page icon={<FileText className="size-6 text-amber-300" />} title="Vendor Review Packet Builder"
-      blurb="Assemble customer-ready vendor review packets. Publishing requires explicit human approval.">
+      blurb="Assemble customer-ready vendor review packets from library and placeholder blocks. Publishing requires explicit human approval.">
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Packet sections</h3>
         <ol className="mt-2 grid gap-1 text-sm md:grid-cols-2">{PACKET_SECTIONS.map((s, i) => (
           <li key={s} className="rounded border border-white/10 bg-black/20 px-2 py-1"><span className="mr-2 font-mono text-xs text-amber-300">{i + 1}.</span>{s}</li>
         ))}</ol>
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Block sources</h3>
+        <div className="mt-2 grid gap-1.5 text-sm md:grid-cols-2">{VENDOR_PACKET_BLOCKS.map((b) => (
+          <div key={b.block} className="flex items-center justify-between rounded border border-white/10 bg-black/20 px-2 py-1">
+            <span>{b.block}</span>
+            <Badge variant="outline" className={b.source === "placeholder" ? "border-amber-500/40 text-amber-300" : "border-sky-500/40 text-sky-300"}>{b.source}</Badge>
+          </div>
+        ))}</div>
       </Card>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Customer packets</h3>
