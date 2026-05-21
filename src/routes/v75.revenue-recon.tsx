@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Wallet } from "lucide-react";
 import { V75Page } from "@/components/v75/V75Page";
-import { SimpleTable, StatusPill, ScoreCard } from "@/components/v75/ui-bits";
+import { SimpleTable, StatusPill, ScoreCard, KpiGrid } from "@/components/v75/ui-bits";
 import { Card } from "@/components/ui/card";
 import { useRevenueReconciliationPlaceholder } from "@/v75/hooks";
 
