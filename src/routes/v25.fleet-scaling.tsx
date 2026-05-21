@@ -37,6 +37,18 @@ export const Route = createFileRoute("/v25/fleet-scaling")({
           </tbody>
         </table>
       </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Scaling watch alerts</h2>
+        <div className="mt-3 space-y-2">
+          {SCALING_ALERTS.map((a) => (
+            <div key={a.id} className="rounded-lg border border-white/10 bg-black/20 p-3 text-sm">
+              <div className="flex items-center justify-between"><div className="font-medium">{a.area}</div><Badge variant="outline" className={a.level === "warn" ? "border-amber-500/30 text-amber-300" : "border-sky-500/30 text-sky-300"}>{a.level}</Badge></div>
+              <div className="mt-1 text-xs text-muted-foreground">Currently {a.at} / threshold {a.threshold}</div>
+              <div className="mt-1 text-xs"><span className="text-emerald-300">Action:</span> {a.action}</div>
+            </div>
+          ))}
+        </div>
+      </Card>
     </V25Page>
   ),
 });
