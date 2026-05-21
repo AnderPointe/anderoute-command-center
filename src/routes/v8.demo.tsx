@@ -46,8 +46,8 @@ export const Route = createFileRoute("/v8/demo")({
           <h3 className="text-sm font-semibold">Role-specific guidance — this week</h3>
           <div className="mt-2 grid gap-2 md:grid-cols-2 lg:grid-cols-4">
             {ROLE_GUIDANCE.map((g) => (
-              <div key={g.role} className={`rounded-md border border-${g.tone}-400/30 bg-${g.tone}-400/5 p-3 text-sm`}>
-                <div className={`font-semibold text-${g.tone}-200`}>{g.role}</div>
+              <div key={g.role} className={`rounded-md border p-3 text-sm ${g.cls}`}>
+                <div className={`font-semibold ${g.titleCls}`}>{g.role}</div>
                 <ul className="mt-1 list-disc pl-4 text-xs text-muted-foreground">
                   {g.lines.map((l) => <li key={l}>{l}</li>)}
                 </ul>
