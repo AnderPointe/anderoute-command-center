@@ -28,6 +28,7 @@ export const Route = createFileRoute("/v25/overview")({
           ))}
         </div>
       </Card>
+      <OverlayStrip title="V2.5 enterprise execution overlays" items={V25_EXECUTION_OVERLAYS.slice(0, 9)} />
     </V25Page>
   ),
 });
