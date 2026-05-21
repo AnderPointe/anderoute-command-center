@@ -3,7 +3,8 @@ import { Activity } from "lucide-react";
 import { V5Page } from "@/components/v5/V5Page";
 import { ScoreCard, SimpleTable } from "@/components/v5/ui-bits";
 import { Card } from "@/components/ui/card";
-import { V5_MATURITY, V5_MATURITY_TREND } from "@/v5/data/mockPhase23";
+import { V5_MATURITY, V5_MATURITY_TREND, NATIONAL_ALERTS } from "@/v5/data/mockPhase23";
+import { StatusPill } from "@/components/v5/ui-bits";
 
 export const Route = createFileRoute("/v5/maturity")({
   head: () => ({ meta: [{ title: "Platform Maturity · Anderoute V5" }] }),
