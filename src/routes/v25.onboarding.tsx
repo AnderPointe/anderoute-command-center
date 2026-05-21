@@ -4,7 +4,7 @@ import { V25Page } from "@/components/v25/V25Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ONBOARDING_STEPS } from "@/v25/data/mockPhase18";
+import { ONBOARDING_STEPS, ONBOARDING_OWNER_LOAD } from "@/v25/data/mockPhase18";
 
 export const Route = createFileRoute("/v25/onboarding")({
   head: () => ({ meta: [{ title: "Enterprise Onboarding · Anderoute" }] }),
