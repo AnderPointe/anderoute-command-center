@@ -3,7 +3,7 @@ import { Network } from "lucide-react";
 import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { EDI_PARTNERS, EDI_DOC_FLOW } from "@/v2/data/mockPhase17";
+import { EDI_PARTNERS, EDI_DOC_FLOW, EDI_PARTNER_HEALTH, EDI_ERROR_GUIDE } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/edi")({
   head: () => ({ meta: [{ title: "EDI Beta · Anderoute" }] }),
