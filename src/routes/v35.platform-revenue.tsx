@@ -2,13 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DollarSign } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
-import { PLATFORM_REVENUE_EVENTS, PLATFORM_REVENUE_BY_LINE } from "@/v35/data/mockPhase20";
+import { PLATFORM_REVENUE_EVENTS, PLATFORM_REVENUE_BY_LINE, PLATFORM_REVENUE_MONTHLY } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/platform-revenue")({
   head: () => ({ meta: [{ title: "Platform Revenue · Anderoute V3.5" }] }),
   component: () => (
     <V35Page icon={<DollarSign className="size-6 text-amber-300" />} title="Platform Revenue Operations"
-      blurb="Revenue events by product line. Forecast + reconciliation remain placeholder until finance integration.">
+      blurb="Revenue events by product line, monthly trend, and event log. Forecast + reconciliation remain placeholder until finance integration.">
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Monthly trend</h3>
+        <table className="mt-2 w-full text-sm">
+          <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground"><tr><th className="p-1">Month</th><th className="p-1">SaaS</th><th className="p-1">Marketplace</th><th className="p-1">API</th><th className="p-1">Impl.</th></tr></thead>
+          <tbody>{PLATFORM_REVENUE_MONTHLY.map((m) => (
+            <tr key={m.month} className="border-t border-white/10"><td className="p-1">{m.month}</td><td className="p-1 font-mono">${m.saas.toLocaleString()}</td><td className="p-1 font-mono">${m.marketplace.toLocaleString()}</td><td className="p-1 font-mono">${m.api.toLocaleString()}</td><td className="p-1 font-mono">${m.impl.toLocaleString()}</td></tr>
+          ))}</tbody>
+        </table>
+      </Card>
       <div className="grid gap-3 md:grid-cols-2">
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-semibold">Revenue by product line</h3>

@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ListChecks } from "lucide-react";
+import { ListChecks, ShieldAlert, Server } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
-import { DEMO_FLOW } from "@/v35/data/mockPhase20";
+import { Badge } from "@/components/ui/badge";
+import { DEMO_FLOW, RLS_POLICY_EXAMPLES, EDGE_FUNCTION_BOUNDARY } from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/demo")({
   head: () => ({ meta: [{ title: "V3.5 Demo Flow · Anderoute" }] }),
@@ -18,6 +19,28 @@ export const Route = createFileRoute("/v35/demo")({
             </li>
           ))}
         </ol>
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="flex items-center gap-2 text-sm font-semibold"><ShieldAlert className="size-4 text-amber-300" />RLS policy examples</h3>
+        <ul className="mt-2 space-y-1 text-sm">{RLS_POLICY_EXAMPLES.map((r) => (
+          <li key={r.table} className="rounded border border-white/10 bg-black/20 px-2 py-1.5">
+            <div className="font-mono text-xs text-amber-300">{r.table}</div>
+            <div className="font-mono text-xs text-muted-foreground">{r.policy}</div>
+          </li>
+        ))}</ul>
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="flex items-center gap-2 text-sm font-semibold"><Server className="size-4 text-amber-300" />Edge Function separation</h3>
+        <table className="mt-2 w-full text-sm">
+          <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground"><tr><th className="p-1">Function</th><th className="p-1">Runtime</th><th className="p-1">Reason</th></tr></thead>
+          <tbody>{EDGE_FUNCTION_BOUNDARY.map((f) => (
+            <tr key={f.fn} className="border-t border-white/10">
+              <td className="p-1 font-mono text-xs">{f.fn}</td>
+              <td className="p-1"><Badge variant="outline" className={f.runtime.includes("TanStack") ? "border-sky-500/40 text-sky-300" : "border-amber-500/40 text-amber-300"}>{f.runtime}</Badge></td>
+              <td className="p-1 text-xs text-muted-foreground">{f.reason}</td>
+            </tr>
+          ))}</tbody>
+        </table>
       </Card>
     </V35Page>
   ),
