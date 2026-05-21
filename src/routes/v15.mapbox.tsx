@@ -4,7 +4,7 @@ import { V15Page } from "@/components/v15/V15Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatTile } from "@/components/v1/StatTile";
-import { PROVIDER_HEALTH } from "@/v15/data/mockPhase16";
+import { PROVIDER_HEALTH, MAPBOX_BOUNDARY } from "@/v15/data/mockPhase16";
 
 export const Route = createFileRoute("/v15/mapbox")({
   head: () => ({ meta: [{ title: "V1.5 Mapbox Provider · Anderoute" }] }),
