@@ -42,6 +42,27 @@ function Page() {
           {FILES.map((f) => <div key={f}>· {f}</div>)}
         </div>
       </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Provider boundary layers</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Google secret key never leaves the server. Native Nav SDK handoff stays deferred until a native shell ships.</p>
+        <div className="mt-3 space-y-2 text-sm">
+          {GOOGLE_BOUNDARY.map((l) => (
+            <div key={l.layer} className="flex items-center justify-between rounded-lg border border-white/10 bg-black/20 px-3 py-2">
+              <div>
+                <div className="font-medium">{l.layer}</div>
+                <div className="text-xs text-muted-foreground">{l.detail}</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="border-white/15 text-xs text-muted-foreground">{l.scope}</Badge>
+                <Badge variant="outline" className={l.ok ? "border-emerald-500/30 text-emerald-300" : "border-amber-500/30 text-amber-300"}>
+                  {l.ok ? "OK" : "Action"}
+                </Badge>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
     </V15Page>
   );
 }
