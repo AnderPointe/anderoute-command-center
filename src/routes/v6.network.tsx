@@ -38,6 +38,34 @@ export const Route = createFileRoute("/v6/network")({
           { label: "CoPilot recs 24h", value: v.copilot_recs_24h.toLocaleString() },
           { label: "Automation approvals 24h", value: v.automation_approvals_24h },
         ]} />
+        <div className="grid gap-3 md:grid-cols-2">
+          <Card className="border-white/10 bg-white/[0.02] p-4">
+            <h3 className="text-sm font-semibold">Subsystem health</h3>
+            <div className="mt-2 grid gap-2">
+              {subsystems.map(s => (
+                <div key={s.sys}>
+                  <div className="flex justify-between text-xs"><span className="text-muted-foreground">{s.sys}</span><span className={s.score >= 90 ? "text-emerald-300" : s.score >= 85 ? "text-sky-300" : "text-amber-300"}>{s.score}</span></div>
+                  <Progress value={s.score} className="mt-1 h-1.5" />
+                </div>
+              ))}
+            </div>
+          </Card>
+          <Card className="border-white/10 bg-white/[0.02] p-4">
+            <h3 className="text-sm font-semibold">Load lifecycle flow (last 24h)</h3>
+            <div className="mt-2 space-y-1.5 text-xs">
+              {flow.map(f => {
+                const pct = Math.round((f.ok / flow[0].count) * 100);
+                return (
+                  <div key={f.stage} className="grid grid-cols-[140px_1fr_70px] items-center gap-2">
+                    <span className="text-muted-foreground">{f.stage}</span>
+                    <div className="h-2 rounded bg-white/5"><div className="h-full rounded bg-emerald-400/70" style={{ width: `${pct}%` }} /></div>
+                    <span className="text-right tabular-nums">{f.ok.toLocaleString()}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+        </div>
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-semibold">Network alerts</h3>
           <ul className="mt-2 space-y-2 text-xs">

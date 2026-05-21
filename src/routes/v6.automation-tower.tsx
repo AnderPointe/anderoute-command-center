@@ -3,12 +3,13 @@ import { ShieldCheck } from "lucide-react";
 import { V6Page } from "@/components/v6/V6Page";
 import { KpiGrid, SimpleTable } from "@/components/v6/ui-bits";
 import { Card } from "@/components/ui/card";
-import { useAutomationControlTower } from "@/v6/hooks";
+import { useAutomationControlTower, useAutomationTowerTrend } from "@/v6/hooks";
 
 export const Route = createFileRoute("/v6/automation-tower")({
   head: () => ({ meta: [{ title: "Automation Control Tower · V6" }] }),
   component: () => {
     const { tower } = useAutomationControlTower();
+    const { trend } = useAutomationTowerTrend();
     return (
       <V6Page icon={<ShieldCheck className="size-6 text-emerald-300" />} title="Automation Control Tower"
         blurb="Live pending approvals, outcomes, overrides and policy violations across customer ETA, dispatch recommendations, billing adjustments, EDI acks, webhook retries and support triage.">
