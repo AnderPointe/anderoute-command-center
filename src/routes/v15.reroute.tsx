@@ -3,7 +3,7 @@ import { Navigation } from "lucide-react";
 import { V15Page } from "@/components/v15/V15Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { NAV_SESSIONS, NAV_EVENTS } from "@/v15/data/mockPhase16";
+import { NAV_SESSIONS, NAV_EVENTS, REROUTE_POLICY } from "@/v15/data/mockPhase16";
 
 export const Route = createFileRoute("/v15/reroute")({
   head: () => ({ meta: [{ title: "V1.5 Reroute & Off-Route · Anderoute" }] }),
