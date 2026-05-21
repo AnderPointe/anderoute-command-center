@@ -3,7 +3,7 @@ import { Scale } from "lucide-react";
 import { V5Page } from "@/components/v5/V5Page";
 import { SimpleTable, StatusPill } from "@/components/v5/ui-bits";
 import { Card } from "@/components/ui/card";
-import { SUPPLY_DEMAND, EQUIPMENT_DEMAND, CARRIER_GAP_RECS } from "@/v5/data/mockPhase23";
+import { SUPPLY_DEMAND, EQUIPMENT_DEMAND, CARRIER_GAP_RECS, NATIONAL_ALERTS } from "@/v5/data/mockPhase23";
 
 export const Route = createFileRoute("/v5/supply-demand")({
   head: () => ({ meta: [{ title: "Supply / Demand · Anderoute V5" }] }),
