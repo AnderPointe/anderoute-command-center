@@ -575,3 +575,250 @@ export function v15Stats() {
     securityTotal: V15_SECURITY.length,
   };
 }
+
+// ============================================================================
+// POLISH (Phase 16.5) — Deeper structures for V1.5 production readiness.
+// ============================================================================
+
+// ---------------- Cleaner nav provider interface ----------------
+export interface NavInterfaceMethod {
+  group: "lifecycle" | "routing" | "session" | "telemetry" | "rendering" | "diagnostics";
+  signature: string;
+  purpose: string;
+}
+
+export const NAV_INTERFACE_METHODS: NavInterfaceMethod[] = [
+  { group: "lifecycle",   signature: "initialize(config)",                  purpose: "Validate token + warm SDK; throws on bad config" },
+  { group: "lifecycle",   signature: "dispose()",                           purpose: "Release map handles + subscriptions" },
+  { group: "routing",     signature: "requestRoute(req)",                   purpose: "Returns RouteResponse (geometry, steps, ETA)" },
+  { group: "routing",     signature: "reroute(sessionId, from)",            purpose: "Recompute from current driver position" },
+  { group: "session",     signature: "startSession(routeId, driverId)",     purpose: "Create navigation_session row + emit events" },
+  { group: "session",     signature: "stopSession(sessionId)",              purpose: "Finalize + flush remaining events" },
+  { group: "session",     signature: "pauseSession / resumeSession",        purpose: "Driver break handling" },
+  { group: "telemetry",   signature: "getETA(sessionId)",                   purpose: "Provider-derived ETA in ISO + minutes" },
+  { group: "telemetry",   signature: "getRemainingDistance(sessionId)",     purpose: "In miles, rounded to 0.1 mi" },
+  { group: "telemetry",   signature: "subscribeNavigationEvents(handler)",  purpose: "off_route, eta_updated, arrived, etc." },
+  { group: "rendering",   signature: "renderRoute(map, route)",             purpose: "Draw line layer + waypoint markers" },
+  { group: "rendering",   signature: "clearRoute(map)",                     purpose: "Remove all route layers cleanly" },
+  { group: "diagnostics", signature: "validateProviderConfig()",            purpose: "Pre-flight check for required env vars" },
+  { group: "diagnostics", signature: "testProviderConnection()",            purpose: "Round-trip health probe for the dashboard" },
+];
+
+// ---------------- Mapbox / Google boundary layers ----------------
+export interface BoundaryLayer {
+  layer: string;
+  scope: "client" | "server" | "shared";
+  detail: string;
+  ok: boolean;
+}
+
+export const MAPBOX_BOUNDARY: BoundaryLayer[] = [
+  { layer: "Public token (GL JS)",        scope: "client", detail: "VITE_MAPBOX_PUBLIC_TOKEN · URL-restricted",       ok: true  },
+  { layer: "Directions API",              scope: "server", detail: "Server fn proxy · no secret in browser",          ok: true  },
+  { layer: "Matrix API (optional)",       scope: "server", detail: "Used by ETA recompute · same proxy",              ok: true  },
+  { layer: "Polyline parser",             scope: "shared", detail: "Pure TS · safe both sides",                       ok: true  },
+  { layer: "Mobile SDK token",            scope: "client", detail: "EXPO_PUBLIC_MAPBOX_TOKEN · mobile only",          ok: true  },
+  { layer: "Usage telemetry",             scope: "server", detail: "Per-company request counter · audited",            ok: true  },
+];
+
+export const GOOGLE_BOUNDARY: BoundaryLayer[] = [
+  { layer: "Directions API key",          scope: "server", detail: "Restricted to server IPs · not configured yet",   ok: false },
+  { layer: "Polyline decoder",            scope: "shared", detail: "Pure TS · safe both sides",                       ok: true  },
+  { layer: "Web Maps JS (optional)",      scope: "client", detail: "Only when Google is the active provider",         ok: true  },
+  { layer: "Nav SDK handoff (native)",    scope: "client", detail: "Deferred to V2 native bridge",                    ok: false },
+  { layer: "Usage caps",                  scope: "server", detail: "Daily quota guard before request",                ok: true  },
+];
+
+// ---------------- Route render layers ----------------
+export interface RenderLayer {
+  id: string;
+  label: string;
+  source: "provider" | "mock" | "telemetry";
+  zIndex: number;
+  notes: string;
+}
+
+export const ROUTE_RENDER_LAYERS: RenderLayer[] = [
+  { id: "rl-1", label: "Planned route line",       source: "provider",  zIndex: 10, notes: "Solid · provider color · width 5" },
+  { id: "rl-2", label: "Driven trail",             source: "telemetry", zIndex: 11, notes: "Faded provider color · width 3" },
+  { id: "rl-3", label: "Off-route segment",        source: "telemetry", zIndex: 12, notes: "Amber dashed · width 4" },
+  { id: "rl-4", label: "Reroute preview",          source: "provider",  zIndex: 13, notes: "Cyan dashed · width 4 · while rerouting" },
+  { id: "rl-5", label: "Origin / destination pin", source: "provider",  zIndex: 14, notes: "Marker layer · clickable" },
+  { id: "rl-6", label: "Mock fallback line",       source: "mock",      zIndex: 9,  notes: "Hatched style · clearly distinct from real route" },
+];
+
+// ---------------- Reroute policy ----------------
+export interface ReroutePolicyRule {
+  id: string;
+  trigger: string;
+  threshold: string;
+  action: string;
+  manual: boolean;
+}
+
+export const REROUTE_POLICY: ReroutePolicyRule[] = [
+  { id: "rp-1", trigger: "Off-route distance", threshold: "> 0.25 mi for 30s", action: "Flag off_route; show banner",         manual: false },
+  { id: "rp-2", trigger: "Off-route distance", threshold: "> 0.50 mi",         action: "Suggest reroute to dispatcher",        manual: false },
+  { id: "rp-3", trigger: "Dispatcher click",   threshold: "—",                  action: "Call provider.reroute(); log event",   manual: true  },
+  { id: "rp-4", trigger: "Driver click",       threshold: "—",                  action: "Call provider.reroute(); log event",   manual: true  },
+  { id: "rp-5", trigger: "Provider failure",   threshold: "2 consecutive fails", action: "Fall back to mock; alert ops",        manual: false },
+];
+
+// ---------------- Provider health 24h trend ----------------
+export interface ProviderTrendPoint { hour: number; successPct: number; latencyMs: number; }
+export const PROVIDER_TREND_MAPBOX: ProviderTrendPoint[] = [
+  { hour: 0, successPct: 99, latencyMs: 380 }, { hour: 4, successPct: 100, latencyMs: 360 },
+  { hour: 8, successPct: 97, latencyMs: 420 }, { hour: 12, successPct: 96, latencyMs: 460 },
+  { hour: 16, successPct: 98, latencyMs: 410 }, { hour: 20, successPct: 99, latencyMs: 395 },
+];
+
+// ---------------- Billing / Stripe trust boundary ----------------
+export interface TrustBoundaryLayer {
+  layer: string;
+  zone: "Browser" | "Server fn" | "Stripe" | "Webhook route" | "Database";
+  carries: string;
+  rule: string;
+}
+
+export const STRIPE_TRUST_BOUNDARY: TrustBoundaryLayer[] = [
+  { layer: "Plan picker",            zone: "Browser",       carries: "Publishable key + plan id",  rule: "No secret values; no totals trust" },
+  { layer: "Create checkout",        zone: "Server fn",     carries: "Secret key",                  rule: "Server-only env; never returned to client" },
+  { layer: "Stripe Checkout",        zone: "Stripe",        carries: "Card data",                   rule: "Anderoute never sees PAN" },
+  { layer: "stripe-webhook",         zone: "Webhook route", carries: "Signed payload",              rule: "Verify Stripe-Signature before any DB write" },
+  { layer: "subscriptions / invoices", zone: "Database",    carries: "Synced state",                rule: "RLS scoped to company_id · admin only" },
+];
+
+// ---------------- Plan limit enforcement events ----------------
+export interface PlanLimitEvent {
+  id: string;
+  company: string;
+  meter: string;
+  used: number;
+  limit: number;
+  outcome: "warn_80" | "warn_95" | "block" | "upgrade_prompted";
+  at: string;
+}
+
+export const PLAN_LIMIT_EVENTS: PlanLimitEvent[] = [
+  { id: "ple-1", company: "Northstar Freight", meter: "Drivers",            used: 4,   limit: 5,    outcome: "warn_80",        at: "1h ago" },
+  { id: "ple-2", company: "Anderoute Demo",    meter: "CoPilot queries",    used: 612, limit: 1000, outcome: "warn_80",        at: "30m ago" },
+  { id: "ple-3", company: "Sierra Logistics",  meter: "Navigation sessions",used: 990, limit: 1000, outcome: "warn_95",        at: "12m ago" },
+  { id: "ple-4", company: "Pacific Haul Co.",  meter: "Loads / month",      used: 1245,limit: 2000, outcome: "upgrade_prompted",at: "yesterday" },
+];
+
+// ---------------- Webhook retry policy + signature ----------------
+export interface RetryStep { attempt: number; delaySec: number; }
+export const WEBHOOK_RETRY_POLICY: RetryStep[] = [
+  { attempt: 1, delaySec: 0   },
+  { attempt: 2, delaySec: 15  },
+  { attempt: 3, delaySec: 60  },
+  { attempt: 4, delaySec: 300 },
+  { attempt: 5, delaySec: 1800 },
+];
+
+export const WEBHOOK_SIGNATURE_SPEC = {
+  header: "X-Anderoute-Signature",
+  algorithm: "HMAC-SHA256",
+  format: "t=<unix>,v1=<hex>",
+  toleranceSec: 300,
+  secretRotation: "Per-endpoint; manual rotation; old secret valid for 24h grace",
+};
+
+// ---------------- Dispatcher saved filters ----------------
+export interface DispatcherFilter { id: string; label: string; predicate: string; count: number; }
+export const DISPATCHER_SAVED_FILTERS: DispatcherFilter[] = [
+  { id: "df-1", label: "Off-route now",         predicate: "status = off_route",                count: 1 },
+  { id: "df-2", label: "Drift > 15m",           predicate: "driftMin > 15",                     count: 2 },
+  { id: "df-3", label: "Active Mapbox sessions",predicate: "provider = mapbox AND active",      count: 3 },
+  { id: "df-4", label: "Rerouting",             predicate: "status = rerouting",                count: 1 },
+  { id: "df-5", label: "Completed today",       predicate: "status = completed AND today()",    count: 1 },
+];
+
+// ---------------- Customer portal V1.5 timeline ----------------
+export interface PortalTimelineEvent {
+  id: string;
+  shipment: string;
+  at: string;
+  label: string;
+  tone: Tone;
+}
+export const PORTAL_TIMELINE: PortalTimelineEvent[] = [
+  { id: "pt-1", shipment: "sh-1", at: "8:12 AM",  label: "Picked up · Acme Foods DC-3",  tone: "info" },
+  { id: "pt-2", shipment: "sh-1", at: "10:40 AM", label: "Departed origin",              tone: "info" },
+  { id: "pt-3", shipment: "sh-1", at: "2:05 PM",  label: "ETA pushed back 8 min",        tone: "warn" },
+  { id: "pt-4", shipment: "sh-1", at: "5:42 PM",  label: "Approaching destination",     tone: "good" },
+  { id: "pt-5", shipment: "sh-2", at: "3:20 PM",  label: "Off-route detected",           tone: "warn" },
+  { id: "pt-6", shipment: "sh-2", at: "3:34 PM",  label: "Reroute completed (+12 mi)",   tone: "info" },
+];
+
+// ---------------- Driver maneuvers ----------------
+export interface Maneuver { idx: number; instruction: string; distanceMi: number; }
+export const DRIVER_NEXT_MANEUVERS: Maneuver[] = [
+  { idx: 1, instruction: "Continue on I-80 W",                distanceMi: 0.8  },
+  { idx: 2, instruction: "Take exit 92B toward Reno",         distanceMi: 14.2 },
+  { idx: 3, instruction: "Merge onto US-395 S",                distanceMi: 0.5  },
+  { idx: 4, instruction: "Continue for 47 miles",              distanceMi: 47.0 },
+  { idx: 5, instruction: "Arrive at dropoff · Bay 3",          distanceMi: 0.1  },
+];
+
+// ---------------- Paid customer health factors ----------------
+export interface HealthFactor { label: string; weight: number; pct: number; note?: string; }
+export function paidCustomerHealthFactors(companyId: string): HealthFactor[] {
+  const c = PAID_CUSTOMERS.find((p) => p.id === companyId);
+  if (!c) return [];
+  return [
+    { label: "Plan utilization",   weight: 25, pct: Math.min(100, Math.round((c.loadsMonth / 500) * 100)), note: `${c.loadsMonth} loads / mo` },
+    { label: "Driver engagement",  weight: 20, pct: Math.min(100, c.driversActive * 5),                    note: `${c.driversActive} active` },
+    { label: "Onboarding",         weight: 15, pct: c.onboardingPct },
+    { label: "Billing status",     weight: 20, pct: c.status === "active" ? 100 : c.status === "trialing" ? 80 : 25, note: c.status },
+    { label: "Support sentiment",  weight: 10, pct: 78 },
+    { label: "Feature adoption",   weight: 10, pct: c.plan === "professional" ? 92 : c.plan === "growth" ? 74 : 55 },
+  ];
+}
+
+// ---------------- V1.5 report KPI tiles ----------------
+export interface ReportKpi { label: string; value: string; tone: Tone; }
+export const REPORT_KPIS: ReportKpi[] = [
+  { label: "ETA accuracy (within 15m)", value: "80%",   tone: "good" },
+  { label: "Mean ETA drift",            value: "12 min",tone: "info" },
+  { label: "Provider success",          value: "98.7%", tone: "good" },
+  { label: "Fallback uses (24h)",       value: "1",     tone: "warn" },
+  { label: "Webhook delivery",          value: "98%",   tone: "good" },
+  { label: "MRR",                       value: "$2,196",tone: "info" },
+  { label: "Trial → paid",              value: "—",     tone: "info" },
+  { label: "Avg load → delivered",      value: "14h 22m", tone: "info" },
+];
+
+// ---------------- V1.5 security findings detail ----------------
+export interface SecurityFinding {
+  id: string;
+  area: string;
+  severity: "low" | "med" | "high";
+  status: "open" | "mitigated" | "accepted";
+  description: string;
+  owner: string;
+  eta: string;
+}
+
+export const V15_SECURITY_FINDINGS: SecurityFinding[] = [
+  { id: "f-1", area: "Webhooks", severity: "med",  status: "open",      description: "Webhook payloads include some fields not strictly required by consumers", owner: "Integrations", eta: "this week" },
+  { id: "f-2", area: "Webhooks", severity: "low",  status: "open",      description: "Manual secret rotation only; automate post-V1.5",                          owner: "Integrations", eta: "V1.6" },
+  { id: "f-3", area: "Billing",  severity: "high", status: "mitigated", description: "Stripe secret confined to server fn + webhook route",                      owner: "Platform",     eta: "—" },
+  { id: "f-4", area: "Navigation", severity: "med", status: "mitigated", description: "Mapbox token URL-restricted to first-party origins",                      owner: "Platform",     eta: "—" },
+  { id: "f-5", area: "Audit",    severity: "low",  status: "accepted",  description: "Provider config audit retained 90 days (regulatory min)",                  owner: "Security",     eta: "—" },
+];
+
+// ---------------- Polish summary ----------------
+export function v15PolishStats() {
+  return {
+    interfaceMethods: NAV_INTERFACE_METHODS.length,
+    mapboxLayers: MAPBOX_BOUNDARY.length,
+    googleLayers: GOOGLE_BOUNDARY.length,
+    renderLayers: ROUTE_RENDER_LAYERS.length,
+    reroutePolicy: REROUTE_POLICY.length,
+    planLimitEvents: PLAN_LIMIT_EVENTS.length,
+    retrySteps: WEBHOOK_RETRY_POLICY.length,
+    savedFilters: DISPATCHER_SAVED_FILTERS.length,
+    securityFindingsOpen: V15_SECURITY_FINDINGS.filter((f) => f.status === "open").length,
+  };
+}
