@@ -44,6 +44,20 @@ export const Route = createFileRoute("/v5/maturity")({
           </Card>
         </div>
         <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">National operating alerts</h3>
+          <div className="mt-2 space-y-2 text-xs">
+            {NATIONAL_ALERTS.map(a => (
+              <div key={a.region + a.issue} className="flex items-start justify-between gap-3 rounded border border-white/10 bg-white/[0.02] p-2">
+                <div>
+                  <div className="font-medium">{a.region} · {a.issue}</div>
+                  <div className="text-[11px] text-muted-foreground">Action: {a.action}</div>
+                </div>
+                <StatusPill status={a.severity} />
+              </div>
+            ))}
+          </div>
+        </Card>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-semibold">Executive summary</h3>
           <p className="mt-1 text-xs text-muted-foreground">
             Platform is national-scale ready across product, integration, and customer success. Marketplace and category-leadership pillars are the highest-leverage gaps. Next 90 days: SE carrier recruiting, SOC 2 audit kickoff, board-grade reporting cadence.
