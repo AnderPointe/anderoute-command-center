@@ -16,7 +16,7 @@ export const Route = createFileRoute("/v75/marketplace-discipline")({
           <ScoreCard label="Discipline score" value={discipline.score} tone="emerald" />
           <ScoreCard label="Exceptions" value={discipline.controls.filter(c => c.status === "exception").length} tone="amber" />
           <ScoreCard label="Regions tracked" value={discipline.regional.length} tone="sky" />
-          <ScoreCard label="Trend (6w)" value={`+${discipline.score - trend[0].score}`} tone="violet" />
+          <ScoreCard label="Trend (6w)" value={discipline.score - trend[0].score} tone="violet" />
         </div>
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-semibold">Discipline trend (last 6 weeks)</h3>
