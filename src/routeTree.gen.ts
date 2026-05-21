@@ -29,6 +29,29 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as V4SupportRouteImport } from './routes/v4.support'
+import { Route as V4ScopeRouteImport } from './routes/v4.scope'
+import { Route as V4ReportsRouteImport } from './routes/v4.reports'
+import { Route as V4PartnersRouteImport } from './routes/v4.partners'
+import { Route as V4PartnerRevenueRouteImport } from './routes/v4.partner-revenue'
+import { Route as V4OverviewRouteImport } from './routes/v4.overview'
+import { Route as V4OnboardingRouteImport } from './routes/v4.onboarding'
+import { Route as V4NetworkRouteImport } from './routes/v4.network'
+import { Route as V4NationalOpsRouteImport } from './routes/v4.national-ops'
+import { Route as V4MultiRegionRouteImport } from './routes/v4.multi-region'
+import { Route as V4MobileCertRouteImport } from './routes/v4.mobile-cert'
+import { Route as V4MarketplaceRouteImport } from './routes/v4.marketplace'
+import { Route as V4LifecycleRouteImport } from './routes/v4.lifecycle'
+import { Route as V4LaunchRouteImport } from './routes/v4.launch'
+import { Route as V4IntegrationsRouteImport } from './routes/v4.integrations'
+import { Route as V4GovernanceRouteImport } from './routes/v4.governance'
+import { Route as V4FleetPerformanceRouteImport } from './routes/v4.fleet-performance'
+import { Route as V4EnterpriseRevenueRouteImport } from './routes/v4.enterprise-revenue'
+import { Route as V4DemoRouteImport } from './routes/v4.demo'
+import { Route as V4ComplianceRouteImport } from './routes/v4.compliance'
+import { Route as V4CarplayRouteImport } from './routes/v4.carplay'
+import { Route as V4AndroidAutoRouteImport } from './routes/v4.android-auto'
+import { Route as V4AiGovernanceRouteImport } from './routes/v4.ai-governance'
 import { Route as V35VendorPacketRouteImport } from './routes/v35.vendor-packet'
 import { Route as V35VehicleHealthRouteImport } from './routes/v35.vehicle-health'
 import { Route as V35TelematicsRouteImport } from './routes/v35.telematics'
@@ -398,6 +421,121 @@ const IndexRoute = IndexRouteImport.update({
 const DriverIndexRoute = DriverIndexRouteImport.update({
   id: '/driver/',
   path: '/driver/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4SupportRoute = V4SupportRouteImport.update({
+  id: '/v4/support',
+  path: '/v4/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4ScopeRoute = V4ScopeRouteImport.update({
+  id: '/v4/scope',
+  path: '/v4/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4ReportsRoute = V4ReportsRouteImport.update({
+  id: '/v4/reports',
+  path: '/v4/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4PartnersRoute = V4PartnersRouteImport.update({
+  id: '/v4/partners',
+  path: '/v4/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4PartnerRevenueRoute = V4PartnerRevenueRouteImport.update({
+  id: '/v4/partner-revenue',
+  path: '/v4/partner-revenue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4OverviewRoute = V4OverviewRouteImport.update({
+  id: '/v4/overview',
+  path: '/v4/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4OnboardingRoute = V4OnboardingRouteImport.update({
+  id: '/v4/onboarding',
+  path: '/v4/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4NetworkRoute = V4NetworkRouteImport.update({
+  id: '/v4/network',
+  path: '/v4/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4NationalOpsRoute = V4NationalOpsRouteImport.update({
+  id: '/v4/national-ops',
+  path: '/v4/national-ops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4MultiRegionRoute = V4MultiRegionRouteImport.update({
+  id: '/v4/multi-region',
+  path: '/v4/multi-region',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4MobileCertRoute = V4MobileCertRouteImport.update({
+  id: '/v4/mobile-cert',
+  path: '/v4/mobile-cert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4MarketplaceRoute = V4MarketplaceRouteImport.update({
+  id: '/v4/marketplace',
+  path: '/v4/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4LifecycleRoute = V4LifecycleRouteImport.update({
+  id: '/v4/lifecycle',
+  path: '/v4/lifecycle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4LaunchRoute = V4LaunchRouteImport.update({
+  id: '/v4/launch',
+  path: '/v4/launch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4IntegrationsRoute = V4IntegrationsRouteImport.update({
+  id: '/v4/integrations',
+  path: '/v4/integrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4GovernanceRoute = V4GovernanceRouteImport.update({
+  id: '/v4/governance',
+  path: '/v4/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4FleetPerformanceRoute = V4FleetPerformanceRouteImport.update({
+  id: '/v4/fleet-performance',
+  path: '/v4/fleet-performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4EnterpriseRevenueRoute = V4EnterpriseRevenueRouteImport.update({
+  id: '/v4/enterprise-revenue',
+  path: '/v4/enterprise-revenue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4DemoRoute = V4DemoRouteImport.update({
+  id: '/v4/demo',
+  path: '/v4/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4ComplianceRoute = V4ComplianceRouteImport.update({
+  id: '/v4/compliance',
+  path: '/v4/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4CarplayRoute = V4CarplayRouteImport.update({
+  id: '/v4/carplay',
+  path: '/v4/carplay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4AndroidAutoRoute = V4AndroidAutoRouteImport.update({
+  id: '/v4/android-auto',
+  path: '/v4/android-auto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V4AiGovernanceRoute = V4AiGovernanceRouteImport.update({
+  id: '/v4/ai-governance',
+  path: '/v4/ai-governance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V35VendorPacketRoute = V35VendorPacketRouteImport.update({
@@ -2047,6 +2185,29 @@ export interface FileRoutesByFullPath {
   '/v35/telematics': typeof V35TelematicsRoute
   '/v35/vehicle-health': typeof V35VehicleHealthRoute
   '/v35/vendor-packet': typeof V35VendorPacketRoute
+  '/v4/ai-governance': typeof V4AiGovernanceRoute
+  '/v4/android-auto': typeof V4AndroidAutoRoute
+  '/v4/carplay': typeof V4CarplayRoute
+  '/v4/compliance': typeof V4ComplianceRoute
+  '/v4/demo': typeof V4DemoRoute
+  '/v4/enterprise-revenue': typeof V4EnterpriseRevenueRoute
+  '/v4/fleet-performance': typeof V4FleetPerformanceRoute
+  '/v4/governance': typeof V4GovernanceRoute
+  '/v4/integrations': typeof V4IntegrationsRoute
+  '/v4/launch': typeof V4LaunchRoute
+  '/v4/lifecycle': typeof V4LifecycleRoute
+  '/v4/marketplace': typeof V4MarketplaceRoute
+  '/v4/mobile-cert': typeof V4MobileCertRoute
+  '/v4/multi-region': typeof V4MultiRegionRoute
+  '/v4/national-ops': typeof V4NationalOpsRoute
+  '/v4/network': typeof V4NetworkRoute
+  '/v4/onboarding': typeof V4OnboardingRoute
+  '/v4/overview': typeof V4OverviewRoute
+  '/v4/partner-revenue': typeof V4PartnerRevenueRoute
+  '/v4/partners': typeof V4PartnersRoute
+  '/v4/reports': typeof V4ReportsRoute
+  '/v4/scope': typeof V4ScopeRoute
+  '/v4/support': typeof V4SupportRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -2339,6 +2500,29 @@ export interface FileRoutesByTo {
   '/v35/telematics': typeof V35TelematicsRoute
   '/v35/vehicle-health': typeof V35VehicleHealthRoute
   '/v35/vendor-packet': typeof V35VendorPacketRoute
+  '/v4/ai-governance': typeof V4AiGovernanceRoute
+  '/v4/android-auto': typeof V4AndroidAutoRoute
+  '/v4/carplay': typeof V4CarplayRoute
+  '/v4/compliance': typeof V4ComplianceRoute
+  '/v4/demo': typeof V4DemoRoute
+  '/v4/enterprise-revenue': typeof V4EnterpriseRevenueRoute
+  '/v4/fleet-performance': typeof V4FleetPerformanceRoute
+  '/v4/governance': typeof V4GovernanceRoute
+  '/v4/integrations': typeof V4IntegrationsRoute
+  '/v4/launch': typeof V4LaunchRoute
+  '/v4/lifecycle': typeof V4LifecycleRoute
+  '/v4/marketplace': typeof V4MarketplaceRoute
+  '/v4/mobile-cert': typeof V4MobileCertRoute
+  '/v4/multi-region': typeof V4MultiRegionRoute
+  '/v4/national-ops': typeof V4NationalOpsRoute
+  '/v4/network': typeof V4NetworkRoute
+  '/v4/onboarding': typeof V4OnboardingRoute
+  '/v4/overview': typeof V4OverviewRoute
+  '/v4/partner-revenue': typeof V4PartnerRevenueRoute
+  '/v4/partners': typeof V4PartnersRoute
+  '/v4/reports': typeof V4ReportsRoute
+  '/v4/scope': typeof V4ScopeRoute
+  '/v4/support': typeof V4SupportRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -2632,6 +2816,29 @@ export interface FileRoutesById {
   '/v35/telematics': typeof V35TelematicsRoute
   '/v35/vehicle-health': typeof V35VehicleHealthRoute
   '/v35/vendor-packet': typeof V35VendorPacketRoute
+  '/v4/ai-governance': typeof V4AiGovernanceRoute
+  '/v4/android-auto': typeof V4AndroidAutoRoute
+  '/v4/carplay': typeof V4CarplayRoute
+  '/v4/compliance': typeof V4ComplianceRoute
+  '/v4/demo': typeof V4DemoRoute
+  '/v4/enterprise-revenue': typeof V4EnterpriseRevenueRoute
+  '/v4/fleet-performance': typeof V4FleetPerformanceRoute
+  '/v4/governance': typeof V4GovernanceRoute
+  '/v4/integrations': typeof V4IntegrationsRoute
+  '/v4/launch': typeof V4LaunchRoute
+  '/v4/lifecycle': typeof V4LifecycleRoute
+  '/v4/marketplace': typeof V4MarketplaceRoute
+  '/v4/mobile-cert': typeof V4MobileCertRoute
+  '/v4/multi-region': typeof V4MultiRegionRoute
+  '/v4/national-ops': typeof V4NationalOpsRoute
+  '/v4/network': typeof V4NetworkRoute
+  '/v4/onboarding': typeof V4OnboardingRoute
+  '/v4/overview': typeof V4OverviewRoute
+  '/v4/partner-revenue': typeof V4PartnerRevenueRoute
+  '/v4/partners': typeof V4PartnersRoute
+  '/v4/reports': typeof V4ReportsRoute
+  '/v4/scope': typeof V4ScopeRoute
+  '/v4/support': typeof V4SupportRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -2926,6 +3133,29 @@ export interface FileRouteTypes {
     | '/v35/telematics'
     | '/v35/vehicle-health'
     | '/v35/vendor-packet'
+    | '/v4/ai-governance'
+    | '/v4/android-auto'
+    | '/v4/carplay'
+    | '/v4/compliance'
+    | '/v4/demo'
+    | '/v4/enterprise-revenue'
+    | '/v4/fleet-performance'
+    | '/v4/governance'
+    | '/v4/integrations'
+    | '/v4/launch'
+    | '/v4/lifecycle'
+    | '/v4/marketplace'
+    | '/v4/mobile-cert'
+    | '/v4/multi-region'
+    | '/v4/national-ops'
+    | '/v4/network'
+    | '/v4/onboarding'
+    | '/v4/overview'
+    | '/v4/partner-revenue'
+    | '/v4/partners'
+    | '/v4/reports'
+    | '/v4/scope'
+    | '/v4/support'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -3218,6 +3448,29 @@ export interface FileRouteTypes {
     | '/v35/telematics'
     | '/v35/vehicle-health'
     | '/v35/vendor-packet'
+    | '/v4/ai-governance'
+    | '/v4/android-auto'
+    | '/v4/carplay'
+    | '/v4/compliance'
+    | '/v4/demo'
+    | '/v4/enterprise-revenue'
+    | '/v4/fleet-performance'
+    | '/v4/governance'
+    | '/v4/integrations'
+    | '/v4/launch'
+    | '/v4/lifecycle'
+    | '/v4/marketplace'
+    | '/v4/mobile-cert'
+    | '/v4/multi-region'
+    | '/v4/national-ops'
+    | '/v4/network'
+    | '/v4/onboarding'
+    | '/v4/overview'
+    | '/v4/partner-revenue'
+    | '/v4/partners'
+    | '/v4/reports'
+    | '/v4/scope'
+    | '/v4/support'
     | '/driver'
   id:
     | '__root__'
@@ -3510,6 +3763,29 @@ export interface FileRouteTypes {
     | '/v35/telematics'
     | '/v35/vehicle-health'
     | '/v35/vendor-packet'
+    | '/v4/ai-governance'
+    | '/v4/android-auto'
+    | '/v4/carplay'
+    | '/v4/compliance'
+    | '/v4/demo'
+    | '/v4/enterprise-revenue'
+    | '/v4/fleet-performance'
+    | '/v4/governance'
+    | '/v4/integrations'
+    | '/v4/launch'
+    | '/v4/lifecycle'
+    | '/v4/marketplace'
+    | '/v4/mobile-cert'
+    | '/v4/multi-region'
+    | '/v4/national-ops'
+    | '/v4/network'
+    | '/v4/onboarding'
+    | '/v4/overview'
+    | '/v4/partner-revenue'
+    | '/v4/partners'
+    | '/v4/reports'
+    | '/v4/scope'
+    | '/v4/support'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -3795,6 +4071,29 @@ export interface RootRouteChildren {
   V35TelematicsRoute: typeof V35TelematicsRoute
   V35VehicleHealthRoute: typeof V35VehicleHealthRoute
   V35VendorPacketRoute: typeof V35VendorPacketRoute
+  V4AiGovernanceRoute: typeof V4AiGovernanceRoute
+  V4AndroidAutoRoute: typeof V4AndroidAutoRoute
+  V4CarplayRoute: typeof V4CarplayRoute
+  V4ComplianceRoute: typeof V4ComplianceRoute
+  V4DemoRoute: typeof V4DemoRoute
+  V4EnterpriseRevenueRoute: typeof V4EnterpriseRevenueRoute
+  V4FleetPerformanceRoute: typeof V4FleetPerformanceRoute
+  V4GovernanceRoute: typeof V4GovernanceRoute
+  V4IntegrationsRoute: typeof V4IntegrationsRoute
+  V4LaunchRoute: typeof V4LaunchRoute
+  V4LifecycleRoute: typeof V4LifecycleRoute
+  V4MarketplaceRoute: typeof V4MarketplaceRoute
+  V4MobileCertRoute: typeof V4MobileCertRoute
+  V4MultiRegionRoute: typeof V4MultiRegionRoute
+  V4NationalOpsRoute: typeof V4NationalOpsRoute
+  V4NetworkRoute: typeof V4NetworkRoute
+  V4OnboardingRoute: typeof V4OnboardingRoute
+  V4OverviewRoute: typeof V4OverviewRoute
+  V4PartnerRevenueRoute: typeof V4PartnerRevenueRoute
+  V4PartnersRoute: typeof V4PartnersRoute
+  V4ReportsRoute: typeof V4ReportsRoute
+  V4ScopeRoute: typeof V4ScopeRoute
+  V4SupportRoute: typeof V4SupportRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -3938,6 +4237,167 @@ declare module '@tanstack/react-router' {
       path: '/driver'
       fullPath: '/driver/'
       preLoaderRoute: typeof DriverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/support': {
+      id: '/v4/support'
+      path: '/v4/support'
+      fullPath: '/v4/support'
+      preLoaderRoute: typeof V4SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/scope': {
+      id: '/v4/scope'
+      path: '/v4/scope'
+      fullPath: '/v4/scope'
+      preLoaderRoute: typeof V4ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/reports': {
+      id: '/v4/reports'
+      path: '/v4/reports'
+      fullPath: '/v4/reports'
+      preLoaderRoute: typeof V4ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/partners': {
+      id: '/v4/partners'
+      path: '/v4/partners'
+      fullPath: '/v4/partners'
+      preLoaderRoute: typeof V4PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/partner-revenue': {
+      id: '/v4/partner-revenue'
+      path: '/v4/partner-revenue'
+      fullPath: '/v4/partner-revenue'
+      preLoaderRoute: typeof V4PartnerRevenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/overview': {
+      id: '/v4/overview'
+      path: '/v4/overview'
+      fullPath: '/v4/overview'
+      preLoaderRoute: typeof V4OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/onboarding': {
+      id: '/v4/onboarding'
+      path: '/v4/onboarding'
+      fullPath: '/v4/onboarding'
+      preLoaderRoute: typeof V4OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/network': {
+      id: '/v4/network'
+      path: '/v4/network'
+      fullPath: '/v4/network'
+      preLoaderRoute: typeof V4NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/national-ops': {
+      id: '/v4/national-ops'
+      path: '/v4/national-ops'
+      fullPath: '/v4/national-ops'
+      preLoaderRoute: typeof V4NationalOpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/multi-region': {
+      id: '/v4/multi-region'
+      path: '/v4/multi-region'
+      fullPath: '/v4/multi-region'
+      preLoaderRoute: typeof V4MultiRegionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/mobile-cert': {
+      id: '/v4/mobile-cert'
+      path: '/v4/mobile-cert'
+      fullPath: '/v4/mobile-cert'
+      preLoaderRoute: typeof V4MobileCertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/marketplace': {
+      id: '/v4/marketplace'
+      path: '/v4/marketplace'
+      fullPath: '/v4/marketplace'
+      preLoaderRoute: typeof V4MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/lifecycle': {
+      id: '/v4/lifecycle'
+      path: '/v4/lifecycle'
+      fullPath: '/v4/lifecycle'
+      preLoaderRoute: typeof V4LifecycleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/launch': {
+      id: '/v4/launch'
+      path: '/v4/launch'
+      fullPath: '/v4/launch'
+      preLoaderRoute: typeof V4LaunchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/integrations': {
+      id: '/v4/integrations'
+      path: '/v4/integrations'
+      fullPath: '/v4/integrations'
+      preLoaderRoute: typeof V4IntegrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/governance': {
+      id: '/v4/governance'
+      path: '/v4/governance'
+      fullPath: '/v4/governance'
+      preLoaderRoute: typeof V4GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/fleet-performance': {
+      id: '/v4/fleet-performance'
+      path: '/v4/fleet-performance'
+      fullPath: '/v4/fleet-performance'
+      preLoaderRoute: typeof V4FleetPerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/enterprise-revenue': {
+      id: '/v4/enterprise-revenue'
+      path: '/v4/enterprise-revenue'
+      fullPath: '/v4/enterprise-revenue'
+      preLoaderRoute: typeof V4EnterpriseRevenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/demo': {
+      id: '/v4/demo'
+      path: '/v4/demo'
+      fullPath: '/v4/demo'
+      preLoaderRoute: typeof V4DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/compliance': {
+      id: '/v4/compliance'
+      path: '/v4/compliance'
+      fullPath: '/v4/compliance'
+      preLoaderRoute: typeof V4ComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/carplay': {
+      id: '/v4/carplay'
+      path: '/v4/carplay'
+      fullPath: '/v4/carplay'
+      preLoaderRoute: typeof V4CarplayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/android-auto': {
+      id: '/v4/android-auto'
+      path: '/v4/android-auto'
+      fullPath: '/v4/android-auto'
+      preLoaderRoute: typeof V4AndroidAutoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v4/ai-governance': {
+      id: '/v4/ai-governance'
+      path: '/v4/ai-governance'
+      fullPath: '/v4/ai-governance'
+      preLoaderRoute: typeof V4AiGovernanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v35/vendor-packet': {
@@ -6168,6 +6628,29 @@ const rootRouteChildren: RootRouteChildren = {
   V35TelematicsRoute: V35TelematicsRoute,
   V35VehicleHealthRoute: V35VehicleHealthRoute,
   V35VendorPacketRoute: V35VendorPacketRoute,
+  V4AiGovernanceRoute: V4AiGovernanceRoute,
+  V4AndroidAutoRoute: V4AndroidAutoRoute,
+  V4CarplayRoute: V4CarplayRoute,
+  V4ComplianceRoute: V4ComplianceRoute,
+  V4DemoRoute: V4DemoRoute,
+  V4EnterpriseRevenueRoute: V4EnterpriseRevenueRoute,
+  V4FleetPerformanceRoute: V4FleetPerformanceRoute,
+  V4GovernanceRoute: V4GovernanceRoute,
+  V4IntegrationsRoute: V4IntegrationsRoute,
+  V4LaunchRoute: V4LaunchRoute,
+  V4LifecycleRoute: V4LifecycleRoute,
+  V4MarketplaceRoute: V4MarketplaceRoute,
+  V4MobileCertRoute: V4MobileCertRoute,
+  V4MultiRegionRoute: V4MultiRegionRoute,
+  V4NationalOpsRoute: V4NationalOpsRoute,
+  V4NetworkRoute: V4NetworkRoute,
+  V4OnboardingRoute: V4OnboardingRoute,
+  V4OverviewRoute: V4OverviewRoute,
+  V4PartnerRevenueRoute: V4PartnerRevenueRoute,
+  V4PartnersRoute: V4PartnersRoute,
+  V4ReportsRoute: V4ReportsRoute,
+  V4ScopeRoute: V4ScopeRoute,
+  V4SupportRoute: V4SupportRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
