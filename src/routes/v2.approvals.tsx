@@ -4,7 +4,7 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { APPROVAL_QUEUE } from "@/v2/data/mockPhase17";
+import { APPROVAL_QUEUE, APPROVAL_POLICIES } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/approvals")({
   head: () => ({ meta: [{ title: "AI Approvals · Anderoute" }] }),
