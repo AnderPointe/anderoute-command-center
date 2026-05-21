@@ -73,6 +73,24 @@ function Page() {
         </table>
       </Card>
 
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Mapbox · 24h trend</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Hourly success rate + latency. Dips correlate with the noon traffic spike.</p>
+        <div className="mt-3 grid grid-cols-6 gap-2 text-xs">
+          {PROVIDER_TREND_MAPBOX.map((p) => {
+            const tone = p.successPct >= 99 ? "bg-emerald-500/30" : p.successPct >= 97 ? "bg-amber-500/30" : "bg-rose-500/30";
+            return (
+              <div key={p.hour} className="rounded-lg border border-white/10 bg-black/20 p-2 text-center">
+                <div className="text-[10px] uppercase text-muted-foreground">{String(p.hour).padStart(2, "0")}:00</div>
+                <div className={`mx-auto mt-1 h-12 w-3 rounded ${tone}`} style={{ opacity: p.successPct / 100 }} />
+                <div className="mt-1">{p.successPct}%</div>
+                <div className="text-[10px] text-muted-foreground">{p.latencyMs}ms</div>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+
       <StatTile label="Total requests (24h)" value={ROUTE_REQUEST_LOG.length} tone="info" />
     </V15Page>
   );
