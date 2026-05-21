@@ -4,7 +4,7 @@ import { V25Page } from "@/components/v25/V25Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { SCALE_TIERS, SCALING_AREAS } from "@/v25/data/mockPhase18";
+import { SCALE_TIERS, SCALING_AREAS, SCALING_ALERTS } from "@/v25/data/mockPhase18";
 
 const tone: Record<string, string> = { ready: "border-emerald-500/30 text-emerald-300", needs_work: "border-amber-500/30 text-amber-300", placeholder: "border-white/15 text-muted-foreground", good: "border-emerald-500/30 text-emerald-300", warn: "border-amber-500/30 text-amber-300" };
 
