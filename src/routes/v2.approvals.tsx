@@ -4,7 +4,7 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { APPROVAL_QUEUE } from "@/v2/data/mockPhase17";
+import { APPROVAL_QUEUE, APPROVAL_POLICIES } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/approvals")({
   head: () => ({ meta: [{ title: "AI Approvals · Anderoute" }] }),
@@ -50,6 +50,28 @@ function Page() {
               </div>
             </div>
           ))}
+        </div>
+      </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Approval policy matrix</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Defines who can approve each action, the SLA before escalation, and whether a written reason is required.</p>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+              <tr><th className="p-2">Action</th><th className="p-2">Approvers</th><th className="p-2">SLA</th><th className="p-2">Reason</th></tr>
+            </thead>
+            <tbody>
+              {APPROVAL_POLICIES.map((p) => (
+                <tr key={p.action} className="border-t border-white/10">
+                  <td className="p-2">{p.action.replace(/_/g, " ")}</td>
+                  <td className="p-2 text-xs">{p.approvers.join(", ")}</td>
+                  <td className="p-2 text-xs">{p.slaMin}m</td>
+                  <td className="p-2 text-xs">{p.reasonRequired ? "required" : "optional"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </Card>
     </V2Page>

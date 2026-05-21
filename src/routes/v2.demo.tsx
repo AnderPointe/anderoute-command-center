@@ -3,6 +3,7 @@ import { ListChecks } from "lucide-react";
 import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { DEMO_TRACKS } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/demo")({
   head: () => ({ meta: [{ title: "V2 Demo · Anderoute" }] }),
@@ -45,6 +46,22 @@ function Page() {
                 <div className="text-xs text-muted-foreground">{s.detail}</div>
               </div>
             </Link>
+          ))}
+        </div>
+      </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Persona tracks</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Run the demo for the audience in the room — each track touches only the steps that matter to them.</p>
+        <div className="mt-3 grid gap-2 md:grid-cols-2">
+          {DEMO_TRACKS.map((t) => (
+            <div key={t.persona} className="rounded-lg border border-white/10 bg-black/20 p-3 text-sm">
+              <div className="flex items-center justify-between">
+                <div className="font-medium">{t.persona}</div>
+                <Badge variant="outline" className="border-violet-500/40 text-violet-300">steps {t.steps.join(", ")}</Badge>
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground">{t.focus}</div>
+            </div>
           ))}
         </div>
       </Card>

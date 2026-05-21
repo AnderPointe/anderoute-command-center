@@ -4,18 +4,19 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { OPT_LOAD, OPT_CANDIDATES } from "@/v2/data/mockPhase17";
+import { OPT_LOAD, OPT_CANDIDATES, confidenceBand } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/suggested-drivers")({
   head: () => ({ meta: [{ title: "Suggested Drivers · Anderoute" }] }),
   component: Page,
 });
 
-function confidence(score: number) {
-  if (score >= 85) return { label: "High confidence", tone: "border-emerald-500/30 text-emerald-300" };
-  if (score >= 70) return { label: "Medium confidence", tone: "border-sky-500/30 text-sky-300" };
-  return { label: "Low confidence", tone: "border-amber-500/30 text-amber-300" };
-}
+const toneClass: Record<string, string> = {
+  good: "border-emerald-500/30 text-emerald-300",
+  info: "border-sky-500/30 text-sky-300",
+  warn: "border-amber-500/30 text-amber-300",
+  bad:  "border-rose-500/30 text-rose-300",
+};
 
 function Page() {
   return (
@@ -26,7 +27,7 @@ function Page() {
     >
       <div className="grid gap-3 md:grid-cols-2">
         {OPT_CANDIDATES.slice().sort((a, b) => b.score - a.score).map((c) => {
-          const conf = confidence(c.score);
+          const conf = confidenceBand(c.score);
           return (
             <Card key={c.driverId} className="border-white/10 bg-white/[0.02] p-4 text-sm">
               <div className="flex items-center justify-between">
@@ -34,8 +35,9 @@ function Page() {
                   <div className="font-medium">{c.driver}</div>
                   <div className="text-xs text-muted-foreground">{c.driverId} · {c.vehicleType}</div>
                 </div>
-                <Badge variant="outline" className={conf.tone}>{conf.label}</Badge>
+                <Badge variant="outline" className={toneClass[conf.tone]}>{conf.label} confidence</Badge>
               </div>
+              <div className="mt-1 text-xs text-muted-foreground">{conf.note}</div>
               <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
                 <div><span className="text-muted-foreground">Status:</span> {c.status.replace("_", " ")}</div>
                 <div><span className="text-muted-foreground">Distance:</span> {c.distanceMi} mi</div>

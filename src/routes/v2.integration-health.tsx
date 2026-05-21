@@ -3,7 +3,22 @@ import { Activity } from "lucide-react";
 import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PROVIDER_HEALTH } from "@/v2/data/mockPhase17";
+import { PROVIDER_HEALTH, PROVIDER_TREND_24H } from "@/v2/data/mockPhase17";
+
+function MiniSpark({ data }: { data: number[] }) {
+  const min = Math.min(...data), max = Math.max(...data);
+  const w = 120, h = 24;
+  const pts = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * w;
+    const y = h - ((v - min) / Math.max(1, max - min)) * h;
+    return `${x},${y}`;
+  }).join(" ");
+  return (
+    <svg width={w} height={h} className="overflow-visible">
+      <polyline fill="none" stroke="hsl(265 90% 70%)" strokeWidth="1.5" points={pts} />
+    </svg>
+  );
+}
 
 export const Route = createFileRoute("/v2/integration-health")({
   head: () => ({ meta: [{ title: "Integration Health · Anderoute" }] }),
@@ -39,6 +54,12 @@ function Page() {
                   <div>errors: {p.errorPct}%</div>
                 </div>
                 {p.note && <div className="mt-1 text-xs text-muted-foreground">{p.note}</div>}
+                {PROVIDER_TREND_24H[p.name] && (
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wide text-muted-foreground">p95 24h</span>
+                    <MiniSpark data={PROVIDER_TREND_24H[p.name]} />
+                  </div>
+                )}
               </div>
             ))}
           </div>

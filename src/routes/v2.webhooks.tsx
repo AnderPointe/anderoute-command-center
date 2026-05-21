@@ -4,7 +4,7 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { WEBHOOK_EVENTS, WEBHOOK_SUBS, WEBHOOK_DELIVERIES } from "@/v2/data/mockPhase17";
+import { WEBHOOK_EVENTS, WEBHOOK_SUBS, WEBHOOK_DELIVERIES, WEBHOOK_SIGNING_SPEC, WEBHOOK_RETRY_POLICY } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/webhooks")({
   head: () => ({ meta: [{ title: "Webhooks V2 · Anderoute" }] }),
@@ -84,6 +84,31 @@ function Page() {
           </table>
         </div>
       </Card>
+
+      <div className="grid gap-3 md:grid-cols-2">
+        <Card className="border-white/10 bg-white/[0.02] p-4 text-sm">
+          <h2 className="font-semibold">Signing spec</h2>
+          <div className="mt-2 space-y-1 text-xs">
+            <div><span className="text-muted-foreground">Algorithm:</span> <span className="font-mono">{WEBHOOK_SIGNING_SPEC.algorithm}</span></div>
+            <div><span className="text-muted-foreground">Signature header:</span> <span className="font-mono">{WEBHOOK_SIGNING_SPEC.header}</span></div>
+            <div><span className="text-muted-foreground">Timestamp header:</span> <span className="font-mono">{WEBHOOK_SIGNING_SPEC.timestampHeader}</span></div>
+            <div><span className="text-muted-foreground">Event header:</span> <span className="font-mono">{WEBHOOK_SIGNING_SPEC.payloadHeader}</span></div>
+            <div><span className="text-muted-foreground">Tolerance:</span> {WEBHOOK_SIGNING_SPEC.toleranceSec}s</div>
+            <div className="mt-2 rounded-md border border-white/10 bg-black/30 p-2 font-mono text-[11px] text-violet-200 break-all">{WEBHOOK_SIGNING_SPEC.example}</div>
+          </div>
+        </Card>
+        <Card className="border-white/10 bg-white/[0.02] p-4 text-sm">
+          <h2 className="font-semibold">Retry policy</h2>
+          <div className="mt-2 space-y-1 text-xs">
+            {WEBHOOK_RETRY_POLICY.map((r) => (
+              <div key={r.attempt} className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 px-2 py-1.5">
+                <span>Attempt {r.attempt} <span className="text-muted-foreground">— {r.note}</span></span>
+                <span className="font-mono text-violet-300">{r.delay}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
     </V2Page>
   );
 }

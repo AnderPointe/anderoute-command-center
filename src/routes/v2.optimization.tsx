@@ -3,7 +3,7 @@ import { Cpu } from "lucide-react";
 import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { OPT_LOAD, OPT_CANDIDATES } from "@/v2/data/mockPhase17";
+import { OPT_LOAD, OPT_CANDIDATES, OPT_WEIGHTS } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/optimization")({
   head: () => ({ meta: [{ title: "Optimization Engine · Anderoute" }] }),
@@ -73,6 +73,19 @@ function Page() {
               ))}
             </tbody>
           </table>
+        </div>
+      </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Score weights (transparent)</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Each candidate's 0–100 score is a weighted sum of these factors. Weights are fixed in V2 — tunable per-company in V2.5.</p>
+        <div className="mt-3 grid gap-2 md:grid-cols-2">
+          {OPT_WEIGHTS.map((w) => (
+            <div key={w.factor} className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 px-3 py-1.5 text-xs">
+              <div><span className="font-medium">{w.factor}</span> <span className="text-muted-foreground">— {w.note}</span></div>
+              <span className="font-mono text-violet-300">{w.weight}%</span>
+            </div>
+          ))}
         </div>
       </Card>
     </V2Page>

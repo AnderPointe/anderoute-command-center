@@ -4,7 +4,7 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { RISK_ROWS } from "@/v2/data/mockPhase17";
+import { RISK_ROWS, RISK_FACTORS } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/risk")({
   head: () => ({ meta: [{ title: "Predictive Risk · Anderoute" }] }),
@@ -41,7 +41,18 @@ function Page() {
               </div>
               <Progress value={r.score} className="mt-2 h-1" />
               <div className="mt-2 text-xs text-muted-foreground">{r.explanation}</div>
-              <div className="mt-1 text-xs text-violet-200">Recommended: {r.recommended}</div>
+              {RISK_FACTORS[r.id] && (
+                <div className="mt-2 space-y-1 rounded-md border border-white/10 bg-black/30 p-2">
+                  <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Factor breakdown</div>
+                  {RISK_FACTORS[r.id].map((f) => (
+                    <div key={f.label} className="flex items-center justify-between text-xs">
+                      <span className="text-muted-foreground">{f.label} <span className="text-foreground/60">— {f.signal}</span></span>
+                      <span className="font-mono text-violet-300">{f.weight}%</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className="mt-2 text-xs text-violet-200">Recommended: {r.recommended}</div>
             </div>
           ))}
         </div>
