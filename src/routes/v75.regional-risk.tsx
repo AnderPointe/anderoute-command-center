@@ -8,7 +8,7 @@ import { useRegionalRiskManagement } from "@/v75/hooks";
 export const Route = createFileRoute("/v75/regional-risk")({
   head: () => ({ meta: [{ title: "Regional Risk Management · V7.5 · Anderoute" }] }),
   component: () => {
-    const { risks } = useRegionalRiskManagement();
+    const { risks, summary } = useRegionalRiskManagement();
     return (
       <V75Page icon={<AlertTriangle className="size-6 text-indigo-300" />} title="Regional Risk Management"
         blurb="12 risk categories across compliance, legal, billing/tax, data residency, support, marketplace, carrier, partner, security, customer concentration, operational, mobile.">
@@ -17,6 +17,17 @@ export const Route = createFileRoute("/v75/regional-risk")({
           <ScoreCard label="Medium risks" value={risks.filter(r => r.level === "medium").length} tone="amber" />
           <ScoreCard label="Low risks"    value={risks.filter(r => r.level === "low").length}    tone="emerald" />
         </div>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Risk profile by region</h3>
+          <SimpleTable rows={summary as any} columns={[
+            { key: "region", label: "Region" },
+            { key: "high",   label: "High" },
+            { key: "medium", label: "Medium" },
+            { key: "low",    label: "Low" },
+            { key: "total",  label: "Total" },
+          ]} />
+        </Card>
+
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <SimpleTable rows={risks as any} columns={[
             { key: "region",     label: "Region" },
