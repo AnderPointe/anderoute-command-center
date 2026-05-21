@@ -29,6 +29,32 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as V25WhiteLabelRouteImport } from './routes/v25.white-label'
+import { Route as V25SecurityRouteImport } from './routes/v25.security'
+import { Route as V25ScopeRouteImport } from './routes/v25.scope'
+import { Route as V25ScenariosRouteImport } from './routes/v25.scenarios'
+import { Route as V25RetentionRouteImport } from './routes/v25.retention'
+import { Route as V25ReportsRouteImport } from './routes/v25.reports'
+import { Route as V25PortalInsightsRouteImport } from './routes/v25.portal-insights'
+import { Route as V25OverviewRouteImport } from './routes/v25.overview'
+import { Route as V25OptimizationRouteImport } from './routes/v25.optimization'
+import { Route as V25OnboardingRouteImport } from './routes/v25.onboarding'
+import { Route as V25MapClusteringRouteImport } from './routes/v25.map-clustering'
+import { Route as V25LocationsRouteImport } from './routes/v25.locations'
+import { Route as V25IntegrationReliabilityRouteImport } from './routes/v25.integration-reliability'
+import { Route as V25FleetScalingRouteImport } from './routes/v25.fleet-scaling'
+import { Route as V25EdiPartnersRouteImport } from './routes/v25.edi-partners'
+import { Route as V25EdiMonitorRouteImport } from './routes/v25.edi-monitor'
+import { Route as V25EdiMappingsRouteImport } from './routes/v25.edi-mappings'
+import { Route as V25EdiRouteImport } from './routes/v25.edi'
+import { Route as V25DemoRouteImport } from './routes/v25.demo'
+import { Route as V25CustomDomainRouteImport } from './routes/v25.custom-domain'
+import { Route as V25CopilotRouteImport } from './routes/v25.copilot'
+import { Route as V25CommunicationRouteImport } from './routes/v25.communication'
+import { Route as V25AuditRouteImport } from './routes/v25.audit'
+import { Route as V25ApiProductsRouteImport } from './routes/v25.api-products'
+import { Route as V25ApiMonetizationRouteImport } from './routes/v25.api-monetization'
+import { Route as V25ApiGatewayRouteImport } from './routes/v25.api-gateway'
 import { Route as V2WebhooksRouteImport } from './routes/v2.webhooks'
 import { Route as V2SuggestedDriversRouteImport } from './routes/v2.suggested-drivers'
 import { Route as V2SecurityRouteImport } from './routes/v2.security'
@@ -325,6 +351,137 @@ const IndexRoute = IndexRouteImport.update({
 const DriverIndexRoute = DriverIndexRouteImport.update({
   id: '/driver/',
   path: '/driver/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25WhiteLabelRoute = V25WhiteLabelRouteImport.update({
+  id: '/v25/white-label',
+  path: '/v25/white-label',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25SecurityRoute = V25SecurityRouteImport.update({
+  id: '/v25/security',
+  path: '/v25/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25ScopeRoute = V25ScopeRouteImport.update({
+  id: '/v25/scope',
+  path: '/v25/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25ScenariosRoute = V25ScenariosRouteImport.update({
+  id: '/v25/scenarios',
+  path: '/v25/scenarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25RetentionRoute = V25RetentionRouteImport.update({
+  id: '/v25/retention',
+  path: '/v25/retention',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25ReportsRoute = V25ReportsRouteImport.update({
+  id: '/v25/reports',
+  path: '/v25/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25PortalInsightsRoute = V25PortalInsightsRouteImport.update({
+  id: '/v25/portal-insights',
+  path: '/v25/portal-insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25OverviewRoute = V25OverviewRouteImport.update({
+  id: '/v25/overview',
+  path: '/v25/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25OptimizationRoute = V25OptimizationRouteImport.update({
+  id: '/v25/optimization',
+  path: '/v25/optimization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25OnboardingRoute = V25OnboardingRouteImport.update({
+  id: '/v25/onboarding',
+  path: '/v25/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25MapClusteringRoute = V25MapClusteringRouteImport.update({
+  id: '/v25/map-clustering',
+  path: '/v25/map-clustering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25LocationsRoute = V25LocationsRouteImport.update({
+  id: '/v25/locations',
+  path: '/v25/locations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25IntegrationReliabilityRoute =
+  V25IntegrationReliabilityRouteImport.update({
+    id: '/v25/integration-reliability',
+    path: '/v25/integration-reliability',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const V25FleetScalingRoute = V25FleetScalingRouteImport.update({
+  id: '/v25/fleet-scaling',
+  path: '/v25/fleet-scaling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25EdiPartnersRoute = V25EdiPartnersRouteImport.update({
+  id: '/v25/edi-partners',
+  path: '/v25/edi-partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25EdiMonitorRoute = V25EdiMonitorRouteImport.update({
+  id: '/v25/edi-monitor',
+  path: '/v25/edi-monitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25EdiMappingsRoute = V25EdiMappingsRouteImport.update({
+  id: '/v25/edi-mappings',
+  path: '/v25/edi-mappings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25EdiRoute = V25EdiRouteImport.update({
+  id: '/v25/edi',
+  path: '/v25/edi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25DemoRoute = V25DemoRouteImport.update({
+  id: '/v25/demo',
+  path: '/v25/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25CustomDomainRoute = V25CustomDomainRouteImport.update({
+  id: '/v25/custom-domain',
+  path: '/v25/custom-domain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25CopilotRoute = V25CopilotRouteImport.update({
+  id: '/v25/copilot',
+  path: '/v25/copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25CommunicationRoute = V25CommunicationRouteImport.update({
+  id: '/v25/communication',
+  path: '/v25/communication',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25AuditRoute = V25AuditRouteImport.update({
+  id: '/v25/audit',
+  path: '/v25/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25ApiProductsRoute = V25ApiProductsRouteImport.update({
+  id: '/v25/api-products',
+  path: '/v25/api-products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25ApiMonetizationRoute = V25ApiMonetizationRouteImport.update({
+  id: '/v25/api-monetization',
+  path: '/v25/api-monetization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V25ApiGatewayRoute = V25ApiGatewayRouteImport.update({
+  id: '/v25/api-gateway',
+  path: '/v25/api-gateway',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V2WebhooksRoute = V2WebhooksRouteImport.update({
@@ -1534,6 +1691,32 @@ export interface FileRoutesByFullPath {
   '/v2/security': typeof V2SecurityRoute
   '/v2/suggested-drivers': typeof V2SuggestedDriversRoute
   '/v2/webhooks': typeof V2WebhooksRoute
+  '/v25/api-gateway': typeof V25ApiGatewayRoute
+  '/v25/api-monetization': typeof V25ApiMonetizationRoute
+  '/v25/api-products': typeof V25ApiProductsRoute
+  '/v25/audit': typeof V25AuditRoute
+  '/v25/communication': typeof V25CommunicationRoute
+  '/v25/copilot': typeof V25CopilotRoute
+  '/v25/custom-domain': typeof V25CustomDomainRoute
+  '/v25/demo': typeof V25DemoRoute
+  '/v25/edi': typeof V25EdiRoute
+  '/v25/edi-mappings': typeof V25EdiMappingsRoute
+  '/v25/edi-monitor': typeof V25EdiMonitorRoute
+  '/v25/edi-partners': typeof V25EdiPartnersRoute
+  '/v25/fleet-scaling': typeof V25FleetScalingRoute
+  '/v25/integration-reliability': typeof V25IntegrationReliabilityRoute
+  '/v25/locations': typeof V25LocationsRoute
+  '/v25/map-clustering': typeof V25MapClusteringRoute
+  '/v25/onboarding': typeof V25OnboardingRoute
+  '/v25/optimization': typeof V25OptimizationRoute
+  '/v25/overview': typeof V25OverviewRoute
+  '/v25/portal-insights': typeof V25PortalInsightsRoute
+  '/v25/reports': typeof V25ReportsRoute
+  '/v25/retention': typeof V25RetentionRoute
+  '/v25/scenarios': typeof V25ScenariosRoute
+  '/v25/scope': typeof V25ScopeRoute
+  '/v25/security': typeof V25SecurityRoute
+  '/v25/white-label': typeof V25WhiteLabelRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -1753,6 +1936,32 @@ export interface FileRoutesByTo {
   '/v2/security': typeof V2SecurityRoute
   '/v2/suggested-drivers': typeof V2SuggestedDriversRoute
   '/v2/webhooks': typeof V2WebhooksRoute
+  '/v25/api-gateway': typeof V25ApiGatewayRoute
+  '/v25/api-monetization': typeof V25ApiMonetizationRoute
+  '/v25/api-products': typeof V25ApiProductsRoute
+  '/v25/audit': typeof V25AuditRoute
+  '/v25/communication': typeof V25CommunicationRoute
+  '/v25/copilot': typeof V25CopilotRoute
+  '/v25/custom-domain': typeof V25CustomDomainRoute
+  '/v25/demo': typeof V25DemoRoute
+  '/v25/edi': typeof V25EdiRoute
+  '/v25/edi-mappings': typeof V25EdiMappingsRoute
+  '/v25/edi-monitor': typeof V25EdiMonitorRoute
+  '/v25/edi-partners': typeof V25EdiPartnersRoute
+  '/v25/fleet-scaling': typeof V25FleetScalingRoute
+  '/v25/integration-reliability': typeof V25IntegrationReliabilityRoute
+  '/v25/locations': typeof V25LocationsRoute
+  '/v25/map-clustering': typeof V25MapClusteringRoute
+  '/v25/onboarding': typeof V25OnboardingRoute
+  '/v25/optimization': typeof V25OptimizationRoute
+  '/v25/overview': typeof V25OverviewRoute
+  '/v25/portal-insights': typeof V25PortalInsightsRoute
+  '/v25/reports': typeof V25ReportsRoute
+  '/v25/retention': typeof V25RetentionRoute
+  '/v25/scenarios': typeof V25ScenariosRoute
+  '/v25/scope': typeof V25ScopeRoute
+  '/v25/security': typeof V25SecurityRoute
+  '/v25/white-label': typeof V25WhiteLabelRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -1973,6 +2182,32 @@ export interface FileRoutesById {
   '/v2/security': typeof V2SecurityRoute
   '/v2/suggested-drivers': typeof V2SuggestedDriversRoute
   '/v2/webhooks': typeof V2WebhooksRoute
+  '/v25/api-gateway': typeof V25ApiGatewayRoute
+  '/v25/api-monetization': typeof V25ApiMonetizationRoute
+  '/v25/api-products': typeof V25ApiProductsRoute
+  '/v25/audit': typeof V25AuditRoute
+  '/v25/communication': typeof V25CommunicationRoute
+  '/v25/copilot': typeof V25CopilotRoute
+  '/v25/custom-domain': typeof V25CustomDomainRoute
+  '/v25/demo': typeof V25DemoRoute
+  '/v25/edi': typeof V25EdiRoute
+  '/v25/edi-mappings': typeof V25EdiMappingsRoute
+  '/v25/edi-monitor': typeof V25EdiMonitorRoute
+  '/v25/edi-partners': typeof V25EdiPartnersRoute
+  '/v25/fleet-scaling': typeof V25FleetScalingRoute
+  '/v25/integration-reliability': typeof V25IntegrationReliabilityRoute
+  '/v25/locations': typeof V25LocationsRoute
+  '/v25/map-clustering': typeof V25MapClusteringRoute
+  '/v25/onboarding': typeof V25OnboardingRoute
+  '/v25/optimization': typeof V25OptimizationRoute
+  '/v25/overview': typeof V25OverviewRoute
+  '/v25/portal-insights': typeof V25PortalInsightsRoute
+  '/v25/reports': typeof V25ReportsRoute
+  '/v25/retention': typeof V25RetentionRoute
+  '/v25/scenarios': typeof V25ScenariosRoute
+  '/v25/scope': typeof V25ScopeRoute
+  '/v25/security': typeof V25SecurityRoute
+  '/v25/white-label': typeof V25WhiteLabelRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -2194,6 +2429,32 @@ export interface FileRouteTypes {
     | '/v2/security'
     | '/v2/suggested-drivers'
     | '/v2/webhooks'
+    | '/v25/api-gateway'
+    | '/v25/api-monetization'
+    | '/v25/api-products'
+    | '/v25/audit'
+    | '/v25/communication'
+    | '/v25/copilot'
+    | '/v25/custom-domain'
+    | '/v25/demo'
+    | '/v25/edi'
+    | '/v25/edi-mappings'
+    | '/v25/edi-monitor'
+    | '/v25/edi-partners'
+    | '/v25/fleet-scaling'
+    | '/v25/integration-reliability'
+    | '/v25/locations'
+    | '/v25/map-clustering'
+    | '/v25/onboarding'
+    | '/v25/optimization'
+    | '/v25/overview'
+    | '/v25/portal-insights'
+    | '/v25/reports'
+    | '/v25/retention'
+    | '/v25/scenarios'
+    | '/v25/scope'
+    | '/v25/security'
+    | '/v25/white-label'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -2413,6 +2674,32 @@ export interface FileRouteTypes {
     | '/v2/security'
     | '/v2/suggested-drivers'
     | '/v2/webhooks'
+    | '/v25/api-gateway'
+    | '/v25/api-monetization'
+    | '/v25/api-products'
+    | '/v25/audit'
+    | '/v25/communication'
+    | '/v25/copilot'
+    | '/v25/custom-domain'
+    | '/v25/demo'
+    | '/v25/edi'
+    | '/v25/edi-mappings'
+    | '/v25/edi-monitor'
+    | '/v25/edi-partners'
+    | '/v25/fleet-scaling'
+    | '/v25/integration-reliability'
+    | '/v25/locations'
+    | '/v25/map-clustering'
+    | '/v25/onboarding'
+    | '/v25/optimization'
+    | '/v25/overview'
+    | '/v25/portal-insights'
+    | '/v25/reports'
+    | '/v25/retention'
+    | '/v25/scenarios'
+    | '/v25/scope'
+    | '/v25/security'
+    | '/v25/white-label'
     | '/driver'
   id:
     | '__root__'
@@ -2632,6 +2919,32 @@ export interface FileRouteTypes {
     | '/v2/security'
     | '/v2/suggested-drivers'
     | '/v2/webhooks'
+    | '/v25/api-gateway'
+    | '/v25/api-monetization'
+    | '/v25/api-products'
+    | '/v25/audit'
+    | '/v25/communication'
+    | '/v25/copilot'
+    | '/v25/custom-domain'
+    | '/v25/demo'
+    | '/v25/edi'
+    | '/v25/edi-mappings'
+    | '/v25/edi-monitor'
+    | '/v25/edi-partners'
+    | '/v25/fleet-scaling'
+    | '/v25/integration-reliability'
+    | '/v25/locations'
+    | '/v25/map-clustering'
+    | '/v25/onboarding'
+    | '/v25/optimization'
+    | '/v25/overview'
+    | '/v25/portal-insights'
+    | '/v25/reports'
+    | '/v25/retention'
+    | '/v25/scenarios'
+    | '/v25/scope'
+    | '/v25/security'
+    | '/v25/white-label'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -2844,6 +3157,32 @@ export interface RootRouteChildren {
   V2SecurityRoute: typeof V2SecurityRoute
   V2SuggestedDriversRoute: typeof V2SuggestedDriversRoute
   V2WebhooksRoute: typeof V2WebhooksRoute
+  V25ApiGatewayRoute: typeof V25ApiGatewayRoute
+  V25ApiMonetizationRoute: typeof V25ApiMonetizationRoute
+  V25ApiProductsRoute: typeof V25ApiProductsRoute
+  V25AuditRoute: typeof V25AuditRoute
+  V25CommunicationRoute: typeof V25CommunicationRoute
+  V25CopilotRoute: typeof V25CopilotRoute
+  V25CustomDomainRoute: typeof V25CustomDomainRoute
+  V25DemoRoute: typeof V25DemoRoute
+  V25EdiRoute: typeof V25EdiRoute
+  V25EdiMappingsRoute: typeof V25EdiMappingsRoute
+  V25EdiMonitorRoute: typeof V25EdiMonitorRoute
+  V25EdiPartnersRoute: typeof V25EdiPartnersRoute
+  V25FleetScalingRoute: typeof V25FleetScalingRoute
+  V25IntegrationReliabilityRoute: typeof V25IntegrationReliabilityRoute
+  V25LocationsRoute: typeof V25LocationsRoute
+  V25MapClusteringRoute: typeof V25MapClusteringRoute
+  V25OnboardingRoute: typeof V25OnboardingRoute
+  V25OptimizationRoute: typeof V25OptimizationRoute
+  V25OverviewRoute: typeof V25OverviewRoute
+  V25PortalInsightsRoute: typeof V25PortalInsightsRoute
+  V25ReportsRoute: typeof V25ReportsRoute
+  V25RetentionRoute: typeof V25RetentionRoute
+  V25ScenariosRoute: typeof V25ScenariosRoute
+  V25ScopeRoute: typeof V25ScopeRoute
+  V25SecurityRoute: typeof V25SecurityRoute
+  V25WhiteLabelRoute: typeof V25WhiteLabelRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -2987,6 +3326,188 @@ declare module '@tanstack/react-router' {
       path: '/driver'
       fullPath: '/driver/'
       preLoaderRoute: typeof DriverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/white-label': {
+      id: '/v25/white-label'
+      path: '/v25/white-label'
+      fullPath: '/v25/white-label'
+      preLoaderRoute: typeof V25WhiteLabelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/security': {
+      id: '/v25/security'
+      path: '/v25/security'
+      fullPath: '/v25/security'
+      preLoaderRoute: typeof V25SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/scope': {
+      id: '/v25/scope'
+      path: '/v25/scope'
+      fullPath: '/v25/scope'
+      preLoaderRoute: typeof V25ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/scenarios': {
+      id: '/v25/scenarios'
+      path: '/v25/scenarios'
+      fullPath: '/v25/scenarios'
+      preLoaderRoute: typeof V25ScenariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/retention': {
+      id: '/v25/retention'
+      path: '/v25/retention'
+      fullPath: '/v25/retention'
+      preLoaderRoute: typeof V25RetentionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/reports': {
+      id: '/v25/reports'
+      path: '/v25/reports'
+      fullPath: '/v25/reports'
+      preLoaderRoute: typeof V25ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/portal-insights': {
+      id: '/v25/portal-insights'
+      path: '/v25/portal-insights'
+      fullPath: '/v25/portal-insights'
+      preLoaderRoute: typeof V25PortalInsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/overview': {
+      id: '/v25/overview'
+      path: '/v25/overview'
+      fullPath: '/v25/overview'
+      preLoaderRoute: typeof V25OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/optimization': {
+      id: '/v25/optimization'
+      path: '/v25/optimization'
+      fullPath: '/v25/optimization'
+      preLoaderRoute: typeof V25OptimizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/onboarding': {
+      id: '/v25/onboarding'
+      path: '/v25/onboarding'
+      fullPath: '/v25/onboarding'
+      preLoaderRoute: typeof V25OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/map-clustering': {
+      id: '/v25/map-clustering'
+      path: '/v25/map-clustering'
+      fullPath: '/v25/map-clustering'
+      preLoaderRoute: typeof V25MapClusteringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/locations': {
+      id: '/v25/locations'
+      path: '/v25/locations'
+      fullPath: '/v25/locations'
+      preLoaderRoute: typeof V25LocationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/integration-reliability': {
+      id: '/v25/integration-reliability'
+      path: '/v25/integration-reliability'
+      fullPath: '/v25/integration-reliability'
+      preLoaderRoute: typeof V25IntegrationReliabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/fleet-scaling': {
+      id: '/v25/fleet-scaling'
+      path: '/v25/fleet-scaling'
+      fullPath: '/v25/fleet-scaling'
+      preLoaderRoute: typeof V25FleetScalingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/edi-partners': {
+      id: '/v25/edi-partners'
+      path: '/v25/edi-partners'
+      fullPath: '/v25/edi-partners'
+      preLoaderRoute: typeof V25EdiPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/edi-monitor': {
+      id: '/v25/edi-monitor'
+      path: '/v25/edi-monitor'
+      fullPath: '/v25/edi-monitor'
+      preLoaderRoute: typeof V25EdiMonitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/edi-mappings': {
+      id: '/v25/edi-mappings'
+      path: '/v25/edi-mappings'
+      fullPath: '/v25/edi-mappings'
+      preLoaderRoute: typeof V25EdiMappingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/edi': {
+      id: '/v25/edi'
+      path: '/v25/edi'
+      fullPath: '/v25/edi'
+      preLoaderRoute: typeof V25EdiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/demo': {
+      id: '/v25/demo'
+      path: '/v25/demo'
+      fullPath: '/v25/demo'
+      preLoaderRoute: typeof V25DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/custom-domain': {
+      id: '/v25/custom-domain'
+      path: '/v25/custom-domain'
+      fullPath: '/v25/custom-domain'
+      preLoaderRoute: typeof V25CustomDomainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/copilot': {
+      id: '/v25/copilot'
+      path: '/v25/copilot'
+      fullPath: '/v25/copilot'
+      preLoaderRoute: typeof V25CopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/communication': {
+      id: '/v25/communication'
+      path: '/v25/communication'
+      fullPath: '/v25/communication'
+      preLoaderRoute: typeof V25CommunicationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/audit': {
+      id: '/v25/audit'
+      path: '/v25/audit'
+      fullPath: '/v25/audit'
+      preLoaderRoute: typeof V25AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/api-products': {
+      id: '/v25/api-products'
+      path: '/v25/api-products'
+      fullPath: '/v25/api-products'
+      preLoaderRoute: typeof V25ApiProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/api-monetization': {
+      id: '/v25/api-monetization'
+      path: '/v25/api-monetization'
+      fullPath: '/v25/api-monetization'
+      preLoaderRoute: typeof V25ApiMonetizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v25/api-gateway': {
+      id: '/v25/api-gateway'
+      path: '/v25/api-gateway'
+      fullPath: '/v25/api-gateway'
+      preLoaderRoute: typeof V25ApiGatewayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v2/webhooks': {
@@ -4633,6 +5154,32 @@ const rootRouteChildren: RootRouteChildren = {
   V2SecurityRoute: V2SecurityRoute,
   V2SuggestedDriversRoute: V2SuggestedDriversRoute,
   V2WebhooksRoute: V2WebhooksRoute,
+  V25ApiGatewayRoute: V25ApiGatewayRoute,
+  V25ApiMonetizationRoute: V25ApiMonetizationRoute,
+  V25ApiProductsRoute: V25ApiProductsRoute,
+  V25AuditRoute: V25AuditRoute,
+  V25CommunicationRoute: V25CommunicationRoute,
+  V25CopilotRoute: V25CopilotRoute,
+  V25CustomDomainRoute: V25CustomDomainRoute,
+  V25DemoRoute: V25DemoRoute,
+  V25EdiRoute: V25EdiRoute,
+  V25EdiMappingsRoute: V25EdiMappingsRoute,
+  V25EdiMonitorRoute: V25EdiMonitorRoute,
+  V25EdiPartnersRoute: V25EdiPartnersRoute,
+  V25FleetScalingRoute: V25FleetScalingRoute,
+  V25IntegrationReliabilityRoute: V25IntegrationReliabilityRoute,
+  V25LocationsRoute: V25LocationsRoute,
+  V25MapClusteringRoute: V25MapClusteringRoute,
+  V25OnboardingRoute: V25OnboardingRoute,
+  V25OptimizationRoute: V25OptimizationRoute,
+  V25OverviewRoute: V25OverviewRoute,
+  V25PortalInsightsRoute: V25PortalInsightsRoute,
+  V25ReportsRoute: V25ReportsRoute,
+  V25RetentionRoute: V25RetentionRoute,
+  V25ScenariosRoute: V25ScenariosRoute,
+  V25ScopeRoute: V25ScopeRoute,
+  V25SecurityRoute: V25SecurityRoute,
+  V25WhiteLabelRoute: V25WhiteLabelRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
