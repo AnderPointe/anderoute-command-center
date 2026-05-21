@@ -27,6 +27,18 @@ export const Route = createFileRoute("/v6/liquidity")({
           { label: "Carrier acceptance", value: `${l.acceptance}%` },
         ]} />
         <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Liquidity score trend (4w)</h3>
+          <div className="mt-3 flex items-end gap-2 h-24">
+            {trend.map(t => (
+              <div key={t.w} className="flex flex-1 flex-col items-center gap-1">
+                <div className="w-full rounded-t bg-emerald-400/70" style={{ height: `${t.score}%` }} />
+                <div className="text-[10px] text-muted-foreground">{t.w}</div>
+                <div className="text-[10px] text-emerald-200">{t.score}</div>
+              </div>
+            ))}
+          </div>
+        </Card>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-semibold">Lane liquidity matrix</h3>
           <div className="mt-2">
             <SimpleTable rows={lanes} columns={[
