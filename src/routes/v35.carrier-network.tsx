@@ -3,12 +3,16 @@ import { Network } from "lucide-react";
 import { V35Page } from "@/components/v35/V35Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CARRIER_NETWORK_METRICS, CARRIER_REGION_COVERAGE, CARRIER_EQUIPMENT_COVERAGE } from "@/v35/data/mockPhase20";
+import {
+  CARRIER_NETWORK_METRICS, CARRIER_REGION_COVERAGE,
+  CARRIER_EQUIPMENT_COVERAGE, CARRIER_FUNNEL,
+} from "@/v35/data/mockPhase20";
 
 export const Route = createFileRoute("/v35/carrier-network")({
   head: () => ({ meta: [{ title: "Carrier Network · Anderoute V3.5" }] }),
   component: () => {
     const m = CARRIER_NETWORK_METRICS;
+    const max = Math.max(...CARRIER_FUNNEL.map((s) => s.count));
     return (
       <V35Page icon={<Network className="size-6 text-amber-300" />} title="Carrier Network Growth"
         blurb="Network funnel, regional coverage, equipment mix, and operational responsiveness.">
@@ -17,9 +21,18 @@ export const Route = createFileRoute("/v35/carrier-network")({
             <Card key={String(l)} className="border-white/10 bg-white/[0.02] p-3"><div className="text-xs uppercase text-muted-foreground">{l}</div><div className="text-xl font-semibold">{v as number}</div></Card>
           ))}
         </div>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Acquisition funnel</h3>
+          <div className="mt-2 space-y-1.5">{CARRIER_FUNNEL.map((s) => (
+            <div key={s.stage} className="rounded border border-white/10 bg-black/20 p-2">
+              <div className="flex items-center justify-between text-sm"><span>{s.stage}</span><span className="font-mono text-amber-300">{s.count}</span></div>
+              <div className="mt-1 h-1.5 overflow-hidden rounded bg-white/5"><div className="h-full bg-amber-400/60" style={{ width: `${(s.count / max) * 100}%` }} /></div>
+            </div>
+          ))}</div>
+        </Card>
         <div className="grid gap-3 md:grid-cols-2">
           <Card className="border-white/10 bg-white/[0.02] p-4">
-            <h3 className="text-sm font-semibold">Funnel</h3>
+            <h3 className="text-sm font-semibold">Operational ratios</h3>
             <ul className="mt-2 space-y-1 text-sm">
               <li>Response rate <span className="font-mono">{(m.response_rate * 100).toFixed(0)}%</span></li>
               <li>Award rate <span className="font-mono">{(m.award_rate * 100).toFixed(0)}%</span></li>
