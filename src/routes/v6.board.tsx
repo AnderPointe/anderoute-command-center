@@ -3,12 +3,13 @@ import { Briefcase } from "lucide-react";
 import { V6Page } from "@/components/v6/V6Page";
 import { SimpleTable, StatusPill } from "@/components/v6/ui-bits";
 import { Card } from "@/components/ui/card";
-import { useBoardGovernance } from "@/v6/hooks";
+import { useBoardGovernance, useBoardKpis } from "@/v6/hooks";
 
 export const Route = createFileRoute("/v6/board")({
   head: () => ({ meta: [{ title: "Board OS · V6" }] }),
   component: () => {
     const { meetings, agenda, decisions, actions } = useBoardGovernance();
+    const { kpis } = useBoardKpis();
     return (
       <V6Page icon={<Briefcase className="size-6 text-emerald-300" />} title="Board Governance Operating System"
         blurb="Meeting calendar, agenda + packet builder, KPI/risk review, decision and action tracking, QOR and investor update workflows.">
