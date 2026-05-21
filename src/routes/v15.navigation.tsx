@@ -3,7 +3,7 @@ import { Map } from "lucide-react";
 import { V15Page } from "@/components/v15/V15Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { NAV_PROVIDERS } from "@/v15/data/mockPhase16";
+import { NAV_PROVIDERS, NAV_INTERFACE_METHODS } from "@/v15/data/mockPhase16";
 
 export const Route = createFileRoute("/v15/navigation")({
   head: () => ({ meta: [{ title: "V1.5 Navigation Providers · Anderoute" }] }),
@@ -64,17 +64,24 @@ function Page() {
         </div>
       </Card>
 
-      <Card className="border-white/10 bg-white/[0.02] p-4 text-sm text-muted-foreground">
-        <h2 className="font-semibold text-foreground">NavigationProvider interface</h2>
-        <pre className="mt-2 overflow-x-auto rounded-lg border border-white/10 bg-black/40 p-3 text-xs">{`interface NavigationProvider {
-  initialize(): Promise<void>;
-  requestRoute(req: RouteRequest): Promise<RouteResponse>;
-  renderRoute(map: unknown, route: RouteResponse): void;
-  startSession / stopSession / pauseSession / resumeSession;
-  getETA(); getRemainingDistance(); getRouteGeometry(); getRouteSteps();
-  subscribeToRouteUpdates / LocationUpdates / NavigationEvents;
-  validateProviderConfig(); testProviderConnection();
-}`}</pre>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">NavigationProvider interface — grouped methods</h2>
+        <p className="mt-1 text-xs text-muted-foreground">One stable contract. Mock, Mapbox, Google, and future providers all satisfy it.</p>
+        <div className="mt-3 grid gap-3 md:grid-cols-2">
+          {Array.from(new Set(NAV_INTERFACE_METHODS.map((m) => m.group))).map((g) => (
+            <div key={g} className="rounded-lg border border-white/10 bg-black/20 p-3">
+              <div className="text-xs uppercase tracking-wide text-cyan-300">{g}</div>
+              <ul className="mt-2 space-y-1.5 text-xs">
+                {NAV_INTERFACE_METHODS.filter((m) => m.group === g).map((m) => (
+                  <li key={m.signature}>
+                    <span className="font-mono text-foreground">{m.signature}</span>
+                    <span className="ml-1 text-muted-foreground">— {m.purpose}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </Card>
     </V15Page>
   );

@@ -3,7 +3,7 @@ import { Navigation } from "lucide-react";
 import { V15Page } from "@/components/v15/V15Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { NAV_SESSIONS, NAV_EVENTS } from "@/v15/data/mockPhase16";
+import { NAV_SESSIONS, NAV_EVENTS, REROUTE_POLICY } from "@/v15/data/mockPhase16";
 
 export const Route = createFileRoute("/v15/reroute")({
   head: () => ({ meta: [{ title: "V1.5 Reroute & Off-Route · Anderoute" }] }),
@@ -42,6 +42,26 @@ function Page() {
             </div>
           ))}
         </div>
+      </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Reroute policy</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Detection thresholds + actions. Auto-detect; manual reroute; mock fallback after 2 provider failures.</p>
+        <table className="mt-3 w-full text-sm">
+          <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+            <tr><th className="p-2">Trigger</th><th className="p-2">Threshold</th><th className="p-2">Action</th><th className="p-2">Mode</th></tr>
+          </thead>
+          <tbody>
+            {REROUTE_POLICY.map((r) => (
+              <tr key={r.id} className="border-t border-white/10">
+                <td className="p-2">{r.trigger}</td>
+                <td className="p-2 text-xs text-muted-foreground">{r.threshold}</td>
+                <td className="p-2 text-xs">{r.action}</td>
+                <td className="p-2"><Badge variant="outline" className={r.manual ? "border-sky-500/30 text-sky-300" : "border-emerald-500/30 text-emerald-300"}>{r.manual ? "manual" : "auto"}</Badge></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Card>
 
       <Card className="border-white/10 bg-white/[0.02] p-4 text-sm text-muted-foreground">

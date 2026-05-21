@@ -3,6 +3,7 @@ import { ShieldCheck } from "lucide-react";
 import { V15Page } from "@/components/v15/V15Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { STRIPE_TRUST_BOUNDARY } from "@/v15/data/mockPhase16";
 
 export const Route = createFileRoute("/v15/stripe")({
   head: () => ({ meta: [{ title: "V1.5 Stripe Edge Plan · Anderoute" }] }),
@@ -62,6 +63,26 @@ function Page() {
             <Badge key={e} variant="outline" className="border-white/15 text-xs text-muted-foreground">{e}</Badge>
           ))}
         </div>
+      </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Trust boundary — zone by zone</h2>
+        <p className="mt-1 text-xs text-muted-foreground">Each row pins a data class to exactly one zone. PAN never reaches Anderoute; secrets never reach the browser.</p>
+        <table className="mt-3 w-full text-sm">
+          <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+            <tr><th className="p-2">Layer</th><th className="p-2">Zone</th><th className="p-2">Carries</th><th className="p-2">Rule</th></tr>
+          </thead>
+          <tbody>
+            {STRIPE_TRUST_BOUNDARY.map((b) => (
+              <tr key={b.layer} className="border-t border-white/10">
+                <td className="p-2">{b.layer}</td>
+                <td className="p-2"><Badge variant="outline" className="border-white/15 text-xs text-muted-foreground">{b.zone}</Badge></td>
+                <td className="p-2 text-xs">{b.carries}</td>
+                <td className="p-2 text-xs text-muted-foreground">{b.rule}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Card>
     </V15Page>
   );
