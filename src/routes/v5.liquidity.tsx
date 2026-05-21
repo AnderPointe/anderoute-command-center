@@ -3,7 +3,7 @@ import { Store } from "lucide-react";
 import { V5Page } from "@/components/v5/V5Page";
 import { KpiGrid, ScoreCard, SimpleTable, StatusPill } from "@/components/v5/ui-bits";
 import { Card } from "@/components/ui/card";
-import { LIQUIDITY, LIQUIDITY_TREND, UNCOVERED_LOADS } from "@/v5/data/mockPhase23";
+import { LIQUIDITY, LIQUIDITY_TREND, MARKETPLACE_LIQUIDITY_TREND, UNCOVERED_LOADS } from "@/v5/data/mockPhase23";
 
 export const Route = createFileRoute("/v5/liquidity")({
   head: () => ({ meta: [{ title: "Marketplace Liquidity · Anderoute V5" }] }),
@@ -50,6 +50,22 @@ export const Route = createFileRoute("/v5/liquidity")({
           </div>
         </Card>
       </div>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Fill-rate trend · posted vs awarded</h3>
+        <div className="mt-3 space-y-2">
+          {MARKETPLACE_LIQUIDITY_TREND.map(r => (
+            <div key={r.week} className="grid grid-cols-[40px_1fr_70px] items-center gap-2 text-[11px]">
+              <span className="text-muted-foreground">{r.week}</span>
+              <div className="relative h-3 overflow-hidden rounded bg-white/5">
+                <div className="absolute inset-y-0 left-0 bg-sky-400/40" style={{ width: `${(r.posted / 2000) * 100}%` }} />
+                <div className="absolute inset-y-0 left-0 bg-emerald-400/70" style={{ width: `${(r.awarded / 2000) * 100}%` }} />
+              </div>
+              <span className="text-right text-emerald-300">{r.fill}% fill</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 text-[10px] text-muted-foreground">Sky = posted · Emerald = awarded · mock data only.</div>
+      </Card>
     </V5Page>
   ),
 });

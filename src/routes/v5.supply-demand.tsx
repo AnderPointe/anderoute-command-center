@@ -3,7 +3,7 @@ import { Scale } from "lucide-react";
 import { V5Page } from "@/components/v5/V5Page";
 import { SimpleTable, StatusPill } from "@/components/v5/ui-bits";
 import { Card } from "@/components/ui/card";
-import { SUPPLY_DEMAND, EQUIPMENT_DEMAND, CARRIER_GAP_RECS } from "@/v5/data/mockPhase23";
+import { SUPPLY_DEMAND, EQUIPMENT_DEMAND, CARRIER_GAP_RECS, NATIONAL_ALERTS } from "@/v5/data/mockPhase23";
 
 export const Route = createFileRoute("/v5/supply-demand")({
   head: () => ({ meta: [{ title: "Supply / Demand · Anderoute V5" }] }),
@@ -43,6 +43,17 @@ export const Route = createFileRoute("/v5/supply-demand")({
             { key: "region",   label: "Region" },
             { key: "action",   label: "Action" },
             { key: "priority", label: "Priority", render: r => <StatusPill status={r.priority} /> },
+          ]} />
+        </div>
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">National coverage alerts</h3>
+        <div className="mt-2">
+          <SimpleTable rows={NATIONAL_ALERTS} columns={[
+            { key: "region",   label: "Region" },
+            { key: "severity", label: "Severity", render: r => <StatusPill status={r.severity} /> },
+            { key: "issue",    label: "Issue" },
+            { key: "action",   label: "Recommended action" },
           ]} />
         </div>
       </Card>

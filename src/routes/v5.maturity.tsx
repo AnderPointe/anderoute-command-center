@@ -3,7 +3,8 @@ import { Activity } from "lucide-react";
 import { V5Page } from "@/components/v5/V5Page";
 import { ScoreCard, SimpleTable } from "@/components/v5/ui-bits";
 import { Card } from "@/components/ui/card";
-import { V5_MATURITY, V5_MATURITY_TREND } from "@/v5/data/mockPhase23";
+import { V5_MATURITY, V5_MATURITY_TREND, NATIONAL_ALERTS } from "@/v5/data/mockPhase23";
+import { StatusPill } from "@/components/v5/ui-bits";
 
 export const Route = createFileRoute("/v5/maturity")({
   head: () => ({ meta: [{ title: "Platform Maturity · Anderoute V5" }] }),
@@ -42,6 +43,20 @@ export const Route = createFileRoute("/v5/maturity")({
             </div>
           </Card>
         </div>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">National operating alerts</h3>
+          <div className="mt-2 space-y-2 text-xs">
+            {NATIONAL_ALERTS.map(a => (
+              <div key={a.region + a.issue} className="flex items-start justify-between gap-3 rounded border border-white/10 bg-white/[0.02] p-2">
+                <div>
+                  <div className="font-medium">{a.region} · {a.issue}</div>
+                  <div className="text-[11px] text-muted-foreground">Action: {a.action}</div>
+                </div>
+                <StatusPill status={a.severity} />
+              </div>
+            ))}
+          </div>
+        </Card>
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <h3 className="text-sm font-semibold">Executive summary</h3>
           <p className="mt-1 text-xs text-muted-foreground">
