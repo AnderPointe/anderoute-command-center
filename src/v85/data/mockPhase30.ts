@@ -620,3 +620,62 @@ export const V85_EXECUTION_OVERLAYS = [
   { area: "AI Governance Stewardship",              role: "AI",    focus: "Score 82 · 14 approval rules · explainability 86%",       decision: "Quarterly threshold tuning review" },
   { area: "Platform Reliability Stewardship",       role: "SRE",   focus: "Score 85 · 1 critical incident 30d · 2 PMs in progress",  decision: "Close 2 postmortems + tabletop drill" },
 ];
+
+// ---- Phase 30 polish: RLS examples for V8.5 enterprise tables -------------
+export const V85_RLS_EXAMPLES = [
+  {
+    table: "v85_discipline_scores",
+    policy: "tenant read; admin / platform-owner write",
+    sql: `create policy v85_disc_read on public.v85_discipline_scores
+  for select to authenticated
+  using (company_id = public.current_company());`,
+  },
+  {
+    table: "v85_control_tests",
+    policy: "tenant admin read; writes only via server fn (service role)",
+    sql: `create policy v85_tests_read on public.v85_control_tests
+  for select to authenticated
+  using (
+    company_id = public.current_company()
+    and public.has_role(auth.uid(), company_id, 'admin')
+  );`,
+  },
+  {
+    table: "v85_country_accountability",
+    policy: "platform-owner only (cross-tenant aggregate)",
+    sql: `create policy v85_country_read on public.v85_country_accountability
+  for select to authenticated
+  using (public.is_platform_owner(auth.uid()));`,
+  },
+  {
+    table: "v85_board_packet_sections",
+    policy: "platform-owner only — board pack is not tenant data",
+    sql: `create policy v85_board_all on public.v85_board_packet_sections
+  for all to authenticated
+  using (public.is_platform_owner(auth.uid()))
+  with check (public.is_platform_owner(auth.uid()));`,
+  },
+];
+
+// ---- Phase 30 polish: server fn vs server route vs edge function -----------
+export const V85_BACKEND_BOUNDARY = [
+  { kind: "createServerFn",  name: "getOperatingDiscipline",            caller: "V8.5 UI",        auth: "requireSupabaseAuth" },
+  { kind: "createServerFn",  name: "recordControlTest",                 caller: "V8.5 UI",        auth: "requireSupabaseAuth + admin" },
+  { kind: "createServerFn",  name: "getCountryAccountability",          caller: "V8.5 UI",        auth: "platform-owner" },
+  { kind: "createServerFn",  name: "lockBoardPacket",                   caller: "V8.5 UI",        auth: "platform-owner" },
+  { kind: "createServerFn",  name: "getMarketplaceEconomics",           caller: "V8.5 UI",        auth: "requireSupabaseAuth" },
+  { kind: "createServerFn",  name: "getAIGovernanceStewardship",        caller: "V8.5 UI",        auth: "requireSupabaseAuth + admin" },
+  { kind: "server route",    name: "/api/public/webhooks/stripe-billing-incident", caller: "Stripe",         auth: "HMAC signature" },
+  { kind: "server route",    name: "/api/public/webhooks/security-evidence-vendor", caller: "Evidence vendor", auth: "HMAC signature" },
+  { kind: "server route",    name: "/api/public/hooks/board-packet-reminder",      caller: "pg_cron",         auth: "apikey header" },
+  { kind: "edge function",   name: "(none new in V8.5)",                caller: "—",              auth: "—" },
+];
+
+// ---- Phase 30 polish: per-role demo guidance -----------------------------
+export const V85_ROLE_GUIDANCE = [
+  { role: "CEO",        tone: "violet",  focus: "Hold discipline > 80; resolve CA storage approval; lock board packet by 2026-06-17." },
+  { role: "COO",        tone: "sky",     focus: "Canada pilot extension memo; close 3 country blockers; cadence catch-up on partner review." },
+  { role: "CFO",        tone: "amber",   focus: "Approve fee schedule review for reefer; re-test API overage in 7d; sign off revenue control framing." },
+  { role: "CCO",        tone: "emerald", focus: "Close 2 overdue remediations; lock control ownership; confirm escalation tier for 2 exec-level." },
+  { role: "Board chair",tone: "rose",    focus: "Sign off API overage + CA pilot + ON reefer in 2026-06-24 review." },
+];
