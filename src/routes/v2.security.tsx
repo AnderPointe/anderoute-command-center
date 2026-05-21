@@ -4,7 +4,7 @@ import { V2Page } from "@/components/v2/V2Page";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatTile } from "@/components/v1/StatTile";
-import { V2_SECURITY } from "@/v2/data/mockPhase17";
+import { V2_SECURITY, V2_RLS_EXAMPLES, V2_EDGE_FN_SEPARATION } from "@/v2/data/mockPhase17";
 
 export const Route = createFileRoute("/v2/security")({
   head: () => ({ meta: [{ title: "V2 Security · Anderoute" }] }),
