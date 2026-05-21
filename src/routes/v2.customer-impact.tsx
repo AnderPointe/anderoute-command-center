@@ -60,6 +60,18 @@ function Page() {
           ))}
         </div>
       </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Account manager action queue</h2>
+        <div className="mt-3 space-y-1.5 text-sm">
+          {CUSTOMER_ACTION_QUEUE.map((a, i) => (
+            <div key={i} className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 px-3 py-2">
+              <div><span className="font-medium">{a.customer}</span> <span className="text-xs text-muted-foreground">— {a.action}</span></div>
+              <Badge variant="outline" className={uTone[a.urgency]}>{a.urgency}</Badge>
+            </div>
+          ))}
+        </div>
+      </Card>
     </V2Page>
   );
 }
