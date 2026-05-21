@@ -19,6 +19,7 @@ export const Route = createFileRoute("/v85/demo")({
       emerald: "border-emerald-400/30 text-emerald-200",
       rose:    "border-rose-400/30 text-rose-200",
     };
+    const STEPS = [
       {who:"CEO",step:"Open Global Enterprise Operating Discipline Dashboard",outcome:"Discipline 82 · Marketplace 84 · Compliance 79 · Support 81"},
       {who:"COO",step:"Open Country Accountability Dashboard",outcome:"Canada 78 · Mexico 63 · EU 41 · 2 Canada exceptions"},
       {who:"CFO",step:"Open Financial Control Testing Center",outcome:"6 pass · 3 review · 1 exception · Revenue Control 73"},
