@@ -29,6 +29,31 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as V85SupportRouteImport } from './routes/v85.support'
+import { Route as V85StewardshipExecRouteImport } from './routes/v85.stewardship-exec'
+import { Route as V85StewardshipRouteImport } from './routes/v85.stewardship'
+import { Route as V85ScopeRouteImport } from './routes/v85.scope'
+import { Route as V85RiskRouteImport } from './routes/v85.risk'
+import { Route as V85RevenueControlRouteImport } from './routes/v85.revenue-control'
+import { Route as V85ReportsRouteImport } from './routes/v85.reports'
+import { Route as V85ReliabilityRouteImport } from './routes/v85.reliability'
+import { Route as V85ProductLinesRouteImport } from './routes/v85.product-lines'
+import { Route as V85PartnerRouteImport } from './routes/v85.partner'
+import { Route as V85OverviewRouteImport } from './routes/v85.overview'
+import { Route as V85MpFinancialRouteImport } from './routes/v85.mp-financial'
+import { Route as V85MpEconomicsRouteImport } from './routes/v85.mp-economics'
+import { Route as V85FinTestingRouteImport } from './routes/v85.fin-testing'
+import { Route as V85DisciplineRouteImport } from './routes/v85.discipline'
+import { Route as V85DemoRouteImport } from './routes/v85.demo'
+import { Route as V85CustomerSuccessRouteImport } from './routes/v85.customer-success'
+import { Route as V85CountryPerformanceRouteImport } from './routes/v85.country-performance'
+import { Route as V85CountryAccountabilityRouteImport } from './routes/v85.country-accountability'
+import { Route as V85ControlOwnershipRouteImport } from './routes/v85.control-ownership'
+import { Route as V85ControlMaturityRouteImport } from './routes/v85.control-maturity'
+import { Route as V85ComplianceRouteImport } from './routes/v85.compliance'
+import { Route as V85CadenceRouteImport } from './routes/v85.cadence'
+import { Route as V85BoardRouteImport } from './routes/v85.board'
+import { Route as V85AiGovernanceRouteImport } from './routes/v85.ai-governance'
 import { Route as V8SupportOpsRouteImport } from './routes/v8.support-ops'
 import { Route as V8ScopeRouteImport } from './routes/v8.scope'
 import { Route as V8RiskControlRouteImport } from './routes/v8.risk-control'
@@ -620,6 +645,132 @@ const IndexRoute = IndexRouteImport.update({
 const DriverIndexRoute = DriverIndexRouteImport.update({
   id: '/driver/',
   path: '/driver/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85SupportRoute = V85SupportRouteImport.update({
+  id: '/v85/support',
+  path: '/v85/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85StewardshipExecRoute = V85StewardshipExecRouteImport.update({
+  id: '/v85/stewardship-exec',
+  path: '/v85/stewardship-exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85StewardshipRoute = V85StewardshipRouteImport.update({
+  id: '/v85/stewardship',
+  path: '/v85/stewardship',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85ScopeRoute = V85ScopeRouteImport.update({
+  id: '/v85/scope',
+  path: '/v85/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85RiskRoute = V85RiskRouteImport.update({
+  id: '/v85/risk',
+  path: '/v85/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85RevenueControlRoute = V85RevenueControlRouteImport.update({
+  id: '/v85/revenue-control',
+  path: '/v85/revenue-control',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85ReportsRoute = V85ReportsRouteImport.update({
+  id: '/v85/reports',
+  path: '/v85/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85ReliabilityRoute = V85ReliabilityRouteImport.update({
+  id: '/v85/reliability',
+  path: '/v85/reliability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85ProductLinesRoute = V85ProductLinesRouteImport.update({
+  id: '/v85/product-lines',
+  path: '/v85/product-lines',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85PartnerRoute = V85PartnerRouteImport.update({
+  id: '/v85/partner',
+  path: '/v85/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85OverviewRoute = V85OverviewRouteImport.update({
+  id: '/v85/overview',
+  path: '/v85/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85MpFinancialRoute = V85MpFinancialRouteImport.update({
+  id: '/v85/mp-financial',
+  path: '/v85/mp-financial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85MpEconomicsRoute = V85MpEconomicsRouteImport.update({
+  id: '/v85/mp-economics',
+  path: '/v85/mp-economics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85FinTestingRoute = V85FinTestingRouteImport.update({
+  id: '/v85/fin-testing',
+  path: '/v85/fin-testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85DisciplineRoute = V85DisciplineRouteImport.update({
+  id: '/v85/discipline',
+  path: '/v85/discipline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85DemoRoute = V85DemoRouteImport.update({
+  id: '/v85/demo',
+  path: '/v85/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85CustomerSuccessRoute = V85CustomerSuccessRouteImport.update({
+  id: '/v85/customer-success',
+  path: '/v85/customer-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85CountryPerformanceRoute = V85CountryPerformanceRouteImport.update({
+  id: '/v85/country-performance',
+  path: '/v85/country-performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85CountryAccountabilityRoute =
+  V85CountryAccountabilityRouteImport.update({
+    id: '/v85/country-accountability',
+    path: '/v85/country-accountability',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const V85ControlOwnershipRoute = V85ControlOwnershipRouteImport.update({
+  id: '/v85/control-ownership',
+  path: '/v85/control-ownership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85ControlMaturityRoute = V85ControlMaturityRouteImport.update({
+  id: '/v85/control-maturity',
+  path: '/v85/control-maturity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85ComplianceRoute = V85ComplianceRouteImport.update({
+  id: '/v85/compliance',
+  path: '/v85/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85CadenceRoute = V85CadenceRouteImport.update({
+  id: '/v85/cadence',
+  path: '/v85/cadence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85BoardRoute = V85BoardRouteImport.update({
+  id: '/v85/board',
+  path: '/v85/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V85AiGovernanceRoute = V85AiGovernanceRouteImport.update({
+  id: '/v85/ai-governance',
+  path: '/v85/ai-governance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V8SupportOpsRoute = V8SupportOpsRouteImport.update({
@@ -3602,6 +3753,31 @@ export interface FileRoutesByFullPath {
   '/v8/risk-control': typeof V8RiskControlRoute
   '/v8/scope': typeof V8ScopeRoute
   '/v8/support-ops': typeof V8SupportOpsRoute
+  '/v85/ai-governance': typeof V85AiGovernanceRoute
+  '/v85/board': typeof V85BoardRoute
+  '/v85/cadence': typeof V85CadenceRoute
+  '/v85/compliance': typeof V85ComplianceRoute
+  '/v85/control-maturity': typeof V85ControlMaturityRoute
+  '/v85/control-ownership': typeof V85ControlOwnershipRoute
+  '/v85/country-accountability': typeof V85CountryAccountabilityRoute
+  '/v85/country-performance': typeof V85CountryPerformanceRoute
+  '/v85/customer-success': typeof V85CustomerSuccessRoute
+  '/v85/demo': typeof V85DemoRoute
+  '/v85/discipline': typeof V85DisciplineRoute
+  '/v85/fin-testing': typeof V85FinTestingRoute
+  '/v85/mp-economics': typeof V85MpEconomicsRoute
+  '/v85/mp-financial': typeof V85MpFinancialRoute
+  '/v85/overview': typeof V85OverviewRoute
+  '/v85/partner': typeof V85PartnerRoute
+  '/v85/product-lines': typeof V85ProductLinesRoute
+  '/v85/reliability': typeof V85ReliabilityRoute
+  '/v85/reports': typeof V85ReportsRoute
+  '/v85/revenue-control': typeof V85RevenueControlRoute
+  '/v85/risk': typeof V85RiskRoute
+  '/v85/scope': typeof V85ScopeRoute
+  '/v85/stewardship': typeof V85StewardshipRoute
+  '/v85/stewardship-exec': typeof V85StewardshipExecRoute
+  '/v85/support': typeof V85SupportRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -4116,6 +4292,31 @@ export interface FileRoutesByTo {
   '/v8/risk-control': typeof V8RiskControlRoute
   '/v8/scope': typeof V8ScopeRoute
   '/v8/support-ops': typeof V8SupportOpsRoute
+  '/v85/ai-governance': typeof V85AiGovernanceRoute
+  '/v85/board': typeof V85BoardRoute
+  '/v85/cadence': typeof V85CadenceRoute
+  '/v85/compliance': typeof V85ComplianceRoute
+  '/v85/control-maturity': typeof V85ControlMaturityRoute
+  '/v85/control-ownership': typeof V85ControlOwnershipRoute
+  '/v85/country-accountability': typeof V85CountryAccountabilityRoute
+  '/v85/country-performance': typeof V85CountryPerformanceRoute
+  '/v85/customer-success': typeof V85CustomerSuccessRoute
+  '/v85/demo': typeof V85DemoRoute
+  '/v85/discipline': typeof V85DisciplineRoute
+  '/v85/fin-testing': typeof V85FinTestingRoute
+  '/v85/mp-economics': typeof V85MpEconomicsRoute
+  '/v85/mp-financial': typeof V85MpFinancialRoute
+  '/v85/overview': typeof V85OverviewRoute
+  '/v85/partner': typeof V85PartnerRoute
+  '/v85/product-lines': typeof V85ProductLinesRoute
+  '/v85/reliability': typeof V85ReliabilityRoute
+  '/v85/reports': typeof V85ReportsRoute
+  '/v85/revenue-control': typeof V85RevenueControlRoute
+  '/v85/risk': typeof V85RiskRoute
+  '/v85/scope': typeof V85ScopeRoute
+  '/v85/stewardship': typeof V85StewardshipRoute
+  '/v85/stewardship-exec': typeof V85StewardshipExecRoute
+  '/v85/support': typeof V85SupportRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -4631,6 +4832,31 @@ export interface FileRoutesById {
   '/v8/risk-control': typeof V8RiskControlRoute
   '/v8/scope': typeof V8ScopeRoute
   '/v8/support-ops': typeof V8SupportOpsRoute
+  '/v85/ai-governance': typeof V85AiGovernanceRoute
+  '/v85/board': typeof V85BoardRoute
+  '/v85/cadence': typeof V85CadenceRoute
+  '/v85/compliance': typeof V85ComplianceRoute
+  '/v85/control-maturity': typeof V85ControlMaturityRoute
+  '/v85/control-ownership': typeof V85ControlOwnershipRoute
+  '/v85/country-accountability': typeof V85CountryAccountabilityRoute
+  '/v85/country-performance': typeof V85CountryPerformanceRoute
+  '/v85/customer-success': typeof V85CustomerSuccessRoute
+  '/v85/demo': typeof V85DemoRoute
+  '/v85/discipline': typeof V85DisciplineRoute
+  '/v85/fin-testing': typeof V85FinTestingRoute
+  '/v85/mp-economics': typeof V85MpEconomicsRoute
+  '/v85/mp-financial': typeof V85MpFinancialRoute
+  '/v85/overview': typeof V85OverviewRoute
+  '/v85/partner': typeof V85PartnerRoute
+  '/v85/product-lines': typeof V85ProductLinesRoute
+  '/v85/reliability': typeof V85ReliabilityRoute
+  '/v85/reports': typeof V85ReportsRoute
+  '/v85/revenue-control': typeof V85RevenueControlRoute
+  '/v85/risk': typeof V85RiskRoute
+  '/v85/scope': typeof V85ScopeRoute
+  '/v85/stewardship': typeof V85StewardshipRoute
+  '/v85/stewardship-exec': typeof V85StewardshipExecRoute
+  '/v85/support': typeof V85SupportRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -5147,6 +5373,31 @@ export interface FileRouteTypes {
     | '/v8/risk-control'
     | '/v8/scope'
     | '/v8/support-ops'
+    | '/v85/ai-governance'
+    | '/v85/board'
+    | '/v85/cadence'
+    | '/v85/compliance'
+    | '/v85/control-maturity'
+    | '/v85/control-ownership'
+    | '/v85/country-accountability'
+    | '/v85/country-performance'
+    | '/v85/customer-success'
+    | '/v85/demo'
+    | '/v85/discipline'
+    | '/v85/fin-testing'
+    | '/v85/mp-economics'
+    | '/v85/mp-financial'
+    | '/v85/overview'
+    | '/v85/partner'
+    | '/v85/product-lines'
+    | '/v85/reliability'
+    | '/v85/reports'
+    | '/v85/revenue-control'
+    | '/v85/risk'
+    | '/v85/scope'
+    | '/v85/stewardship'
+    | '/v85/stewardship-exec'
+    | '/v85/support'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -5661,6 +5912,31 @@ export interface FileRouteTypes {
     | '/v8/risk-control'
     | '/v8/scope'
     | '/v8/support-ops'
+    | '/v85/ai-governance'
+    | '/v85/board'
+    | '/v85/cadence'
+    | '/v85/compliance'
+    | '/v85/control-maturity'
+    | '/v85/control-ownership'
+    | '/v85/country-accountability'
+    | '/v85/country-performance'
+    | '/v85/customer-success'
+    | '/v85/demo'
+    | '/v85/discipline'
+    | '/v85/fin-testing'
+    | '/v85/mp-economics'
+    | '/v85/mp-financial'
+    | '/v85/overview'
+    | '/v85/partner'
+    | '/v85/product-lines'
+    | '/v85/reliability'
+    | '/v85/reports'
+    | '/v85/revenue-control'
+    | '/v85/risk'
+    | '/v85/scope'
+    | '/v85/stewardship'
+    | '/v85/stewardship-exec'
+    | '/v85/support'
     | '/driver'
   id:
     | '__root__'
@@ -6175,6 +6451,31 @@ export interface FileRouteTypes {
     | '/v8/risk-control'
     | '/v8/scope'
     | '/v8/support-ops'
+    | '/v85/ai-governance'
+    | '/v85/board'
+    | '/v85/cadence'
+    | '/v85/compliance'
+    | '/v85/control-maturity'
+    | '/v85/control-ownership'
+    | '/v85/country-accountability'
+    | '/v85/country-performance'
+    | '/v85/customer-success'
+    | '/v85/demo'
+    | '/v85/discipline'
+    | '/v85/fin-testing'
+    | '/v85/mp-economics'
+    | '/v85/mp-financial'
+    | '/v85/overview'
+    | '/v85/partner'
+    | '/v85/product-lines'
+    | '/v85/reliability'
+    | '/v85/reports'
+    | '/v85/revenue-control'
+    | '/v85/risk'
+    | '/v85/scope'
+    | '/v85/stewardship'
+    | '/v85/stewardship-exec'
+    | '/v85/support'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -6682,6 +6983,31 @@ export interface RootRouteChildren {
   V8RiskControlRoute: typeof V8RiskControlRoute
   V8ScopeRoute: typeof V8ScopeRoute
   V8SupportOpsRoute: typeof V8SupportOpsRoute
+  V85AiGovernanceRoute: typeof V85AiGovernanceRoute
+  V85BoardRoute: typeof V85BoardRoute
+  V85CadenceRoute: typeof V85CadenceRoute
+  V85ComplianceRoute: typeof V85ComplianceRoute
+  V85ControlMaturityRoute: typeof V85ControlMaturityRoute
+  V85ControlOwnershipRoute: typeof V85ControlOwnershipRoute
+  V85CountryAccountabilityRoute: typeof V85CountryAccountabilityRoute
+  V85CountryPerformanceRoute: typeof V85CountryPerformanceRoute
+  V85CustomerSuccessRoute: typeof V85CustomerSuccessRoute
+  V85DemoRoute: typeof V85DemoRoute
+  V85DisciplineRoute: typeof V85DisciplineRoute
+  V85FinTestingRoute: typeof V85FinTestingRoute
+  V85MpEconomicsRoute: typeof V85MpEconomicsRoute
+  V85MpFinancialRoute: typeof V85MpFinancialRoute
+  V85OverviewRoute: typeof V85OverviewRoute
+  V85PartnerRoute: typeof V85PartnerRoute
+  V85ProductLinesRoute: typeof V85ProductLinesRoute
+  V85ReliabilityRoute: typeof V85ReliabilityRoute
+  V85ReportsRoute: typeof V85ReportsRoute
+  V85RevenueControlRoute: typeof V85RevenueControlRoute
+  V85RiskRoute: typeof V85RiskRoute
+  V85ScopeRoute: typeof V85ScopeRoute
+  V85StewardshipRoute: typeof V85StewardshipRoute
+  V85StewardshipExecRoute: typeof V85StewardshipExecRoute
+  V85SupportRoute: typeof V85SupportRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -6825,6 +7151,181 @@ declare module '@tanstack/react-router' {
       path: '/driver'
       fullPath: '/driver/'
       preLoaderRoute: typeof DriverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/support': {
+      id: '/v85/support'
+      path: '/v85/support'
+      fullPath: '/v85/support'
+      preLoaderRoute: typeof V85SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/stewardship-exec': {
+      id: '/v85/stewardship-exec'
+      path: '/v85/stewardship-exec'
+      fullPath: '/v85/stewardship-exec'
+      preLoaderRoute: typeof V85StewardshipExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/stewardship': {
+      id: '/v85/stewardship'
+      path: '/v85/stewardship'
+      fullPath: '/v85/stewardship'
+      preLoaderRoute: typeof V85StewardshipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/scope': {
+      id: '/v85/scope'
+      path: '/v85/scope'
+      fullPath: '/v85/scope'
+      preLoaderRoute: typeof V85ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/risk': {
+      id: '/v85/risk'
+      path: '/v85/risk'
+      fullPath: '/v85/risk'
+      preLoaderRoute: typeof V85RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/revenue-control': {
+      id: '/v85/revenue-control'
+      path: '/v85/revenue-control'
+      fullPath: '/v85/revenue-control'
+      preLoaderRoute: typeof V85RevenueControlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/reports': {
+      id: '/v85/reports'
+      path: '/v85/reports'
+      fullPath: '/v85/reports'
+      preLoaderRoute: typeof V85ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/reliability': {
+      id: '/v85/reliability'
+      path: '/v85/reliability'
+      fullPath: '/v85/reliability'
+      preLoaderRoute: typeof V85ReliabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/product-lines': {
+      id: '/v85/product-lines'
+      path: '/v85/product-lines'
+      fullPath: '/v85/product-lines'
+      preLoaderRoute: typeof V85ProductLinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/partner': {
+      id: '/v85/partner'
+      path: '/v85/partner'
+      fullPath: '/v85/partner'
+      preLoaderRoute: typeof V85PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/overview': {
+      id: '/v85/overview'
+      path: '/v85/overview'
+      fullPath: '/v85/overview'
+      preLoaderRoute: typeof V85OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/mp-financial': {
+      id: '/v85/mp-financial'
+      path: '/v85/mp-financial'
+      fullPath: '/v85/mp-financial'
+      preLoaderRoute: typeof V85MpFinancialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/mp-economics': {
+      id: '/v85/mp-economics'
+      path: '/v85/mp-economics'
+      fullPath: '/v85/mp-economics'
+      preLoaderRoute: typeof V85MpEconomicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/fin-testing': {
+      id: '/v85/fin-testing'
+      path: '/v85/fin-testing'
+      fullPath: '/v85/fin-testing'
+      preLoaderRoute: typeof V85FinTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/discipline': {
+      id: '/v85/discipline'
+      path: '/v85/discipline'
+      fullPath: '/v85/discipline'
+      preLoaderRoute: typeof V85DisciplineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/demo': {
+      id: '/v85/demo'
+      path: '/v85/demo'
+      fullPath: '/v85/demo'
+      preLoaderRoute: typeof V85DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/customer-success': {
+      id: '/v85/customer-success'
+      path: '/v85/customer-success'
+      fullPath: '/v85/customer-success'
+      preLoaderRoute: typeof V85CustomerSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/country-performance': {
+      id: '/v85/country-performance'
+      path: '/v85/country-performance'
+      fullPath: '/v85/country-performance'
+      preLoaderRoute: typeof V85CountryPerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/country-accountability': {
+      id: '/v85/country-accountability'
+      path: '/v85/country-accountability'
+      fullPath: '/v85/country-accountability'
+      preLoaderRoute: typeof V85CountryAccountabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/control-ownership': {
+      id: '/v85/control-ownership'
+      path: '/v85/control-ownership'
+      fullPath: '/v85/control-ownership'
+      preLoaderRoute: typeof V85ControlOwnershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/control-maturity': {
+      id: '/v85/control-maturity'
+      path: '/v85/control-maturity'
+      fullPath: '/v85/control-maturity'
+      preLoaderRoute: typeof V85ControlMaturityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/compliance': {
+      id: '/v85/compliance'
+      path: '/v85/compliance'
+      fullPath: '/v85/compliance'
+      preLoaderRoute: typeof V85ComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/cadence': {
+      id: '/v85/cadence'
+      path: '/v85/cadence'
+      fullPath: '/v85/cadence'
+      preLoaderRoute: typeof V85CadenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/board': {
+      id: '/v85/board'
+      path: '/v85/board'
+      fullPath: '/v85/board'
+      preLoaderRoute: typeof V85BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v85/ai-governance': {
+      id: '/v85/ai-governance'
+      path: '/v85/ai-governance'
+      fullPath: '/v85/ai-governance'
+      preLoaderRoute: typeof V85AiGovernanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v8/support-ops': {
@@ -10831,8 +11332,43 @@ const rootRouteChildren: RootRouteChildren = {
   V8RiskControlRoute: V8RiskControlRoute,
   V8ScopeRoute: V8ScopeRoute,
   V8SupportOpsRoute: V8SupportOpsRoute,
+  V85AiGovernanceRoute: V85AiGovernanceRoute,
+  V85BoardRoute: V85BoardRoute,
+  V85CadenceRoute: V85CadenceRoute,
+  V85ComplianceRoute: V85ComplianceRoute,
+  V85ControlMaturityRoute: V85ControlMaturityRoute,
+  V85ControlOwnershipRoute: V85ControlOwnershipRoute,
+  V85CountryAccountabilityRoute: V85CountryAccountabilityRoute,
+  V85CountryPerformanceRoute: V85CountryPerformanceRoute,
+  V85CustomerSuccessRoute: V85CustomerSuccessRoute,
+  V85DemoRoute: V85DemoRoute,
+  V85DisciplineRoute: V85DisciplineRoute,
+  V85FinTestingRoute: V85FinTestingRoute,
+  V85MpEconomicsRoute: V85MpEconomicsRoute,
+  V85MpFinancialRoute: V85MpFinancialRoute,
+  V85OverviewRoute: V85OverviewRoute,
+  V85PartnerRoute: V85PartnerRoute,
+  V85ProductLinesRoute: V85ProductLinesRoute,
+  V85ReliabilityRoute: V85ReliabilityRoute,
+  V85ReportsRoute: V85ReportsRoute,
+  V85RevenueControlRoute: V85RevenueControlRoute,
+  V85RiskRoute: V85RiskRoute,
+  V85ScopeRoute: V85ScopeRoute,
+  V85StewardshipRoute: V85StewardshipRoute,
+  V85StewardshipExecRoute: V85StewardshipExecRoute,
+  V85SupportRoute: V85SupportRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
