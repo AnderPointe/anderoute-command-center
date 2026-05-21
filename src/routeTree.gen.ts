@@ -29,6 +29,31 @@ import { Route as AdminChangePasswordRouteImport } from './routes/admin-change-p
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as V6SecurityModelRouteImport } from './routes/v6.security-model'
+import { Route as V6ScopeRouteImport } from './routes/v6.scope'
+import { Route as V6RoadmapRouteImport } from './routes/v6.roadmap'
+import { Route as V6RisksRouteImport } from './routes/v6.risks'
+import { Route as V6RevenueQualityRouteImport } from './routes/v6.revenue-quality'
+import { Route as V6ReportsRouteImport } from './routes/v6.reports'
+import { Route as V6ReliabilityRouteImport } from './routes/v6.reliability'
+import { Route as V6OverviewRouteImport } from './routes/v6.overview'
+import { Route as V6NetworkOpsRouteImport } from './routes/v6.network-ops'
+import { Route as V6NetworkRouteImport } from './routes/v6.network'
+import { Route as V6NarrativeRouteImport } from './routes/v6.narrative'
+import { Route as V6LiquidityRouteImport } from './routes/v6.liquidity'
+import { Route as V6ExitReadinessRouteImport } from './routes/v6.exit-readiness'
+import { Route as V6EvidenceRouteImport } from './routes/v6.evidence'
+import { Route as V6EcosystemMatRouteImport } from './routes/v6.ecosystem-mat'
+import { Route as V6EcosystemRouteImport } from './routes/v6.ecosystem'
+import { Route as V6EconomicsRouteImport } from './routes/v6.economics'
+import { Route as V6DemoRouteImport } from './routes/v6.demo'
+import { Route as V6DefensibilityRouteImport } from './routes/v6.defensibility'
+import { Route as V6DataRoomRouteImport } from './routes/v6.data-room'
+import { Route as V6CategoryRouteImport } from './routes/v6.category'
+import { Route as V6BoardRouteImport } from './routes/v6.board'
+import { Route as V6AutomationTowerRouteImport } from './routes/v6.automation-tower'
+import { Route as V6AutomationGovRouteImport } from './routes/v6.automation-gov'
+import { Route as V6AiGovRouteImport } from './routes/v6.ai-gov'
 import { Route as V55SecurityExecRouteImport } from './routes/v55.security-exec'
 import { Route as V55ScopeRouteImport } from './routes/v55.scope'
 import { Route as V55RoadmapRouteImport } from './routes/v55.roadmap'
@@ -498,6 +523,131 @@ const IndexRoute = IndexRouteImport.update({
 const DriverIndexRoute = DriverIndexRouteImport.update({
   id: '/driver/',
   path: '/driver/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6SecurityModelRoute = V6SecurityModelRouteImport.update({
+  id: '/v6/security-model',
+  path: '/v6/security-model',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6ScopeRoute = V6ScopeRouteImport.update({
+  id: '/v6/scope',
+  path: '/v6/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6RoadmapRoute = V6RoadmapRouteImport.update({
+  id: '/v6/roadmap',
+  path: '/v6/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6RisksRoute = V6RisksRouteImport.update({
+  id: '/v6/risks',
+  path: '/v6/risks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6RevenueQualityRoute = V6RevenueQualityRouteImport.update({
+  id: '/v6/revenue-quality',
+  path: '/v6/revenue-quality',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6ReportsRoute = V6ReportsRouteImport.update({
+  id: '/v6/reports',
+  path: '/v6/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6ReliabilityRoute = V6ReliabilityRouteImport.update({
+  id: '/v6/reliability',
+  path: '/v6/reliability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6OverviewRoute = V6OverviewRouteImport.update({
+  id: '/v6/overview',
+  path: '/v6/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6NetworkOpsRoute = V6NetworkOpsRouteImport.update({
+  id: '/v6/network-ops',
+  path: '/v6/network-ops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6NetworkRoute = V6NetworkRouteImport.update({
+  id: '/v6/network',
+  path: '/v6/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6NarrativeRoute = V6NarrativeRouteImport.update({
+  id: '/v6/narrative',
+  path: '/v6/narrative',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6LiquidityRoute = V6LiquidityRouteImport.update({
+  id: '/v6/liquidity',
+  path: '/v6/liquidity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6ExitReadinessRoute = V6ExitReadinessRouteImport.update({
+  id: '/v6/exit-readiness',
+  path: '/v6/exit-readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6EvidenceRoute = V6EvidenceRouteImport.update({
+  id: '/v6/evidence',
+  path: '/v6/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6EcosystemMatRoute = V6EcosystemMatRouteImport.update({
+  id: '/v6/ecosystem-mat',
+  path: '/v6/ecosystem-mat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6EcosystemRoute = V6EcosystemRouteImport.update({
+  id: '/v6/ecosystem',
+  path: '/v6/ecosystem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6EconomicsRoute = V6EconomicsRouteImport.update({
+  id: '/v6/economics',
+  path: '/v6/economics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6DemoRoute = V6DemoRouteImport.update({
+  id: '/v6/demo',
+  path: '/v6/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6DefensibilityRoute = V6DefensibilityRouteImport.update({
+  id: '/v6/defensibility',
+  path: '/v6/defensibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6DataRoomRoute = V6DataRoomRouteImport.update({
+  id: '/v6/data-room',
+  path: '/v6/data-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6CategoryRoute = V6CategoryRouteImport.update({
+  id: '/v6/category',
+  path: '/v6/category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6BoardRoute = V6BoardRouteImport.update({
+  id: '/v6/board',
+  path: '/v6/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6AutomationTowerRoute = V6AutomationTowerRouteImport.update({
+  id: '/v6/automation-tower',
+  path: '/v6/automation-tower',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6AutomationGovRoute = V6AutomationGovRouteImport.update({
+  id: '/v6/automation-gov',
+  path: '/v6/automation-gov',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V6AiGovRoute = V6AiGovRouteImport.update({
+  id: '/v6/ai-gov',
+  path: '/v6/ai-gov',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V55SecurityExecRoute = V55SecurityExecRouteImport.update({
@@ -2747,6 +2897,31 @@ export interface FileRoutesByFullPath {
   '/v55/roadmap': typeof V55RoadmapRoute
   '/v55/scope': typeof V55ScopeRoute
   '/v55/security-exec': typeof V55SecurityExecRoute
+  '/v6/ai-gov': typeof V6AiGovRoute
+  '/v6/automation-gov': typeof V6AutomationGovRoute
+  '/v6/automation-tower': typeof V6AutomationTowerRoute
+  '/v6/board': typeof V6BoardRoute
+  '/v6/category': typeof V6CategoryRoute
+  '/v6/data-room': typeof V6DataRoomRoute
+  '/v6/defensibility': typeof V6DefensibilityRoute
+  '/v6/demo': typeof V6DemoRoute
+  '/v6/economics': typeof V6EconomicsRoute
+  '/v6/ecosystem': typeof V6EcosystemRoute
+  '/v6/ecosystem-mat': typeof V6EcosystemMatRoute
+  '/v6/evidence': typeof V6EvidenceRoute
+  '/v6/exit-readiness': typeof V6ExitReadinessRoute
+  '/v6/liquidity': typeof V6LiquidityRoute
+  '/v6/narrative': typeof V6NarrativeRoute
+  '/v6/network': typeof V6NetworkRoute
+  '/v6/network-ops': typeof V6NetworkOpsRoute
+  '/v6/overview': typeof V6OverviewRoute
+  '/v6/reliability': typeof V6ReliabilityRoute
+  '/v6/reports': typeof V6ReportsRoute
+  '/v6/revenue-quality': typeof V6RevenueQualityRoute
+  '/v6/risks': typeof V6RisksRoute
+  '/v6/roadmap': typeof V6RoadmapRoute
+  '/v6/scope': typeof V6ScopeRoute
+  '/v6/security-model': typeof V6SecurityModelRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -3139,6 +3314,31 @@ export interface FileRoutesByTo {
   '/v55/roadmap': typeof V55RoadmapRoute
   '/v55/scope': typeof V55ScopeRoute
   '/v55/security-exec': typeof V55SecurityExecRoute
+  '/v6/ai-gov': typeof V6AiGovRoute
+  '/v6/automation-gov': typeof V6AutomationGovRoute
+  '/v6/automation-tower': typeof V6AutomationTowerRoute
+  '/v6/board': typeof V6BoardRoute
+  '/v6/category': typeof V6CategoryRoute
+  '/v6/data-room': typeof V6DataRoomRoute
+  '/v6/defensibility': typeof V6DefensibilityRoute
+  '/v6/demo': typeof V6DemoRoute
+  '/v6/economics': typeof V6EconomicsRoute
+  '/v6/ecosystem': typeof V6EcosystemRoute
+  '/v6/ecosystem-mat': typeof V6EcosystemMatRoute
+  '/v6/evidence': typeof V6EvidenceRoute
+  '/v6/exit-readiness': typeof V6ExitReadinessRoute
+  '/v6/liquidity': typeof V6LiquidityRoute
+  '/v6/narrative': typeof V6NarrativeRoute
+  '/v6/network': typeof V6NetworkRoute
+  '/v6/network-ops': typeof V6NetworkOpsRoute
+  '/v6/overview': typeof V6OverviewRoute
+  '/v6/reliability': typeof V6ReliabilityRoute
+  '/v6/reports': typeof V6ReportsRoute
+  '/v6/revenue-quality': typeof V6RevenueQualityRoute
+  '/v6/risks': typeof V6RisksRoute
+  '/v6/roadmap': typeof V6RoadmapRoute
+  '/v6/scope': typeof V6ScopeRoute
+  '/v6/security-model': typeof V6SecurityModelRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -3532,6 +3732,31 @@ export interface FileRoutesById {
   '/v55/roadmap': typeof V55RoadmapRoute
   '/v55/scope': typeof V55ScopeRoute
   '/v55/security-exec': typeof V55SecurityExecRoute
+  '/v6/ai-gov': typeof V6AiGovRoute
+  '/v6/automation-gov': typeof V6AutomationGovRoute
+  '/v6/automation-tower': typeof V6AutomationTowerRoute
+  '/v6/board': typeof V6BoardRoute
+  '/v6/category': typeof V6CategoryRoute
+  '/v6/data-room': typeof V6DataRoomRoute
+  '/v6/defensibility': typeof V6DefensibilityRoute
+  '/v6/demo': typeof V6DemoRoute
+  '/v6/economics': typeof V6EconomicsRoute
+  '/v6/ecosystem': typeof V6EcosystemRoute
+  '/v6/ecosystem-mat': typeof V6EcosystemMatRoute
+  '/v6/evidence': typeof V6EvidenceRoute
+  '/v6/exit-readiness': typeof V6ExitReadinessRoute
+  '/v6/liquidity': typeof V6LiquidityRoute
+  '/v6/narrative': typeof V6NarrativeRoute
+  '/v6/network': typeof V6NetworkRoute
+  '/v6/network-ops': typeof V6NetworkOpsRoute
+  '/v6/overview': typeof V6OverviewRoute
+  '/v6/reliability': typeof V6ReliabilityRoute
+  '/v6/reports': typeof V6ReportsRoute
+  '/v6/revenue-quality': typeof V6RevenueQualityRoute
+  '/v6/risks': typeof V6RisksRoute
+  '/v6/roadmap': typeof V6RoadmapRoute
+  '/v6/scope': typeof V6ScopeRoute
+  '/v6/security-model': typeof V6SecurityModelRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -3926,6 +4151,31 @@ export interface FileRouteTypes {
     | '/v55/roadmap'
     | '/v55/scope'
     | '/v55/security-exec'
+    | '/v6/ai-gov'
+    | '/v6/automation-gov'
+    | '/v6/automation-tower'
+    | '/v6/board'
+    | '/v6/category'
+    | '/v6/data-room'
+    | '/v6/defensibility'
+    | '/v6/demo'
+    | '/v6/economics'
+    | '/v6/ecosystem'
+    | '/v6/ecosystem-mat'
+    | '/v6/evidence'
+    | '/v6/exit-readiness'
+    | '/v6/liquidity'
+    | '/v6/narrative'
+    | '/v6/network'
+    | '/v6/network-ops'
+    | '/v6/overview'
+    | '/v6/reliability'
+    | '/v6/reports'
+    | '/v6/revenue-quality'
+    | '/v6/risks'
+    | '/v6/roadmap'
+    | '/v6/scope'
+    | '/v6/security-model'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -4318,6 +4568,31 @@ export interface FileRouteTypes {
     | '/v55/roadmap'
     | '/v55/scope'
     | '/v55/security-exec'
+    | '/v6/ai-gov'
+    | '/v6/automation-gov'
+    | '/v6/automation-tower'
+    | '/v6/board'
+    | '/v6/category'
+    | '/v6/data-room'
+    | '/v6/defensibility'
+    | '/v6/demo'
+    | '/v6/economics'
+    | '/v6/ecosystem'
+    | '/v6/ecosystem-mat'
+    | '/v6/evidence'
+    | '/v6/exit-readiness'
+    | '/v6/liquidity'
+    | '/v6/narrative'
+    | '/v6/network'
+    | '/v6/network-ops'
+    | '/v6/overview'
+    | '/v6/reliability'
+    | '/v6/reports'
+    | '/v6/revenue-quality'
+    | '/v6/risks'
+    | '/v6/roadmap'
+    | '/v6/scope'
+    | '/v6/security-model'
     | '/driver'
   id:
     | '__root__'
@@ -4710,6 +4985,31 @@ export interface FileRouteTypes {
     | '/v55/roadmap'
     | '/v55/scope'
     | '/v55/security-exec'
+    | '/v6/ai-gov'
+    | '/v6/automation-gov'
+    | '/v6/automation-tower'
+    | '/v6/board'
+    | '/v6/category'
+    | '/v6/data-room'
+    | '/v6/defensibility'
+    | '/v6/demo'
+    | '/v6/economics'
+    | '/v6/ecosystem'
+    | '/v6/ecosystem-mat'
+    | '/v6/evidence'
+    | '/v6/exit-readiness'
+    | '/v6/liquidity'
+    | '/v6/narrative'
+    | '/v6/network'
+    | '/v6/network-ops'
+    | '/v6/overview'
+    | '/v6/reliability'
+    | '/v6/reports'
+    | '/v6/revenue-quality'
+    | '/v6/risks'
+    | '/v6/roadmap'
+    | '/v6/scope'
+    | '/v6/security-model'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -5095,6 +5395,31 @@ export interface RootRouteChildren {
   V55RoadmapRoute: typeof V55RoadmapRoute
   V55ScopeRoute: typeof V55ScopeRoute
   V55SecurityExecRoute: typeof V55SecurityExecRoute
+  V6AiGovRoute: typeof V6AiGovRoute
+  V6AutomationGovRoute: typeof V6AutomationGovRoute
+  V6AutomationTowerRoute: typeof V6AutomationTowerRoute
+  V6BoardRoute: typeof V6BoardRoute
+  V6CategoryRoute: typeof V6CategoryRoute
+  V6DataRoomRoute: typeof V6DataRoomRoute
+  V6DefensibilityRoute: typeof V6DefensibilityRoute
+  V6DemoRoute: typeof V6DemoRoute
+  V6EconomicsRoute: typeof V6EconomicsRoute
+  V6EcosystemRoute: typeof V6EcosystemRoute
+  V6EcosystemMatRoute: typeof V6EcosystemMatRoute
+  V6EvidenceRoute: typeof V6EvidenceRoute
+  V6ExitReadinessRoute: typeof V6ExitReadinessRoute
+  V6LiquidityRoute: typeof V6LiquidityRoute
+  V6NarrativeRoute: typeof V6NarrativeRoute
+  V6NetworkRoute: typeof V6NetworkRoute
+  V6NetworkOpsRoute: typeof V6NetworkOpsRoute
+  V6OverviewRoute: typeof V6OverviewRoute
+  V6ReliabilityRoute: typeof V6ReliabilityRoute
+  V6ReportsRoute: typeof V6ReportsRoute
+  V6RevenueQualityRoute: typeof V6RevenueQualityRoute
+  V6RisksRoute: typeof V6RisksRoute
+  V6RoadmapRoute: typeof V6RoadmapRoute
+  V6ScopeRoute: typeof V6ScopeRoute
+  V6SecurityModelRoute: typeof V6SecurityModelRoute
   DriverIndexRoute: typeof DriverIndexRoute
 }
 
@@ -5238,6 +5563,181 @@ declare module '@tanstack/react-router' {
       path: '/driver'
       fullPath: '/driver/'
       preLoaderRoute: typeof DriverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/security-model': {
+      id: '/v6/security-model'
+      path: '/v6/security-model'
+      fullPath: '/v6/security-model'
+      preLoaderRoute: typeof V6SecurityModelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/scope': {
+      id: '/v6/scope'
+      path: '/v6/scope'
+      fullPath: '/v6/scope'
+      preLoaderRoute: typeof V6ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/roadmap': {
+      id: '/v6/roadmap'
+      path: '/v6/roadmap'
+      fullPath: '/v6/roadmap'
+      preLoaderRoute: typeof V6RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/risks': {
+      id: '/v6/risks'
+      path: '/v6/risks'
+      fullPath: '/v6/risks'
+      preLoaderRoute: typeof V6RisksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/revenue-quality': {
+      id: '/v6/revenue-quality'
+      path: '/v6/revenue-quality'
+      fullPath: '/v6/revenue-quality'
+      preLoaderRoute: typeof V6RevenueQualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/reports': {
+      id: '/v6/reports'
+      path: '/v6/reports'
+      fullPath: '/v6/reports'
+      preLoaderRoute: typeof V6ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/reliability': {
+      id: '/v6/reliability'
+      path: '/v6/reliability'
+      fullPath: '/v6/reliability'
+      preLoaderRoute: typeof V6ReliabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/overview': {
+      id: '/v6/overview'
+      path: '/v6/overview'
+      fullPath: '/v6/overview'
+      preLoaderRoute: typeof V6OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/network-ops': {
+      id: '/v6/network-ops'
+      path: '/v6/network-ops'
+      fullPath: '/v6/network-ops'
+      preLoaderRoute: typeof V6NetworkOpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/network': {
+      id: '/v6/network'
+      path: '/v6/network'
+      fullPath: '/v6/network'
+      preLoaderRoute: typeof V6NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/narrative': {
+      id: '/v6/narrative'
+      path: '/v6/narrative'
+      fullPath: '/v6/narrative'
+      preLoaderRoute: typeof V6NarrativeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/liquidity': {
+      id: '/v6/liquidity'
+      path: '/v6/liquidity'
+      fullPath: '/v6/liquidity'
+      preLoaderRoute: typeof V6LiquidityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/exit-readiness': {
+      id: '/v6/exit-readiness'
+      path: '/v6/exit-readiness'
+      fullPath: '/v6/exit-readiness'
+      preLoaderRoute: typeof V6ExitReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/evidence': {
+      id: '/v6/evidence'
+      path: '/v6/evidence'
+      fullPath: '/v6/evidence'
+      preLoaderRoute: typeof V6EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/ecosystem-mat': {
+      id: '/v6/ecosystem-mat'
+      path: '/v6/ecosystem-mat'
+      fullPath: '/v6/ecosystem-mat'
+      preLoaderRoute: typeof V6EcosystemMatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/ecosystem': {
+      id: '/v6/ecosystem'
+      path: '/v6/ecosystem'
+      fullPath: '/v6/ecosystem'
+      preLoaderRoute: typeof V6EcosystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/economics': {
+      id: '/v6/economics'
+      path: '/v6/economics'
+      fullPath: '/v6/economics'
+      preLoaderRoute: typeof V6EconomicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/demo': {
+      id: '/v6/demo'
+      path: '/v6/demo'
+      fullPath: '/v6/demo'
+      preLoaderRoute: typeof V6DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/defensibility': {
+      id: '/v6/defensibility'
+      path: '/v6/defensibility'
+      fullPath: '/v6/defensibility'
+      preLoaderRoute: typeof V6DefensibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/data-room': {
+      id: '/v6/data-room'
+      path: '/v6/data-room'
+      fullPath: '/v6/data-room'
+      preLoaderRoute: typeof V6DataRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/category': {
+      id: '/v6/category'
+      path: '/v6/category'
+      fullPath: '/v6/category'
+      preLoaderRoute: typeof V6CategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/board': {
+      id: '/v6/board'
+      path: '/v6/board'
+      fullPath: '/v6/board'
+      preLoaderRoute: typeof V6BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/automation-tower': {
+      id: '/v6/automation-tower'
+      path: '/v6/automation-tower'
+      fullPath: '/v6/automation-tower'
+      preLoaderRoute: typeof V6AutomationTowerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/automation-gov': {
+      id: '/v6/automation-gov'
+      path: '/v6/automation-gov'
+      fullPath: '/v6/automation-gov'
+      preLoaderRoute: typeof V6AutomationGovRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v6/ai-gov': {
+      id: '/v6/ai-gov'
+      path: '/v6/ai-gov'
+      fullPath: '/v6/ai-gov'
+      preLoaderRoute: typeof V6AiGovRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v55/security-exec': {
@@ -8268,6 +8768,31 @@ const rootRouteChildren: RootRouteChildren = {
   V55RoadmapRoute: V55RoadmapRoute,
   V55ScopeRoute: V55ScopeRoute,
   V55SecurityExecRoute: V55SecurityExecRoute,
+  V6AiGovRoute: V6AiGovRoute,
+  V6AutomationGovRoute: V6AutomationGovRoute,
+  V6AutomationTowerRoute: V6AutomationTowerRoute,
+  V6BoardRoute: V6BoardRoute,
+  V6CategoryRoute: V6CategoryRoute,
+  V6DataRoomRoute: V6DataRoomRoute,
+  V6DefensibilityRoute: V6DefensibilityRoute,
+  V6DemoRoute: V6DemoRoute,
+  V6EconomicsRoute: V6EconomicsRoute,
+  V6EcosystemRoute: V6EcosystemRoute,
+  V6EcosystemMatRoute: V6EcosystemMatRoute,
+  V6EvidenceRoute: V6EvidenceRoute,
+  V6ExitReadinessRoute: V6ExitReadinessRoute,
+  V6LiquidityRoute: V6LiquidityRoute,
+  V6NarrativeRoute: V6NarrativeRoute,
+  V6NetworkRoute: V6NetworkRoute,
+  V6NetworkOpsRoute: V6NetworkOpsRoute,
+  V6OverviewRoute: V6OverviewRoute,
+  V6ReliabilityRoute: V6ReliabilityRoute,
+  V6ReportsRoute: V6ReportsRoute,
+  V6RevenueQualityRoute: V6RevenueQualityRoute,
+  V6RisksRoute: V6RisksRoute,
+  V6RoadmapRoute: V6RoadmapRoute,
+  V6ScopeRoute: V6ScopeRoute,
+  V6SecurityModelRoute: V6SecurityModelRoute,
   DriverIndexRoute: DriverIndexRoute,
 }
 export const routeTree = rootRouteImport
