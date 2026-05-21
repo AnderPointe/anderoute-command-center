@@ -51,6 +51,31 @@ function Page() {
         </div>
       </Card>
 
+      {ENTERPRISE_GROUPS.map((g) => (
+        <Card key={g.group} className="border-white/10 bg-white/[0.02] p-4">
+          <h2 className="text-sm font-semibold">{g.group}</h2>
+          <div className="mt-3 grid gap-2 md:grid-cols-2">
+            {g.items.map((it) => (
+              <div key={it.label} className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 px-3 py-2 text-sm">
+                <span>{it.label}</span>
+                <Badge
+                  variant="outline"
+                  className={
+                    it.status === "ready"
+                      ? "border-emerald-500/30 text-emerald-300"
+                      : it.status === "placeholder"
+                      ? "border-amber-500/30 text-amber-300"
+                      : "border-white/15 text-muted-foreground"
+                  }
+                >
+                  {it.status}
+                </Badge>
+              </div>
+            ))}
+          </div>
+        </Card>
+      ))}
+
       <Card className="border-white/10 bg-white/[0.02] p-4 text-sm text-muted-foreground">
         <Badge variant="outline" className="border-white/15 text-muted-foreground">Deferred</Badge>{" "}
         Full SOC 2 evidence automation, SCIM, advanced SSO, IP allowlists, and session policies are deferred to V2.5.
