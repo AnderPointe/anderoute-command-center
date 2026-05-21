@@ -10,7 +10,15 @@ export const Route = createFileRoute("/v85/demo")({
   component: () => {
     const headline = H.useV85ExecHeadline();
     const overlays = H.useV85ExecutionOverlays();
-    const STEPS = [
+    const guidance = H.useV85RoleGuidance();
+    const rls = H.useV85RlsExamples();
+    const toneMap: Record<string,string> = {
+      violet:  "border-violet-400/30 text-violet-200",
+      sky:     "border-sky-400/30 text-sky-200",
+      amber:   "border-amber-400/30 text-amber-200",
+      emerald: "border-emerald-400/30 text-emerald-200",
+      rose:    "border-rose-400/30 text-rose-200",
+    };
       {who:"CEO",step:"Open Global Enterprise Operating Discipline Dashboard",outcome:"Discipline 82 · Marketplace 84 · Compliance 79 · Support 81"},
       {who:"COO",step:"Open Country Accountability Dashboard",outcome:"Canada 78 · Mexico 63 · EU 41 · 2 Canada exceptions"},
       {who:"CFO",step:"Open Financial Control Testing Center",outcome:"6 pass · 3 review · 1 exception · Revenue Control 73"},
