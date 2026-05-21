@@ -18,6 +18,8 @@ export const Route = createFileRoute("/v8/overview")({
     const { summary: comp } = useAdvancedComplianceExecution();
     const { summary: dec } = useExecutiveStrategicGovernance();
     const headline = useV8ExecHeadline();
+    const overlays = useV8ExecutionOverlays();
+    const topOverlays = overlays.slice(0, 6);
     return (
       <V8Page icon={<Gauge className="size-6 text-violet-300" />} title="Anderoute V8 — Global Operating Network Scale"
         blurb="Country-level operating execution, mature financial controls, international marketplace operations, advanced compliance execution, global partner & customer success, executive strategic governance. No final audit / compliance / autonomous claims.">
