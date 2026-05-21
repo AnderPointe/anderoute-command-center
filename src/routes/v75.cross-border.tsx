@@ -1,17 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Truck } from "lucide-react";
 import { V75Page } from "@/components/v75/V75Page";
-import { SimpleTable, StatusPill } from "@/components/v75/ui-bits";
+import { SimpleTable, StatusPill, KpiGrid } from "@/components/v75/ui-bits";
 import { Card } from "@/components/ui/card";
 import { useCrossBorderExecutionPlaceholder } from "@/v75/hooks";
 
 export const Route = createFileRoute("/v75/cross-border")({
   head: () => ({ meta: [{ title: "Cross-Border Execution · V7.5 · Anderoute" }] }),
   component: () => {
-    const { shipments } = useCrossBorderExecutionPlaceholder();
+    const { shipments, summary } = useCrossBorderExecutionPlaceholder();
     return (
       <V75Page icon={<Truck className="size-6 text-indigo-300" />} title="Cross-Border Workflow Execution Placeholder"
         blurb="Placeholder only — not production customs. Profile, checkpoint, broker, commercial invoice, document status placeholders for review.">
+        <KpiGrid cols={3} items={[
+          { label: "Shipments", value: summary.shipments },
+          { label: "Placeholders", value: summary.placeholders, sub: "Not production" },
+          { label: "Exceptions", value: summary.exceptions },
+        ]} />
+        <Card className="border-white/10 bg-white/[0.02] p-3 text-xs text-amber-200">
+          {summary.notice}
+        </Card>
+
         <Card className="border-white/10 bg-white/[0.02] p-4">
           <SimpleTable rows={shipments as any} columns={[
             { key: "id",          label: "Shipment" },
