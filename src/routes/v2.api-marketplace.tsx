@@ -51,6 +51,28 @@ function Page() {
           Manage keys → <Link to="/v2/api-keys" className="text-violet-300 hover:underline">API Keys</Link>
         </div>
       </Card>
+
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h2 className="text-sm font-semibold">Rate limits by plan</h2>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+              <tr><th className="p-2">Plan</th><th className="p-2">RPM</th><th className="p-2">Burst</th><th className="p-2">Included scopes</th></tr>
+            </thead>
+            <tbody>
+              {API_RATE_LIMITS.map((r) => (
+                <tr key={r.plan} className="border-t border-white/10">
+                  <td className="p-2 font-medium">{r.plan}</td>
+                  <td className="p-2 font-mono">{r.rpm}</td>
+                  <td className="p-2 font-mono">{r.burst}</td>
+                  <td className="p-2 text-xs text-muted-foreground">{r.scopes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-2 text-xs text-muted-foreground">429 returned when exceeded. Real limiter wires up in V2.5.</div>
+      </Card>
     </V2Page>
   );
 }
