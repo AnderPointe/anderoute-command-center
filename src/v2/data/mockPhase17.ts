@@ -490,3 +490,220 @@ export function v2Stats() {
     securityTotal: V2_SECURITY.length,
   };
 }
+
+// ============================================================
+// PHASE 17 POLISH — extra data surfaces for V2 dashboards
+// ============================================================
+
+// ===== RISK FACTOR BREAKDOWN (explainability) =====
+export type RiskFactor = { label: string; weight: number; signal: string };
+export const RISK_FACTORS: Record<string, RiskFactor[]> = {
+  r1: [
+    { label: "ETA drift",            weight: 35, signal: "+28m vs scheduled" },
+    { label: "Traffic incident",     weight: 25, signal: "I-880 NB congestion" },
+    { label: "Customer priority",    weight: 20, signal: "Priority A (top-10 revenue)" },
+    { label: "Time-of-day",          weight: 10, signal: "Inside rush window" },
+    { label: "Driver on-time hist.", weight: 10, signal: "Driver 95% — protective" },
+  ],
+  r2: [
+    { label: "Window closes soon",   weight: 40, signal: "<35m" },
+    { label: "ETA drift",            weight: 30, signal: "+12m" },
+    { label: "Driver on-time hist.", weight: 20, signal: "88%" },
+    { label: "Customer priority",    weight: 10, signal: "Priority B" },
+  ],
+  r4: [
+    { label: "Ping age",             weight: 60, signal: "11m without ping" },
+    { label: "Geo last known",       weight: 20, signal: "Tunnel area" },
+    { label: "Battery trend",        weight: 20, signal: "82% — not low" },
+  ],
+};
+
+// ===== OPTIMIZATION SCORE WEIGHTS (explainability) =====
+export const OPT_WEIGHTS: { factor: string; weight: number; note: string }[] = [
+  { factor: "Vehicle match",     weight: 25, note: "Reefer/dry/flatbed alignment" },
+  { factor: "CDL match",         weight: 15, note: "Required class + endorsements" },
+  { factor: "Distance to pickup",weight: 15, note: "Linear penalty per mile" },
+  { factor: "ETA confidence",    weight: 15, note: "Provider confidence + history" },
+  { factor: "Driver availability",weight: 10, note: "HOS + current load status" },
+  { factor: "On-time score",     weight: 10, note: "Trailing 30-day on-time %" },
+  { factor: "GPS freshness",     weight: 5,  note: "Penalty if stale >5m" },
+  { factor: "Current workload",  weight: 5,  note: "Active loads / shift hours" },
+];
+
+// ===== SUGGESTED-DRIVER CONFIDENCE BAND =====
+export function confidenceBand(score: number): { label: string; tone: Tone; note: string } {
+  if (score >= 90) return { label: "High",     tone: "good", note: "Strong match — recommended" };
+  if (score >= 75) return { label: "Medium",   tone: "info", note: "Acceptable — review tradeoffs" };
+  if (score >= 60) return { label: "Low",      tone: "warn", note: "Manual review suggested" };
+  return                  { label: "Very low", tone: "bad",  note: "Pick a different driver" };
+}
+
+// ===== APPROVAL POLICY =====
+export type ApprovalPolicy = {
+  action: ApprovalAction;
+  approvers: ("owner" | "admin")[];
+  slaMin: number;
+  reasonRequired: boolean;
+};
+export const APPROVAL_POLICIES: ApprovalPolicy[] = [
+  { action: "reassign_active_load",        approvers: ["owner", "admin"], slaMin: 5,  reasonRequired: false },
+  { action: "cancel_load",                 approvers: ["owner", "admin"], slaMin: 10, reasonRequired: true  },
+  { action: "notify_customer_major_delay", approvers: ["owner", "admin"], slaMin: 3,  reasonRequired: false },
+  { action: "override_cdl_warning",        approvers: ["owner"],          slaMin: 15, reasonRequired: true  },
+  { action: "trigger_billing_action",      approvers: ["owner"],          slaMin: 30, reasonRequired: true  },
+  { action: "send_mass_notification",      approvers: ["owner", "admin"], slaMin: 10, reasonRequired: false },
+  { action: "mark_shipment_completed",     approvers: ["owner", "admin"], slaMin: 15, reasonRequired: false },
+  { action: "disable_driver_tracking",     approvers: ["owner"],          slaMin: 30, reasonRequired: true  },
+  { action: "change_subscription_plan",    approvers: ["owner"],          slaMin: 60, reasonRequired: true  },
+  { action: "modify_customer_portal_access",approvers:["owner", "admin"], slaMin: 30, reasonRequired: true  },
+];
+
+// ===== CUSTOMER IMPACT ACTIONS =====
+export const CUSTOMER_ACTION_QUEUE: { customer: string; action: string; urgency: Tone }[] = [
+  { customer: "Acme Industrial", action: "Send delay update for LD-4821 (CoPilot draft ready)", urgency: "bad"  },
+  { customer: "Acme Industrial", action: "Confirm new ETA for LD-4830",                          urgency: "warn" },
+  { customer: "Globex Logistics",action: "Resolve EDI 204 with partner integrations team",       urgency: "warn" },
+  { customer: "Northwind",       action: "Send trial-ending reminder + checkout link",           urgency: "info" },
+];
+
+// ===== EXEC TREND NOTES =====
+export const TREND_NOTES = {
+  loads:  "Volume up 18% week-on-week; capacity adequate.",
+  ontime: "Down 2pp — driven by 1 carrier delay + Mapbox p95 spike.",
+  util:   "Up 8pp — assignment recommendations accepted at higher rate.",
+};
+
+// ===== REPORT DETAIL METADATA =====
+export const REPORT_FILTERS = ["Date range", "Customer", "Driver", "Vehicle type", "Route", "Status"];
+export const REPORT_EXPORTS = ["CSV", "JSON", "PDF (placeholder)"];
+
+// ===== EDI PARTNER HEALTH + ERROR GUIDE =====
+export type EdiPartnerHealth = { partner: string; in24h: number; errors24h: number; ackPct: number; lastError?: string };
+export const EDI_PARTNER_HEALTH: EdiPartnerHealth[] = [
+  { partner: "Acme Industrial",  in24h: 42, errors24h: 0, ackPct: 100.0 },
+  { partner: "Globex Logistics", in24h: 18, errors24h: 1, ackPct: 94.5, lastError: "204 SE segment missing" },
+  { partner: "Northwind",        in24h: 0,  errors24h: 0, ackPct: 100.0 },
+];
+export const EDI_ERROR_GUIDE = [
+  { code: "ENV-001", title: "Envelope mismatch",       fix: "Check ISA qualifier/ID and GS application sender" },
+  { code: "SEG-014", title: "SE segment missing",      fix: "Reject with 997 functional ack; ask partner to resend" },
+  { code: "DOC-201", title: "Unsupported document",    fix: "Document type not enabled for this partner" },
+  { code: "PARSE-9", title: "Generic parse failure",   fix: "Capture raw payload to internal store (never UI)" },
+];
+
+// ===== API RATE LIMITS + KEY LIFECYCLE =====
+export const API_RATE_LIMITS = [
+  { plan: "Starter",  rpm: 60,   burst: 120,  scopes: "loads.read, tracking.read" },
+  { plan: "Growth",   rpm: 300,  burst: 600,  scopes: "+ shipments.*, reports.read" },
+  { plan: "Pro",      rpm: 1200, burst: 2400, scopes: "+ webhooks.manage, loads.write" },
+];
+export const API_KEY_LIFECYCLE = [
+  { step: 1, label: "Create",   detail: "Admin selects scopes; plaintext shown once; hash stored" },
+  { step: 2, label: "Use",      detail: "Bearer auth; per-key + per-IP rate limit applied" },
+  { step: 3, label: "Audit",    detail: "Every request logged: key prefix, path, status, latency" },
+  { step: 4, label: "Rotate",   detail: "New key issued, old key 24h grace, audit entry written" },
+  { step: 5, label: "Revoke",   detail: "Immediate; subsequent requests return 401; logged" },
+];
+
+// ===== WEBHOOK SIGNING + RETRY POLICY =====
+export const WEBHOOK_SIGNING_SPEC = {
+  algorithm: "HMAC-SHA256",
+  header: "X-Anderoute-Signature",
+  payloadHeader: "X-Anderoute-Event",
+  timestampHeader: "X-Anderoute-Timestamp",
+  toleranceSec: 300,
+  example: "sha256=base64(hmac(secret, timestamp + '.' + body))",
+};
+export const WEBHOOK_RETRY_POLICY = [
+  { attempt: 1, delay: "immediate",  note: "Initial delivery" },
+  { attempt: 2, delay: "30s",        note: "First retry" },
+  { attempt: 3, delay: "2m",         note: "Backoff" },
+  { attempt: 4, delay: "10m",        note: "Backoff" },
+  { attempt: 5, delay: "1h",         note: "Final retry; mark failed; notify owner" },
+];
+
+// ===== PROVIDER HEALTH 24H TREND =====
+export const PROVIDER_TREND_24H: Record<string, number[]> = {
+  Mapbox:               [620, 640, 700, 980, 1240, 1500, 1820, 1780],
+  "Google Maps":        [510, 530, 540, 520, 540, 550, 540, 530],
+  Stripe:               [210, 215, 220, 225, 220, 215, 220, 220],
+  "Webhook dispatcher": [380, 390, 410, 420, 410, 420, 410, 410],
+  "EDI gateway":        [260, 265, 270, 290, 280, 285, 280, 280],
+};
+
+// ===== ENTERPRISE CONTROL GROUPS =====
+export const ENTERPRISE_GROUPS = [
+  {
+    group: "Access & Identity",
+    items: [
+      { label: "Role permission matrix",     status: "ready"       as const },
+      { label: "Customer portal access",     status: "ready"       as const },
+      { label: "SSO (SAML)",                 status: "placeholder" as const },
+      { label: "SCIM provisioning",          status: "deferred"    as const },
+    ],
+  },
+  {
+    group: "Audit & Compliance",
+    items: [
+      { label: "Audit log (read)",           status: "ready"       as const },
+      { label: "Support access audit",       status: "ready"       as const },
+      { label: "Audit log export",           status: "placeholder" as const },
+      { label: "SOC 2 evidence automation",  status: "deferred"    as const },
+    ],
+  },
+  {
+    group: "Data & Retention",
+    items: [
+      { label: "Data retention policy",      status: "placeholder" as const },
+      { label: "GDPR data deletion request", status: "placeholder" as const },
+      { label: "Field-level redaction",      status: "deferred"    as const },
+    ],
+  },
+];
+
+// ===== V2 RLS EXAMPLES =====
+export const V2_RLS_EXAMPLES = [
+  {
+    table: "predictive_risks",
+    policy: "company members read own",
+    sql: "create policy r_select on predictive_risks for select to authenticated using (is_company_member(auth.uid(), company_id));",
+  },
+  {
+    table: "ai_approval_requests",
+    policy: "only owners/admins approve",
+    sql: "create policy r_update on ai_approval_requests for update to authenticated using (has_role(auth.uid(), company_id, 'admin') or has_role(auth.uid(), company_id, 'owner'));",
+  },
+  {
+    table: "api_keys",
+    policy: "admin-only management",
+    sql: "create policy r_all on api_keys for all to authenticated using (has_role(auth.uid(), company_id, 'admin') or has_role(auth.uid(), company_id, 'owner'));",
+  },
+  {
+    table: "edi_transactions",
+    policy: "scoped to partner+company",
+    sql: "create policy r_select on edi_transactions for select to authenticated using (is_company_member(auth.uid(), company_id));",
+  },
+  {
+    table: "webhook_deliveries",
+    policy: "read by company members",
+    sql: "create policy r_select on webhook_deliveries for select to authenticated using (is_company_member(auth.uid(), company_id));",
+  },
+];
+
+// ===== EDGE FUNCTION SEPARATION =====
+export const V2_EDGE_FN_SEPARATION = [
+  { fn: "ai-recommend",      runtime: "server fn",  trust: "internal", note: "Reads risk inputs, returns ranked actions; never writes" },
+  { fn: "ai-approve",        runtime: "server fn",  trust: "internal", note: "Auth: admin/owner; writes ai_approval_history" },
+  { fn: "edi-inbound",       runtime: "server route",trust: "partner",  note: "/api/public/edi/inbound; verifies partner ISA + HMAC" },
+  { fn: "webhook-dispatch",  runtime: "server fn",  trust: "internal", note: "Signs payload (HMAC) before egress; retries via queue" },
+  { fn: "api-gateway",       runtime: "server route",trust: "public",   note: "Bearer auth, scope check, per-key rate limit" },
+  { fn: "stripe-webhook",    runtime: "server route",trust: "stripe",   note: "/api/public/stripe; verify signature before any write" },
+];
+
+// ===== DEMO PERSONA TRACKS =====
+export const DEMO_TRACKS = [
+  { persona: "Dispatcher", focus: "AI Ops → Risk → Optimization → Approvals → CoPilot", steps: [1, 2, 3, 4, 5, 6] },
+  { persona: "Customer",   focus: "Portal V2 with approved delay explanation",          steps: [7] },
+  { persona: "Integrator", focus: "EDI beta + API marketplace + Webhooks",              steps: [8, 9, 10] },
+  { persona: "Executive",  focus: "Executive dashboard + Integration health",           steps: [11, 12] },
+];
