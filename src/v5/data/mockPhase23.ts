@@ -338,3 +338,46 @@ export const V5_REPORTS = [
   "Governance maturity", "Strategic growth", "Partner ecosystem",
   "National operations", "Data room maturity",
 ];
+
+// ── Phase 23 polish: trends + alerts ──
+export const SOC2_TREND = [
+  { week: "W-3", pct: 68 }, { week: "W-2", pct: 71 },
+  { week: "W-1", pct: 74 }, { week: "W0",  pct: 76 },
+];
+export const MARKETPLACE_LIQUIDITY_TREND = [
+  { week: "W-3", posted: 1612, awarded: 1372, fill: 85.1 },
+  { week: "W-2", posted: 1701, awarded: 1463, fill: 86.0 },
+  { week: "W-1", posted: 1788, awarded: 1551, fill: 86.7 },
+  { week: "W0",  posted: 1842, awarded: 1612, fill: 87.5 },
+];
+export const TRUST_SAFETY_TREND = [
+  { week: "W-3", score: 84, incidents: 9 },
+  { week: "W-2", score: 86, incidents: 7 },
+  { week: "W-1", score: 87, incidents: 6 },
+  { week: "W0",  score: 88, incidents: 5 },
+];
+export const CARRIER_QUALITY_TREND = [
+  { week: "W-3", elite: 14, preferred: 58, watchlist: 12 },
+  { week: "W-2", elite: 15, preferred: 60, watchlist: 11 },
+  { week: "W-1", elite: 17, preferred: 61, watchlist: 10 },
+  { week: "W0",  elite: 18, preferred: 62, watchlist:  9 },
+];
+export const NATIONAL_ALERTS = [
+  { region: "Southeast", severity: "high",   issue: "Flatbed supply gap (-56 units)",        action: "Recruit + reposition" },
+  { region: "Southwest", severity: "medium", issue: "Reefer demand spike (-37 units)",        action: "Expand reefer tier"  },
+  { region: "Northeast", severity: "low",    issue: "Capacity headroom — bid pricing soft",  action: "Run lane review"     },
+];
+export const BOARD_TRENDS = [
+  { quarter: "Q-3", customers: 118, gmv_idx: 78, nps: "—" },
+  { quarter: "Q-2", customers: 126, gmv_idx: 87, nps: "—" },
+  { quarter: "Q-1", customers: 134, gmv_idx: 95, nps: "—" },
+  { quarter: "Q0",  customers: 142, gmv_idx: 112, nps: "—" },
+];
+export const DATA_ROOM_PROGRESS = { complete: 9, in_progress: 4, placeholder: 3, total: 16 };
+export const CATEGORY_PROOF_POINTS = [
+  { theme: "Mobile excellence",        metric: "99.7% crash-free", evidence: "EliteNav telemetry" },
+  { theme: "Marketplace liquidity",    metric: "87.5% fill rate",  evidence: "4-week trend" },
+  { theme: "Enterprise governance",    metric: "8 review streams", evidence: "Quarterly cadence" },
+  { theme: "AI with human approval",   metric: "100% reviewed",    evidence: "Approval ledger" },
+  { theme: "Certification execution",  metric: "SOC 2 76%",        evidence: "Control tracker" },
+];
