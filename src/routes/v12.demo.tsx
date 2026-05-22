@@ -71,6 +71,20 @@ function Page() {
           ]} />
         </Card>
       </div>
+      <div className="grid gap-3 lg:grid-cols-2">
+        <Card className="border-amber-400/20 bg-amber-400/5 p-4">
+          <h3 className="text-sm font-semibold text-amber-100">Explicitly deferred in V12</h3>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground/90">
+            {scope.deferred.map((d) => <li key={d}>{d}</li>)}
+          </ul>
+        </Card>
+        <Card className="border-cyan-400/20 bg-cyan-400/5 p-4">
+          <h3 className="text-sm font-semibold text-cyan-100">Phase 38 (V12.5) teaser — not started</h3>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground/90">
+            {teaser.map((t) => <li key={t}>{t}</li>)}
+          </ul>
+        </Card>
+      </div>
     </V12Page>
   );
 }
