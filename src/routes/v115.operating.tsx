@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Activity } from "lucide-react";
 import { V115Page } from "@/components/v115/V115Page";
 import { Card } from "@/components/ui/card";
-import { SimpleTable, StatusPill } from "@/components/v115/ui-bits";
+import { ScoreCard, SimpleTable, StatusPill } from "@/components/v115/ui-bits";
 import * as H from "@/v115/hooks";
 
 function Page() {
