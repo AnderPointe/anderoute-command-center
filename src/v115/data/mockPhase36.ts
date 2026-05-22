@@ -255,14 +255,22 @@ export const V115_DEMO_CLOSEOUT = [
 
 // Executive headline + overlays + boundary
 export const V115_EXEC_HEADLINE = {
-  title: "V11.5 enterprise revenue optimization",
-  subtitle: "Optimization score 81 · NRR 124% · Discount discipline 94% · Procurement cycle 41d",
+  status: "amber" as const,
+  headline: "V11.5 optimization score 81 · uplift +8.4% · partner mix below target",
+  detail: "Discount discipline and packaging mix are on plan; partner-sourced share is 2pts below target and forecast confidence needs tightening.",
+  signals: [
+    { label: "Optimization", value: "81%", tone: "good" as const },
+    { label: "NRR",          value: "124%", tone: "good" as const },
+    { label: "Partner mix",  value: "28%", tone: "warn" as const },
+    { label: "Procurement",  value: "41d", tone: "good" as const },
+  ],
+  next_decision: { who: "CRO + CFO", what: "Approve partner mix push + forecast confidence tightening", due: "2026-08-15" },
 };
 export const V115_EXECUTION_OVERLAYS = [
-  { label: "Optimization", value: "81%",  tone: "emerald" as const },
-  { label: "Capital ready",value: "82%",  tone: "sky"     as const },
-  { label: "Retention",    value: "94% GRR", tone: "emerald" as const },
-  { label: "Partner mix",  value: "28%",  tone: "amber"   as const },
+  { area: "Revenue optimization", role: "CRO",  focus: "14/18 levers active, +8.4% uplift",        decision: "Approve discount discipline policy update" },
+  { area: "Capital readiness",    role: "CFO",  focus: "Concentration + forecast confidence soft",  decision: "Sign off baseline + tighten intervals" },
+  { area: "Retention",            role: "CCO",  focus: "94% GRR, 4 high-risk accounts",             decision: "Launch top-10 save play sprint" },
+  { area: "Partner monetization", role: "Partner", focus: "Sourced 28% vs 30% target",              decision: "Reconcile payouts + push co-sell program" },
 ];
 export const V115_BACKEND_BOUNDARY = [
   { kind: "server fn",    name: "calculate-revenue-optimization-score", caller: "app",     auth: "requireSupabaseAuth + admin" },
