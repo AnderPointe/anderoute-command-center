@@ -14,6 +14,11 @@ function Page() {
         <ScoreCard label="Active buyers"  value={m.active_buyers} tone="violet" />
         <ScoreCard label="Active sellers" value={m.active_sellers} tone="amber" />
       </div>
+      <div className="grid gap-3 md:grid-cols-3">
+        <ScoreCard label="Monetized routes" value={m.monetized_routes_pct} tone="emerald" />
+        <ScoreCard label="Gap to target" value={`${(m.target_pct - m.take_rate_pct).toFixed(1)} pts`} tone="sky" />
+        <ScoreCard label="GMV per seller" value={`$${Math.round(m.gmv_qtd_usd / m.active_sellers / 1000)}k`} tone="violet" />
+      </div>
     </V115Page>
   );
 }
