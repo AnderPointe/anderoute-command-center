@@ -11,6 +11,8 @@ function Page() {
   const closeout = H.useV12DemoCloseout();
   const boundary = H.useV12BackendBoundary();
   const rls = H.useV12RlsExamples();
+  const teaser = H.useV12Phase38Teaser();
+  const scope = H.useV12Scope();
   const toneMap: Record<string, string> = {
     violet: "border-violet-400/40 text-violet-200",
     sky: "border-sky-400/40 text-sky-200",
@@ -67,6 +69,20 @@ function Page() {
           <SimpleTable rows={boundary as any} columns={[
             { key: "kind", label: "Kind" }, { key: "name", label: "Name" }, { key: "auth", label: "Auth" },
           ]} />
+        </Card>
+      </div>
+      <div className="grid gap-3 lg:grid-cols-2">
+        <Card className="border-amber-400/20 bg-amber-400/5 p-4">
+          <h3 className="text-sm font-semibold text-amber-100">Explicitly deferred in V12</h3>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground/90">
+            {scope.deferred.map((d) => <li key={d}>{d}</li>)}
+          </ul>
+        </Card>
+        <Card className="border-cyan-400/20 bg-cyan-400/5 p-4">
+          <h3 className="text-sm font-semibold text-cyan-100">Phase 38 (V12.5) teaser — not started</h3>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground/90">
+            {teaser.map((t) => <li key={t}>{t}</li>)}
+          </ul>
         </Card>
       </div>
     </V12Page>

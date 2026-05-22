@@ -46,7 +46,14 @@ export const V12_COMMAND_SCORE = {
   trust_influenced_usd: 14_800_000,
   blocked_procurement: 3, blocked_security: 1, blocked_technical: 2,
   velocity_days: 64, slippage_pct: 9, revenue_quality: 82,
+  win_rate_pct: 34, avg_acv_usd: 184_000, exec_sponsored_pct: 71,
 };
+export const V12_COMMAND_TRENDS = [
+  { quarter: "Q-3", command: 79, quality: 74, velocity_days: 78, slippage_pct: 14 },
+  { quarter: "Q-2", command: 82, quality: 76, velocity_days: 74, slippage_pct: 12 },
+  { quarter: "Q-1", command: 85, quality: 79, velocity_days: 69, slippage_pct: 11 },
+  { quarter: "Q-0", command: 89, quality: 82, velocity_days: 64, slippage_pct: 9  },
+];
 export const V12_NEXT_BEST_ACTIONS = [
   { action: "Close AI disclosure gap on Atlas Logistics procurement packet", owner: "Security",   impact: "$1.8M ARR", due: "3d" },
   { action: "Expand CoPilot on NorthLine multi-region account",              owner: "CSM",        impact: "$420k ARR", due: "this Q" },
