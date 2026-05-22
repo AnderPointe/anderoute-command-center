@@ -36,7 +36,7 @@ function Page() {
   const rls = H.useV95RlsExamples();
   const boundary = H.useV95BackendBoundary();
   return (
-    <V95Page icon={<ListChecks className="size-6 text-cyan-300" />} title="V9.5 Demo Flow" blurb="8-step executive walkthrough with role guidance, RLS examples, and backend boundary.">
+    <V95Page icon={<ListChecks className="size-6 text-cyan-300" />} title="V9.5 Demo Flow" blurb="12-step executive walkthrough with role guidance, RLS examples, backend boundary, and a signed closeout.">
       <ExecBanner h={h} />
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Role guidance</h3>
