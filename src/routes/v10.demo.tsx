@@ -29,9 +29,11 @@ function Page() {
   const guidance = H.useV10RoleGuidance();
   const rls = H.useV10RlsExamples();
   const boundary = H.useV10BackendBoundary();
+  const closeout = H.useV10DemoCloseout();
   return (
     <V10Page icon={<ListChecks className="size-6 text-amber-300" />} title={TITLE} blurb={BLURB}>
       <ExecBanner h={h} />
+
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Role guidance</h3>
         <div className="mt-2 grid gap-2 md:grid-cols-2 lg:grid-cols-3">
