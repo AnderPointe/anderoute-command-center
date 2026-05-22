@@ -7,11 +7,15 @@ import * as H from "@/v12/hooks";
 
 function Page() {
   const d = H.useDealExecutionControl();
+  const blocked = d.rows.filter((r) => [r.tech, r.sec, r.proc].includes("blocked" as any)).length;
+  const avgPlan = Math.round(d.rows.reduce((s, r) => s + r.close_plan, 0) / d.rows.length);
   return (
     <V12Page icon={<ClipboardList className="size-6 text-cyan-300" />} title="Deal Execution Control Tower" blurb="Stage, age, buying committee, technical / security / procurement gates, pricing approval, and close-plan completeness per deal.">
-      <div className="grid gap-3 md:grid-cols-2">
-        <ScoreCard label="Execution score" value={d.score} tone="emerald" />
-        <ScoreCard label="Deals tracked"   value={String(d.rows.length)} tone="sky" />
+      <div className="grid gap-3 md:grid-cols-4">
+        <ScoreCard label="Execution score"   value={d.score}              tone="emerald" />
+        <ScoreCard label="Deals tracked"     value={String(d.rows.length)} tone="sky" />
+        <ScoreCard label="Blocked gates"     value={String(blocked)}       tone="rose" />
+        <ScoreCard label="Avg close-plan"    value={`${avgPlan}%`}         tone="violet" />
       </div>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <SimpleTable rows={d.rows as any} columns={[
