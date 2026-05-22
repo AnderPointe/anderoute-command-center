@@ -28,3 +28,12 @@ export const useV11ExecutionOverlays              = () => M.V11_EXECUTION_OVERLA
 export const useV11BackendBoundary                = () => M.V11_BACKEND_BOUNDARY;
 export const useV11RlsExamples                    = () => M.V11_RLS_EXAMPLES;
 export const useV11DemoFlow                       = () => M.V11_DEMO_FLOW;
+
+// Phase 35 polish
+export const useV11RevenueTrend                   = () => M.V11_REVENUE_TREND;
+export const useV11OutcomeKpis                    = () => M.V11_OUTCOME_KPIS;
+export const useV11MonetizationBreakdown          = () => M.V11_MONETIZATION_BREAKDOWN;
+export const useV11RevenueRiskHeatmap             = () => M.V11_REVENUE_RISK_HEATMAP;
+export const useV11RoleGuidance                   = () => M.V11_ROLE_GUIDANCE;
+export const useV11DemoCloseout                   = () => M.V11_DEMO_CLOSEOUT;
+

@@ -78,6 +78,40 @@ function Page() {
         </Card>
       </div>
 
+      <div className="grid gap-3 lg:grid-cols-2">
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Revenue maturity trend (5 quarters)</h3>
+          <SimpleTable rows={H.useV11RevenueTrend() as any} columns={[
+            { key: "quarter", label: "Quarter" }, { key: "engine", label: "Engine" },
+            { key: "monetization", label: "Monetiz." }, { key: "trust", label: "Trust" }, { key: "partner", label: "Partner" },
+          ]} />
+        </Card>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Outcome KPIs vs target</h3>
+          <SimpleTable rows={H.useV11OutcomeKpis() as any} columns={[
+            { key: "kpi", label: "KPI" }, { key: "actual", label: "Actual" }, { key: "target", label: "Target" },
+            { key: "tone", label: "Status", render: (r: any) => <StatusPill status={r.tone === "good" ? "ready" : r.tone === "warn" ? "at_risk" : "blocked"} /> },
+          ]} />
+        </Card>
+      </div>
+
+      <div className="grid gap-3 lg:grid-cols-2">
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Monetization lever breakdown</h3>
+          <SimpleTable rows={H.useV11MonetizationBreakdown() as any} columns={[
+            { key: "lever", label: "Lever" }, { key: "arr_share_pct", label: "ARR %" },
+            { key: "attach_pct", label: "Attach %" }, { key: "delta_q", label: "ΔQ" },
+          ]} />
+        </Card>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Revenue risk heatmap (mitigation owners)</h3>
+          <SimpleTable rows={H.useV11RevenueRiskHeatmap() as any} columns={[
+            { key: "risk", label: "Risk" }, { key: "likelihood", label: "Likelihood" },
+            { key: "impact", label: "Impact" }, { key: "owner", label: "Owner" }, { key: "mitigation", label: "Mitigation" },
+          ]} />
+        </Card>
+      </div>
+
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Backend boundary — server fn vs server route</h3>
         <p className="mt-1 text-xs text-muted-foreground">V11 internal logic uses TanStack <code>createServerFn</code>. Partner/procurement callbacks live under <code>/api/public/*</code> with HMAC signatures.</p>
@@ -85,6 +119,7 @@ function Page() {
           { key: "kind", label: "Kind" }, { key: "name", label: "Name" }, { key: "caller", label: "Caller" }, { key: "auth", label: "Auth" },
         ]} />
       </Card>
+
     </V11Page>
   );
 }
