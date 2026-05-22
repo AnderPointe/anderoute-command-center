@@ -23,6 +23,14 @@ function Page() {
           {s.deferred.map((d) => <li key={d}>{d}</li>)}
         </ul>
       </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Phase 36 guardrails</h3>
+        <ul className="mt-2 list-inside list-disc text-sm text-muted-foreground">
+          <li>Keep focus on enterprise revenue optimization, partner monetization, and expansion discipline.</li>
+          <li>Keep procurement, proof, pricing, and board reporting framed as commercialization enablers.</li>
+          <li>Do not expand into autonomous dispatch or Phase 37 scope.</li>
+        </ul>
+      </Card>
     </V115Page>
   );
 }
