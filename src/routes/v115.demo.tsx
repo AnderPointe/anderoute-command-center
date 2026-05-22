@@ -2,12 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ListChecks } from "lucide-react";
 import { V115Page } from "@/components/v115/V115Page";
 import { Card } from "@/components/ui/card";
+import { SimpleTable } from "@/components/v115/ui-bits";
 import * as H from "@/v115/hooks";
 
 function Page() {
   const d = H.useV115DemoFlow();
   const guidance = H.useV115RoleGuidance();
   const closeout = H.useV115DemoCloseout();
+  const boundary = H.useV115BackendBoundary();
+  const rls = H.useV115RlsExamples();
   const toneMap: Record<string, string> = {
     violet: "border-violet-400/40 text-violet-200",
     sky: "border-sky-400/40 text-sky-200",
@@ -52,6 +55,24 @@ function Page() {
           ))}
         </ul>
       </Card>
+      <div className="grid gap-3 lg:grid-cols-2">
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">RLS examples to narrate</h3>
+          <SimpleTable rows={rls as any} columns={[
+            { key: "table", label: "Table" },
+            { key: "policy", label: "Policy" },
+            { key: "expression", label: "Policy expression" },
+          ]} />
+        </Card>
+        <Card className="border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold">Server boundary to narrate</h3>
+          <SimpleTable rows={boundary as any} columns={[
+            { key: "kind", label: "Kind" },
+            { key: "name", label: "Name" },
+            { key: "auth", label: "Auth" },
+          ]} />
+        </Card>
+      </div>
     </V115Page>
   );
 }
