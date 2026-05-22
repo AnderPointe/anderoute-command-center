@@ -7,14 +7,19 @@ import * as H from "@/v95/hooks";
 
 const STEPS = [
   { who: "CEO",     step: "Open Global Enterprise Stewardship Dashboard",     outcome: "Trust 88 · Financial gov 81 · Cert evidence 79 · MP quality 84 · Customer trust 86" },
-  { who: "CFO",     step: "Open Financial Governance Maturity Center",        outcome: "Billing strong · 1 MP fee exception · evidence 82%" },
+  { who: "CSO",     step: "Open Enterprise Trust Command Center",             outcome: "15 trust domains · 2 needs_test · 3 remediation items live" },
   { who: "CSO",     step: "Open Certification Evidence Maturity Center",      outcome: "Freshness 90 · 3 controls need refresh · audit package 76 (placeholder)" },
-  { who: "MP",      step: "Open Marketplace Intelligence Optimization Center",outcome: "TX/Midwest strong · SE concentration → preferred carrier recruitment" },
-  { who: "CCO",     step: "Open Global Customer Trust Dashboard",             outcome: "2 packets stale · 1 AI disclosure pending · trust packet generated" },
-  { who: "Board",   step: "Open Board & Investor Operating Discipline",       outcome: "Packet ready: trust + financial + MP + evidence + risks + durability + value" },
-  { who: "Strategy",step: "Open Strategic Category Leadership Execution",     outcome: "Publish enterprise trust narrative + MP proof points refresh" },
-  { who: "CEO",     step: "Approve V9.5 stewardship action plan",             outcome: "5 actions signed (CSO/CFO/CCO/MP/AI)" },
+  { who: "CFO",     step: "Open Financial Governance Maturity Center",        outcome: "Billing strong · 1 MP fee exception · evidence 82% · trend +7 pts" },
+  { who: "MP",      step: "Open Marketplace Intelligence Optimization",       outcome: "TX/Midwest strong · SE concentration → preferred carrier recruitment" },
+  { who: "MP",      step: "Open Marketplace Quality Governance",              outcome: "Preferred program in_progress · 1 fee in_review · 12 governance areas" },
+  { who: "CCO",     step: "Open Global Customer Trust Dashboard",             outcome: "2 packets stale · 1 AI disclosure pending · packet builder triggered" },
+  { who: "Strategy",step: "Open Strategic Category Leadership Execution",     outcome: "Narrative 82 · proof 74 · publish enterprise trust narrative" },
+  { who: "Board",   step: "Open Board & Investor Operating Discipline",       outcome: "Packet 88 ready · 3 decisions pending · KPI snapshot attached" },
+  { who: "CEO",     step: "Open Platform Value Creation Dashboard",           outcome: "Value 82 · expansion 76 · API monetization 72 — 3 value actions" },
+  { who: "Risk",    step: "Open Strategic Risk Execution",                    outcome: "10 risks · residual trend down · 5 board-visible items mapped" },
+  { who: "CEO",     step: "Approve V9.5 stewardship action plan",             outcome: "6 commitments signed — see closeout below" },
 ];
+
 
 const TONE: Record<string, string> = {
   violet: "border-violet-400/30 text-violet-200",
