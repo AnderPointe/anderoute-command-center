@@ -2,7 +2,7 @@
 import * as M from "./data/mockPhase37";
 
 export const useV12Scope                       = () => ({ matrix: M.V12_FEATURE_MATRIX, deferred: M.V12_DEFERRED });
-export const useEnterpriseCommercialCommand    = () => ({ score: M.V12_COMMAND_SCORE, actions: M.V12_NEXT_BEST_ACTIONS, blockers: M.V12_COMMAND_BLOCKERS });
+export const useEnterpriseCommercialCommand    = () => ({ score: M.V12_COMMAND_SCORE, actions: M.V12_NEXT_BEST_ACTIONS, blockers: M.V12_COMMAND_BLOCKERS, trends: M.V12_COMMAND_TRENDS });
 export const useRevenueQualityGovernance       = () => M.V12_REVENUE_QUALITY;
 export const useGlobalAccountExpansion         = () => M.V12_GLOBAL_EXPANSION;
 export const useStrategicAccountGovernance     = () => M.V12_STRATEGIC_ACCOUNTS;
