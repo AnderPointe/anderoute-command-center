@@ -16,6 +16,12 @@ function Page() {
         <ScoreCard label="Approved 30d"      value={d.approved_30d} tone="violet" />
         <ScoreCard label="Policy compliance" value={d.policy_compliance_pct} tone="amber" />
       </div>
+      <div className="grid gap-3 md:grid-cols-4">
+        <ScoreCard label="Median cycle" value={`${ex.summary.median_cycle_days}d`} tone="emerald" />
+        <ScoreCard label="Trust stage win" value={ex.summary.trust_stage_win_rate_pct} tone="sky" />
+        <ScoreCard label="Procurement escape" value={ex.summary.procurement_escape_pct} tone="violet" />
+        <ScoreCard label="Multithreaded deals" value={ex.summary.multi_threaded_deals_pct} tone="amber" />
+      </div>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Enterprise deal execution by stage</h3>
         <SimpleTable rows={ex.stages as any} columns={[
@@ -23,6 +29,10 @@ function Page() {
           { key: "count",         label: "Count" },
           { key: "win_rate_pct",  label: "Win rate", render: (r: any) => `${r.win_rate_pct}%` },
         ]} />
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Execution discipline</h3>
+        <p className="mt-2 text-sm text-muted-foreground">The deal desk now frames maturity around cycle control, trust-stage conversion, and procurement escape velocity—not just ticket throughput.</p>
       </Card>
     </V115Page>
   );
