@@ -14,6 +14,11 @@ function Page() {
   const headlines = H.useV18PolishHeadlines();
   const fresh = H.useV18EvidenceFreshness();
   const horizons = H.useV18RoadmapHorizons();
+  const depth = H.useV18AreaDepth();
+  const slas = H.useV18PersonaSlas();
+  const invariants = H.useV18Invariants();
+  const rls2 = H.useV18RlsPolish2();
+  const edge2 = H.useV18EdgeBoundary2();
   return (
     <V18Page icon={<ShieldCheck className="size-6 text-violet-300" />}
       title="Anderoute V18 — Enterprise Autonomous-Assist Scale Governance"
