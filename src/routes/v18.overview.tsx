@@ -14,6 +14,11 @@ function Page() {
   const headlines = H.useV18PolishHeadlines();
   const fresh = H.useV18EvidenceFreshness();
   const horizons = H.useV18RoadmapHorizons();
+  const depth = H.useV18AreaDepth();
+  const slas = H.useV18PersonaSlas();
+  const invariants = H.useV18Invariants();
+  const rls2 = H.useV18RlsPolish2();
+  const edge2 = H.useV18EdgeBoundary2();
   return (
     <V18Page icon={<ShieldCheck className="size-6 text-violet-300" />}
       title="Anderoute V18 — Enterprise Autonomous-Assist Scale Governance"
@@ -50,6 +55,32 @@ function Page() {
         <SimpleTable rows={horizons as any} columns={[
           { key: "horizon", label: "Horizon" }, { key: "focus", label: "Focus" },
         ]} />
+      </Section>
+      <Section title="Area depth (20 areas × 4 KPIs + SLA)">
+        <SimpleTable rows={depth as any} columns={[
+          { key: "area", label: "Area" }, { key: "kpi1", label: "KPI 1" }, { key: "kpi2", label: "KPI 2" },
+          { key: "kpi3", label: "KPI 3" }, { key: "kpi4", label: "KPI 4" }, { key: "sla", label: "SLA" },
+        ]} />
+      </Section>
+      <Section title="Persona review & approval SLAs">
+        <SimpleTable rows={slas as any} columns={[
+          { key: "persona", label: "Persona" }, { key: "review_sla", label: "Review" },
+          { key: "approval_sla", label: "Approval" }, { key: "backup", label: "Backup" }, { key: "scope", label: "Scope" },
+        ]} />
+      </Section>
+      <Section title="Additional RLS policy examples">
+        <SimpleTable rows={rls2 as any} columns={[
+          { key: "name", label: "Policy" }, { key: "target", label: "Target" }, { key: "sql", label: "SQL sketch" },
+        ]} />
+      </Section>
+      <Section title="Additional Edge / ServerFn / public boundary">
+        <SimpleTable rows={edge2 as any} columns={[
+          { key: "layer", label: "Layer" }, { key: "concern", label: "Concern" },
+          { key: "auth", label: "Auth" }, { key: "returns", label: "Returns" },
+        ]} />
+      </Section>
+      <Section title="Invariants">
+        <ul className="text-sm text-muted-foreground">{invariants.map(x => <li key={x}>· {x}</li>)}</ul>
       </Section>
       <Section title="Guardrails">
         <ul className="text-sm text-muted-foreground">{guards.map(x => <li key={x}>· {x}</li>)}</ul>
