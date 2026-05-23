@@ -420,6 +420,26 @@ import { Route as V15DispatcherRoutesRouteImport } from './routes/v15.dispatcher
 import { Route as V15DemoRouteImport } from './routes/v15.demo'
 import { Route as V15CopilotRouteImport } from './routes/v15.copilot'
 import { Route as V15BillingRouteImport } from './routes/v15.billing'
+import { Route as V135StrategicAcctRouteImport } from './routes/v135.strategic-acct'
+import { Route as V135ScopeRouteImport } from './routes/v135.scope'
+import { Route as V135RoadmapRouteImport } from './routes/v135.roadmap'
+import { Route as V135RiskRouteImport } from './routes/v135.risk'
+import { Route as V135RetentionRouteImport } from './routes/v135.retention'
+import { Route as V135ReportsRouteImport } from './routes/v135.reports'
+import { Route as V135PartnerRouteImport } from './routes/v135.partner'
+import { Route as V135OverviewRouteImport } from './routes/v135.overview'
+import { Route as V135OutlookRouteImport } from './routes/v135.outlook'
+import { Route as V135MpOptimizationRouteImport } from './routes/v135.mp-optimization'
+import { Route as V135ExecStewardRouteImport } from './routes/v135.exec-steward'
+import { Route as V135EvidenceVaultRouteImport } from './routes/v135.evidence-vault'
+import { Route as V135DurabilityRouteImport } from './routes/v135.durability'
+import { Route as V135DiligenceRouteImport } from './routes/v135.diligence'
+import { Route as V135DemoRouteImport } from './routes/v135.demo'
+import { Route as V135ConcentrationRouteImport } from './routes/v135.concentration'
+import { Route as V135CapitalWatchRouteImport } from './routes/v135.capital-watch'
+import { Route as V135BoardStewardRouteImport } from './routes/v135.board-steward'
+import { Route as V135BoardOsRouteImport } from './routes/v135.board-os'
+import { Route as V135ApiEdiRouteImport } from './routes/v135.api-edi'
 import { Route as V13ValuationRouteImport } from './routes/v13.valuation'
 import { Route as V13StrategicAcctRouteImport } from './routes/v13.strategic-acct'
 import { Route as V13ScopeRouteImport } from './routes/v13.scope'
@@ -2771,6 +2791,106 @@ const V15BillingRoute = V15BillingRouteImport.update({
   path: '/v15/billing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const V135StrategicAcctRoute = V135StrategicAcctRouteImport.update({
+  id: '/v135/strategic-acct',
+  path: '/v135/strategic-acct',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135ScopeRoute = V135ScopeRouteImport.update({
+  id: '/v135/scope',
+  path: '/v135/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135RoadmapRoute = V135RoadmapRouteImport.update({
+  id: '/v135/roadmap',
+  path: '/v135/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135RiskRoute = V135RiskRouteImport.update({
+  id: '/v135/risk',
+  path: '/v135/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135RetentionRoute = V135RetentionRouteImport.update({
+  id: '/v135/retention',
+  path: '/v135/retention',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135ReportsRoute = V135ReportsRouteImport.update({
+  id: '/v135/reports',
+  path: '/v135/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135PartnerRoute = V135PartnerRouteImport.update({
+  id: '/v135/partner',
+  path: '/v135/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135OverviewRoute = V135OverviewRouteImport.update({
+  id: '/v135/overview',
+  path: '/v135/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135OutlookRoute = V135OutlookRouteImport.update({
+  id: '/v135/outlook',
+  path: '/v135/outlook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135MpOptimizationRoute = V135MpOptimizationRouteImport.update({
+  id: '/v135/mp-optimization',
+  path: '/v135/mp-optimization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135ExecStewardRoute = V135ExecStewardRouteImport.update({
+  id: '/v135/exec-steward',
+  path: '/v135/exec-steward',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135EvidenceVaultRoute = V135EvidenceVaultRouteImport.update({
+  id: '/v135/evidence-vault',
+  path: '/v135/evidence-vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135DurabilityRoute = V135DurabilityRouteImport.update({
+  id: '/v135/durability',
+  path: '/v135/durability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135DiligenceRoute = V135DiligenceRouteImport.update({
+  id: '/v135/diligence',
+  path: '/v135/diligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135DemoRoute = V135DemoRouteImport.update({
+  id: '/v135/demo',
+  path: '/v135/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135ConcentrationRoute = V135ConcentrationRouteImport.update({
+  id: '/v135/concentration',
+  path: '/v135/concentration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135CapitalWatchRoute = V135CapitalWatchRouteImport.update({
+  id: '/v135/capital-watch',
+  path: '/v135/capital-watch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135BoardStewardRoute = V135BoardStewardRouteImport.update({
+  id: '/v135/board-steward',
+  path: '/v135/board-steward',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135BoardOsRoute = V135BoardOsRouteImport.update({
+  id: '/v135/board-os',
+  path: '/v135/board-os',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V135ApiEdiRoute = V135ApiEdiRouteImport.update({
+  id: '/v135/api-edi',
+  path: '/v135/api-edi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const V13ValuationRoute = V13ValuationRouteImport.update({
   id: '/v13/valuation',
   path: '/v13/valuation',
@@ -4542,6 +4662,26 @@ export interface FileRoutesByFullPath {
   '/v13/scope': typeof V13ScopeRoute
   '/v13/strategic-acct': typeof V13StrategicAcctRoute
   '/v13/valuation': typeof V13ValuationRoute
+  '/v135/api-edi': typeof V135ApiEdiRoute
+  '/v135/board-os': typeof V135BoardOsRoute
+  '/v135/board-steward': typeof V135BoardStewardRoute
+  '/v135/capital-watch': typeof V135CapitalWatchRoute
+  '/v135/concentration': typeof V135ConcentrationRoute
+  '/v135/demo': typeof V135DemoRoute
+  '/v135/diligence': typeof V135DiligenceRoute
+  '/v135/durability': typeof V135DurabilityRoute
+  '/v135/evidence-vault': typeof V135EvidenceVaultRoute
+  '/v135/exec-steward': typeof V135ExecStewardRoute
+  '/v135/mp-optimization': typeof V135MpOptimizationRoute
+  '/v135/outlook': typeof V135OutlookRoute
+  '/v135/overview': typeof V135OverviewRoute
+  '/v135/partner': typeof V135PartnerRoute
+  '/v135/reports': typeof V135ReportsRoute
+  '/v135/retention': typeof V135RetentionRoute
+  '/v135/risk': typeof V135RiskRoute
+  '/v135/roadmap': typeof V135RoadmapRoute
+  '/v135/scope': typeof V135ScopeRoute
+  '/v135/strategic-acct': typeof V135StrategicAcctRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -5246,6 +5386,26 @@ export interface FileRoutesByTo {
   '/v13/scope': typeof V13ScopeRoute
   '/v13/strategic-acct': typeof V13StrategicAcctRoute
   '/v13/valuation': typeof V13ValuationRoute
+  '/v135/api-edi': typeof V135ApiEdiRoute
+  '/v135/board-os': typeof V135BoardOsRoute
+  '/v135/board-steward': typeof V135BoardStewardRoute
+  '/v135/capital-watch': typeof V135CapitalWatchRoute
+  '/v135/concentration': typeof V135ConcentrationRoute
+  '/v135/demo': typeof V135DemoRoute
+  '/v135/diligence': typeof V135DiligenceRoute
+  '/v135/durability': typeof V135DurabilityRoute
+  '/v135/evidence-vault': typeof V135EvidenceVaultRoute
+  '/v135/exec-steward': typeof V135ExecStewardRoute
+  '/v135/mp-optimization': typeof V135MpOptimizationRoute
+  '/v135/outlook': typeof V135OutlookRoute
+  '/v135/overview': typeof V135OverviewRoute
+  '/v135/partner': typeof V135PartnerRoute
+  '/v135/reports': typeof V135ReportsRoute
+  '/v135/retention': typeof V135RetentionRoute
+  '/v135/risk': typeof V135RiskRoute
+  '/v135/roadmap': typeof V135RoadmapRoute
+  '/v135/scope': typeof V135ScopeRoute
+  '/v135/strategic-acct': typeof V135StrategicAcctRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -5951,6 +6111,26 @@ export interface FileRoutesById {
   '/v13/scope': typeof V13ScopeRoute
   '/v13/strategic-acct': typeof V13StrategicAcctRoute
   '/v13/valuation': typeof V13ValuationRoute
+  '/v135/api-edi': typeof V135ApiEdiRoute
+  '/v135/board-os': typeof V135BoardOsRoute
+  '/v135/board-steward': typeof V135BoardStewardRoute
+  '/v135/capital-watch': typeof V135CapitalWatchRoute
+  '/v135/concentration': typeof V135ConcentrationRoute
+  '/v135/demo': typeof V135DemoRoute
+  '/v135/diligence': typeof V135DiligenceRoute
+  '/v135/durability': typeof V135DurabilityRoute
+  '/v135/evidence-vault': typeof V135EvidenceVaultRoute
+  '/v135/exec-steward': typeof V135ExecStewardRoute
+  '/v135/mp-optimization': typeof V135MpOptimizationRoute
+  '/v135/outlook': typeof V135OutlookRoute
+  '/v135/overview': typeof V135OverviewRoute
+  '/v135/partner': typeof V135PartnerRoute
+  '/v135/reports': typeof V135ReportsRoute
+  '/v135/retention': typeof V135RetentionRoute
+  '/v135/risk': typeof V135RiskRoute
+  '/v135/roadmap': typeof V135RoadmapRoute
+  '/v135/scope': typeof V135ScopeRoute
+  '/v135/strategic-acct': typeof V135StrategicAcctRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -6657,6 +6837,26 @@ export interface FileRouteTypes {
     | '/v13/scope'
     | '/v13/strategic-acct'
     | '/v13/valuation'
+    | '/v135/api-edi'
+    | '/v135/board-os'
+    | '/v135/board-steward'
+    | '/v135/capital-watch'
+    | '/v135/concentration'
+    | '/v135/demo'
+    | '/v135/diligence'
+    | '/v135/durability'
+    | '/v135/evidence-vault'
+    | '/v135/exec-steward'
+    | '/v135/mp-optimization'
+    | '/v135/outlook'
+    | '/v135/overview'
+    | '/v135/partner'
+    | '/v135/reports'
+    | '/v135/retention'
+    | '/v135/risk'
+    | '/v135/roadmap'
+    | '/v135/scope'
+    | '/v135/strategic-acct'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -7361,6 +7561,26 @@ export interface FileRouteTypes {
     | '/v13/scope'
     | '/v13/strategic-acct'
     | '/v13/valuation'
+    | '/v135/api-edi'
+    | '/v135/board-os'
+    | '/v135/board-steward'
+    | '/v135/capital-watch'
+    | '/v135/concentration'
+    | '/v135/demo'
+    | '/v135/diligence'
+    | '/v135/durability'
+    | '/v135/evidence-vault'
+    | '/v135/exec-steward'
+    | '/v135/mp-optimization'
+    | '/v135/outlook'
+    | '/v135/overview'
+    | '/v135/partner'
+    | '/v135/reports'
+    | '/v135/retention'
+    | '/v135/risk'
+    | '/v135/roadmap'
+    | '/v135/scope'
+    | '/v135/strategic-acct'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -8065,6 +8285,26 @@ export interface FileRouteTypes {
     | '/v13/scope'
     | '/v13/strategic-acct'
     | '/v13/valuation'
+    | '/v135/api-edi'
+    | '/v135/board-os'
+    | '/v135/board-steward'
+    | '/v135/capital-watch'
+    | '/v135/concentration'
+    | '/v135/demo'
+    | '/v135/diligence'
+    | '/v135/durability'
+    | '/v135/evidence-vault'
+    | '/v135/exec-steward'
+    | '/v135/mp-optimization'
+    | '/v135/outlook'
+    | '/v135/overview'
+    | '/v135/partner'
+    | '/v135/reports'
+    | '/v135/retention'
+    | '/v135/risk'
+    | '/v135/roadmap'
+    | '/v135/scope'
+    | '/v135/strategic-acct'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -8762,6 +9002,26 @@ export interface RootRouteChildren {
   V13ScopeRoute: typeof V13ScopeRoute
   V13StrategicAcctRoute: typeof V13StrategicAcctRoute
   V13ValuationRoute: typeof V13ValuationRoute
+  V135ApiEdiRoute: typeof V135ApiEdiRoute
+  V135BoardOsRoute: typeof V135BoardOsRoute
+  V135BoardStewardRoute: typeof V135BoardStewardRoute
+  V135CapitalWatchRoute: typeof V135CapitalWatchRoute
+  V135ConcentrationRoute: typeof V135ConcentrationRoute
+  V135DemoRoute: typeof V135DemoRoute
+  V135DiligenceRoute: typeof V135DiligenceRoute
+  V135DurabilityRoute: typeof V135DurabilityRoute
+  V135EvidenceVaultRoute: typeof V135EvidenceVaultRoute
+  V135ExecStewardRoute: typeof V135ExecStewardRoute
+  V135MpOptimizationRoute: typeof V135MpOptimizationRoute
+  V135OutlookRoute: typeof V135OutlookRoute
+  V135OverviewRoute: typeof V135OverviewRoute
+  V135PartnerRoute: typeof V135PartnerRoute
+  V135ReportsRoute: typeof V135ReportsRoute
+  V135RetentionRoute: typeof V135RetentionRoute
+  V135RiskRoute: typeof V135RiskRoute
+  V135RoadmapRoute: typeof V135RoadmapRoute
+  V135ScopeRoute: typeof V135ScopeRoute
+  V135StrategicAcctRoute: typeof V135StrategicAcctRoute
   V15BillingRoute: typeof V15BillingRoute
   V15CopilotRoute: typeof V15CopilotRoute
   V15DemoRoute: typeof V15DemoRoute
@@ -12035,6 +12295,146 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof V15BillingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v135/strategic-acct': {
+      id: '/v135/strategic-acct'
+      path: '/v135/strategic-acct'
+      fullPath: '/v135/strategic-acct'
+      preLoaderRoute: typeof V135StrategicAcctRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/scope': {
+      id: '/v135/scope'
+      path: '/v135/scope'
+      fullPath: '/v135/scope'
+      preLoaderRoute: typeof V135ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/roadmap': {
+      id: '/v135/roadmap'
+      path: '/v135/roadmap'
+      fullPath: '/v135/roadmap'
+      preLoaderRoute: typeof V135RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/risk': {
+      id: '/v135/risk'
+      path: '/v135/risk'
+      fullPath: '/v135/risk'
+      preLoaderRoute: typeof V135RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/retention': {
+      id: '/v135/retention'
+      path: '/v135/retention'
+      fullPath: '/v135/retention'
+      preLoaderRoute: typeof V135RetentionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/reports': {
+      id: '/v135/reports'
+      path: '/v135/reports'
+      fullPath: '/v135/reports'
+      preLoaderRoute: typeof V135ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/partner': {
+      id: '/v135/partner'
+      path: '/v135/partner'
+      fullPath: '/v135/partner'
+      preLoaderRoute: typeof V135PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/overview': {
+      id: '/v135/overview'
+      path: '/v135/overview'
+      fullPath: '/v135/overview'
+      preLoaderRoute: typeof V135OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/outlook': {
+      id: '/v135/outlook'
+      path: '/v135/outlook'
+      fullPath: '/v135/outlook'
+      preLoaderRoute: typeof V135OutlookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/mp-optimization': {
+      id: '/v135/mp-optimization'
+      path: '/v135/mp-optimization'
+      fullPath: '/v135/mp-optimization'
+      preLoaderRoute: typeof V135MpOptimizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/exec-steward': {
+      id: '/v135/exec-steward'
+      path: '/v135/exec-steward'
+      fullPath: '/v135/exec-steward'
+      preLoaderRoute: typeof V135ExecStewardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/evidence-vault': {
+      id: '/v135/evidence-vault'
+      path: '/v135/evidence-vault'
+      fullPath: '/v135/evidence-vault'
+      preLoaderRoute: typeof V135EvidenceVaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/durability': {
+      id: '/v135/durability'
+      path: '/v135/durability'
+      fullPath: '/v135/durability'
+      preLoaderRoute: typeof V135DurabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/diligence': {
+      id: '/v135/diligence'
+      path: '/v135/diligence'
+      fullPath: '/v135/diligence'
+      preLoaderRoute: typeof V135DiligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/demo': {
+      id: '/v135/demo'
+      path: '/v135/demo'
+      fullPath: '/v135/demo'
+      preLoaderRoute: typeof V135DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/concentration': {
+      id: '/v135/concentration'
+      path: '/v135/concentration'
+      fullPath: '/v135/concentration'
+      preLoaderRoute: typeof V135ConcentrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/capital-watch': {
+      id: '/v135/capital-watch'
+      path: '/v135/capital-watch'
+      fullPath: '/v135/capital-watch'
+      preLoaderRoute: typeof V135CapitalWatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/board-steward': {
+      id: '/v135/board-steward'
+      path: '/v135/board-steward'
+      fullPath: '/v135/board-steward'
+      preLoaderRoute: typeof V135BoardStewardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/board-os': {
+      id: '/v135/board-os'
+      path: '/v135/board-os'
+      fullPath: '/v135/board-os'
+      preLoaderRoute: typeof V135BoardOsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v135/api-edi': {
+      id: '/v135/api-edi'
+      path: '/v135/api-edi'
+      fullPath: '/v135/api-edi'
+      preLoaderRoute: typeof V135ApiEdiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/v13/valuation': {
       id: '/v13/valuation'
       path: '/v13/valuation'
@@ -14431,6 +14831,26 @@ const rootRouteChildren: RootRouteChildren = {
   V13ScopeRoute: V13ScopeRoute,
   V13StrategicAcctRoute: V13StrategicAcctRoute,
   V13ValuationRoute: V13ValuationRoute,
+  V135ApiEdiRoute: V135ApiEdiRoute,
+  V135BoardOsRoute: V135BoardOsRoute,
+  V135BoardStewardRoute: V135BoardStewardRoute,
+  V135CapitalWatchRoute: V135CapitalWatchRoute,
+  V135ConcentrationRoute: V135ConcentrationRoute,
+  V135DemoRoute: V135DemoRoute,
+  V135DiligenceRoute: V135DiligenceRoute,
+  V135DurabilityRoute: V135DurabilityRoute,
+  V135EvidenceVaultRoute: V135EvidenceVaultRoute,
+  V135ExecStewardRoute: V135ExecStewardRoute,
+  V135MpOptimizationRoute: V135MpOptimizationRoute,
+  V135OutlookRoute: V135OutlookRoute,
+  V135OverviewRoute: V135OverviewRoute,
+  V135PartnerRoute: V135PartnerRoute,
+  V135ReportsRoute: V135ReportsRoute,
+  V135RetentionRoute: V135RetentionRoute,
+  V135RiskRoute: V135RiskRoute,
+  V135RoadmapRoute: V135RoadmapRoute,
+  V135ScopeRoute: V135ScopeRoute,
+  V135StrategicAcctRoute: V135StrategicAcctRoute,
   V15BillingRoute: V15BillingRoute,
   V15CopilotRoute: V15CopilotRoute,
   V15DemoRoute: V15DemoRoute,
