@@ -397,6 +397,31 @@ import { Route as V2ApprovalsRouteImport } from './routes/v2.approvals'
 import { Route as V2ApiMarketplaceRouteImport } from './routes/v2.api-marketplace'
 import { Route as V2ApiKeysRouteImport } from './routes/v2.api-keys'
 import { Route as V2AiOpsRouteImport } from './routes/v2.ai-ops'
+import { Route as V16ScopeRouteImport } from './routes/v16.scope'
+import { Route as V16RoadmapRouteImport } from './routes/v16.roadmap'
+import { Route as V16RiskRouteImport } from './routes/v16.risk'
+import { Route as V16RevControlsRouteImport } from './routes/v16.rev-controls'
+import { Route as V16ReportsRouteImport } from './routes/v16.reports'
+import { Route as V16RecGovRouteImport } from './routes/v16.rec-gov'
+import { Route as V16ProductControlsRouteImport } from './routes/v16.product-controls'
+import { Route as V16PredictiveRouteImport } from './routes/v16.predictive'
+import { Route as V16PartnerControlsRouteImport } from './routes/v16.partner-controls'
+import { Route as V16OverviewRouteImport } from './routes/v16.overview'
+import { Route as V16OutcomesRouteImport } from './routes/v16.outcomes'
+import { Route as V16MpOptRouteImport } from './routes/v16.mp-opt'
+import { Route as V16MpControlsRouteImport } from './routes/v16.mp-controls'
+import { Route as V16HitlRouteImport } from './routes/v16.hitl'
+import { Route as V16ExplainabilityRouteImport } from './routes/v16.explainability'
+import { Route as V16ExecDecisionRouteImport } from './routes/v16.exec-decision'
+import { Route as V16EvidenceRouteImport } from './routes/v16.evidence'
+import { Route as V16DemoRouteImport } from './routes/v16.demo'
+import { Route as V16ControlMaturityRouteImport } from './routes/v16.control-maturity'
+import { Route as V16CommandRouteImport } from './routes/v16.command'
+import { Route as V16CategoryControlsRouteImport } from './routes/v16.category-controls'
+import { Route as V16CapitalBoardRouteImport } from './routes/v16.capital-board'
+import { Route as V16CapControlsRouteImport } from './routes/v16.cap-controls'
+import { Route as V16BoardDecisionRouteImport } from './routes/v16.board-decision'
+import { Route as V16AcctControlsRouteImport } from './routes/v16.acct-controls'
 import { Route as V155ScopeRouteImport } from './routes/v155.scope'
 import { Route as V155RoadmapRouteImport } from './routes/v155.roadmap'
 import { Route as V155RiskIntelRouteImport } from './routes/v155.risk-intel'
@@ -2765,6 +2790,131 @@ const V2ApiKeysRoute = V2ApiKeysRouteImport.update({
 const V2AiOpsRoute = V2AiOpsRouteImport.update({
   id: '/v2/ai-ops',
   path: '/v2/ai-ops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16ScopeRoute = V16ScopeRouteImport.update({
+  id: '/v16/scope',
+  path: '/v16/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16RoadmapRoute = V16RoadmapRouteImport.update({
+  id: '/v16/roadmap',
+  path: '/v16/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16RiskRoute = V16RiskRouteImport.update({
+  id: '/v16/risk',
+  path: '/v16/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16RevControlsRoute = V16RevControlsRouteImport.update({
+  id: '/v16/rev-controls',
+  path: '/v16/rev-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16ReportsRoute = V16ReportsRouteImport.update({
+  id: '/v16/reports',
+  path: '/v16/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16RecGovRoute = V16RecGovRouteImport.update({
+  id: '/v16/rec-gov',
+  path: '/v16/rec-gov',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16ProductControlsRoute = V16ProductControlsRouteImport.update({
+  id: '/v16/product-controls',
+  path: '/v16/product-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16PredictiveRoute = V16PredictiveRouteImport.update({
+  id: '/v16/predictive',
+  path: '/v16/predictive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16PartnerControlsRoute = V16PartnerControlsRouteImport.update({
+  id: '/v16/partner-controls',
+  path: '/v16/partner-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16OverviewRoute = V16OverviewRouteImport.update({
+  id: '/v16/overview',
+  path: '/v16/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16OutcomesRoute = V16OutcomesRouteImport.update({
+  id: '/v16/outcomes',
+  path: '/v16/outcomes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16MpOptRoute = V16MpOptRouteImport.update({
+  id: '/v16/mp-opt',
+  path: '/v16/mp-opt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16MpControlsRoute = V16MpControlsRouteImport.update({
+  id: '/v16/mp-controls',
+  path: '/v16/mp-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16HitlRoute = V16HitlRouteImport.update({
+  id: '/v16/hitl',
+  path: '/v16/hitl',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16ExplainabilityRoute = V16ExplainabilityRouteImport.update({
+  id: '/v16/explainability',
+  path: '/v16/explainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16ExecDecisionRoute = V16ExecDecisionRouteImport.update({
+  id: '/v16/exec-decision',
+  path: '/v16/exec-decision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16EvidenceRoute = V16EvidenceRouteImport.update({
+  id: '/v16/evidence',
+  path: '/v16/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16DemoRoute = V16DemoRouteImport.update({
+  id: '/v16/demo',
+  path: '/v16/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16ControlMaturityRoute = V16ControlMaturityRouteImport.update({
+  id: '/v16/control-maturity',
+  path: '/v16/control-maturity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16CommandRoute = V16CommandRouteImport.update({
+  id: '/v16/command',
+  path: '/v16/command',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16CategoryControlsRoute = V16CategoryControlsRouteImport.update({
+  id: '/v16/category-controls',
+  path: '/v16/category-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16CapitalBoardRoute = V16CapitalBoardRouteImport.update({
+  id: '/v16/capital-board',
+  path: '/v16/capital-board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16CapControlsRoute = V16CapControlsRouteImport.update({
+  id: '/v16/cap-controls',
+  path: '/v16/cap-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16BoardDecisionRoute = V16BoardDecisionRouteImport.update({
+  id: '/v16/board-decision',
+  path: '/v16/board-decision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V16AcctControlsRoute = V16AcctControlsRouteImport.update({
+  id: '/v16/acct-controls',
+  path: '/v16/acct-controls',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V155ScopeRoute = V155ScopeRouteImport.update({
@@ -5342,6 +5492,31 @@ export interface FileRoutesByFullPath {
   '/v155/risk-intel': typeof V155RiskIntelRoute
   '/v155/roadmap': typeof V155RoadmapRoute
   '/v155/scope': typeof V155ScopeRoute
+  '/v16/acct-controls': typeof V16AcctControlsRoute
+  '/v16/board-decision': typeof V16BoardDecisionRoute
+  '/v16/cap-controls': typeof V16CapControlsRoute
+  '/v16/capital-board': typeof V16CapitalBoardRoute
+  '/v16/category-controls': typeof V16CategoryControlsRoute
+  '/v16/command': typeof V16CommandRoute
+  '/v16/control-maturity': typeof V16ControlMaturityRoute
+  '/v16/demo': typeof V16DemoRoute
+  '/v16/evidence': typeof V16EvidenceRoute
+  '/v16/exec-decision': typeof V16ExecDecisionRoute
+  '/v16/explainability': typeof V16ExplainabilityRoute
+  '/v16/hitl': typeof V16HitlRoute
+  '/v16/mp-controls': typeof V16MpControlsRoute
+  '/v16/mp-opt': typeof V16MpOptRoute
+  '/v16/outcomes': typeof V16OutcomesRoute
+  '/v16/overview': typeof V16OverviewRoute
+  '/v16/partner-controls': typeof V16PartnerControlsRoute
+  '/v16/predictive': typeof V16PredictiveRoute
+  '/v16/product-controls': typeof V16ProductControlsRoute
+  '/v16/rec-gov': typeof V16RecGovRoute
+  '/v16/reports': typeof V16ReportsRoute
+  '/v16/rev-controls': typeof V16RevControlsRoute
+  '/v16/risk': typeof V16RiskRoute
+  '/v16/roadmap': typeof V16RoadmapRoute
+  '/v16/scope': typeof V16ScopeRoute
   '/v2/ai-ops': typeof V2AiOpsRoute
   '/v2/api-keys': typeof V2ApiKeysRoute
   '/v2/api-marketplace': typeof V2ApiMarketplaceRoute
@@ -6157,6 +6332,31 @@ export interface FileRoutesByTo {
   '/v155/risk-intel': typeof V155RiskIntelRoute
   '/v155/roadmap': typeof V155RoadmapRoute
   '/v155/scope': typeof V155ScopeRoute
+  '/v16/acct-controls': typeof V16AcctControlsRoute
+  '/v16/board-decision': typeof V16BoardDecisionRoute
+  '/v16/cap-controls': typeof V16CapControlsRoute
+  '/v16/capital-board': typeof V16CapitalBoardRoute
+  '/v16/category-controls': typeof V16CategoryControlsRoute
+  '/v16/command': typeof V16CommandRoute
+  '/v16/control-maturity': typeof V16ControlMaturityRoute
+  '/v16/demo': typeof V16DemoRoute
+  '/v16/evidence': typeof V16EvidenceRoute
+  '/v16/exec-decision': typeof V16ExecDecisionRoute
+  '/v16/explainability': typeof V16ExplainabilityRoute
+  '/v16/hitl': typeof V16HitlRoute
+  '/v16/mp-controls': typeof V16MpControlsRoute
+  '/v16/mp-opt': typeof V16MpOptRoute
+  '/v16/outcomes': typeof V16OutcomesRoute
+  '/v16/overview': typeof V16OverviewRoute
+  '/v16/partner-controls': typeof V16PartnerControlsRoute
+  '/v16/predictive': typeof V16PredictiveRoute
+  '/v16/product-controls': typeof V16ProductControlsRoute
+  '/v16/rec-gov': typeof V16RecGovRoute
+  '/v16/reports': typeof V16ReportsRoute
+  '/v16/rev-controls': typeof V16RevControlsRoute
+  '/v16/risk': typeof V16RiskRoute
+  '/v16/roadmap': typeof V16RoadmapRoute
+  '/v16/scope': typeof V16ScopeRoute
   '/v2/ai-ops': typeof V2AiOpsRoute
   '/v2/api-keys': typeof V2ApiKeysRoute
   '/v2/api-marketplace': typeof V2ApiMarketplaceRoute
@@ -6973,6 +7173,31 @@ export interface FileRoutesById {
   '/v155/risk-intel': typeof V155RiskIntelRoute
   '/v155/roadmap': typeof V155RoadmapRoute
   '/v155/scope': typeof V155ScopeRoute
+  '/v16/acct-controls': typeof V16AcctControlsRoute
+  '/v16/board-decision': typeof V16BoardDecisionRoute
+  '/v16/cap-controls': typeof V16CapControlsRoute
+  '/v16/capital-board': typeof V16CapitalBoardRoute
+  '/v16/category-controls': typeof V16CategoryControlsRoute
+  '/v16/command': typeof V16CommandRoute
+  '/v16/control-maturity': typeof V16ControlMaturityRoute
+  '/v16/demo': typeof V16DemoRoute
+  '/v16/evidence': typeof V16EvidenceRoute
+  '/v16/exec-decision': typeof V16ExecDecisionRoute
+  '/v16/explainability': typeof V16ExplainabilityRoute
+  '/v16/hitl': typeof V16HitlRoute
+  '/v16/mp-controls': typeof V16MpControlsRoute
+  '/v16/mp-opt': typeof V16MpOptRoute
+  '/v16/outcomes': typeof V16OutcomesRoute
+  '/v16/overview': typeof V16OverviewRoute
+  '/v16/partner-controls': typeof V16PartnerControlsRoute
+  '/v16/predictive': typeof V16PredictiveRoute
+  '/v16/product-controls': typeof V16ProductControlsRoute
+  '/v16/rec-gov': typeof V16RecGovRoute
+  '/v16/reports': typeof V16ReportsRoute
+  '/v16/rev-controls': typeof V16RevControlsRoute
+  '/v16/risk': typeof V16RiskRoute
+  '/v16/roadmap': typeof V16RoadmapRoute
+  '/v16/scope': typeof V16ScopeRoute
   '/v2/ai-ops': typeof V2AiOpsRoute
   '/v2/api-keys': typeof V2ApiKeysRoute
   '/v2/api-marketplace': typeof V2ApiMarketplaceRoute
@@ -7790,6 +8015,31 @@ export interface FileRouteTypes {
     | '/v155/risk-intel'
     | '/v155/roadmap'
     | '/v155/scope'
+    | '/v16/acct-controls'
+    | '/v16/board-decision'
+    | '/v16/cap-controls'
+    | '/v16/capital-board'
+    | '/v16/category-controls'
+    | '/v16/command'
+    | '/v16/control-maturity'
+    | '/v16/demo'
+    | '/v16/evidence'
+    | '/v16/exec-decision'
+    | '/v16/explainability'
+    | '/v16/hitl'
+    | '/v16/mp-controls'
+    | '/v16/mp-opt'
+    | '/v16/outcomes'
+    | '/v16/overview'
+    | '/v16/partner-controls'
+    | '/v16/predictive'
+    | '/v16/product-controls'
+    | '/v16/rec-gov'
+    | '/v16/reports'
+    | '/v16/rev-controls'
+    | '/v16/risk'
+    | '/v16/roadmap'
+    | '/v16/scope'
     | '/v2/ai-ops'
     | '/v2/api-keys'
     | '/v2/api-marketplace'
@@ -8605,6 +8855,31 @@ export interface FileRouteTypes {
     | '/v155/risk-intel'
     | '/v155/roadmap'
     | '/v155/scope'
+    | '/v16/acct-controls'
+    | '/v16/board-decision'
+    | '/v16/cap-controls'
+    | '/v16/capital-board'
+    | '/v16/category-controls'
+    | '/v16/command'
+    | '/v16/control-maturity'
+    | '/v16/demo'
+    | '/v16/evidence'
+    | '/v16/exec-decision'
+    | '/v16/explainability'
+    | '/v16/hitl'
+    | '/v16/mp-controls'
+    | '/v16/mp-opt'
+    | '/v16/outcomes'
+    | '/v16/overview'
+    | '/v16/partner-controls'
+    | '/v16/predictive'
+    | '/v16/product-controls'
+    | '/v16/rec-gov'
+    | '/v16/reports'
+    | '/v16/rev-controls'
+    | '/v16/risk'
+    | '/v16/roadmap'
+    | '/v16/scope'
     | '/v2/ai-ops'
     | '/v2/api-keys'
     | '/v2/api-marketplace'
@@ -9420,6 +9695,31 @@ export interface FileRouteTypes {
     | '/v155/risk-intel'
     | '/v155/roadmap'
     | '/v155/scope'
+    | '/v16/acct-controls'
+    | '/v16/board-decision'
+    | '/v16/cap-controls'
+    | '/v16/capital-board'
+    | '/v16/category-controls'
+    | '/v16/command'
+    | '/v16/control-maturity'
+    | '/v16/demo'
+    | '/v16/evidence'
+    | '/v16/exec-decision'
+    | '/v16/explainability'
+    | '/v16/hitl'
+    | '/v16/mp-controls'
+    | '/v16/mp-opt'
+    | '/v16/outcomes'
+    | '/v16/overview'
+    | '/v16/partner-controls'
+    | '/v16/predictive'
+    | '/v16/product-controls'
+    | '/v16/rec-gov'
+    | '/v16/reports'
+    | '/v16/rev-controls'
+    | '/v16/risk'
+    | '/v16/roadmap'
+    | '/v16/scope'
     | '/v2/ai-ops'
     | '/v2/api-keys'
     | '/v2/api-marketplace'
@@ -10228,6 +10528,31 @@ export interface RootRouteChildren {
   V155RiskIntelRoute: typeof V155RiskIntelRoute
   V155RoadmapRoute: typeof V155RoadmapRoute
   V155ScopeRoute: typeof V155ScopeRoute
+  V16AcctControlsRoute: typeof V16AcctControlsRoute
+  V16BoardDecisionRoute: typeof V16BoardDecisionRoute
+  V16CapControlsRoute: typeof V16CapControlsRoute
+  V16CapitalBoardRoute: typeof V16CapitalBoardRoute
+  V16CategoryControlsRoute: typeof V16CategoryControlsRoute
+  V16CommandRoute: typeof V16CommandRoute
+  V16ControlMaturityRoute: typeof V16ControlMaturityRoute
+  V16DemoRoute: typeof V16DemoRoute
+  V16EvidenceRoute: typeof V16EvidenceRoute
+  V16ExecDecisionRoute: typeof V16ExecDecisionRoute
+  V16ExplainabilityRoute: typeof V16ExplainabilityRoute
+  V16HitlRoute: typeof V16HitlRoute
+  V16MpControlsRoute: typeof V16MpControlsRoute
+  V16MpOptRoute: typeof V16MpOptRoute
+  V16OutcomesRoute: typeof V16OutcomesRoute
+  V16OverviewRoute: typeof V16OverviewRoute
+  V16PartnerControlsRoute: typeof V16PartnerControlsRoute
+  V16PredictiveRoute: typeof V16PredictiveRoute
+  V16ProductControlsRoute: typeof V16ProductControlsRoute
+  V16RecGovRoute: typeof V16RecGovRoute
+  V16ReportsRoute: typeof V16ReportsRoute
+  V16RevControlsRoute: typeof V16RevControlsRoute
+  V16RiskRoute: typeof V16RiskRoute
+  V16RoadmapRoute: typeof V16RoadmapRoute
+  V16ScopeRoute: typeof V16ScopeRoute
   V2AiOpsRoute: typeof V2AiOpsRoute
   V2ApiKeysRoute: typeof V2ApiKeysRoute
   V2ApiMarketplaceRoute: typeof V2ApiMarketplaceRoute
@@ -13315,6 +13640,181 @@ declare module '@tanstack/react-router' {
       path: '/v2/ai-ops'
       fullPath: '/v2/ai-ops'
       preLoaderRoute: typeof V2AiOpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/scope': {
+      id: '/v16/scope'
+      path: '/v16/scope'
+      fullPath: '/v16/scope'
+      preLoaderRoute: typeof V16ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/roadmap': {
+      id: '/v16/roadmap'
+      path: '/v16/roadmap'
+      fullPath: '/v16/roadmap'
+      preLoaderRoute: typeof V16RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/risk': {
+      id: '/v16/risk'
+      path: '/v16/risk'
+      fullPath: '/v16/risk'
+      preLoaderRoute: typeof V16RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/rev-controls': {
+      id: '/v16/rev-controls'
+      path: '/v16/rev-controls'
+      fullPath: '/v16/rev-controls'
+      preLoaderRoute: typeof V16RevControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/reports': {
+      id: '/v16/reports'
+      path: '/v16/reports'
+      fullPath: '/v16/reports'
+      preLoaderRoute: typeof V16ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/rec-gov': {
+      id: '/v16/rec-gov'
+      path: '/v16/rec-gov'
+      fullPath: '/v16/rec-gov'
+      preLoaderRoute: typeof V16RecGovRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/product-controls': {
+      id: '/v16/product-controls'
+      path: '/v16/product-controls'
+      fullPath: '/v16/product-controls'
+      preLoaderRoute: typeof V16ProductControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/predictive': {
+      id: '/v16/predictive'
+      path: '/v16/predictive'
+      fullPath: '/v16/predictive'
+      preLoaderRoute: typeof V16PredictiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/partner-controls': {
+      id: '/v16/partner-controls'
+      path: '/v16/partner-controls'
+      fullPath: '/v16/partner-controls'
+      preLoaderRoute: typeof V16PartnerControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/overview': {
+      id: '/v16/overview'
+      path: '/v16/overview'
+      fullPath: '/v16/overview'
+      preLoaderRoute: typeof V16OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/outcomes': {
+      id: '/v16/outcomes'
+      path: '/v16/outcomes'
+      fullPath: '/v16/outcomes'
+      preLoaderRoute: typeof V16OutcomesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/mp-opt': {
+      id: '/v16/mp-opt'
+      path: '/v16/mp-opt'
+      fullPath: '/v16/mp-opt'
+      preLoaderRoute: typeof V16MpOptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/mp-controls': {
+      id: '/v16/mp-controls'
+      path: '/v16/mp-controls'
+      fullPath: '/v16/mp-controls'
+      preLoaderRoute: typeof V16MpControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/hitl': {
+      id: '/v16/hitl'
+      path: '/v16/hitl'
+      fullPath: '/v16/hitl'
+      preLoaderRoute: typeof V16HitlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/explainability': {
+      id: '/v16/explainability'
+      path: '/v16/explainability'
+      fullPath: '/v16/explainability'
+      preLoaderRoute: typeof V16ExplainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/exec-decision': {
+      id: '/v16/exec-decision'
+      path: '/v16/exec-decision'
+      fullPath: '/v16/exec-decision'
+      preLoaderRoute: typeof V16ExecDecisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/evidence': {
+      id: '/v16/evidence'
+      path: '/v16/evidence'
+      fullPath: '/v16/evidence'
+      preLoaderRoute: typeof V16EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/demo': {
+      id: '/v16/demo'
+      path: '/v16/demo'
+      fullPath: '/v16/demo'
+      preLoaderRoute: typeof V16DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/control-maturity': {
+      id: '/v16/control-maturity'
+      path: '/v16/control-maturity'
+      fullPath: '/v16/control-maturity'
+      preLoaderRoute: typeof V16ControlMaturityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/command': {
+      id: '/v16/command'
+      path: '/v16/command'
+      fullPath: '/v16/command'
+      preLoaderRoute: typeof V16CommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/category-controls': {
+      id: '/v16/category-controls'
+      path: '/v16/category-controls'
+      fullPath: '/v16/category-controls'
+      preLoaderRoute: typeof V16CategoryControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/capital-board': {
+      id: '/v16/capital-board'
+      path: '/v16/capital-board'
+      fullPath: '/v16/capital-board'
+      preLoaderRoute: typeof V16CapitalBoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/cap-controls': {
+      id: '/v16/cap-controls'
+      path: '/v16/cap-controls'
+      fullPath: '/v16/cap-controls'
+      preLoaderRoute: typeof V16CapControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/board-decision': {
+      id: '/v16/board-decision'
+      path: '/v16/board-decision'
+      fullPath: '/v16/board-decision'
+      preLoaderRoute: typeof V16BoardDecisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v16/acct-controls': {
+      id: '/v16/acct-controls'
+      path: '/v16/acct-controls'
+      fullPath: '/v16/acct-controls'
+      preLoaderRoute: typeof V16AcctControlsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v155/scope': {
@@ -16785,6 +17285,31 @@ const rootRouteChildren: RootRouteChildren = {
   V155RiskIntelRoute: V155RiskIntelRoute,
   V155RoadmapRoute: V155RoadmapRoute,
   V155ScopeRoute: V155ScopeRoute,
+  V16AcctControlsRoute: V16AcctControlsRoute,
+  V16BoardDecisionRoute: V16BoardDecisionRoute,
+  V16CapControlsRoute: V16CapControlsRoute,
+  V16CapitalBoardRoute: V16CapitalBoardRoute,
+  V16CategoryControlsRoute: V16CategoryControlsRoute,
+  V16CommandRoute: V16CommandRoute,
+  V16ControlMaturityRoute: V16ControlMaturityRoute,
+  V16DemoRoute: V16DemoRoute,
+  V16EvidenceRoute: V16EvidenceRoute,
+  V16ExecDecisionRoute: V16ExecDecisionRoute,
+  V16ExplainabilityRoute: V16ExplainabilityRoute,
+  V16HitlRoute: V16HitlRoute,
+  V16MpControlsRoute: V16MpControlsRoute,
+  V16MpOptRoute: V16MpOptRoute,
+  V16OutcomesRoute: V16OutcomesRoute,
+  V16OverviewRoute: V16OverviewRoute,
+  V16PartnerControlsRoute: V16PartnerControlsRoute,
+  V16PredictiveRoute: V16PredictiveRoute,
+  V16ProductControlsRoute: V16ProductControlsRoute,
+  V16RecGovRoute: V16RecGovRoute,
+  V16ReportsRoute: V16ReportsRoute,
+  V16RevControlsRoute: V16RevControlsRoute,
+  V16RiskRoute: V16RiskRoute,
+  V16RoadmapRoute: V16RoadmapRoute,
+  V16ScopeRoute: V16ScopeRoute,
   V2AiOpsRoute: V2AiOpsRoute,
   V2ApiKeysRoute: V2ApiKeysRoute,
   V2ApiMarketplaceRoute: V2ApiMarketplaceRoute,
