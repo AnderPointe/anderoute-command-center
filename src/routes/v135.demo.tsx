@@ -11,12 +11,17 @@ function Page() {
   const roles = H.useV135RoleGuidance();
   const headline = H.useV135ExecHeadline();
   const rlsSql = H.useV135RlsSqlSnippets();
-  const edge = H.useV135EdgeVsServerFn();
+  const rlsExt = H.useV135RlsSqlSnippetsExt();
+  const edge = H.useV135EdgeVsServerFnExt();
+  const real = H.useV135ValueRealization();
   return (
-    <V135Page icon={<ListChecks className="size-6 text-fuchsia-300" />} title="V13.5 Demo Flow" blurb="Multi-role durability + board strategic OS walkthrough — CEO, CFO, CRO, Board admin, MP leader, Partner lead.">
+    <V135Page icon={<ListChecks className="size-6 text-fuchsia-300" />} title="V13.5 Demo Flow" blurb="Multi-role enterprise value-creation walkthrough — CEO, CFO, CRO, Board admin, MP leader, Partner lead.">
       <Card className="border-fuchsia-400/20 bg-fuchsia-400/5 p-4">
         <div className="text-xs uppercase tracking-wide text-fuchsia-200/80">Exec headline</div>
         <p className="mt-1 text-sm">{headline.headline}</p>
+        <p className="mt-2 text-xs text-foreground/80">
+          Value realized {real.realized_pct}% · in flight {real.in_flight_pct}% · at risk {real.at_risk_pct}%
+        </p>
       </Card>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Role guidance</h3>
@@ -29,7 +34,7 @@ function Page() {
         ]} />
       </Card>
       <Card className="border-white/10 bg-white/[0.02] p-4">
-        <h3 className="text-sm font-semibold">Edge Function vs ServerFn separation</h3>
+        <h3 className="text-sm font-semibold">Edge Function vs ServerFn separation (extended)</h3>
         <SimpleTable rows={edge as any} columns={[
           { key: "kind", label: "Kind" }, { key: "surface", label: "Surface" },
           { key: "example", label: "Example" }, { key: "why", label: "Why" },
@@ -37,9 +42,9 @@ function Page() {
       </Card>
       <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">RLS policy SQL examples (mock)</h3>
-        <p className="mt-1 text-xs text-muted-foreground">Illustrative only — see docs/phase40-plan.md for the full V13.5 RLS sketch list.</p>
+        <p className="mt-1 text-xs text-muted-foreground">Illustrative only — see docs/phase40-plan.md + docs/phase40-polish.md for the full V13.5 RLS sketch.</p>
         <div className="mt-2 space-y-2">
-          {rlsSql.map((r) => (
+          {[...rlsSql, ...rlsExt].map((r) => (
             <div key={r.table} className="rounded-lg border border-white/10 bg-black/30 p-3 text-sm">
               <div className="font-mono text-xs text-fuchsia-200">{r.table}</div>
               <pre className="mt-2 overflow-x-auto text-[11px] text-muted-foreground">{r.sql}</pre>
