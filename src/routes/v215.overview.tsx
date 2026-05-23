@@ -82,6 +82,11 @@ function Page() {
         ]} />
       </Section>
 
+      <Section title="Boundary controls (extra surfaces)">
+        <SimpleTable rows={boundaryExtra as any} columns={[
+          { key: "surface", label: "Surface" }, { key: "exposes", label: "Exposes" }, { key: "hides", label: "Hides" },
+        ]} />
+
       <Section title="Owner heatmap">
         <SimpleTable rows={owners as any} columns={[
           { key: "owner", label: "Owner" }, { key: "green", label: "Green" }, { key: "amber", label: "Amber" }, { key: "red", label: "Red" },
