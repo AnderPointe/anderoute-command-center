@@ -420,6 +420,30 @@ import { Route as V15DispatcherRoutesRouteImport } from './routes/v15.dispatcher
 import { Route as V15DemoRouteImport } from './routes/v15.demo'
 import { Route as V15CopilotRouteImport } from './routes/v15.copilot'
 import { Route as V15BillingRouteImport } from './routes/v15.billing'
+import { Route as V14ValueTowerRouteImport } from './routes/v14.value-tower'
+import { Route as V14StrategicRiskRouteImport } from './routes/v14.strategic-risk'
+import { Route as V14StrategicInvestRouteImport } from './routes/v14.strategic-invest'
+import { Route as V14StrategicAcctRouteImport } from './routes/v14.strategic-acct'
+import { Route as V14SosRouteImport } from './routes/v14.sos'
+import { Route as V14ScopeRouteImport } from './routes/v14.scope'
+import { Route as V14RoadmapRouteImport } from './routes/v14.roadmap'
+import { Route as V14RevenueDurabilityRouteImport } from './routes/v14.revenue-durability'
+import { Route as V14RevenueControlsRouteImport } from './routes/v14.revenue-controls'
+import { Route as V14ReportsRouteImport } from './routes/v14.reports'
+import { Route as V14ReportingRouteImport } from './routes/v14.reporting'
+import { Route as V14ProductLineRouteImport } from './routes/v14.product-line'
+import { Route as V14PartnerValueRouteImport } from './routes/v14.partner-value'
+import { Route as V14OverviewRouteImport } from './routes/v14.overview'
+import { Route as V14MpEconRouteImport } from './routes/v14.mp-econ'
+import { Route as V14MpControlsRouteImport } from './routes/v14.mp-controls'
+import { Route as V14DiligenceRouteImport } from './routes/v14.diligence'
+import { Route as V14DemoRouteImport } from './routes/v14.demo'
+import { Route as V14CategoryEvidenceRouteImport } from './routes/v14.category-evidence'
+import { Route as V14CategoryRouteImport } from './routes/v14.category'
+import { Route as V14CapitalExecRouteImport } from './routes/v14.capital-exec'
+import { Route as V14CapitalEvidenceRouteImport } from './routes/v14.capital-evidence'
+import { Route as V14CadenceRouteImport } from './routes/v14.cadence'
+import { Route as V14BoardExecRouteImport } from './routes/v14.board-exec'
 import { Route as V135StrategicAcctRouteImport } from './routes/v135.strategic-acct'
 import { Route as V135ScopeRouteImport } from './routes/v135.scope'
 import { Route as V135RoadmapRouteImport } from './routes/v135.roadmap'
@@ -2791,6 +2815,126 @@ const V15BillingRoute = V15BillingRouteImport.update({
   path: '/v15/billing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const V14ValueTowerRoute = V14ValueTowerRouteImport.update({
+  id: '/v14/value-tower',
+  path: '/v14/value-tower',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14StrategicRiskRoute = V14StrategicRiskRouteImport.update({
+  id: '/v14/strategic-risk',
+  path: '/v14/strategic-risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14StrategicInvestRoute = V14StrategicInvestRouteImport.update({
+  id: '/v14/strategic-invest',
+  path: '/v14/strategic-invest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14StrategicAcctRoute = V14StrategicAcctRouteImport.update({
+  id: '/v14/strategic-acct',
+  path: '/v14/strategic-acct',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14SosRoute = V14SosRouteImport.update({
+  id: '/v14/sos',
+  path: '/v14/sos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14ScopeRoute = V14ScopeRouteImport.update({
+  id: '/v14/scope',
+  path: '/v14/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14RoadmapRoute = V14RoadmapRouteImport.update({
+  id: '/v14/roadmap',
+  path: '/v14/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14RevenueDurabilityRoute = V14RevenueDurabilityRouteImport.update({
+  id: '/v14/revenue-durability',
+  path: '/v14/revenue-durability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14RevenueControlsRoute = V14RevenueControlsRouteImport.update({
+  id: '/v14/revenue-controls',
+  path: '/v14/revenue-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14ReportsRoute = V14ReportsRouteImport.update({
+  id: '/v14/reports',
+  path: '/v14/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14ReportingRoute = V14ReportingRouteImport.update({
+  id: '/v14/reporting',
+  path: '/v14/reporting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14ProductLineRoute = V14ProductLineRouteImport.update({
+  id: '/v14/product-line',
+  path: '/v14/product-line',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14PartnerValueRoute = V14PartnerValueRouteImport.update({
+  id: '/v14/partner-value',
+  path: '/v14/partner-value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14OverviewRoute = V14OverviewRouteImport.update({
+  id: '/v14/overview',
+  path: '/v14/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14MpEconRoute = V14MpEconRouteImport.update({
+  id: '/v14/mp-econ',
+  path: '/v14/mp-econ',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14MpControlsRoute = V14MpControlsRouteImport.update({
+  id: '/v14/mp-controls',
+  path: '/v14/mp-controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14DiligenceRoute = V14DiligenceRouteImport.update({
+  id: '/v14/diligence',
+  path: '/v14/diligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14DemoRoute = V14DemoRouteImport.update({
+  id: '/v14/demo',
+  path: '/v14/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14CategoryEvidenceRoute = V14CategoryEvidenceRouteImport.update({
+  id: '/v14/category-evidence',
+  path: '/v14/category-evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14CategoryRoute = V14CategoryRouteImport.update({
+  id: '/v14/category',
+  path: '/v14/category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14CapitalExecRoute = V14CapitalExecRouteImport.update({
+  id: '/v14/capital-exec',
+  path: '/v14/capital-exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14CapitalEvidenceRoute = V14CapitalEvidenceRouteImport.update({
+  id: '/v14/capital-evidence',
+  path: '/v14/capital-evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14CadenceRoute = V14CadenceRouteImport.update({
+  id: '/v14/cadence',
+  path: '/v14/cadence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V14BoardExecRoute = V14BoardExecRouteImport.update({
+  id: '/v14/board-exec',
+  path: '/v14/board-exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const V135StrategicAcctRoute = V135StrategicAcctRouteImport.update({
   id: '/v135/strategic-acct',
   path: '/v135/strategic-acct',
@@ -4682,6 +4826,30 @@ export interface FileRoutesByFullPath {
   '/v135/roadmap': typeof V135RoadmapRoute
   '/v135/scope': typeof V135ScopeRoute
   '/v135/strategic-acct': typeof V135StrategicAcctRoute
+  '/v14/board-exec': typeof V14BoardExecRoute
+  '/v14/cadence': typeof V14CadenceRoute
+  '/v14/capital-evidence': typeof V14CapitalEvidenceRoute
+  '/v14/capital-exec': typeof V14CapitalExecRoute
+  '/v14/category': typeof V14CategoryRoute
+  '/v14/category-evidence': typeof V14CategoryEvidenceRoute
+  '/v14/demo': typeof V14DemoRoute
+  '/v14/diligence': typeof V14DiligenceRoute
+  '/v14/mp-controls': typeof V14MpControlsRoute
+  '/v14/mp-econ': typeof V14MpEconRoute
+  '/v14/overview': typeof V14OverviewRoute
+  '/v14/partner-value': typeof V14PartnerValueRoute
+  '/v14/product-line': typeof V14ProductLineRoute
+  '/v14/reporting': typeof V14ReportingRoute
+  '/v14/reports': typeof V14ReportsRoute
+  '/v14/revenue-controls': typeof V14RevenueControlsRoute
+  '/v14/revenue-durability': typeof V14RevenueDurabilityRoute
+  '/v14/roadmap': typeof V14RoadmapRoute
+  '/v14/scope': typeof V14ScopeRoute
+  '/v14/sos': typeof V14SosRoute
+  '/v14/strategic-acct': typeof V14StrategicAcctRoute
+  '/v14/strategic-invest': typeof V14StrategicInvestRoute
+  '/v14/strategic-risk': typeof V14StrategicRiskRoute
+  '/v14/value-tower': typeof V14ValueTowerRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -5406,6 +5574,30 @@ export interface FileRoutesByTo {
   '/v135/roadmap': typeof V135RoadmapRoute
   '/v135/scope': typeof V135ScopeRoute
   '/v135/strategic-acct': typeof V135StrategicAcctRoute
+  '/v14/board-exec': typeof V14BoardExecRoute
+  '/v14/cadence': typeof V14CadenceRoute
+  '/v14/capital-evidence': typeof V14CapitalEvidenceRoute
+  '/v14/capital-exec': typeof V14CapitalExecRoute
+  '/v14/category': typeof V14CategoryRoute
+  '/v14/category-evidence': typeof V14CategoryEvidenceRoute
+  '/v14/demo': typeof V14DemoRoute
+  '/v14/diligence': typeof V14DiligenceRoute
+  '/v14/mp-controls': typeof V14MpControlsRoute
+  '/v14/mp-econ': typeof V14MpEconRoute
+  '/v14/overview': typeof V14OverviewRoute
+  '/v14/partner-value': typeof V14PartnerValueRoute
+  '/v14/product-line': typeof V14ProductLineRoute
+  '/v14/reporting': typeof V14ReportingRoute
+  '/v14/reports': typeof V14ReportsRoute
+  '/v14/revenue-controls': typeof V14RevenueControlsRoute
+  '/v14/revenue-durability': typeof V14RevenueDurabilityRoute
+  '/v14/roadmap': typeof V14RoadmapRoute
+  '/v14/scope': typeof V14ScopeRoute
+  '/v14/sos': typeof V14SosRoute
+  '/v14/strategic-acct': typeof V14StrategicAcctRoute
+  '/v14/strategic-invest': typeof V14StrategicInvestRoute
+  '/v14/strategic-risk': typeof V14StrategicRiskRoute
+  '/v14/value-tower': typeof V14ValueTowerRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -6131,6 +6323,30 @@ export interface FileRoutesById {
   '/v135/roadmap': typeof V135RoadmapRoute
   '/v135/scope': typeof V135ScopeRoute
   '/v135/strategic-acct': typeof V135StrategicAcctRoute
+  '/v14/board-exec': typeof V14BoardExecRoute
+  '/v14/cadence': typeof V14CadenceRoute
+  '/v14/capital-evidence': typeof V14CapitalEvidenceRoute
+  '/v14/capital-exec': typeof V14CapitalExecRoute
+  '/v14/category': typeof V14CategoryRoute
+  '/v14/category-evidence': typeof V14CategoryEvidenceRoute
+  '/v14/demo': typeof V14DemoRoute
+  '/v14/diligence': typeof V14DiligenceRoute
+  '/v14/mp-controls': typeof V14MpControlsRoute
+  '/v14/mp-econ': typeof V14MpEconRoute
+  '/v14/overview': typeof V14OverviewRoute
+  '/v14/partner-value': typeof V14PartnerValueRoute
+  '/v14/product-line': typeof V14ProductLineRoute
+  '/v14/reporting': typeof V14ReportingRoute
+  '/v14/reports': typeof V14ReportsRoute
+  '/v14/revenue-controls': typeof V14RevenueControlsRoute
+  '/v14/revenue-durability': typeof V14RevenueDurabilityRoute
+  '/v14/roadmap': typeof V14RoadmapRoute
+  '/v14/scope': typeof V14ScopeRoute
+  '/v14/sos': typeof V14SosRoute
+  '/v14/strategic-acct': typeof V14StrategicAcctRoute
+  '/v14/strategic-invest': typeof V14StrategicInvestRoute
+  '/v14/strategic-risk': typeof V14StrategicRiskRoute
+  '/v14/value-tower': typeof V14ValueTowerRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -6857,6 +7073,30 @@ export interface FileRouteTypes {
     | '/v135/roadmap'
     | '/v135/scope'
     | '/v135/strategic-acct'
+    | '/v14/board-exec'
+    | '/v14/cadence'
+    | '/v14/capital-evidence'
+    | '/v14/capital-exec'
+    | '/v14/category'
+    | '/v14/category-evidence'
+    | '/v14/demo'
+    | '/v14/diligence'
+    | '/v14/mp-controls'
+    | '/v14/mp-econ'
+    | '/v14/overview'
+    | '/v14/partner-value'
+    | '/v14/product-line'
+    | '/v14/reporting'
+    | '/v14/reports'
+    | '/v14/revenue-controls'
+    | '/v14/revenue-durability'
+    | '/v14/roadmap'
+    | '/v14/scope'
+    | '/v14/sos'
+    | '/v14/strategic-acct'
+    | '/v14/strategic-invest'
+    | '/v14/strategic-risk'
+    | '/v14/value-tower'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -7581,6 +7821,30 @@ export interface FileRouteTypes {
     | '/v135/roadmap'
     | '/v135/scope'
     | '/v135/strategic-acct'
+    | '/v14/board-exec'
+    | '/v14/cadence'
+    | '/v14/capital-evidence'
+    | '/v14/capital-exec'
+    | '/v14/category'
+    | '/v14/category-evidence'
+    | '/v14/demo'
+    | '/v14/diligence'
+    | '/v14/mp-controls'
+    | '/v14/mp-econ'
+    | '/v14/overview'
+    | '/v14/partner-value'
+    | '/v14/product-line'
+    | '/v14/reporting'
+    | '/v14/reports'
+    | '/v14/revenue-controls'
+    | '/v14/revenue-durability'
+    | '/v14/roadmap'
+    | '/v14/scope'
+    | '/v14/sos'
+    | '/v14/strategic-acct'
+    | '/v14/strategic-invest'
+    | '/v14/strategic-risk'
+    | '/v14/value-tower'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -8305,6 +8569,30 @@ export interface FileRouteTypes {
     | '/v135/roadmap'
     | '/v135/scope'
     | '/v135/strategic-acct'
+    | '/v14/board-exec'
+    | '/v14/cadence'
+    | '/v14/capital-evidence'
+    | '/v14/capital-exec'
+    | '/v14/category'
+    | '/v14/category-evidence'
+    | '/v14/demo'
+    | '/v14/diligence'
+    | '/v14/mp-controls'
+    | '/v14/mp-econ'
+    | '/v14/overview'
+    | '/v14/partner-value'
+    | '/v14/product-line'
+    | '/v14/reporting'
+    | '/v14/reports'
+    | '/v14/revenue-controls'
+    | '/v14/revenue-durability'
+    | '/v14/roadmap'
+    | '/v14/scope'
+    | '/v14/sos'
+    | '/v14/strategic-acct'
+    | '/v14/strategic-invest'
+    | '/v14/strategic-risk'
+    | '/v14/value-tower'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -9022,6 +9310,30 @@ export interface RootRouteChildren {
   V135RoadmapRoute: typeof V135RoadmapRoute
   V135ScopeRoute: typeof V135ScopeRoute
   V135StrategicAcctRoute: typeof V135StrategicAcctRoute
+  V14BoardExecRoute: typeof V14BoardExecRoute
+  V14CadenceRoute: typeof V14CadenceRoute
+  V14CapitalEvidenceRoute: typeof V14CapitalEvidenceRoute
+  V14CapitalExecRoute: typeof V14CapitalExecRoute
+  V14CategoryRoute: typeof V14CategoryRoute
+  V14CategoryEvidenceRoute: typeof V14CategoryEvidenceRoute
+  V14DemoRoute: typeof V14DemoRoute
+  V14DiligenceRoute: typeof V14DiligenceRoute
+  V14MpControlsRoute: typeof V14MpControlsRoute
+  V14MpEconRoute: typeof V14MpEconRoute
+  V14OverviewRoute: typeof V14OverviewRoute
+  V14PartnerValueRoute: typeof V14PartnerValueRoute
+  V14ProductLineRoute: typeof V14ProductLineRoute
+  V14ReportingRoute: typeof V14ReportingRoute
+  V14ReportsRoute: typeof V14ReportsRoute
+  V14RevenueControlsRoute: typeof V14RevenueControlsRoute
+  V14RevenueDurabilityRoute: typeof V14RevenueDurabilityRoute
+  V14RoadmapRoute: typeof V14RoadmapRoute
+  V14ScopeRoute: typeof V14ScopeRoute
+  V14SosRoute: typeof V14SosRoute
+  V14StrategicAcctRoute: typeof V14StrategicAcctRoute
+  V14StrategicInvestRoute: typeof V14StrategicInvestRoute
+  V14StrategicRiskRoute: typeof V14StrategicRiskRoute
+  V14ValueTowerRoute: typeof V14ValueTowerRoute
   V15BillingRoute: typeof V15BillingRoute
   V15CopilotRoute: typeof V15CopilotRoute
   V15DemoRoute: typeof V15DemoRoute
@@ -12295,6 +12607,174 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof V15BillingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v14/value-tower': {
+      id: '/v14/value-tower'
+      path: '/v14/value-tower'
+      fullPath: '/v14/value-tower'
+      preLoaderRoute: typeof V14ValueTowerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/strategic-risk': {
+      id: '/v14/strategic-risk'
+      path: '/v14/strategic-risk'
+      fullPath: '/v14/strategic-risk'
+      preLoaderRoute: typeof V14StrategicRiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/strategic-invest': {
+      id: '/v14/strategic-invest'
+      path: '/v14/strategic-invest'
+      fullPath: '/v14/strategic-invest'
+      preLoaderRoute: typeof V14StrategicInvestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/strategic-acct': {
+      id: '/v14/strategic-acct'
+      path: '/v14/strategic-acct'
+      fullPath: '/v14/strategic-acct'
+      preLoaderRoute: typeof V14StrategicAcctRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/sos': {
+      id: '/v14/sos'
+      path: '/v14/sos'
+      fullPath: '/v14/sos'
+      preLoaderRoute: typeof V14SosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/scope': {
+      id: '/v14/scope'
+      path: '/v14/scope'
+      fullPath: '/v14/scope'
+      preLoaderRoute: typeof V14ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/roadmap': {
+      id: '/v14/roadmap'
+      path: '/v14/roadmap'
+      fullPath: '/v14/roadmap'
+      preLoaderRoute: typeof V14RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/revenue-durability': {
+      id: '/v14/revenue-durability'
+      path: '/v14/revenue-durability'
+      fullPath: '/v14/revenue-durability'
+      preLoaderRoute: typeof V14RevenueDurabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/revenue-controls': {
+      id: '/v14/revenue-controls'
+      path: '/v14/revenue-controls'
+      fullPath: '/v14/revenue-controls'
+      preLoaderRoute: typeof V14RevenueControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/reports': {
+      id: '/v14/reports'
+      path: '/v14/reports'
+      fullPath: '/v14/reports'
+      preLoaderRoute: typeof V14ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/reporting': {
+      id: '/v14/reporting'
+      path: '/v14/reporting'
+      fullPath: '/v14/reporting'
+      preLoaderRoute: typeof V14ReportingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/product-line': {
+      id: '/v14/product-line'
+      path: '/v14/product-line'
+      fullPath: '/v14/product-line'
+      preLoaderRoute: typeof V14ProductLineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/partner-value': {
+      id: '/v14/partner-value'
+      path: '/v14/partner-value'
+      fullPath: '/v14/partner-value'
+      preLoaderRoute: typeof V14PartnerValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/overview': {
+      id: '/v14/overview'
+      path: '/v14/overview'
+      fullPath: '/v14/overview'
+      preLoaderRoute: typeof V14OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/mp-econ': {
+      id: '/v14/mp-econ'
+      path: '/v14/mp-econ'
+      fullPath: '/v14/mp-econ'
+      preLoaderRoute: typeof V14MpEconRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/mp-controls': {
+      id: '/v14/mp-controls'
+      path: '/v14/mp-controls'
+      fullPath: '/v14/mp-controls'
+      preLoaderRoute: typeof V14MpControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/diligence': {
+      id: '/v14/diligence'
+      path: '/v14/diligence'
+      fullPath: '/v14/diligence'
+      preLoaderRoute: typeof V14DiligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/demo': {
+      id: '/v14/demo'
+      path: '/v14/demo'
+      fullPath: '/v14/demo'
+      preLoaderRoute: typeof V14DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/category-evidence': {
+      id: '/v14/category-evidence'
+      path: '/v14/category-evidence'
+      fullPath: '/v14/category-evidence'
+      preLoaderRoute: typeof V14CategoryEvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/category': {
+      id: '/v14/category'
+      path: '/v14/category'
+      fullPath: '/v14/category'
+      preLoaderRoute: typeof V14CategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/capital-exec': {
+      id: '/v14/capital-exec'
+      path: '/v14/capital-exec'
+      fullPath: '/v14/capital-exec'
+      preLoaderRoute: typeof V14CapitalExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/capital-evidence': {
+      id: '/v14/capital-evidence'
+      path: '/v14/capital-evidence'
+      fullPath: '/v14/capital-evidence'
+      preLoaderRoute: typeof V14CapitalEvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/cadence': {
+      id: '/v14/cadence'
+      path: '/v14/cadence'
+      fullPath: '/v14/cadence'
+      preLoaderRoute: typeof V14CadenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v14/board-exec': {
+      id: '/v14/board-exec'
+      path: '/v14/board-exec'
+      fullPath: '/v14/board-exec'
+      preLoaderRoute: typeof V14BoardExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/v135/strategic-acct': {
       id: '/v135/strategic-acct'
       path: '/v135/strategic-acct'
@@ -14851,6 +15331,30 @@ const rootRouteChildren: RootRouteChildren = {
   V135RoadmapRoute: V135RoadmapRoute,
   V135ScopeRoute: V135ScopeRoute,
   V135StrategicAcctRoute: V135StrategicAcctRoute,
+  V14BoardExecRoute: V14BoardExecRoute,
+  V14CadenceRoute: V14CadenceRoute,
+  V14CapitalEvidenceRoute: V14CapitalEvidenceRoute,
+  V14CapitalExecRoute: V14CapitalExecRoute,
+  V14CategoryRoute: V14CategoryRoute,
+  V14CategoryEvidenceRoute: V14CategoryEvidenceRoute,
+  V14DemoRoute: V14DemoRoute,
+  V14DiligenceRoute: V14DiligenceRoute,
+  V14MpControlsRoute: V14MpControlsRoute,
+  V14MpEconRoute: V14MpEconRoute,
+  V14OverviewRoute: V14OverviewRoute,
+  V14PartnerValueRoute: V14PartnerValueRoute,
+  V14ProductLineRoute: V14ProductLineRoute,
+  V14ReportingRoute: V14ReportingRoute,
+  V14ReportsRoute: V14ReportsRoute,
+  V14RevenueControlsRoute: V14RevenueControlsRoute,
+  V14RevenueDurabilityRoute: V14RevenueDurabilityRoute,
+  V14RoadmapRoute: V14RoadmapRoute,
+  V14ScopeRoute: V14ScopeRoute,
+  V14SosRoute: V14SosRoute,
+  V14StrategicAcctRoute: V14StrategicAcctRoute,
+  V14StrategicInvestRoute: V14StrategicInvestRoute,
+  V14StrategicRiskRoute: V14StrategicRiskRoute,
+  V14ValueTowerRoute: V14ValueTowerRoute,
   V15BillingRoute: V15BillingRoute,
   V15CopilotRoute: V15CopilotRoute,
   V15DemoRoute: V15DemoRoute,
