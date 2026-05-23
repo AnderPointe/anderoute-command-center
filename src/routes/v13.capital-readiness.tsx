@@ -36,6 +36,13 @@ function Page() {
         </Card>
       </div>
       <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Capital readiness trend (last 4Q)</h3>
+        <SimpleTable rows={trends as any} columns={[
+          { key: "quarter", label: "Quarter" }, { key: "score", label: "Score" },
+          { key: "ready_kpis", label: "Ready KPIs" }, { key: "gaps_open", label: "Open gaps" },
+        ]} />
+      </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
         <h3 className="text-sm font-semibold">Executive capital summary</h3>
         <ul className="list-disc space-y-1 pl-5 text-sm">
           {c.exec_summary.map((s) => <li key={s}>{s}</li>)}
