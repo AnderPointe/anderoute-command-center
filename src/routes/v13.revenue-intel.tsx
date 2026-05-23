@@ -32,6 +32,13 @@ function Page() {
           <SimpleTable rows={ri.risks as any} columns={[{ key: "risk", label: "Risk" }, { key: "severity", label: "Sev." }, { key: "owner", label: "Owner" }]} />
         </Card>
       </div>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Revenue intel trend (last 4Q)</h3>
+        <SimpleTable rows={trends as any} columns={[
+          { key: "quarter", label: "Quarter" }, { key: "score", label: "Score" },
+          { key: "sub_quality", label: "Sub" }, { key: "mp_quality", label: "MP" }, { key: "api_quality", label: "API" },
+        ]} />
+      </Card>
     </V13Page>
   );
 }
