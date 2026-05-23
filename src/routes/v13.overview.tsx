@@ -67,6 +67,13 @@ function Page() {
           <SimpleTable rows={rls as any} columns={[{ key: "table", label: "Table" }, { key: "policy", label: "Policy" }]} />
         </div>
       </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Edge Function vs ServerFn separation</h3>
+        <SimpleTable rows={edge as any} columns={[
+          { key: "kind", label: "Kind" }, { key: "surface", label: "Surface" },
+          { key: "example", label: "Example" }, { key: "why", label: "Why" },
+        ]} />
+      </Card>
       <Card className="border-indigo-400/20 bg-indigo-400/5 p-4">
         <h3 className="text-sm font-semibold text-indigo-100">Phase 40 (V13.5) teaser — not started</h3>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground/90">
