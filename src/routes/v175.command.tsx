@@ -6,6 +6,8 @@ import * as H from "@/v175/hooks";
 
 function Page() {
   const gs = H.useGovernedAutomationScale();
+  const headlines = H.useV175PolishHeadlines();
+  const heatmap = H.useV175OwnerHeatmap();
   return (
     <V175Page icon={<Gauge className="size-6 text-emerald-300" />} title="Governed Enterprise Automation Scale Center"
       blurb="Governed automation scale score, policy compliance, approval health, evidence coverage, and per-domain coverage matrix. Audit completeness tracked across all surfaces.">
