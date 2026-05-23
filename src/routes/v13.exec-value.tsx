@@ -7,6 +7,7 @@ import * as H from "@/v13/hooks";
 
 function Page() {
   const e = H.useExecutiveValueCreation();
+  const trends = H.useV13ExecValueTrends();
   return (
     <V13Page icon={<Stamp className="size-6 text-indigo-300" />} title="Executive Value Creation Dashboard" blurb="Value creation score, value drivers, risks, action queue, and decisions needed.">
       <div className="grid gap-3 md:grid-cols-4">
