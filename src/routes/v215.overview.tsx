@@ -105,6 +105,14 @@ function Page() {
         ]} />
       </Section>
 
+      <Section title="Server boundary — extras (ServerFn + /api/public/*)">
+        <SimpleTable rows={edgeExtra.serverfn_extra as any} columns={[
+          { key: "name", label: "ServerFn" }, { key: "kind", label: "Kind" }, { key: "auth", label: "Auth" },
+        ]} />
+        <SimpleTable rows={edgeExtra.edge_routes_extra as any} columns={[
+          { key: "path", label: "Public route" }, { key: "purpose", label: "Purpose" },
+        ]} />
+
       <Section title="RLS policy examples (expanded)">
         <SimpleTable rows={rls as any} columns={[
           { key: "policy", label: "Policy" }, { key: "rule", label: "Rule" }, { key: "surface", label: "Surface" },
