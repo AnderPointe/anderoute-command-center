@@ -7,6 +7,7 @@ import * as H from "@/v125/hooks";
 
 function Page() {
   const q = H.useRevenueQualityControls();
+  const trends = H.useRevenueQualityTrends();
   const pass = q.controls.filter((c) => c.status === "pass").length;
   const review = q.controls.filter((c) => c.status === "review").length;
   const exc = q.controls.filter((c) => c.status === "exception").length;
