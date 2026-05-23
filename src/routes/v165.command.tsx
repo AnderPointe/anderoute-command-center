@@ -26,6 +26,18 @@ function Page() {
           { key: "item", label: "Action" }, { key: "owner", label: "Owner" }, { key: "due", label: "Due" },
         ]} />
       </Section>
+      <Section title="Per-area headlines (polish)">
+        <SimpleTable rows={H.useV165PolishHeadlines() as any} columns={[
+          { key: "area", label: "Area" }, { key: "headline", label: "Headline" }, { key: "owner", label: "Owner" },
+        ]} />
+      </Section>
+      <Section title="Owner approval heatmap (last 7 days)">
+        <SimpleTable rows={H.useV165OwnerHeatmap() as any} columns={[
+          { key: "owner", label: "Owner" }, { key: "pending", label: "Pending" },
+          { key: "approved7d", label: "Approved 7d" }, { key: "rejected7d", label: "Rejected 7d" },
+          { key: "sla", label: "SLA" },
+        ]} />
+      </Section>
     </V165Page>
   );
 }
