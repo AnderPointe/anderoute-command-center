@@ -397,6 +397,31 @@ import { Route as V2ApprovalsRouteImport } from './routes/v2.approvals'
 import { Route as V2ApiMarketplaceRouteImport } from './routes/v2.api-marketplace'
 import { Route as V2ApiKeysRouteImport } from './routes/v2.api-keys'
 import { Route as V2AiOpsRouteImport } from './routes/v2.ai-ops'
+import { Route as V19SettingsRouteImport } from './routes/v19.settings'
+import { Route as V19ScopeRouteImport } from './routes/v19.scope'
+import { Route as V19RoadmapRouteImport } from './routes/v19.roadmap'
+import { Route as V19RiskRouteImport } from './routes/v19.risk'
+import { Route as V19RevenueRouteImport } from './routes/v19.revenue'
+import { Route as V19ResilienceRouteImport } from './routes/v19.resilience'
+import { Route as V19ReportsRouteImport } from './routes/v19.reports'
+import { Route as V19RecRouteImport } from './routes/v19.rec'
+import { Route as V19ProductsRouteImport } from './routes/v19.products'
+import { Route as V19PartnersRouteImport } from './routes/v19.partners'
+import { Route as V19OverviewRouteImport } from './routes/v19.overview'
+import { Route as V19OutcomeRouteImport } from './routes/v19.outcome'
+import { Route as V19OsRouteImport } from './routes/v19.os'
+import { Route as V19MpRouteImport } from './routes/v19.mp'
+import { Route as V19ExecRouteImport } from './routes/v19.exec'
+import { Route as V19ExceptionRouteImport } from './routes/v19.exception'
+import { Route as V19EvidenceRouteImport } from './routes/v19.evidence'
+import { Route as V19DemoRouteImport } from './routes/v19.demo'
+import { Route as V19CategoryRouteImport } from './routes/v19.category'
+import { Route as V19CapitalRouteImport } from './routes/v19.capital'
+import { Route as V19BoardReportRouteImport } from './routes/v19.board-report'
+import { Route as V19BoardExecRouteImport } from './routes/v19.board-exec'
+import { Route as V19AuditRouteImport } from './routes/v19.audit'
+import { Route as V19ApprovalRouteImport } from './routes/v19.approval'
+import { Route as V19AccountsRouteImport } from './routes/v19.accounts'
 import { Route as V185ScopeRouteImport } from './routes/v185.scope'
 import { Route as V185RoadmapRouteImport } from './routes/v185.roadmap'
 import { Route as V185RiskRouteImport } from './routes/v185.risk'
@@ -2889,6 +2914,131 @@ const V2ApiKeysRoute = V2ApiKeysRouteImport.update({
 const V2AiOpsRoute = V2AiOpsRouteImport.update({
   id: '/v2/ai-ops',
   path: '/v2/ai-ops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19SettingsRoute = V19SettingsRouteImport.update({
+  id: '/v19/settings',
+  path: '/v19/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ScopeRoute = V19ScopeRouteImport.update({
+  id: '/v19/scope',
+  path: '/v19/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19RoadmapRoute = V19RoadmapRouteImport.update({
+  id: '/v19/roadmap',
+  path: '/v19/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19RiskRoute = V19RiskRouteImport.update({
+  id: '/v19/risk',
+  path: '/v19/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19RevenueRoute = V19RevenueRouteImport.update({
+  id: '/v19/revenue',
+  path: '/v19/revenue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ResilienceRoute = V19ResilienceRouteImport.update({
+  id: '/v19/resilience',
+  path: '/v19/resilience',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ReportsRoute = V19ReportsRouteImport.update({
+  id: '/v19/reports',
+  path: '/v19/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19RecRoute = V19RecRouteImport.update({
+  id: '/v19/rec',
+  path: '/v19/rec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ProductsRoute = V19ProductsRouteImport.update({
+  id: '/v19/products',
+  path: '/v19/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19PartnersRoute = V19PartnersRouteImport.update({
+  id: '/v19/partners',
+  path: '/v19/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19OverviewRoute = V19OverviewRouteImport.update({
+  id: '/v19/overview',
+  path: '/v19/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19OutcomeRoute = V19OutcomeRouteImport.update({
+  id: '/v19/outcome',
+  path: '/v19/outcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19OsRoute = V19OsRouteImport.update({
+  id: '/v19/os',
+  path: '/v19/os',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19MpRoute = V19MpRouteImport.update({
+  id: '/v19/mp',
+  path: '/v19/mp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ExecRoute = V19ExecRouteImport.update({
+  id: '/v19/exec',
+  path: '/v19/exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ExceptionRoute = V19ExceptionRouteImport.update({
+  id: '/v19/exception',
+  path: '/v19/exception',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19EvidenceRoute = V19EvidenceRouteImport.update({
+  id: '/v19/evidence',
+  path: '/v19/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19DemoRoute = V19DemoRouteImport.update({
+  id: '/v19/demo',
+  path: '/v19/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19CategoryRoute = V19CategoryRouteImport.update({
+  id: '/v19/category',
+  path: '/v19/category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19CapitalRoute = V19CapitalRouteImport.update({
+  id: '/v19/capital',
+  path: '/v19/capital',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19BoardReportRoute = V19BoardReportRouteImport.update({
+  id: '/v19/board-report',
+  path: '/v19/board-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19BoardExecRoute = V19BoardExecRouteImport.update({
+  id: '/v19/board-exec',
+  path: '/v19/board-exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19AuditRoute = V19AuditRouteImport.update({
+  id: '/v19/audit',
+  path: '/v19/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19ApprovalRoute = V19ApprovalRouteImport.update({
+  id: '/v19/approval',
+  path: '/v19/approval',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V19AccountsRoute = V19AccountsRouteImport.update({
+  id: '/v19/accounts',
+  path: '/v19/accounts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V185ScopeRoute = V185ScopeRouteImport.update({
@@ -6210,6 +6360,31 @@ export interface FileRoutesByFullPath {
   '/v185/risk': typeof V185RiskRoute
   '/v185/roadmap': typeof V185RoadmapRoute
   '/v185/scope': typeof V185ScopeRoute
+  '/v19/accounts': typeof V19AccountsRoute
+  '/v19/approval': typeof V19ApprovalRoute
+  '/v19/audit': typeof V19AuditRoute
+  '/v19/board-exec': typeof V19BoardExecRoute
+  '/v19/board-report': typeof V19BoardReportRoute
+  '/v19/capital': typeof V19CapitalRoute
+  '/v19/category': typeof V19CategoryRoute
+  '/v19/demo': typeof V19DemoRoute
+  '/v19/evidence': typeof V19EvidenceRoute
+  '/v19/exception': typeof V19ExceptionRoute
+  '/v19/exec': typeof V19ExecRoute
+  '/v19/mp': typeof V19MpRoute
+  '/v19/os': typeof V19OsRoute
+  '/v19/outcome': typeof V19OutcomeRoute
+  '/v19/overview': typeof V19OverviewRoute
+  '/v19/partners': typeof V19PartnersRoute
+  '/v19/products': typeof V19ProductsRoute
+  '/v19/rec': typeof V19RecRoute
+  '/v19/reports': typeof V19ReportsRoute
+  '/v19/resilience': typeof V19ResilienceRoute
+  '/v19/revenue': typeof V19RevenueRoute
+  '/v19/risk': typeof V19RiskRoute
+  '/v19/roadmap': typeof V19RoadmapRoute
+  '/v19/scope': typeof V19ScopeRoute
+  '/v19/settings': typeof V19SettingsRoute
   '/v2/ai-ops': typeof V2AiOpsRoute
   '/v2/api-keys': typeof V2ApiKeysRoute
   '/v2/api-marketplace': typeof V2ApiMarketplaceRoute
@@ -7149,6 +7324,31 @@ export interface FileRoutesByTo {
   '/v185/risk': typeof V185RiskRoute
   '/v185/roadmap': typeof V185RoadmapRoute
   '/v185/scope': typeof V185ScopeRoute
+  '/v19/accounts': typeof V19AccountsRoute
+  '/v19/approval': typeof V19ApprovalRoute
+  '/v19/audit': typeof V19AuditRoute
+  '/v19/board-exec': typeof V19BoardExecRoute
+  '/v19/board-report': typeof V19BoardReportRoute
+  '/v19/capital': typeof V19CapitalRoute
+  '/v19/category': typeof V19CategoryRoute
+  '/v19/demo': typeof V19DemoRoute
+  '/v19/evidence': typeof V19EvidenceRoute
+  '/v19/exception': typeof V19ExceptionRoute
+  '/v19/exec': typeof V19ExecRoute
+  '/v19/mp': typeof V19MpRoute
+  '/v19/os': typeof V19OsRoute
+  '/v19/outcome': typeof V19OutcomeRoute
+  '/v19/overview': typeof V19OverviewRoute
+  '/v19/partners': typeof V19PartnersRoute
+  '/v19/products': typeof V19ProductsRoute
+  '/v19/rec': typeof V19RecRoute
+  '/v19/reports': typeof V19ReportsRoute
+  '/v19/resilience': typeof V19ResilienceRoute
+  '/v19/revenue': typeof V19RevenueRoute
+  '/v19/risk': typeof V19RiskRoute
+  '/v19/roadmap': typeof V19RoadmapRoute
+  '/v19/scope': typeof V19ScopeRoute
+  '/v19/settings': typeof V19SettingsRoute
   '/v2/ai-ops': typeof V2AiOpsRoute
   '/v2/api-keys': typeof V2ApiKeysRoute
   '/v2/api-marketplace': typeof V2ApiMarketplaceRoute
@@ -8089,6 +8289,31 @@ export interface FileRoutesById {
   '/v185/risk': typeof V185RiskRoute
   '/v185/roadmap': typeof V185RoadmapRoute
   '/v185/scope': typeof V185ScopeRoute
+  '/v19/accounts': typeof V19AccountsRoute
+  '/v19/approval': typeof V19ApprovalRoute
+  '/v19/audit': typeof V19AuditRoute
+  '/v19/board-exec': typeof V19BoardExecRoute
+  '/v19/board-report': typeof V19BoardReportRoute
+  '/v19/capital': typeof V19CapitalRoute
+  '/v19/category': typeof V19CategoryRoute
+  '/v19/demo': typeof V19DemoRoute
+  '/v19/evidence': typeof V19EvidenceRoute
+  '/v19/exception': typeof V19ExceptionRoute
+  '/v19/exec': typeof V19ExecRoute
+  '/v19/mp': typeof V19MpRoute
+  '/v19/os': typeof V19OsRoute
+  '/v19/outcome': typeof V19OutcomeRoute
+  '/v19/overview': typeof V19OverviewRoute
+  '/v19/partners': typeof V19PartnersRoute
+  '/v19/products': typeof V19ProductsRoute
+  '/v19/rec': typeof V19RecRoute
+  '/v19/reports': typeof V19ReportsRoute
+  '/v19/resilience': typeof V19ResilienceRoute
+  '/v19/revenue': typeof V19RevenueRoute
+  '/v19/risk': typeof V19RiskRoute
+  '/v19/roadmap': typeof V19RoadmapRoute
+  '/v19/scope': typeof V19ScopeRoute
+  '/v19/settings': typeof V19SettingsRoute
   '/v2/ai-ops': typeof V2AiOpsRoute
   '/v2/api-keys': typeof V2ApiKeysRoute
   '/v2/api-marketplace': typeof V2ApiMarketplaceRoute
@@ -9030,6 +9255,31 @@ export interface FileRouteTypes {
     | '/v185/risk'
     | '/v185/roadmap'
     | '/v185/scope'
+    | '/v19/accounts'
+    | '/v19/approval'
+    | '/v19/audit'
+    | '/v19/board-exec'
+    | '/v19/board-report'
+    | '/v19/capital'
+    | '/v19/category'
+    | '/v19/demo'
+    | '/v19/evidence'
+    | '/v19/exception'
+    | '/v19/exec'
+    | '/v19/mp'
+    | '/v19/os'
+    | '/v19/outcome'
+    | '/v19/overview'
+    | '/v19/partners'
+    | '/v19/products'
+    | '/v19/rec'
+    | '/v19/reports'
+    | '/v19/resilience'
+    | '/v19/revenue'
+    | '/v19/risk'
+    | '/v19/roadmap'
+    | '/v19/scope'
+    | '/v19/settings'
     | '/v2/ai-ops'
     | '/v2/api-keys'
     | '/v2/api-marketplace'
@@ -9969,6 +10219,31 @@ export interface FileRouteTypes {
     | '/v185/risk'
     | '/v185/roadmap'
     | '/v185/scope'
+    | '/v19/accounts'
+    | '/v19/approval'
+    | '/v19/audit'
+    | '/v19/board-exec'
+    | '/v19/board-report'
+    | '/v19/capital'
+    | '/v19/category'
+    | '/v19/demo'
+    | '/v19/evidence'
+    | '/v19/exception'
+    | '/v19/exec'
+    | '/v19/mp'
+    | '/v19/os'
+    | '/v19/outcome'
+    | '/v19/overview'
+    | '/v19/partners'
+    | '/v19/products'
+    | '/v19/rec'
+    | '/v19/reports'
+    | '/v19/resilience'
+    | '/v19/revenue'
+    | '/v19/risk'
+    | '/v19/roadmap'
+    | '/v19/scope'
+    | '/v19/settings'
     | '/v2/ai-ops'
     | '/v2/api-keys'
     | '/v2/api-marketplace'
@@ -10908,6 +11183,31 @@ export interface FileRouteTypes {
     | '/v185/risk'
     | '/v185/roadmap'
     | '/v185/scope'
+    | '/v19/accounts'
+    | '/v19/approval'
+    | '/v19/audit'
+    | '/v19/board-exec'
+    | '/v19/board-report'
+    | '/v19/capital'
+    | '/v19/category'
+    | '/v19/demo'
+    | '/v19/evidence'
+    | '/v19/exception'
+    | '/v19/exec'
+    | '/v19/mp'
+    | '/v19/os'
+    | '/v19/outcome'
+    | '/v19/overview'
+    | '/v19/partners'
+    | '/v19/products'
+    | '/v19/rec'
+    | '/v19/reports'
+    | '/v19/resilience'
+    | '/v19/revenue'
+    | '/v19/risk'
+    | '/v19/roadmap'
+    | '/v19/scope'
+    | '/v19/settings'
     | '/v2/ai-ops'
     | '/v2/api-keys'
     | '/v2/api-marketplace'
@@ -11840,6 +12140,31 @@ export interface RootRouteChildren {
   V185RiskRoute: typeof V185RiskRoute
   V185RoadmapRoute: typeof V185RoadmapRoute
   V185ScopeRoute: typeof V185ScopeRoute
+  V19AccountsRoute: typeof V19AccountsRoute
+  V19ApprovalRoute: typeof V19ApprovalRoute
+  V19AuditRoute: typeof V19AuditRoute
+  V19BoardExecRoute: typeof V19BoardExecRoute
+  V19BoardReportRoute: typeof V19BoardReportRoute
+  V19CapitalRoute: typeof V19CapitalRoute
+  V19CategoryRoute: typeof V19CategoryRoute
+  V19DemoRoute: typeof V19DemoRoute
+  V19EvidenceRoute: typeof V19EvidenceRoute
+  V19ExceptionRoute: typeof V19ExceptionRoute
+  V19ExecRoute: typeof V19ExecRoute
+  V19MpRoute: typeof V19MpRoute
+  V19OsRoute: typeof V19OsRoute
+  V19OutcomeRoute: typeof V19OutcomeRoute
+  V19OverviewRoute: typeof V19OverviewRoute
+  V19PartnersRoute: typeof V19PartnersRoute
+  V19ProductsRoute: typeof V19ProductsRoute
+  V19RecRoute: typeof V19RecRoute
+  V19ReportsRoute: typeof V19ReportsRoute
+  V19ResilienceRoute: typeof V19ResilienceRoute
+  V19RevenueRoute: typeof V19RevenueRoute
+  V19RiskRoute: typeof V19RiskRoute
+  V19RoadmapRoute: typeof V19RoadmapRoute
+  V19ScopeRoute: typeof V19ScopeRoute
+  V19SettingsRoute: typeof V19SettingsRoute
   V2AiOpsRoute: typeof V2AiOpsRoute
   V2ApiKeysRoute: typeof V2ApiKeysRoute
   V2ApiMarketplaceRoute: typeof V2ApiMarketplaceRoute
@@ -14927,6 +15252,181 @@ declare module '@tanstack/react-router' {
       path: '/v2/ai-ops'
       fullPath: '/v2/ai-ops'
       preLoaderRoute: typeof V2AiOpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/settings': {
+      id: '/v19/settings'
+      path: '/v19/settings'
+      fullPath: '/v19/settings'
+      preLoaderRoute: typeof V19SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/scope': {
+      id: '/v19/scope'
+      path: '/v19/scope'
+      fullPath: '/v19/scope'
+      preLoaderRoute: typeof V19ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/roadmap': {
+      id: '/v19/roadmap'
+      path: '/v19/roadmap'
+      fullPath: '/v19/roadmap'
+      preLoaderRoute: typeof V19RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/risk': {
+      id: '/v19/risk'
+      path: '/v19/risk'
+      fullPath: '/v19/risk'
+      preLoaderRoute: typeof V19RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/revenue': {
+      id: '/v19/revenue'
+      path: '/v19/revenue'
+      fullPath: '/v19/revenue'
+      preLoaderRoute: typeof V19RevenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/resilience': {
+      id: '/v19/resilience'
+      path: '/v19/resilience'
+      fullPath: '/v19/resilience'
+      preLoaderRoute: typeof V19ResilienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/reports': {
+      id: '/v19/reports'
+      path: '/v19/reports'
+      fullPath: '/v19/reports'
+      preLoaderRoute: typeof V19ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/rec': {
+      id: '/v19/rec'
+      path: '/v19/rec'
+      fullPath: '/v19/rec'
+      preLoaderRoute: typeof V19RecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/products': {
+      id: '/v19/products'
+      path: '/v19/products'
+      fullPath: '/v19/products'
+      preLoaderRoute: typeof V19ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/partners': {
+      id: '/v19/partners'
+      path: '/v19/partners'
+      fullPath: '/v19/partners'
+      preLoaderRoute: typeof V19PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/overview': {
+      id: '/v19/overview'
+      path: '/v19/overview'
+      fullPath: '/v19/overview'
+      preLoaderRoute: typeof V19OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/outcome': {
+      id: '/v19/outcome'
+      path: '/v19/outcome'
+      fullPath: '/v19/outcome'
+      preLoaderRoute: typeof V19OutcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/os': {
+      id: '/v19/os'
+      path: '/v19/os'
+      fullPath: '/v19/os'
+      preLoaderRoute: typeof V19OsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/mp': {
+      id: '/v19/mp'
+      path: '/v19/mp'
+      fullPath: '/v19/mp'
+      preLoaderRoute: typeof V19MpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/exec': {
+      id: '/v19/exec'
+      path: '/v19/exec'
+      fullPath: '/v19/exec'
+      preLoaderRoute: typeof V19ExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/exception': {
+      id: '/v19/exception'
+      path: '/v19/exception'
+      fullPath: '/v19/exception'
+      preLoaderRoute: typeof V19ExceptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/evidence': {
+      id: '/v19/evidence'
+      path: '/v19/evidence'
+      fullPath: '/v19/evidence'
+      preLoaderRoute: typeof V19EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/demo': {
+      id: '/v19/demo'
+      path: '/v19/demo'
+      fullPath: '/v19/demo'
+      preLoaderRoute: typeof V19DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/category': {
+      id: '/v19/category'
+      path: '/v19/category'
+      fullPath: '/v19/category'
+      preLoaderRoute: typeof V19CategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/capital': {
+      id: '/v19/capital'
+      path: '/v19/capital'
+      fullPath: '/v19/capital'
+      preLoaderRoute: typeof V19CapitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/board-report': {
+      id: '/v19/board-report'
+      path: '/v19/board-report'
+      fullPath: '/v19/board-report'
+      preLoaderRoute: typeof V19BoardReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/board-exec': {
+      id: '/v19/board-exec'
+      path: '/v19/board-exec'
+      fullPath: '/v19/board-exec'
+      preLoaderRoute: typeof V19BoardExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/audit': {
+      id: '/v19/audit'
+      path: '/v19/audit'
+      fullPath: '/v19/audit'
+      preLoaderRoute: typeof V19AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/approval': {
+      id: '/v19/approval'
+      path: '/v19/approval'
+      fullPath: '/v19/approval'
+      preLoaderRoute: typeof V19ApprovalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v19/accounts': {
+      id: '/v19/accounts'
+      path: '/v19/accounts'
+      fullPath: '/v19/accounts'
+      preLoaderRoute: typeof V19AccountsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v185/scope': {
@@ -19389,6 +19889,31 @@ const rootRouteChildren: RootRouteChildren = {
   V185RiskRoute: V185RiskRoute,
   V185RoadmapRoute: V185RoadmapRoute,
   V185ScopeRoute: V185ScopeRoute,
+  V19AccountsRoute: V19AccountsRoute,
+  V19ApprovalRoute: V19ApprovalRoute,
+  V19AuditRoute: V19AuditRoute,
+  V19BoardExecRoute: V19BoardExecRoute,
+  V19BoardReportRoute: V19BoardReportRoute,
+  V19CapitalRoute: V19CapitalRoute,
+  V19CategoryRoute: V19CategoryRoute,
+  V19DemoRoute: V19DemoRoute,
+  V19EvidenceRoute: V19EvidenceRoute,
+  V19ExceptionRoute: V19ExceptionRoute,
+  V19ExecRoute: V19ExecRoute,
+  V19MpRoute: V19MpRoute,
+  V19OsRoute: V19OsRoute,
+  V19OutcomeRoute: V19OutcomeRoute,
+  V19OverviewRoute: V19OverviewRoute,
+  V19PartnersRoute: V19PartnersRoute,
+  V19ProductsRoute: V19ProductsRoute,
+  V19RecRoute: V19RecRoute,
+  V19ReportsRoute: V19ReportsRoute,
+  V19ResilienceRoute: V19ResilienceRoute,
+  V19RevenueRoute: V19RevenueRoute,
+  V19RiskRoute: V19RiskRoute,
+  V19RoadmapRoute: V19RoadmapRoute,
+  V19ScopeRoute: V19ScopeRoute,
+  V19SettingsRoute: V19SettingsRoute,
   V2AiOpsRoute: V2AiOpsRoute,
   V2ApiKeysRoute: V2ApiKeysRoute,
   V2ApiMarketplaceRoute: V2ApiMarketplaceRoute,
