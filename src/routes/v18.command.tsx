@@ -45,6 +45,18 @@ function Page() {
       <Section title="Action plan">
         <SimpleTable rows={g.action_plan as any} columns={[{ key: "item", label: "Action" }, { key: "owner", label: "Owner" }, { key: "due", label: "Due" }]} />
       </Section>
+      <Section title="Next best HITL actions">
+        <SimpleTable rows={nba as any} columns={[
+          { key: "rank", label: "#" }, { key: "action", label: "Action" },
+          { key: "owner", label: "Owner" }, { key: "impact", label: "Impact" }, { key: "hitl", label: "HITL" },
+        ]} />
+      </Section>
+      <Section title="Persona SLAs & backups">
+        <SimpleTable rows={slas as any} columns={[
+          { key: "persona", label: "Persona" }, { key: "review_sla", label: "Review" },
+          { key: "approval_sla", label: "Approval" }, { key: "backup", label: "Backup" }, { key: "scope", label: "Scope" },
+        ]} />
+      </Section>
       <Section title="Executive scale summary">
         <ul className="text-sm text-muted-foreground">{g.exec_summary.map(x => <li key={x}>· {x}</li>)}</ul>
       </Section>
