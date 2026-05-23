@@ -6,11 +6,32 @@ import * as H from "@/v18/hooks";
 
 function Page() {
   const g = H.useAutonomousAssistScaleGovernance();
+  const headlines = H.useV18PolishHeadlines();
+  const heatmap = H.useV18OwnerHeatmap();
+  const calibration = H.useV18PolicyCalibration();
   return (
     <V18Page icon={<Gauge className="size-6 text-violet-300" />} title="Enterprise Autonomous-Assist Scale Governance Center"
       blurb="Scale governance score, policy compliance, high-impact protection, approval coverage, recommendation/evidence/audit completeness, outcome learning coverage, and exception health.">
       <ScoreCard label="Assist scale governance" value={g.score} tone="violet" />
       <KpiGrid cols={4} items={g.kpis} />
+      <Section title="Polish headlines (20 areas)">
+        <SimpleTable rows={headlines as any} columns={[
+          { key: "area", label: "Area" }, { key: "headline", label: "Headline" }, { key: "trend", label: "Trend" },
+        ]} />
+      </Section>
+      <Section title="Owner approval heatmap">
+        <SimpleTable rows={heatmap as any} columns={[
+          { key: "owner", label: "Owner" }, { key: "pending", label: "Pending" },
+          { key: "overdue", label: "Overdue" }, { key: "high_risk", label: "High-risk" },
+          { key: "completion", label: "Completion" },
+        ]} />
+      </Section>
+      <Section title="Policy calibration drift">
+        <SimpleTable rows={calibration as any} columns={[
+          { key: "policy", label: "Policy" }, { key: "drift", label: "Drift" },
+          { key: "suggestion", label: "Suggestion" }, { key: "owner", label: "Owner" },
+        ]} />
+      </Section>
       <Section title="Health map">
         <SimpleTable rows={g.health_map as any} columns={[{ key: "domain", label: "Domain" }, { key: "health", label: "Health" }]} />
       </Section>
