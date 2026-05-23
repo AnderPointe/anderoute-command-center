@@ -373,6 +373,30 @@ import { Route as V25AuditRouteImport } from './routes/v25.audit'
 import { Route as V25ApiProductsRouteImport } from './routes/v25.api-products'
 import { Route as V25ApiMonetizationRouteImport } from './routes/v25.api-monetization'
 import { Route as V25ApiGatewayRouteImport } from './routes/v25.api-gateway'
+import { Route as V21ScopeRouteImport } from './routes/v21.scope'
+import { Route as V21RoadmapRouteImport } from './routes/v21.roadmap'
+import { Route as V21RiskRouteImport } from './routes/v21.risk'
+import { Route as V21RevenueRouteImport } from './routes/v21.revenue'
+import { Route as V21ReportsRouteImport } from './routes/v21.reports'
+import { Route as V21RecRouteImport } from './routes/v21.rec'
+import { Route as V21ProductsRouteImport } from './routes/v21.products'
+import { Route as V21PartnerRouteImport } from './routes/v21.partner'
+import { Route as V21OverviewRouteImport } from './routes/v21.overview'
+import { Route as V21OutcomeRouteImport } from './routes/v21.outcome'
+import { Route as V21NetworkRouteImport } from './routes/v21.network'
+import { Route as V21MpRouteImport } from './routes/v21.mp'
+import { Route as V21ExecRouteImport } from './routes/v21.exec'
+import { Route as V21ExceptionRouteImport } from './routes/v21.exception'
+import { Route as V21EvidenceRouteImport } from './routes/v21.evidence'
+import { Route as V21DemoRouteImport } from './routes/v21.demo'
+import { Route as V21CustomerRouteImport } from './routes/v21.customer'
+import { Route as V21CategoryRouteImport } from './routes/v21.category'
+import { Route as V21CapitalRouteImport } from './routes/v21.capital'
+import { Route as V21BoundaryRouteImport } from './routes/v21.boundary'
+import { Route as V21BoardReportRouteImport } from './routes/v21.board-report'
+import { Route as V21BoardRouteImport } from './routes/v21.board'
+import { Route as V21AuditRouteImport } from './routes/v21.audit'
+import { Route as V21ApprovalRouteImport } from './routes/v21.approval'
 import { Route as V205ScopeRouteImport } from './routes/v205.scope'
 import { Route as V205ScaleRouteImport } from './routes/v205.scale'
 import { Route as V205RoadmapRouteImport } from './routes/v205.roadmap'
@@ -2843,6 +2867,126 @@ const V25ApiMonetizationRoute = V25ApiMonetizationRouteImport.update({
 const V25ApiGatewayRoute = V25ApiGatewayRouteImport.update({
   id: '/v25/api-gateway',
   path: '/v25/api-gateway',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21ScopeRoute = V21ScopeRouteImport.update({
+  id: '/v21/scope',
+  path: '/v21/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21RoadmapRoute = V21RoadmapRouteImport.update({
+  id: '/v21/roadmap',
+  path: '/v21/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21RiskRoute = V21RiskRouteImport.update({
+  id: '/v21/risk',
+  path: '/v21/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21RevenueRoute = V21RevenueRouteImport.update({
+  id: '/v21/revenue',
+  path: '/v21/revenue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21ReportsRoute = V21ReportsRouteImport.update({
+  id: '/v21/reports',
+  path: '/v21/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21RecRoute = V21RecRouteImport.update({
+  id: '/v21/rec',
+  path: '/v21/rec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21ProductsRoute = V21ProductsRouteImport.update({
+  id: '/v21/products',
+  path: '/v21/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21PartnerRoute = V21PartnerRouteImport.update({
+  id: '/v21/partner',
+  path: '/v21/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21OverviewRoute = V21OverviewRouteImport.update({
+  id: '/v21/overview',
+  path: '/v21/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21OutcomeRoute = V21OutcomeRouteImport.update({
+  id: '/v21/outcome',
+  path: '/v21/outcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21NetworkRoute = V21NetworkRouteImport.update({
+  id: '/v21/network',
+  path: '/v21/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21MpRoute = V21MpRouteImport.update({
+  id: '/v21/mp',
+  path: '/v21/mp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21ExecRoute = V21ExecRouteImport.update({
+  id: '/v21/exec',
+  path: '/v21/exec',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21ExceptionRoute = V21ExceptionRouteImport.update({
+  id: '/v21/exception',
+  path: '/v21/exception',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21EvidenceRoute = V21EvidenceRouteImport.update({
+  id: '/v21/evidence',
+  path: '/v21/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21DemoRoute = V21DemoRouteImport.update({
+  id: '/v21/demo',
+  path: '/v21/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21CustomerRoute = V21CustomerRouteImport.update({
+  id: '/v21/customer',
+  path: '/v21/customer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21CategoryRoute = V21CategoryRouteImport.update({
+  id: '/v21/category',
+  path: '/v21/category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21CapitalRoute = V21CapitalRouteImport.update({
+  id: '/v21/capital',
+  path: '/v21/capital',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21BoundaryRoute = V21BoundaryRouteImport.update({
+  id: '/v21/boundary',
+  path: '/v21/boundary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21BoardReportRoute = V21BoardReportRouteImport.update({
+  id: '/v21/board-report',
+  path: '/v21/board-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21BoardRoute = V21BoardRouteImport.update({
+  id: '/v21/board',
+  path: '/v21/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21AuditRoute = V21AuditRouteImport.update({
+  id: '/v21/audit',
+  path: '/v21/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V21ApprovalRoute = V21ApprovalRouteImport.update({
+  id: '/v21/approval',
+  path: '/v21/approval',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V205ScopeRoute = V205ScopeRouteImport.update({
@@ -6752,6 +6896,30 @@ export interface FileRoutesByFullPath {
   '/v205/roadmap': typeof V205RoadmapRoute
   '/v205/scale': typeof V205ScaleRoute
   '/v205/scope': typeof V205ScopeRoute
+  '/v21/approval': typeof V21ApprovalRoute
+  '/v21/audit': typeof V21AuditRoute
+  '/v21/board': typeof V21BoardRoute
+  '/v21/board-report': typeof V21BoardReportRoute
+  '/v21/boundary': typeof V21BoundaryRoute
+  '/v21/capital': typeof V21CapitalRoute
+  '/v21/category': typeof V21CategoryRoute
+  '/v21/customer': typeof V21CustomerRoute
+  '/v21/demo': typeof V21DemoRoute
+  '/v21/evidence': typeof V21EvidenceRoute
+  '/v21/exception': typeof V21ExceptionRoute
+  '/v21/exec': typeof V21ExecRoute
+  '/v21/mp': typeof V21MpRoute
+  '/v21/network': typeof V21NetworkRoute
+  '/v21/outcome': typeof V21OutcomeRoute
+  '/v21/overview': typeof V21OverviewRoute
+  '/v21/partner': typeof V21PartnerRoute
+  '/v21/products': typeof V21ProductsRoute
+  '/v21/rec': typeof V21RecRoute
+  '/v21/reports': typeof V21ReportsRoute
+  '/v21/revenue': typeof V21RevenueRoute
+  '/v21/risk': typeof V21RiskRoute
+  '/v21/roadmap': typeof V21RoadmapRoute
+  '/v21/scope': typeof V21ScopeRoute
   '/v25/api-gateway': typeof V25ApiGatewayRoute
   '/v25/api-monetization': typeof V25ApiMonetizationRoute
   '/v25/api-products': typeof V25ApiProductsRoute
@@ -7765,6 +7933,30 @@ export interface FileRoutesByTo {
   '/v205/roadmap': typeof V205RoadmapRoute
   '/v205/scale': typeof V205ScaleRoute
   '/v205/scope': typeof V205ScopeRoute
+  '/v21/approval': typeof V21ApprovalRoute
+  '/v21/audit': typeof V21AuditRoute
+  '/v21/board': typeof V21BoardRoute
+  '/v21/board-report': typeof V21BoardReportRoute
+  '/v21/boundary': typeof V21BoundaryRoute
+  '/v21/capital': typeof V21CapitalRoute
+  '/v21/category': typeof V21CategoryRoute
+  '/v21/customer': typeof V21CustomerRoute
+  '/v21/demo': typeof V21DemoRoute
+  '/v21/evidence': typeof V21EvidenceRoute
+  '/v21/exception': typeof V21ExceptionRoute
+  '/v21/exec': typeof V21ExecRoute
+  '/v21/mp': typeof V21MpRoute
+  '/v21/network': typeof V21NetworkRoute
+  '/v21/outcome': typeof V21OutcomeRoute
+  '/v21/overview': typeof V21OverviewRoute
+  '/v21/partner': typeof V21PartnerRoute
+  '/v21/products': typeof V21ProductsRoute
+  '/v21/rec': typeof V21RecRoute
+  '/v21/reports': typeof V21ReportsRoute
+  '/v21/revenue': typeof V21RevenueRoute
+  '/v21/risk': typeof V21RiskRoute
+  '/v21/roadmap': typeof V21RoadmapRoute
+  '/v21/scope': typeof V21ScopeRoute
   '/v25/api-gateway': typeof V25ApiGatewayRoute
   '/v25/api-monetization': typeof V25ApiMonetizationRoute
   '/v25/api-products': typeof V25ApiProductsRoute
@@ -8779,6 +8971,30 @@ export interface FileRoutesById {
   '/v205/roadmap': typeof V205RoadmapRoute
   '/v205/scale': typeof V205ScaleRoute
   '/v205/scope': typeof V205ScopeRoute
+  '/v21/approval': typeof V21ApprovalRoute
+  '/v21/audit': typeof V21AuditRoute
+  '/v21/board': typeof V21BoardRoute
+  '/v21/board-report': typeof V21BoardReportRoute
+  '/v21/boundary': typeof V21BoundaryRoute
+  '/v21/capital': typeof V21CapitalRoute
+  '/v21/category': typeof V21CategoryRoute
+  '/v21/customer': typeof V21CustomerRoute
+  '/v21/demo': typeof V21DemoRoute
+  '/v21/evidence': typeof V21EvidenceRoute
+  '/v21/exception': typeof V21ExceptionRoute
+  '/v21/exec': typeof V21ExecRoute
+  '/v21/mp': typeof V21MpRoute
+  '/v21/network': typeof V21NetworkRoute
+  '/v21/outcome': typeof V21OutcomeRoute
+  '/v21/overview': typeof V21OverviewRoute
+  '/v21/partner': typeof V21PartnerRoute
+  '/v21/products': typeof V21ProductsRoute
+  '/v21/rec': typeof V21RecRoute
+  '/v21/reports': typeof V21ReportsRoute
+  '/v21/revenue': typeof V21RevenueRoute
+  '/v21/risk': typeof V21RiskRoute
+  '/v21/roadmap': typeof V21RoadmapRoute
+  '/v21/scope': typeof V21ScopeRoute
   '/v25/api-gateway': typeof V25ApiGatewayRoute
   '/v25/api-monetization': typeof V25ApiMonetizationRoute
   '/v25/api-products': typeof V25ApiProductsRoute
@@ -9794,6 +10010,30 @@ export interface FileRouteTypes {
     | '/v205/roadmap'
     | '/v205/scale'
     | '/v205/scope'
+    | '/v21/approval'
+    | '/v21/audit'
+    | '/v21/board'
+    | '/v21/board-report'
+    | '/v21/boundary'
+    | '/v21/capital'
+    | '/v21/category'
+    | '/v21/customer'
+    | '/v21/demo'
+    | '/v21/evidence'
+    | '/v21/exception'
+    | '/v21/exec'
+    | '/v21/mp'
+    | '/v21/network'
+    | '/v21/outcome'
+    | '/v21/overview'
+    | '/v21/partner'
+    | '/v21/products'
+    | '/v21/rec'
+    | '/v21/reports'
+    | '/v21/revenue'
+    | '/v21/risk'
+    | '/v21/roadmap'
+    | '/v21/scope'
     | '/v25/api-gateway'
     | '/v25/api-monetization'
     | '/v25/api-products'
@@ -10807,6 +11047,30 @@ export interface FileRouteTypes {
     | '/v205/roadmap'
     | '/v205/scale'
     | '/v205/scope'
+    | '/v21/approval'
+    | '/v21/audit'
+    | '/v21/board'
+    | '/v21/board-report'
+    | '/v21/boundary'
+    | '/v21/capital'
+    | '/v21/category'
+    | '/v21/customer'
+    | '/v21/demo'
+    | '/v21/evidence'
+    | '/v21/exception'
+    | '/v21/exec'
+    | '/v21/mp'
+    | '/v21/network'
+    | '/v21/outcome'
+    | '/v21/overview'
+    | '/v21/partner'
+    | '/v21/products'
+    | '/v21/rec'
+    | '/v21/reports'
+    | '/v21/revenue'
+    | '/v21/risk'
+    | '/v21/roadmap'
+    | '/v21/scope'
     | '/v25/api-gateway'
     | '/v25/api-monetization'
     | '/v25/api-products'
@@ -11820,6 +12084,30 @@ export interface FileRouteTypes {
     | '/v205/roadmap'
     | '/v205/scale'
     | '/v205/scope'
+    | '/v21/approval'
+    | '/v21/audit'
+    | '/v21/board'
+    | '/v21/board-report'
+    | '/v21/boundary'
+    | '/v21/capital'
+    | '/v21/category'
+    | '/v21/customer'
+    | '/v21/demo'
+    | '/v21/evidence'
+    | '/v21/exception'
+    | '/v21/exec'
+    | '/v21/mp'
+    | '/v21/network'
+    | '/v21/outcome'
+    | '/v21/overview'
+    | '/v21/partner'
+    | '/v21/products'
+    | '/v21/rec'
+    | '/v21/reports'
+    | '/v21/revenue'
+    | '/v21/risk'
+    | '/v21/roadmap'
+    | '/v21/scope'
     | '/v25/api-gateway'
     | '/v25/api-monetization'
     | '/v25/api-products'
@@ -12826,6 +13114,30 @@ export interface RootRouteChildren {
   V205RoadmapRoute: typeof V205RoadmapRoute
   V205ScaleRoute: typeof V205ScaleRoute
   V205ScopeRoute: typeof V205ScopeRoute
+  V21ApprovalRoute: typeof V21ApprovalRoute
+  V21AuditRoute: typeof V21AuditRoute
+  V21BoardRoute: typeof V21BoardRoute
+  V21BoardReportRoute: typeof V21BoardReportRoute
+  V21BoundaryRoute: typeof V21BoundaryRoute
+  V21CapitalRoute: typeof V21CapitalRoute
+  V21CategoryRoute: typeof V21CategoryRoute
+  V21CustomerRoute: typeof V21CustomerRoute
+  V21DemoRoute: typeof V21DemoRoute
+  V21EvidenceRoute: typeof V21EvidenceRoute
+  V21ExceptionRoute: typeof V21ExceptionRoute
+  V21ExecRoute: typeof V21ExecRoute
+  V21MpRoute: typeof V21MpRoute
+  V21NetworkRoute: typeof V21NetworkRoute
+  V21OutcomeRoute: typeof V21OutcomeRoute
+  V21OverviewRoute: typeof V21OverviewRoute
+  V21PartnerRoute: typeof V21PartnerRoute
+  V21ProductsRoute: typeof V21ProductsRoute
+  V21RecRoute: typeof V21RecRoute
+  V21ReportsRoute: typeof V21ReportsRoute
+  V21RevenueRoute: typeof V21RevenueRoute
+  V21RiskRoute: typeof V21RiskRoute
+  V21RoadmapRoute: typeof V21RoadmapRoute
+  V21ScopeRoute: typeof V21ScopeRoute
   V25ApiGatewayRoute: typeof V25ApiGatewayRoute
   V25ApiMonetizationRoute: typeof V25ApiMonetizationRoute
   V25ApiProductsRoute: typeof V25ApiProductsRoute
@@ -15721,6 +16033,174 @@ declare module '@tanstack/react-router' {
       path: '/v25/api-gateway'
       fullPath: '/v25/api-gateway'
       preLoaderRoute: typeof V25ApiGatewayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/scope': {
+      id: '/v21/scope'
+      path: '/v21/scope'
+      fullPath: '/v21/scope'
+      preLoaderRoute: typeof V21ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/roadmap': {
+      id: '/v21/roadmap'
+      path: '/v21/roadmap'
+      fullPath: '/v21/roadmap'
+      preLoaderRoute: typeof V21RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/risk': {
+      id: '/v21/risk'
+      path: '/v21/risk'
+      fullPath: '/v21/risk'
+      preLoaderRoute: typeof V21RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/revenue': {
+      id: '/v21/revenue'
+      path: '/v21/revenue'
+      fullPath: '/v21/revenue'
+      preLoaderRoute: typeof V21RevenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/reports': {
+      id: '/v21/reports'
+      path: '/v21/reports'
+      fullPath: '/v21/reports'
+      preLoaderRoute: typeof V21ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/rec': {
+      id: '/v21/rec'
+      path: '/v21/rec'
+      fullPath: '/v21/rec'
+      preLoaderRoute: typeof V21RecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/products': {
+      id: '/v21/products'
+      path: '/v21/products'
+      fullPath: '/v21/products'
+      preLoaderRoute: typeof V21ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/partner': {
+      id: '/v21/partner'
+      path: '/v21/partner'
+      fullPath: '/v21/partner'
+      preLoaderRoute: typeof V21PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/overview': {
+      id: '/v21/overview'
+      path: '/v21/overview'
+      fullPath: '/v21/overview'
+      preLoaderRoute: typeof V21OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/outcome': {
+      id: '/v21/outcome'
+      path: '/v21/outcome'
+      fullPath: '/v21/outcome'
+      preLoaderRoute: typeof V21OutcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/network': {
+      id: '/v21/network'
+      path: '/v21/network'
+      fullPath: '/v21/network'
+      preLoaderRoute: typeof V21NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/mp': {
+      id: '/v21/mp'
+      path: '/v21/mp'
+      fullPath: '/v21/mp'
+      preLoaderRoute: typeof V21MpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/exec': {
+      id: '/v21/exec'
+      path: '/v21/exec'
+      fullPath: '/v21/exec'
+      preLoaderRoute: typeof V21ExecRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/exception': {
+      id: '/v21/exception'
+      path: '/v21/exception'
+      fullPath: '/v21/exception'
+      preLoaderRoute: typeof V21ExceptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/evidence': {
+      id: '/v21/evidence'
+      path: '/v21/evidence'
+      fullPath: '/v21/evidence'
+      preLoaderRoute: typeof V21EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/demo': {
+      id: '/v21/demo'
+      path: '/v21/demo'
+      fullPath: '/v21/demo'
+      preLoaderRoute: typeof V21DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/customer': {
+      id: '/v21/customer'
+      path: '/v21/customer'
+      fullPath: '/v21/customer'
+      preLoaderRoute: typeof V21CustomerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/category': {
+      id: '/v21/category'
+      path: '/v21/category'
+      fullPath: '/v21/category'
+      preLoaderRoute: typeof V21CategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/capital': {
+      id: '/v21/capital'
+      path: '/v21/capital'
+      fullPath: '/v21/capital'
+      preLoaderRoute: typeof V21CapitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/boundary': {
+      id: '/v21/boundary'
+      path: '/v21/boundary'
+      fullPath: '/v21/boundary'
+      preLoaderRoute: typeof V21BoundaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/board-report': {
+      id: '/v21/board-report'
+      path: '/v21/board-report'
+      fullPath: '/v21/board-report'
+      preLoaderRoute: typeof V21BoardReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/board': {
+      id: '/v21/board'
+      path: '/v21/board'
+      fullPath: '/v21/board'
+      preLoaderRoute: typeof V21BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/audit': {
+      id: '/v21/audit'
+      path: '/v21/audit'
+      fullPath: '/v21/audit'
+      preLoaderRoute: typeof V21AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v21/approval': {
+      id: '/v21/approval'
+      path: '/v21/approval'
+      fullPath: '/v21/approval'
+      preLoaderRoute: typeof V21ApprovalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v205/scope': {
@@ -20967,6 +21447,30 @@ const rootRouteChildren: RootRouteChildren = {
   V205RoadmapRoute: V205RoadmapRoute,
   V205ScaleRoute: V205ScaleRoute,
   V205ScopeRoute: V205ScopeRoute,
+  V21ApprovalRoute: V21ApprovalRoute,
+  V21AuditRoute: V21AuditRoute,
+  V21BoardRoute: V21BoardRoute,
+  V21BoardReportRoute: V21BoardReportRoute,
+  V21BoundaryRoute: V21BoundaryRoute,
+  V21CapitalRoute: V21CapitalRoute,
+  V21CategoryRoute: V21CategoryRoute,
+  V21CustomerRoute: V21CustomerRoute,
+  V21DemoRoute: V21DemoRoute,
+  V21EvidenceRoute: V21EvidenceRoute,
+  V21ExceptionRoute: V21ExceptionRoute,
+  V21ExecRoute: V21ExecRoute,
+  V21MpRoute: V21MpRoute,
+  V21NetworkRoute: V21NetworkRoute,
+  V21OutcomeRoute: V21OutcomeRoute,
+  V21OverviewRoute: V21OverviewRoute,
+  V21PartnerRoute: V21PartnerRoute,
+  V21ProductsRoute: V21ProductsRoute,
+  V21RecRoute: V21RecRoute,
+  V21ReportsRoute: V21ReportsRoute,
+  V21RevenueRoute: V21RevenueRoute,
+  V21RiskRoute: V21RiskRoute,
+  V21RoadmapRoute: V21RoadmapRoute,
+  V21ScopeRoute: V21ScopeRoute,
   V25ApiGatewayRoute: V25ApiGatewayRoute,
   V25ApiMonetizationRoute: V25ApiMonetizationRoute,
   V25ApiProductsRoute: V25ApiProductsRoute,
