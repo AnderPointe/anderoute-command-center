@@ -42,7 +42,28 @@ function Page() {
         <ScoreCard label="Board maturity"     value={96} tone="emerald" />
       </div>
 
+      <ExecHeadline tag="V21.5 polish++ headline" headline={p2Head.headline} bullets={p2Head.highlights} />
+
+      <Section title="Domain uplift (polish → polish++)">
+        <SimpleTable rows={uplift as any} columns={[
+          { key: "domain", label: "Domain" }, { key: "from", label: "From" }, { key: "to", label: "To" }, { key: "delta", label: "Δ" },
+        ]} />
+      </Section>
+
+      <Section title="Lifecycle KPIs per domain (in / through / out)">
+        <SimpleTable rows={lcKpis as any} columns={[
+          { key: "domain", label: "Domain" }, { key: "in", label: "In" }, { key: "through", label: "Through" }, { key: "out", label: "Out" },
+        ]} />
+      </Section>
+
+      <Section title="HITL latency (% of SLA)">
+        <SimpleTable rows={hitlLatency as any} columns={[
+          { key: "queue", label: "Queue" }, { key: "median_pct_of_sla", label: "Median %SLA" }, { key: "p90_pct_of_sla", label: "P90 %SLA" },
+        ]} />
+      </Section>
+
       <Section title="21 trust domains — polish heatmap">
+
         <SimpleTable rows={domains as any} columns={[
           { key: "domain", label: "Domain" }, { key: "score", label: "Score" }, { key: "owner", label: "Owner" },
         ]} />
