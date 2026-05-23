@@ -32,6 +32,15 @@ function Page() {
         <h3 className="text-sm font-semibold">Action plan</h3>
         <SimpleTable rows={p.action_plan as any} columns={[{ key: "action", label: "Action" }, { key: "owner", label: "Owner" }, { key: "impact", label: "Impact" }]} />
       </Card>
+      <Card className="border-white/10 bg-white/[0.02] p-4">
+        <h3 className="text-sm font-semibold">Partner attribution trend (last 4Q)</h3>
+        <SimpleTable rows={trends as any} columns={[
+          { key: "quarter", label: "Quarter" },
+          { key: "sourced_usd", label: "Sourced", render: (r: any) => `$${(r.sourced_usd / 1e6).toFixed(1)}M` },
+          { key: "influenced_usd", label: "Influenced", render: (r: any) => `$${(r.influenced_usd / 1e6).toFixed(1)}M` },
+          { key: "conv_pct", label: "Conv %" },
+        ]} />
+      </Card>
     </V125Page>
   );
 }
