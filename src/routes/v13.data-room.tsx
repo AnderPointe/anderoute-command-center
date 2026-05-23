@@ -7,6 +7,7 @@ import * as H from "@/v13/hooks";
 
 function Page() {
   const dr = H.useCapitalDataRoom();
+  const trends = H.useV13DataRoomTrends();
   const ready = dr.filter((r) => r.status === "ready").length;
   const ph = dr.filter((r) => r.status === "placeholder").length;
   return (
