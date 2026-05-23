@@ -3,7 +3,9 @@ import * as M from "./data/mockPhase38";
 
 export const useV125Scope                       = () => ({ matrix: M.V125_FEATURE_MATRIX, deferred: M.V125_DEFERRED });
 export const useCapitalGrowthOperations         = () => ({ score: M.V125_GROWTH_OPS, trend: M.V125_GROWTH_OPS_TREND, actions: M.V125_GROWTH_NEXT_ACTIONS, risks: M.V125_GROWTH_RISK_SUMMARY });
-export const useCommercialAuditability          = () => M.V125_AUDITABILITY;
+export const useCommercialAuditability          = () => ({ ...M.V125_AUDITABILITY, trends: M.V125_AUDIT_TRENDS });
+export const useRevenueQualityTrends            = () => M.V125_REV_QUALITY_TRENDS;
+export const usePartnerAttributionTrends        = () => M.V125_PARTNER_ATTRIBUTION_TRENDS;
 export const useGlobalRevenueIntelligence       = () => M.V125_REV_INTEL;
 export const useRevenueQualityControls          = () => M.V125_REVQ_CONTROLS;
 export const useEnterpriseRevenueEvidence       = () => M.V125_REV_EVIDENCE;
