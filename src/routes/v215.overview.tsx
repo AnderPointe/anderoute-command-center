@@ -86,6 +86,8 @@ function Page() {
         <SimpleTable rows={boundaryExtra as any} columns={[
           { key: "surface", label: "Surface" }, { key: "exposes", label: "Exposes" }, { key: "hides", label: "Hides" },
         ]} />
+      </Section>
+
 
       <Section title="Owner heatmap">
         <SimpleTable rows={owners as any} columns={[
