@@ -420,6 +420,30 @@ import { Route as V15DispatcherRoutesRouteImport } from './routes/v15.dispatcher
 import { Route as V15DemoRouteImport } from './routes/v15.demo'
 import { Route as V15CopilotRouteImport } from './routes/v15.copilot'
 import { Route as V15BillingRouteImport } from './routes/v15.billing'
+import { Route as V13ValuationRouteImport } from './routes/v13.valuation'
+import { Route as V13StrategicAcctRouteImport } from './routes/v13.strategic-acct'
+import { Route as V13ScopeRouteImport } from './routes/v13.scope'
+import { Route as V13RoadmapRouteImport } from './routes/v13.roadmap'
+import { Route as V13RiskRouteImport } from './routes/v13.risk'
+import { Route as V13RevenueQualityRouteImport } from './routes/v13.revenue-quality'
+import { Route as V13RevenueIntelRouteImport } from './routes/v13.revenue-intel'
+import { Route as V13RetentionRouteImport } from './routes/v13.retention'
+import { Route as V13ReportsRouteImport } from './routes/v13.reports'
+import { Route as V13PartnerValueRouteImport } from './routes/v13.partner-value'
+import { Route as V13OverviewRouteImport } from './routes/v13.overview'
+import { Route as V13MpUnitEconRouteImport } from './routes/v13.mp-unit-econ'
+import { Route as V13MarketplaceRouteImport } from './routes/v13.marketplace'
+import { Route as V13InvestorEvidenceRouteImport } from './routes/v13.investor-evidence'
+import { Route as V13GrowthInvestmentRouteImport } from './routes/v13.growth-investment'
+import { Route as V13ForecastRouteImport } from './routes/v13.forecast'
+import { Route as V13ExecValueRouteImport } from './routes/v13.exec-value'
+import { Route as V13DiligenceRouteImport } from './routes/v13.diligence'
+import { Route as V13DemoRouteImport } from './routes/v13.demo'
+import { Route as V13DataRoomRouteImport } from './routes/v13.data-room'
+import { Route as V13ConcentrationRouteImport } from './routes/v13.concentration'
+import { Route as V13CapitalReadinessRouteImport } from './routes/v13.capital-readiness'
+import { Route as V13BoardRouteImport } from './routes/v13.board'
+import { Route as V13ApiEdiRouteImport } from './routes/v13.api-edi'
 import { Route as V125StrategicAcctRouteImport } from './routes/v125.strategic-acct'
 import { Route as V125StewardRouteImport } from './routes/v125.steward'
 import { Route as V125ScopeRouteImport } from './routes/v125.scope'
@@ -2747,6 +2771,126 @@ const V15BillingRoute = V15BillingRouteImport.update({
   path: '/v15/billing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const V13ValuationRoute = V13ValuationRouteImport.update({
+  id: '/v13/valuation',
+  path: '/v13/valuation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13StrategicAcctRoute = V13StrategicAcctRouteImport.update({
+  id: '/v13/strategic-acct',
+  path: '/v13/strategic-acct',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13ScopeRoute = V13ScopeRouteImport.update({
+  id: '/v13/scope',
+  path: '/v13/scope',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13RoadmapRoute = V13RoadmapRouteImport.update({
+  id: '/v13/roadmap',
+  path: '/v13/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13RiskRoute = V13RiskRouteImport.update({
+  id: '/v13/risk',
+  path: '/v13/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13RevenueQualityRoute = V13RevenueQualityRouteImport.update({
+  id: '/v13/revenue-quality',
+  path: '/v13/revenue-quality',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13RevenueIntelRoute = V13RevenueIntelRouteImport.update({
+  id: '/v13/revenue-intel',
+  path: '/v13/revenue-intel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13RetentionRoute = V13RetentionRouteImport.update({
+  id: '/v13/retention',
+  path: '/v13/retention',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13ReportsRoute = V13ReportsRouteImport.update({
+  id: '/v13/reports',
+  path: '/v13/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13PartnerValueRoute = V13PartnerValueRouteImport.update({
+  id: '/v13/partner-value',
+  path: '/v13/partner-value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13OverviewRoute = V13OverviewRouteImport.update({
+  id: '/v13/overview',
+  path: '/v13/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13MpUnitEconRoute = V13MpUnitEconRouteImport.update({
+  id: '/v13/mp-unit-econ',
+  path: '/v13/mp-unit-econ',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13MarketplaceRoute = V13MarketplaceRouteImport.update({
+  id: '/v13/marketplace',
+  path: '/v13/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13InvestorEvidenceRoute = V13InvestorEvidenceRouteImport.update({
+  id: '/v13/investor-evidence',
+  path: '/v13/investor-evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13GrowthInvestmentRoute = V13GrowthInvestmentRouteImport.update({
+  id: '/v13/growth-investment',
+  path: '/v13/growth-investment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13ForecastRoute = V13ForecastRouteImport.update({
+  id: '/v13/forecast',
+  path: '/v13/forecast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13ExecValueRoute = V13ExecValueRouteImport.update({
+  id: '/v13/exec-value',
+  path: '/v13/exec-value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13DiligenceRoute = V13DiligenceRouteImport.update({
+  id: '/v13/diligence',
+  path: '/v13/diligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13DemoRoute = V13DemoRouteImport.update({
+  id: '/v13/demo',
+  path: '/v13/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13DataRoomRoute = V13DataRoomRouteImport.update({
+  id: '/v13/data-room',
+  path: '/v13/data-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13ConcentrationRoute = V13ConcentrationRouteImport.update({
+  id: '/v13/concentration',
+  path: '/v13/concentration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13CapitalReadinessRoute = V13CapitalReadinessRouteImport.update({
+  id: '/v13/capital-readiness',
+  path: '/v13/capital-readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13BoardRoute = V13BoardRouteImport.update({
+  id: '/v13/board',
+  path: '/v13/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V13ApiEdiRoute = V13ApiEdiRouteImport.update({
+  id: '/v13/api-edi',
+  path: '/v13/api-edi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const V125StrategicAcctRoute = V125StrategicAcctRouteImport.update({
   id: '/v125/strategic-acct',
   path: '/v125/strategic-acct',
@@ -4374,6 +4518,30 @@ export interface FileRoutesByFullPath {
   '/v125/scope': typeof V125ScopeRoute
   '/v125/steward': typeof V125StewardRoute
   '/v125/strategic-acct': typeof V125StrategicAcctRoute
+  '/v13/api-edi': typeof V13ApiEdiRoute
+  '/v13/board': typeof V13BoardRoute
+  '/v13/capital-readiness': typeof V13CapitalReadinessRoute
+  '/v13/concentration': typeof V13ConcentrationRoute
+  '/v13/data-room': typeof V13DataRoomRoute
+  '/v13/demo': typeof V13DemoRoute
+  '/v13/diligence': typeof V13DiligenceRoute
+  '/v13/exec-value': typeof V13ExecValueRoute
+  '/v13/forecast': typeof V13ForecastRoute
+  '/v13/growth-investment': typeof V13GrowthInvestmentRoute
+  '/v13/investor-evidence': typeof V13InvestorEvidenceRoute
+  '/v13/marketplace': typeof V13MarketplaceRoute
+  '/v13/mp-unit-econ': typeof V13MpUnitEconRoute
+  '/v13/overview': typeof V13OverviewRoute
+  '/v13/partner-value': typeof V13PartnerValueRoute
+  '/v13/reports': typeof V13ReportsRoute
+  '/v13/retention': typeof V13RetentionRoute
+  '/v13/revenue-intel': typeof V13RevenueIntelRoute
+  '/v13/revenue-quality': typeof V13RevenueQualityRoute
+  '/v13/risk': typeof V13RiskRoute
+  '/v13/roadmap': typeof V13RoadmapRoute
+  '/v13/scope': typeof V13ScopeRoute
+  '/v13/strategic-acct': typeof V13StrategicAcctRoute
+  '/v13/valuation': typeof V13ValuationRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -5054,6 +5222,30 @@ export interface FileRoutesByTo {
   '/v125/scope': typeof V125ScopeRoute
   '/v125/steward': typeof V125StewardRoute
   '/v125/strategic-acct': typeof V125StrategicAcctRoute
+  '/v13/api-edi': typeof V13ApiEdiRoute
+  '/v13/board': typeof V13BoardRoute
+  '/v13/capital-readiness': typeof V13CapitalReadinessRoute
+  '/v13/concentration': typeof V13ConcentrationRoute
+  '/v13/data-room': typeof V13DataRoomRoute
+  '/v13/demo': typeof V13DemoRoute
+  '/v13/diligence': typeof V13DiligenceRoute
+  '/v13/exec-value': typeof V13ExecValueRoute
+  '/v13/forecast': typeof V13ForecastRoute
+  '/v13/growth-investment': typeof V13GrowthInvestmentRoute
+  '/v13/investor-evidence': typeof V13InvestorEvidenceRoute
+  '/v13/marketplace': typeof V13MarketplaceRoute
+  '/v13/mp-unit-econ': typeof V13MpUnitEconRoute
+  '/v13/overview': typeof V13OverviewRoute
+  '/v13/partner-value': typeof V13PartnerValueRoute
+  '/v13/reports': typeof V13ReportsRoute
+  '/v13/retention': typeof V13RetentionRoute
+  '/v13/revenue-intel': typeof V13RevenueIntelRoute
+  '/v13/revenue-quality': typeof V13RevenueQualityRoute
+  '/v13/risk': typeof V13RiskRoute
+  '/v13/roadmap': typeof V13RoadmapRoute
+  '/v13/scope': typeof V13ScopeRoute
+  '/v13/strategic-acct': typeof V13StrategicAcctRoute
+  '/v13/valuation': typeof V13ValuationRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -5735,6 +5927,30 @@ export interface FileRoutesById {
   '/v125/scope': typeof V125ScopeRoute
   '/v125/steward': typeof V125StewardRoute
   '/v125/strategic-acct': typeof V125StrategicAcctRoute
+  '/v13/api-edi': typeof V13ApiEdiRoute
+  '/v13/board': typeof V13BoardRoute
+  '/v13/capital-readiness': typeof V13CapitalReadinessRoute
+  '/v13/concentration': typeof V13ConcentrationRoute
+  '/v13/data-room': typeof V13DataRoomRoute
+  '/v13/demo': typeof V13DemoRoute
+  '/v13/diligence': typeof V13DiligenceRoute
+  '/v13/exec-value': typeof V13ExecValueRoute
+  '/v13/forecast': typeof V13ForecastRoute
+  '/v13/growth-investment': typeof V13GrowthInvestmentRoute
+  '/v13/investor-evidence': typeof V13InvestorEvidenceRoute
+  '/v13/marketplace': typeof V13MarketplaceRoute
+  '/v13/mp-unit-econ': typeof V13MpUnitEconRoute
+  '/v13/overview': typeof V13OverviewRoute
+  '/v13/partner-value': typeof V13PartnerValueRoute
+  '/v13/reports': typeof V13ReportsRoute
+  '/v13/retention': typeof V13RetentionRoute
+  '/v13/revenue-intel': typeof V13RevenueIntelRoute
+  '/v13/revenue-quality': typeof V13RevenueQualityRoute
+  '/v13/risk': typeof V13RiskRoute
+  '/v13/roadmap': typeof V13RoadmapRoute
+  '/v13/scope': typeof V13ScopeRoute
+  '/v13/strategic-acct': typeof V13StrategicAcctRoute
+  '/v13/valuation': typeof V13ValuationRoute
   '/v15/billing': typeof V15BillingRoute
   '/v15/copilot': typeof V15CopilotRoute
   '/v15/demo': typeof V15DemoRoute
@@ -6417,6 +6633,30 @@ export interface FileRouteTypes {
     | '/v125/scope'
     | '/v125/steward'
     | '/v125/strategic-acct'
+    | '/v13/api-edi'
+    | '/v13/board'
+    | '/v13/capital-readiness'
+    | '/v13/concentration'
+    | '/v13/data-room'
+    | '/v13/demo'
+    | '/v13/diligence'
+    | '/v13/exec-value'
+    | '/v13/forecast'
+    | '/v13/growth-investment'
+    | '/v13/investor-evidence'
+    | '/v13/marketplace'
+    | '/v13/mp-unit-econ'
+    | '/v13/overview'
+    | '/v13/partner-value'
+    | '/v13/reports'
+    | '/v13/retention'
+    | '/v13/revenue-intel'
+    | '/v13/revenue-quality'
+    | '/v13/risk'
+    | '/v13/roadmap'
+    | '/v13/scope'
+    | '/v13/strategic-acct'
+    | '/v13/valuation'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -7097,6 +7337,30 @@ export interface FileRouteTypes {
     | '/v125/scope'
     | '/v125/steward'
     | '/v125/strategic-acct'
+    | '/v13/api-edi'
+    | '/v13/board'
+    | '/v13/capital-readiness'
+    | '/v13/concentration'
+    | '/v13/data-room'
+    | '/v13/demo'
+    | '/v13/diligence'
+    | '/v13/exec-value'
+    | '/v13/forecast'
+    | '/v13/growth-investment'
+    | '/v13/investor-evidence'
+    | '/v13/marketplace'
+    | '/v13/mp-unit-econ'
+    | '/v13/overview'
+    | '/v13/partner-value'
+    | '/v13/reports'
+    | '/v13/retention'
+    | '/v13/revenue-intel'
+    | '/v13/revenue-quality'
+    | '/v13/risk'
+    | '/v13/roadmap'
+    | '/v13/scope'
+    | '/v13/strategic-acct'
+    | '/v13/valuation'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -7777,6 +8041,30 @@ export interface FileRouteTypes {
     | '/v125/scope'
     | '/v125/steward'
     | '/v125/strategic-acct'
+    | '/v13/api-edi'
+    | '/v13/board'
+    | '/v13/capital-readiness'
+    | '/v13/concentration'
+    | '/v13/data-room'
+    | '/v13/demo'
+    | '/v13/diligence'
+    | '/v13/exec-value'
+    | '/v13/forecast'
+    | '/v13/growth-investment'
+    | '/v13/investor-evidence'
+    | '/v13/marketplace'
+    | '/v13/mp-unit-econ'
+    | '/v13/overview'
+    | '/v13/partner-value'
+    | '/v13/reports'
+    | '/v13/retention'
+    | '/v13/revenue-intel'
+    | '/v13/revenue-quality'
+    | '/v13/risk'
+    | '/v13/roadmap'
+    | '/v13/scope'
+    | '/v13/strategic-acct'
+    | '/v13/valuation'
     | '/v15/billing'
     | '/v15/copilot'
     | '/v15/demo'
@@ -8450,6 +8738,30 @@ export interface RootRouteChildren {
   V125ScopeRoute: typeof V125ScopeRoute
   V125StewardRoute: typeof V125StewardRoute
   V125StrategicAcctRoute: typeof V125StrategicAcctRoute
+  V13ApiEdiRoute: typeof V13ApiEdiRoute
+  V13BoardRoute: typeof V13BoardRoute
+  V13CapitalReadinessRoute: typeof V13CapitalReadinessRoute
+  V13ConcentrationRoute: typeof V13ConcentrationRoute
+  V13DataRoomRoute: typeof V13DataRoomRoute
+  V13DemoRoute: typeof V13DemoRoute
+  V13DiligenceRoute: typeof V13DiligenceRoute
+  V13ExecValueRoute: typeof V13ExecValueRoute
+  V13ForecastRoute: typeof V13ForecastRoute
+  V13GrowthInvestmentRoute: typeof V13GrowthInvestmentRoute
+  V13InvestorEvidenceRoute: typeof V13InvestorEvidenceRoute
+  V13MarketplaceRoute: typeof V13MarketplaceRoute
+  V13MpUnitEconRoute: typeof V13MpUnitEconRoute
+  V13OverviewRoute: typeof V13OverviewRoute
+  V13PartnerValueRoute: typeof V13PartnerValueRoute
+  V13ReportsRoute: typeof V13ReportsRoute
+  V13RetentionRoute: typeof V13RetentionRoute
+  V13RevenueIntelRoute: typeof V13RevenueIntelRoute
+  V13RevenueQualityRoute: typeof V13RevenueQualityRoute
+  V13RiskRoute: typeof V13RiskRoute
+  V13RoadmapRoute: typeof V13RoadmapRoute
+  V13ScopeRoute: typeof V13ScopeRoute
+  V13StrategicAcctRoute: typeof V13StrategicAcctRoute
+  V13ValuationRoute: typeof V13ValuationRoute
   V15BillingRoute: typeof V15BillingRoute
   V15CopilotRoute: typeof V15CopilotRoute
   V15DemoRoute: typeof V15DemoRoute
@@ -11723,6 +12035,174 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof V15BillingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v13/valuation': {
+      id: '/v13/valuation'
+      path: '/v13/valuation'
+      fullPath: '/v13/valuation'
+      preLoaderRoute: typeof V13ValuationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/strategic-acct': {
+      id: '/v13/strategic-acct'
+      path: '/v13/strategic-acct'
+      fullPath: '/v13/strategic-acct'
+      preLoaderRoute: typeof V13StrategicAcctRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/scope': {
+      id: '/v13/scope'
+      path: '/v13/scope'
+      fullPath: '/v13/scope'
+      preLoaderRoute: typeof V13ScopeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/roadmap': {
+      id: '/v13/roadmap'
+      path: '/v13/roadmap'
+      fullPath: '/v13/roadmap'
+      preLoaderRoute: typeof V13RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/risk': {
+      id: '/v13/risk'
+      path: '/v13/risk'
+      fullPath: '/v13/risk'
+      preLoaderRoute: typeof V13RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/revenue-quality': {
+      id: '/v13/revenue-quality'
+      path: '/v13/revenue-quality'
+      fullPath: '/v13/revenue-quality'
+      preLoaderRoute: typeof V13RevenueQualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/revenue-intel': {
+      id: '/v13/revenue-intel'
+      path: '/v13/revenue-intel'
+      fullPath: '/v13/revenue-intel'
+      preLoaderRoute: typeof V13RevenueIntelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/retention': {
+      id: '/v13/retention'
+      path: '/v13/retention'
+      fullPath: '/v13/retention'
+      preLoaderRoute: typeof V13RetentionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/reports': {
+      id: '/v13/reports'
+      path: '/v13/reports'
+      fullPath: '/v13/reports'
+      preLoaderRoute: typeof V13ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/partner-value': {
+      id: '/v13/partner-value'
+      path: '/v13/partner-value'
+      fullPath: '/v13/partner-value'
+      preLoaderRoute: typeof V13PartnerValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/overview': {
+      id: '/v13/overview'
+      path: '/v13/overview'
+      fullPath: '/v13/overview'
+      preLoaderRoute: typeof V13OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/mp-unit-econ': {
+      id: '/v13/mp-unit-econ'
+      path: '/v13/mp-unit-econ'
+      fullPath: '/v13/mp-unit-econ'
+      preLoaderRoute: typeof V13MpUnitEconRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/marketplace': {
+      id: '/v13/marketplace'
+      path: '/v13/marketplace'
+      fullPath: '/v13/marketplace'
+      preLoaderRoute: typeof V13MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/investor-evidence': {
+      id: '/v13/investor-evidence'
+      path: '/v13/investor-evidence'
+      fullPath: '/v13/investor-evidence'
+      preLoaderRoute: typeof V13InvestorEvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/growth-investment': {
+      id: '/v13/growth-investment'
+      path: '/v13/growth-investment'
+      fullPath: '/v13/growth-investment'
+      preLoaderRoute: typeof V13GrowthInvestmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/forecast': {
+      id: '/v13/forecast'
+      path: '/v13/forecast'
+      fullPath: '/v13/forecast'
+      preLoaderRoute: typeof V13ForecastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/exec-value': {
+      id: '/v13/exec-value'
+      path: '/v13/exec-value'
+      fullPath: '/v13/exec-value'
+      preLoaderRoute: typeof V13ExecValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/diligence': {
+      id: '/v13/diligence'
+      path: '/v13/diligence'
+      fullPath: '/v13/diligence'
+      preLoaderRoute: typeof V13DiligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/demo': {
+      id: '/v13/demo'
+      path: '/v13/demo'
+      fullPath: '/v13/demo'
+      preLoaderRoute: typeof V13DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/data-room': {
+      id: '/v13/data-room'
+      path: '/v13/data-room'
+      fullPath: '/v13/data-room'
+      preLoaderRoute: typeof V13DataRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/concentration': {
+      id: '/v13/concentration'
+      path: '/v13/concentration'
+      fullPath: '/v13/concentration'
+      preLoaderRoute: typeof V13ConcentrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/capital-readiness': {
+      id: '/v13/capital-readiness'
+      path: '/v13/capital-readiness'
+      fullPath: '/v13/capital-readiness'
+      preLoaderRoute: typeof V13CapitalReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/board': {
+      id: '/v13/board'
+      path: '/v13/board'
+      fullPath: '/v13/board'
+      preLoaderRoute: typeof V13BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v13/api-edi': {
+      id: '/v13/api-edi'
+      path: '/v13/api-edi'
+      fullPath: '/v13/api-edi'
+      preLoaderRoute: typeof V13ApiEdiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/v125/strategic-acct': {
       id: '/v125/strategic-acct'
       path: '/v125/strategic-acct'
@@ -13927,6 +14407,30 @@ const rootRouteChildren: RootRouteChildren = {
   V125ScopeRoute: V125ScopeRoute,
   V125StewardRoute: V125StewardRoute,
   V125StrategicAcctRoute: V125StrategicAcctRoute,
+  V13ApiEdiRoute: V13ApiEdiRoute,
+  V13BoardRoute: V13BoardRoute,
+  V13CapitalReadinessRoute: V13CapitalReadinessRoute,
+  V13ConcentrationRoute: V13ConcentrationRoute,
+  V13DataRoomRoute: V13DataRoomRoute,
+  V13DemoRoute: V13DemoRoute,
+  V13DiligenceRoute: V13DiligenceRoute,
+  V13ExecValueRoute: V13ExecValueRoute,
+  V13ForecastRoute: V13ForecastRoute,
+  V13GrowthInvestmentRoute: V13GrowthInvestmentRoute,
+  V13InvestorEvidenceRoute: V13InvestorEvidenceRoute,
+  V13MarketplaceRoute: V13MarketplaceRoute,
+  V13MpUnitEconRoute: V13MpUnitEconRoute,
+  V13OverviewRoute: V13OverviewRoute,
+  V13PartnerValueRoute: V13PartnerValueRoute,
+  V13ReportsRoute: V13ReportsRoute,
+  V13RetentionRoute: V13RetentionRoute,
+  V13RevenueIntelRoute: V13RevenueIntelRoute,
+  V13RevenueQualityRoute: V13RevenueQualityRoute,
+  V13RiskRoute: V13RiskRoute,
+  V13RoadmapRoute: V13RoadmapRoute,
+  V13ScopeRoute: V13ScopeRoute,
+  V13StrategicAcctRoute: V13StrategicAcctRoute,
+  V13ValuationRoute: V13ValuationRoute,
   V15BillingRoute: V15BillingRoute,
   V15CopilotRoute: V15CopilotRoute,
   V15DemoRoute: V15DemoRoute,
