@@ -521,3 +521,25 @@ export const V125_PHASE39_TEASER = [
   "Marketplace economics governance",
   "Executive value creation operations",
 ];
+
+// --- Phase 38 polish: trends + at-risk slices ------------------------------
+export const V125_AUDIT_TRENDS = [
+  { quarter: "Q-3", score: 74, ready: 6, at_risk: 8, exceptions: 7 },
+  { quarter: "Q-2", score: 78, ready: 7, at_risk: 7, exceptions: 5 },
+  { quarter: "Q-1", score: 81, ready: 8, at_risk: 6, exceptions: 4 },
+  { quarter: "Q-0", score: 84, ready: 9, at_risk: 5, exceptions: 3 },
+];
+
+export const V125_REV_QUALITY_TRENDS = [
+  { quarter: "Q-3", score: 74, pass: 7, review: 4, exception: 2 },
+  { quarter: "Q-2", score: 77, pass: 8, review: 4, exception: 1 },
+  { quarter: "Q-1", score: 80, pass: 9, review: 3, exception: 1 },
+  { quarter: "Q-0", score: 82, pass: 10, review: 2, exception: 1 },
+];
+
+export const V125_PARTNER_ATTRIBUTION_TRENDS = [
+  { quarter: "Q-3", sourced_usd: 3.1e6, influenced_usd: 5.4e6, conv_pct: 18 },
+  { quarter: "Q-2", sourced_usd: 3.6e6, influenced_usd: 6.1e6, conv_pct: 20 },
+  { quarter: "Q-1", sourced_usd: 4.0e6, influenced_usd: 6.8e6, conv_pct: 22 },
+  { quarter: "Q-0", sourced_usd: 4.5e6, influenced_usd: 7.4e6, conv_pct: 24 },
+];
