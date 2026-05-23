@@ -7,6 +7,7 @@ import * as H from "@/v13/hooks";
 
 function Page() {
   const ri = H.useRevenueIntelligenceMaturity();
+  const trends = H.useV13RevIntelTrends();
   return (
     <V13Page icon={<Globe2 className="size-6 text-indigo-300" />} title="Revenue Intelligence Maturity Center" blurb="Mix maturity, regional maturity, and revenue risk. Predictability is placeholder-only.">
       <div className="grid gap-3 md:grid-cols-4">
