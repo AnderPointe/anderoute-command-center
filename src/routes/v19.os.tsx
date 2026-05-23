@@ -6,7 +6,9 @@ import * as H from "@/v19/hooks";
 
 function Page() {
   const a = H.useEnterpriseAssuranceOperatingSystem();
-  return (
+  const nb = H.useV19NextBestHitl();
+  const heat = H.useV19OwnerHeatmap();
+  const polish = H.useV19PolishHeadlines();
     <V19Page icon={<Gauge className="size-6 text-violet-300" />}
       title="Enterprise Assurance Operating System"
       blurb="One pane for enterprise assurance: scores, KPIs, health map, gaps, remediation, executive summary.">
