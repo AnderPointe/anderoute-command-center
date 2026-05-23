@@ -7,6 +7,7 @@ import * as H from "@/v125/hooks";
 
 function Page() {
   const p = H.usePartnerChannelOptimization();
+  const trends = H.usePartnerAttributionTrends();
   const sourced = p.partners.reduce((s, r) => s + r.sourced_usd, 0);
   const influenced = p.partners.reduce((s, r) => s + r.influenced_usd, 0);
   return (
