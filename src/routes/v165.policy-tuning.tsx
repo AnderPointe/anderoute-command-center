@@ -26,6 +26,12 @@ function Page() {
           { key: "ts", label: "When" }, { key: "area", label: "Area" }, { key: "change", label: "Change" }, { key: "approver", label: "Approver" },
         ]} />
       </Section>
+      <Section title="Policy calibration drift (polish)">
+        <SimpleTable rows={H.useV165PolicyCalibration() as any} columns={[
+          { key: "policy", label: "Policy" }, { key: "current", label: "Current" },
+          { key: "suggested", label: "Suggested" }, { key: "basis", label: "Basis" }, { key: "owner", label: "Owner" },
+        ]} />
+      </Section>
     </V165Page>
   );
 }

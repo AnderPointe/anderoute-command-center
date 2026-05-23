@@ -16,6 +16,18 @@ function Page() {
           { key: "risk", label: "Risk" }, { key: "status", label: "Status" },
         ]} />
       </Section>
+      <Section title="Owner approval heatmap (last 7 days)">
+        <SimpleTable rows={H.useV165OwnerHeatmap() as any} columns={[
+          { key: "owner", label: "Owner" }, { key: "pending", label: "Pending" },
+          { key: "approved7d", label: "Approved 7d" }, { key: "rejected7d", label: "Rejected 7d" },
+          { key: "sla", label: "SLA" },
+        ]} />
+      </Section>
+      <Section title="RLS policy examples">
+        <SimpleTable rows={H.useV165RlsPolish() as any} columns={[
+          { key: "name", label: "Policy" }, { key: "target", label: "Target" }, { key: "sql", label: "SQL sketch" },
+        ]} />
+      </Section>
       <Section title="Guardrails">
         <ul className="space-y-1 text-sm text-muted-foreground">
           {q.guardrails.map(g => <li key={g}>· {g}</li>)}
