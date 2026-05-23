@@ -9,6 +9,8 @@ function Page() {
   const headlines = H.useV18PolishHeadlines();
   const heatmap = H.useV18OwnerHeatmap();
   const calibration = H.useV18PolicyCalibration();
+  const nba = H.useV18NextBestActions();
+  const slas = H.useV18PersonaSlas();
   return (
     <V18Page icon={<Gauge className="size-6 text-violet-300" />} title="Enterprise Autonomous-Assist Scale Governance Center"
       blurb="Scale governance score, policy compliance, high-impact protection, approval coverage, recommendation/evidence/audit completeness, outcome learning coverage, and exception health.">
