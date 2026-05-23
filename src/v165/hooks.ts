@@ -30,3 +30,14 @@ export const useV165EdgeBoundary                   = () => D.V165_EDGE_BOUNDARY;
 export const useV165EdgeFunctions                  = () => D.V165_EDGE_FUNCTIONS;
 export const useV165Demo                           = () => D.V165_DEMO;
 export const useV165Phase47Teaser                  = () => D.V165_PHASE47_TEASER;
+
+import * as P from "./data/mockPhase46Polish";
+export const useV165PolishHeadlines      = () => P.V165_POLISH_HEADLINES;
+export const useV165OwnerHeatmap         = () => P.V165_OWNER_HEATMAP;
+export const useV165EvidenceFreshness    = () => P.V165_EVIDENCE_FRESHNESS;
+export const useV165PolicyCalibration    = () => P.V165_POLICY_CALIBRATION;
+export const useV165RlsPolish            = () => P.V165_RLS_POLISH;
+export const useV165EdgeBoundaryPolish   = () => P.V165_EDGE_BOUNDARY_POLISH;
+export const useV165DemoPolish           = () => P.V165_DEMO_POLISH;
+export const useV165RoadmapPolish        = () => P.V165_ROADMAP_POLISH;
+export const useV165Phase47TeaserPolish  = () => P.V165_PHASE47_TEASER_POLISH;
