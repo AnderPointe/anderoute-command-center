@@ -14,10 +14,20 @@ function Page() {
   const demo = H.useV235Demo();
   const roadmap = H.useTrustAutomationMaturityRoadmap();
   const teaser = H.useV235Phase61Teaser();
+  const pDomains = H.useV235PolishDomains();
+  const pHitl = H.useV235PolishHitlQueue();
+  const pBoundary = H.useV235PolishBoundary();
+  const pInv = H.useV235PolishInvariants();
+  const pRls = H.useV235PolishRls();
+  const pEdge = H.useV235PolishEdge();
+  const pOwners = H.useV235PolishOwnerHeatmap();
+  const pLanes = H.useV235PolishRoadmapLanes();
+  const pDemo = H.useV235PolishDemo();
   return (
     <V235Page icon={<ShieldCheck className="size-6 text-emerald-300" />}
       title="Anderoute V23.5 — Enterprise Trust Automation Maturity"
-      blurb="20 trust automation centers optimized to enterprise maturity. All high-impact actions HITL-gated; approver ≠ recommender, dual sign-off > $25k, append-only hash-chained evidence — enforced in RLS + server fns.">
+      blurb="Phase 60 polish — 20 trust automation centers lifted to 99 maturity. HITL-gated, approver ≠ recommender, dual sign-off > $25k, append-only hash-chained evidence — enforced in RLS + server fns.">
+
       <ExecHeadline tag="V23.5 headline" headline={head.headline} bullets={head.highlights} />
       <div className="grid gap-3 md:grid-cols-4">
         <ScoreCard label="Maturity"           value={m.score} tone="emerald" />
