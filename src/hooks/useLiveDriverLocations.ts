@@ -46,7 +46,7 @@ export function useLiveDriverLocations(companyId: string | null) {
         .eq("company_id", companyId);
       if (error || cancelled) return;
       const next: Record<string, DriverLocationRow> = {};
-      for (const row of (data ?? []) as DriverLocationRow[]) {
+      for (const row of ((data ?? []) as unknown) as DriverLocationRow[]) {
         next[row.driver_id] = row;
       }
       setByDriverId(next);
