@@ -27,7 +27,9 @@ export function SelectedDriverMapCard({
     .join("");
 
   return (
-    <div className="absolute left-1/2 top-6 z-[500] w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+    <div className="absolute left-1/2 top-6 z-[500] w-80 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white shadow-2xl">
+      {/* Downward tail pointing to driver marker */}
+      <div className="pointer-events-none absolute -bottom-2 left-1/2 size-4 -translate-x-1/2 rotate-45 border-b border-r border-slate-200 bg-white" />
       <button
         onClick={onClose}
         className="absolute right-2 top-2 z-10 grid size-7 place-items-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700"
