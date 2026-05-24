@@ -168,7 +168,7 @@ function PinPlacer({
 }
 
 export function AnderouteUSLiveLogisticsMap() {
-  const { drivers, connected } = useLiveDriverLocations();
+  const { drivers, connected } = useLiveDriverCurrent();
   const pois = useLogisticsMapPois();
 
   const [search, setSearch] = useState("");
