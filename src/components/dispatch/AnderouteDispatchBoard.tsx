@@ -27,7 +27,7 @@ import { DispatchTopBar } from "./DispatchTopBar";
 import { DispatchViewControls } from "./DispatchViewControls";
 import { DispatchFilterBar } from "./DispatchFilterBar";
 import { FleetDriverList } from "./FleetDriverList";
-import { AnderouteDispatchMap } from "./AnderouteDispatchMap";
+import { Anderoute3DDispatchMap } from "./Anderoute3DDispatchMap";
 import { LoadsDispatchPanel } from "./LoadsDispatchPanel";
 import { useLiveDriverCurrent } from "@/hooks/useLiveDriverLocations";
 import { useLogisticsMapPois } from "@/hooks/useLogisticsMapPois";
