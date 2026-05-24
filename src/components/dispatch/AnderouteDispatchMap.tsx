@@ -87,6 +87,21 @@ function poiEl(cat: PoiCategory): HTMLElement {
   return el;
 }
 
+export type DispatchLayerKey =
+  | "drivers"
+  | "loads"
+  | "depots"
+  | "warehouses"
+  | "customers"
+  | "airports"
+  | "stores"
+  | "landmarks"
+  | "waterways"
+  | "custom_pins"
+  | "buildings_3d"
+  | "traffic"
+  | "weather";
+
 interface Props {
   drivers: DispatchDriver[];
   pois: LogisticsPoi[];
@@ -96,7 +111,23 @@ interface Props {
   selectedLoadId?: string | null;
   onSelectLoad?: (id: string | null) => void;
   mapRef: React.MutableRefObject<MLMap | null>;
+  visibleLayers?: Set<DispatchLayerKey>;
 }
+
+const POI_LAYER_FOR_CATEGORY: Partial<Record<PoiCategory, DispatchLayerKey>> = {
+  depot: "depots",
+  warehouse: "warehouses",
+  customer: "customers",
+  airport: "airports",
+  store: "stores",
+  landmark: "landmarks",
+  water: "waterways",
+  truck_stop: "stores",
+  fuel: "stores",
+  maintenance: "stores",
+  rail_yard: "landmarks",
+  port: "landmarks",
+};
 
 export function AnderouteDispatchMap({
   drivers,
@@ -107,7 +138,10 @@ export function AnderouteDispatchMap({
   selectedLoadId = null,
   onSelectLoad,
   mapRef,
+  visibleLayers,
 }: Props) {
+  const isLayerOn = (k: DispatchLayerKey) =>
+    !visibleLayers || visibleLayers.has(k);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapDivRef = useRef<HTMLDivElement>(null);
   const driverMarkersRef = useRef<Map<string, MLMarker>>(new Map());
