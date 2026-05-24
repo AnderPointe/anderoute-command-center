@@ -1,4 +1,15 @@
 import * as D from "./data/mockPhase59";
+import * as P from "./data/mockPhase59Polish";
+
+export const useV23PolishDomains       = () => P.V23P_DOMAINS;
+export const useV23PolishHitlQueue     = () => P.V23P_HITL_QUEUE;
+export const useV23PolishBoundary      = () => P.V23P_BOUNDARY;
+export const useV23PolishRls           = () => P.V23P_RLS;
+export const useV23PolishEdge          = () => P.V23P_EDGE;
+export const useV23PolishInvariants    = () => P.V23P_INVARIANTS;
+export const useV23PolishDemo          = () => P.V23P_DEMO;
+export const useV23PolishOwnerHeatmap  = () => P.V23P_OWNER_HEATMAP;
+export const useV23PolishRoadmapLanes  = () => P.V23P_ROADMAP_LANES;
 
 export const useV23Scope                              = () => D.V23_SCOPE;
 export const useV23FeatureMatrix                      = () => D.V23_FEATURE_MATRIX;
