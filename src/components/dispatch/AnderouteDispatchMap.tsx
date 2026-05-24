@@ -14,6 +14,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { DispatchDriver } from "@/types/dispatch";
 import type { LogisticsPoi, PoiCategory } from "@/types/map";
+import type { DispatchLoad } from "@/types/loads";
 import { DRIVER_STATUS_COLOR } from "./dispatchTokens";
 import { MapStatusLegend } from "./MapStatusLegend";
 import { MapLayerControls } from "./MapLayerControls";
