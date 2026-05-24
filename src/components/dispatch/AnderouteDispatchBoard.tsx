@@ -166,7 +166,7 @@ export default function AnderouteDispatchBoard() {
             onVehicleType={setVehicleTypeFilter}
           />
 
-          <div className="grid min-h-0 grid-cols-[320px_1fr]">
+          <div className="grid min-h-0 grid-cols-[320px_1fr_340px]">
             <FleetDriverList
               drivers={filteredDrivers}
               totalCount={sourceDrivers.length}
@@ -179,9 +179,19 @@ export default function AnderouteDispatchBoard() {
             <AnderouteDispatchMap
               drivers={filteredDrivers}
               pois={pois}
+              loads={filteredLoads}
               selectedDriverId={selectedDriverId}
               onSelectDriver={setSelectedDriverId}
+              selectedLoadId={selectedLoadId}
+              onSelectLoad={setSelectedLoadId}
               mapRef={mapRef}
+            />
+            <LoadsDispatchPanel
+              loads={filteredLoads}
+              selectedLoadId={selectedLoadId}
+              onSelect={(l) => setSelectedLoadId(l.id)}
+              onFocus={onFocusLoad}
+              usingMock={loadsUsingMock}
             />
           </div>
         </div>
