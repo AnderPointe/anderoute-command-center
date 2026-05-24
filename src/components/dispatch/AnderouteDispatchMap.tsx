@@ -329,13 +329,15 @@ export function AnderouteDispatchMap({
     });
   }, [drivers, styleReady, mapRef, onSelectDriver, visibleLayers]);
 
-  // --- POI markers
+  // --- POI markers (filtered by per-category layer toggles)
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleReady) return;
     const bag = poiMarkersRef.current;
     const seen = new Set<string>();
     pois.forEach((p) => {
+      const layerKey = POI_LAYER_FOR_CATEGORY[p.category];
+      if (layerKey && !isLayerOn(layerKey)) return;
       seen.add(p.id);
       const existing = bag.get(p.id);
       if (existing) {
@@ -358,7 +360,7 @@ export function AnderouteDispatchMap({
         bag.delete(id);
       }
     });
-  }, [pois, styleReady, mapRef]);
+  }, [pois, styleReady, mapRef, visibleLayers]);
 
   // --- Load pickup/dropoff markers
   useEffect(() => {
@@ -366,41 +368,43 @@ export function AnderouteDispatchMap({
     if (!map || !styleReady) return;
     const bag = stopMarkersRef.current;
     const seen = new Set<string>();
-    loads.forEach((load) => {
-      load.stops.forEach((s) => {
-        if (s.latitude == null || s.longitude == null) return;
-        seen.add(s.id);
-        if (bag.has(s.id)) {
-          bag.get(s.id)!.setLngLat([s.longitude, s.latitude]);
-          return;
-        }
-        const el = poiEl(s.kind === "pickup" ? "load_pickup" : "load_dropoff");
-        el.addEventListener("click", (ev) => {
-          ev.stopPropagation();
-          onSelectLoad?.(load.id);
+    if (isLayerOn("loads")) {
+      loads.forEach((load) => {
+        load.stops.forEach((s) => {
+          if (s.latitude == null || s.longitude == null) return;
+          seen.add(s.id);
+          if (bag.has(s.id)) {
+            bag.get(s.id)!.setLngLat([s.longitude, s.latitude]);
+            return;
+          }
+          const el = poiEl(s.kind === "pickup" ? "load_pickup" : "load_dropoff");
+          el.addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            onSelectLoad?.(load.id);
+          });
+          const m = new maplibregl.Marker({ element: el, anchor: "bottom" })
+            .setLngLat([s.longitude, s.latitude])
+            .setPopup(
+              new maplibregl.Popup({ offset: 24 }).setHTML(
+                `<div style="font-size:12px">
+                  <div style="font-weight:600">${s.kind === "pickup" ? "Pickup" : "Drop-off"} · ${s.name ?? load.customer ?? "Stop"}</div>
+                  <div style="color:#64748b">${[s.address, s.city, s.region].filter(Boolean).join(", ")}</div>
+                  <div style="margin-top:4px;color:#64748b">Load #${load.id.slice(0, 8)} · ${load.commodity ?? "—"}</div>
+                </div>`,
+              ),
+            )
+            .addTo(map);
+          bag.set(s.id, m);
         });
-        const m = new maplibregl.Marker({ element: el, anchor: "bottom" })
-          .setLngLat([s.longitude, s.latitude])
-          .setPopup(
-            new maplibregl.Popup({ offset: 24 }).setHTML(
-              `<div style="font-size:12px">
-                <div style="font-weight:600">${s.kind === "pickup" ? "Pickup" : "Drop-off"} · ${s.name ?? load.customer ?? "Stop"}</div>
-                <div style="color:#64748b">${[s.address, s.city, s.region].filter(Boolean).join(", ")}</div>
-                <div style="margin-top:4px;color:#64748b">Load #${load.id.slice(0, 8)} · ${load.commodity ?? "—"}</div>
-              </div>`,
-            ),
-          )
-          .addTo(map);
-        bag.set(s.id, m);
       });
-    });
+    }
     [...bag.keys()].forEach((id) => {
       if (!seen.has(id)) {
         bag.get(id)?.remove();
         bag.delete(id);
       }
     });
-  }, [loads, styleReady, mapRef, onSelectLoad]);
+  }, [loads, styleReady, mapRef, onSelectLoad, visibleLayers]);
 
   // --- Route lines (GeoJSON)
   useEffect(() => {
