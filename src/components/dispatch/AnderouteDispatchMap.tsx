@@ -122,7 +122,6 @@ export function AnderouteDispatchMap({
       zoom: US_ZOOM,
       pitch: 45,
       bearing: -12,
-      antialias: true,
       attributionControl: { compact: true },
     });
     mapRef.current = map;
