@@ -297,35 +297,37 @@ export function AnderouteDispatchMap({
     const map = mapRef.current;
     if (!map || !styleReady) return;
     const bag = driverMarkersRef.current;
+    const show = isLayerOn("drivers");
     const seen = new Set<string>();
-    drivers.forEach((d) => {
-      seen.add(d.driver_id);
-      const existing = bag.get(d.driver_id);
-      if (existing) {
-        existing.setLngLat([d.longitude, d.latitude]);
-        const el = existing.getElement();
-        const ring = el.querySelector("div > div") as HTMLElement | null;
-        if (ring) ring.style.borderColor = DRIVER_STATUS_COLOR[d.status];
-        return;
-      }
-      const el = driverEl(d);
-      el.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        onSelectDriver(d.driver_id);
+    if (show) {
+      drivers.forEach((d) => {
+        seen.add(d.driver_id);
+        const existing = bag.get(d.driver_id);
+        if (existing) {
+          existing.setLngLat([d.longitude, d.latitude]);
+          const el = existing.getElement();
+          const ring = el.querySelector("div > div") as HTMLElement | null;
+          if (ring) ring.style.borderColor = DRIVER_STATUS_COLOR[d.status];
+          return;
+        }
+        const el = driverEl(d);
+        el.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          onSelectDriver(d.driver_id);
+        });
+        const m = new maplibregl.Marker({ element: el, anchor: "bottom" })
+          .setLngLat([d.longitude, d.latitude])
+          .addTo(map);
+        bag.set(d.driver_id, m);
       });
-      const m = new maplibregl.Marker({ element: el, anchor: "bottom" })
-        .setLngLat([d.longitude, d.latitude])
-        .addTo(map);
-      bag.set(d.driver_id, m);
-    });
-    // Remove stale
+    }
     [...bag.keys()].forEach((id) => {
       if (!seen.has(id)) {
         bag.get(id)?.remove();
         bag.delete(id);
       }
     });
-  }, [drivers, styleReady, mapRef, onSelectDriver]);
+  }, [drivers, styleReady, mapRef, onSelectDriver, visibleLayers]);
 
   // --- POI markers
   useEffect(() => {
