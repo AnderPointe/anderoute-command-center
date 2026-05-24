@@ -28,10 +28,13 @@ import { DispatchViewControls } from "./DispatchViewControls";
 import { DispatchFilterBar } from "./DispatchFilterBar";
 import { FleetDriverList } from "./FleetDriverList";
 import { AnderouteDispatchMap } from "./AnderouteDispatchMap";
+import { LoadsDispatchPanel } from "./LoadsDispatchPanel";
 import { useLiveDriverCurrent } from "@/hooks/useLiveDriverLocations";
 import { useLogisticsMapPois } from "@/hooks/useLogisticsMapPois";
+import { useLoadsWithStops } from "@/hooks/useLoadsWithStops";
 import { MOCK_DISPATCH_DRIVERS } from "@/data/mockDispatchDrivers";
 import type { DispatchDriver, ViewMode } from "@/types/dispatch";
+import type { DispatchLoad } from "@/types/loads";
 import { STALE_AFTER_SECONDS } from "./dispatchTokens";
 
 export default function AnderouteDispatchBoard() {
