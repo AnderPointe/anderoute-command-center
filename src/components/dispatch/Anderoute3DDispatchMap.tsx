@@ -236,9 +236,7 @@ export function Anderoute3DDispatchMap(props: Props) {
     </div>
   );
 }
-    </div>
-  );
-}
+
 
 function RealtimeBadge({ status }: { status: "connected" | "connecting" | "offline" }) {
   const cfg =
