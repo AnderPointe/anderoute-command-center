@@ -1,9 +1,11 @@
 import { Search, Bell } from "lucide-react";
 import { AnderRouteSidebar } from "@/components/anderroute/AnderRouteSidebar";
 import { DriverCard } from "@/components/anderroute/DriverCard";
-import { DEMO_DRIVERS } from "@/data/anderrouteDemo";
+import { useDriverDossiers } from "@/hooks/useAnderRouteDossiers";
 
 export default function DispatchDashboard() {
+  const { dossiers, loading, usingDemo } = useDriverDossiers();
+
   return (
     <div className="flex min-h-screen bg-[#020617] text-white">
       <AnderRouteSidebar active="Drivers" />
@@ -33,13 +35,17 @@ export default function DispatchDashboard() {
         <div className="p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-sm font-semibold text-white">
-              {DEMO_DRIVERS.length} drivers on shift
+              {loading ? "Loading drivers…" : `${dossiers.length} drivers on shift`}
             </h2>
-            <p className="text-xs text-slate-400">Click any driver to open their command view</p>
+            <p className="text-xs text-slate-400">
+              {usingDemo
+                ? "Showing demo data — sign in to see live fleet"
+                : "Click any driver to open their command view"}
+            </p>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {DEMO_DRIVERS.map((d) => (
+            {dossiers.map((d) => (
               <DriverCard key={d.driver.id} dossier={d} />
             ))}
           </div>
