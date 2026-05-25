@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import {
   ArrowLeft,
   Bell,
@@ -14,53 +16,34 @@ import {
   ShieldCheck,
   Truck,
 } from "lucide-react";
+import {
+  getDriverProfile,
+  type DriverProfilePayload,
+} from "@/lib/driverProfile.functions";
 
 export const Route = createFileRoute("/drivers/$driverId")({
-  component: DriverProfileView,
+  component: DriverProfileViewPage,
 });
 
-const driverProfile = {
-  id: "AR-00346582",
-  name: "John Black",
-  role: "Main Driver",
-  phone: "(555) 555-0132",
-  photoUrl:
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop",
-  status: "En Route",
-  lastSeen: "2 minutes ago",
-  vehicle: {
-    id: "UNIT-4512",
-    make: "Hyundai",
-    model: "HD320 Cargo Truck",
-    type: "Box Truck",
-    plate: "TX-AR4512",
-  },
-  shipment: {
-    id: "SHIP-4512",
-    cargoType: "Medical & mixed freight",
-    hauling: "Priority medical supplies, boxed freight, and route-sensitive cargo",
-    pickup: "12 Sunset St, Los Angeles, CA 90012",
-    destination: "Williamsburg, New York, NY 11213",
-    eta: "44 min",
-    arrivalTime: "12:12 PM",
-    routeProgress: 71,
-    spaceUsed: 88,
-    weight: "7,260 kg",
-    loadVolume: "382.45 cu ft",
-    priority: "High Priority",
-  },
-  telemetry: {
-    speed: "45 MPH",
-    fuel: "57%",
-    signal: "96%",
-    temperature: "Normal",
-    routeStatus: "On Schedule",
-  },
-};
+const FALLBACK_PHOTO =
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop";
 
-function DriverProfileView() {
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function DriverProfileViewPage() {
   const { driverId } = Route.useParams();
   const navigate = useNavigate();
+  const fetchProfile = useServerFn(getDriverProfile);
+
+  const isUuid = UUID_RE.test(driverId);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["driver-profile", driverId],
+    queryFn: () => fetchProfile({ data: { driverId } }),
+    enabled: isUuid,
+    refetchInterval: 15_000,
+  });
 
   return (
     <div className="min-h-screen bg-slate-200 p-4 text-slate-950">
@@ -98,28 +81,9 @@ function DriverProfileView() {
                 }`}
               >
                 <span>{item}</span>
-                {item === "Shipments" && (
-                  <span className="rounded-full bg-orange-500 px-2 py-0.5 text-xs text-white">
-                    2
-                  </span>
-                )}
               </button>
             ))}
           </nav>
-
-          <div className="border-t border-white/10 p-4">
-            <div className="flex items-center gap-3 rounded-2xl bg-white/5 p-3">
-              <img
-                src={driverProfile.photoUrl}
-                alt="Dispatcher profile"
-                className="h-11 w-11 rounded-xl object-cover"
-              />
-              <div>
-                <p className="font-medium">Ivan Anderson</p>
-                <p className="text-xs text-slate-400">Dispatcher</p>
-              </div>
-            </div>
-          </div>
         </aside>
 
         {/* Main content */}
@@ -135,7 +99,7 @@ function DriverProfileView() {
               </button>
 
               <p className="text-sm text-slate-500">
-                Drivers &gt; Active Shipments &gt; {driverId || driverProfile.id}
+                Drivers &gt; Active Shipments &gt; {driverId}
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight">
                 Driver Profile Command View
@@ -152,200 +116,221 @@ function DriverProfileView() {
             </div>
           </header>
 
-          <section className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-            <div className="rounded-[2rem] bg-gradient-to-br from-orange-400 to-orange-500 p-6 text-slate-950 shadow-sm xl:col-span-7">
-              <div className="flex flex-col justify-between gap-4 md:flex-row">
-                <div>
-                  <div className="inline-flex rounded-full bg-white/60 px-3 py-1 text-xs font-bold uppercase tracking-wide">
-                    {driverProfile.shipment.priority}
-                  </div>
-                  <h2 className="mt-4 text-3xl font-bold">
-                    {driverProfile.vehicle.make}
-                  </h2>
-                  <p className="text-lg opacity-80">
-                    {driverProfile.vehicle.model}
-                  </p>
-                  <p className="mt-2 max-w-2xl text-sm opacity-80">
-                    Hauling: {driverProfile.shipment.hauling}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold">
-                  {driverProfile.shipment.id}
-                </div>
-              </div>
-
-              <div className="mt-7 rounded-[1.5rem] border border-slate-900/10 bg-white/25 p-5">
-                <div className="relative h-48 rounded-2xl border border-slate-900/20 bg-orange-300/30 p-5">
-                  <div className="absolute left-6 right-6 top-1/2 h-20 -translate-y-1/2 rounded-xl border-2 border-slate-900/50">
-                    <div className="grid h-full grid-cols-5 divide-x divide-slate-900/30 text-xs font-bold">
-                      <div className="grid place-items-center">540 kg</div>
-                      <div className="grid place-items-center">1230 kg</div>
-                      <div className="grid place-items-center">2000 kg</div>
-                      <div className="grid place-items-center">780 kg</div>
-                      <div className="grid place-items-center">1270 kg</div>
-                    </div>
-                  </div>
-
-                  <div className="absolute bottom-4 left-10 h-8 w-8 rounded-full border-4 border-slate-900/50" />
-                  <div className="absolute bottom-4 left-24 h-8 w-8 rounded-full border-4 border-slate-900/50" />
-                  <div className="absolute bottom-4 left-38 h-8 w-8 rounded-full border-4 border-slate-900/50" />
-                  <div className="absolute bottom-4 right-20 h-8 w-8 rounded-full border-4 border-slate-900/50" />
-                  <div className="absolute bottom-4 right-8 h-8 w-8 rounded-full border-4 border-slate-900/50" />
-
-                  <div className="absolute right-5 top-1/2 h-24 w-24 -translate-y-1/2 rounded-r-2xl border-2 border-l-0 border-slate-900/50" />
-
-                  <div className="absolute left-5 top-5 flex items-center gap-2 text-sm font-semibold">
-                    <Package className="h-4 w-4" />
-                    Cargo Load Distribution
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-                <CargoMetric
-                  label="Space"
-                  value={`${driverProfile.shipment.spaceUsed}% / 100%`}
-                />
-                <CargoMetric label="Weight" value={driverProfile.shipment.weight} />
-                <CargoMetric label="Load Volume" value={driverProfile.shipment.loadVolume} />
-                <CargoMetric
-                  label="Route Progress"
-                  value={`${driverProfile.shipment.routeProgress}%`}
-                />
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] bg-slate-100 p-4 shadow-sm xl:col-span-5">
-              <div className="mb-3 flex items-center justify-between px-2">
-                <div>
-                  <p className="text-sm text-slate-500">Live Location</p>
-                  <h2 className="text-xl font-bold">Route Map</h2>
-                </div>
-                <MapPinned className="h-5 w-5 text-orange-500" />
-              </div>
-
-              <div className="relative h-[430px] overflow-hidden rounded-[1.5rem] bg-slate-300">
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,.08)_1px,transparent_1px),linear-gradient(rgba(15,23,42,.08)_1px,transparent_1px)] bg-[size:32px_32px]" />
-
-                <svg className="absolute inset-0 h-full w-full" viewBox="0 0 500 430">
-                  <path
-                    d="M85 360 C120 290 140 260 190 250 C260 235 260 150 315 130 C365 112 390 95 415 55"
-                    fill="none"
-                    stroke="#f97316"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="85" cy="360" r="12" fill="#14b8a6" />
-                  <circle cx="415" cy="55" r="15" fill="#f97316" />
-                  <circle cx="260" cy="205" r="18" fill="#0f172a" />
-                </svg>
-
-                <div className="absolute left-[48%] top-[44%] grid h-14 w-14 place-items-center rounded-full bg-slate-950 text-white shadow-2xl">
-                  <Navigation2 className="h-7 w-7 text-orange-400" />
-                </div>
-
-                <div className="absolute bottom-4 left-4 rounded-2xl bg-white/90 px-4 py-3 shadow-lg backdrop-blur">
-                  <p className="text-xs text-slate-500">Current ETA</p>
-                  <p className="font-bold">{driverProfile.shipment.eta}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 xl:col-span-3">
-              <div className="mb-5 flex items-center gap-2">
-                <Gauge className="h-5 w-5 text-teal-600" />
-                <h2 className="text-lg font-bold">Vehicle Telemetry</h2>
-              </div>
-
-              <div className="space-y-3">
-                <InfoRow icon={<Gauge />} label="Speed" value={driverProfile.telemetry.speed} />
-                <InfoRow icon={<Fuel />} label="Fuel" value={driverProfile.telemetry.fuel} />
-                <InfoRow icon={<RadioTower />} label="Signal" value={driverProfile.telemetry.signal} />
-                <InfoRow icon={<ShieldCheck />} label="Temp" value={driverProfile.telemetry.temperature} />
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] bg-slate-100 p-5 shadow-sm xl:col-span-3">
-              <div className="mb-5 flex items-center gap-2">
-                <Clock3 className="h-5 w-5 text-orange-500" />
-                <h2 className="text-lg font-bold">Arrival Time</h2>
-              </div>
-
-              <p className="text-sm text-slate-500">Arriving in</p>
-              <p className="mt-1 text-xl font-semibold">
-                {driverProfile.shipment.eta}
-              </p>
-
-              <div className="mt-10">
-                <p className="text-6xl font-light tracking-tight">
-                  {driverProfile.shipment.arrivalTime}
-                </p>
-                <p className="mt-3 rounded-2xl bg-white px-4 py-3 text-sm text-slate-500">
-                  Status: {driverProfile.telemetry.routeStatus}
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-sm xl:col-span-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm tracking-wide text-slate-400">
-                    {driverProfile.id}
-                  </p>
-                  <h2 className="mt-3 text-4xl font-semibold">
-                    {driverProfile.name}
-                  </h2>
-                  <p className="text-slate-400">{driverProfile.role}</p>
-                </div>
-
-                <button className="rounded-full bg-white/10 px-4 py-2 text-sm text-slate-200 hover:bg-white/15">
-                  View Full Profile →
-                </button>
-              </div>
-
-              <div className="mt-6 flex flex-col gap-5 md:flex-row md:items-center">
-                <img
-                  src={driverProfile.photoUrl}
-                  alt={driverProfile.name}
-                  className="h-24 w-24 rounded-3xl object-cover"
-                />
-
-                <div className="space-y-2">
-                  <div className="inline-flex rounded-full bg-teal-500/15 px-3 py-1 text-sm font-semibold text-teal-300">
-                    {driverProfile.status}
-                  </div>
-
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <Phone className="h-4 w-4" />
-                    {driverProfile.phone}
-                  </div>
-
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <Truck className="h-4 w-4" />
-                    {driverProfile.vehicle.id} · {driverProfile.vehicle.plate}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-7 space-y-4">
-                <RouteStop
-                  label="Departure"
-                  value={driverProfile.shipment.pickup}
-                  color="bg-teal-400"
-                />
-                <RouteStop
-                  label="Arrival"
-                  value={driverProfile.shipment.destination}
-                  color="bg-orange-400"
-                />
-              </div>
-            </div>
-          </section>
+          {!isUuid ? (
+            <StatusCard>Invalid driver ID.</StatusCard>
+          ) : isLoading ? (
+            <StatusCard>Loading driver profile…</StatusCard>
+          ) : error ? (
+            <StatusCard>
+              Could not load driver profile: {(error as Error).message}
+            </StatusCard>
+          ) : data ? (
+            <ProfileContent data={data} />
+          ) : (
+            <StatusCard>Driver not found.</StatusCard>
+          )}
         </main>
       </div>
     </div>
   );
+}
+
+function ProfileContent({ data }: { data: DriverProfilePayload }) {
+  const { driver, shipment, vehicle } = data;
+
+  const eta =
+    shipment?.eta_minutes != null ? `${shipment.eta_minutes} min` : "—";
+  const speed =
+    driver.speed_mph != null ? `${Math.round(driver.speed_mph)} MPH` : "—";
+  const fuel = vehicle?.fuel_level != null ? `${vehicle.fuel_level}%` : "—";
+  const routeProgress = shipment?.route_progress ?? 0;
+  const capacity =
+    shipment?.capacity_percent != null ? `${shipment.capacity_percent}%` : "—";
+  const weight = shipment?.weight != null ? `${shipment.weight} kg` : "—";
+  const volume =
+    shipment?.volume != null ? `${shipment.volume} cu ft` : "—";
+
+  return (
+    <section className="grid grid-cols-1 gap-5 xl:grid-cols-12">
+      {/* Shipment / cargo card */}
+      <div className="rounded-[2rem] bg-gradient-to-br from-orange-400 to-orange-500 p-6 text-slate-950 shadow-sm xl:col-span-7">
+        <div className="flex flex-col justify-between gap-4 md:flex-row">
+          <div>
+            <div className="inline-flex rounded-full bg-white/60 px-3 py-1 text-xs font-bold uppercase tracking-wide">
+              {driver.status}
+            </div>
+            <h2 className="mt-4 text-3xl font-bold">{vehicle?.make ?? "—"}</h2>
+            <p className="text-lg opacity-80">{vehicle?.model ?? ""}</p>
+            <p className="mt-2 max-w-2xl text-sm opacity-80">
+              Hauling:{" "}
+              {shipment?.hauling_description ??
+                shipment?.cargo_type ??
+                "No active shipment"}
+            </p>
+          </div>
+
+          {shipment && (
+            <div className="rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold">
+              {shipment.id.slice(0, 8).toUpperCase()}
+            </div>
+          )}
+        </div>
+
+        <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+          <CargoMetric label="Capacity" value={capacity} />
+          <CargoMetric label="Weight" value={weight} />
+          <CargoMetric label="Load Volume" value={volume} />
+          <CargoMetric label="Route Progress" value={`${Math.round(routeProgress)}%`} />
+        </div>
+      </div>
+
+      {/* Live map placeholder */}
+      <div className="rounded-[2rem] bg-slate-100 p-4 shadow-sm xl:col-span-5">
+        <div className="mb-3 flex items-center justify-between px-2">
+          <div>
+            <p className="text-sm text-slate-500">Live Location</p>
+            <h2 className="text-xl font-bold">Route Map</h2>
+          </div>
+          <MapPinned className="h-5 w-5 text-orange-500" />
+        </div>
+
+        <div className="relative h-[430px] overflow-hidden rounded-[1.5rem] bg-slate-300">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,.08)_1px,transparent_1px),linear-gradient(rgba(15,23,42,.08)_1px,transparent_1px)] bg-[size:32px_32px]" />
+          <div className="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-slate-950 text-white shadow-2xl">
+            <Navigation2 className="h-7 w-7 text-orange-400" />
+          </div>
+          <div className="absolute bottom-4 left-4 rounded-2xl bg-white/90 px-4 py-3 shadow-lg backdrop-blur">
+            <p className="text-xs text-slate-500">Current ETA</p>
+            <p className="font-bold">{eta}</p>
+          </div>
+          <div className="absolute right-4 top-4 rounded-2xl bg-white/90 px-3 py-2 text-xs text-slate-700 shadow">
+            {driver.current_lat?.toFixed(4) ?? "—"},{" "}
+            {driver.current_lng?.toFixed(4) ?? "—"}
+          </div>
+        </div>
+      </div>
+
+      {/* Telemetry */}
+      <div className="rounded-[2rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 xl:col-span-3">
+        <div className="mb-5 flex items-center gap-2">
+          <Gauge className="h-5 w-5 text-teal-600" />
+          <h2 className="text-lg font-bold">Vehicle Telemetry</h2>
+        </div>
+
+        <div className="space-y-3">
+          <InfoRow icon={<Gauge />} label="Speed" value={speed} />
+          <InfoRow icon={<Fuel />} label="Fuel" value={fuel} />
+          <InfoRow
+            icon={<RadioTower />}
+            label="Status"
+            value={vehicle?.telemetry_status ?? "—"}
+          />
+          <InfoRow
+            icon={<ShieldCheck />}
+            label="Last Seen"
+            value={formatRelative(driver.last_seen_at)}
+          />
+        </div>
+      </div>
+
+      {/* ETA card */}
+      <div className="rounded-[2rem] bg-slate-100 p-5 shadow-sm xl:col-span-3">
+        <div className="mb-5 flex items-center gap-2">
+          <Clock3 className="h-5 w-5 text-orange-500" />
+          <h2 className="text-lg font-bold">Arrival Time</h2>
+        </div>
+
+        <p className="text-sm text-slate-500">Arriving in</p>
+        <p className="mt-1 text-xl font-semibold">{eta}</p>
+
+        <div className="mt-10">
+          <p className="text-6xl font-light tracking-tight">
+            {shipment?.eta_minutes != null
+              ? new Date(Date.now() + shipment.eta_minutes * 60_000).toLocaleTimeString(
+                  [],
+                  { hour: "numeric", minute: "2-digit" },
+                )
+              : "—"}
+          </p>
+          <p className="mt-3 rounded-2xl bg-white px-4 py-3 text-sm text-slate-500">
+            Status: {driver.status}
+          </p>
+        </div>
+      </div>
+
+      {/* Driver card */}
+      <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-sm xl:col-span-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm tracking-wide text-slate-400">
+              {driver.id.slice(0, 8).toUpperCase()}
+            </p>
+            <h2 className="mt-3 text-4xl font-semibold">{driver.name}</h2>
+            <p className="text-slate-400">Driver</p>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-col gap-5 md:flex-row md:items-center">
+          <img
+            src={driver.photo_url ?? FALLBACK_PHOTO}
+            alt={driver.name}
+            className="h-24 w-24 rounded-3xl object-cover"
+          />
+
+          <div className="space-y-2">
+            <div className="inline-flex rounded-full bg-teal-500/15 px-3 py-1 text-sm font-semibold text-teal-300">
+              {driver.status}
+            </div>
+
+            <div className="flex items-center gap-2 text-sm text-slate-300">
+              <Phone className="h-4 w-4" />
+              {driver.phone ?? "—"}
+            </div>
+
+            {vehicle && (
+              <div className="flex items-center gap-2 text-sm text-slate-300">
+                <Truck className="h-4 w-4" />
+                {vehicle.unit_number}
+                {vehicle.plate ? ` · ${vehicle.plate}` : ""}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-7 space-y-4">
+          <RouteStop
+            label="Departure"
+            value={shipment?.pickup_address ?? "—"}
+            color="bg-teal-400"
+          />
+          <RouteStop
+            label="Arrival"
+            value={shipment?.dropoff_address ?? "—"}
+            color="bg-orange-400"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatusCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-[2rem] bg-white p-10 text-center text-slate-500 shadow-sm ring-1 ring-slate-200">
+      {children}
+    </div>
+  );
+}
+
+function formatRelative(iso: string | null): string {
+  if (!iso) return "—";
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.round(diff / 60_000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins} min ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `${hrs} h ago`;
+  return new Date(iso).toLocaleDateString();
 }
 
 function CargoMetric({ label, value }: { label: string; value: string }) {
