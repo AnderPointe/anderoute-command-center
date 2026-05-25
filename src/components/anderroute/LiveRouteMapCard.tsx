@@ -101,14 +101,41 @@ export function LiveRouteMapCard({ driver, shipment }: Props) {
           </div>
         </div>
 
-        {/* Floating telemetry chips */}
+        {/* Floating ETA + speed (top-left) */}
         <div className="absolute left-4 top-4 flex flex-col gap-2">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/85 px-3.5 py-2 shadow-2xl shadow-black/60 backdrop-blur-xl">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#2dd4bf]">
+              ETA
+            </p>
+            <p className="text-2xl font-black leading-none text-white">
+              {shipment.eta_minutes}
+              <span className="ml-1 text-xs font-medium text-slate-400">min</span>
+            </p>
+            <p className="mt-1 text-[10px] text-slate-400">
+              Arrive {shipment.scheduled_arrival}
+            </p>
+          </div>
           <Chip icon={Gauge} label={`${driver.speed_mph} mph`} />
           <Chip icon={Signal} label="96% signal" />
         </div>
 
-        <div className="absolute bottom-4 right-4 rounded-xl bg-slate-950/80 px-3 py-2 text-[11px] text-slate-300 ring-1 ring-white/10 backdrop-blur">
-          Last ping <span className="font-semibold text-white">2s ago</span>
+        {/* Last ping (bottom-right) */}
+        <div className="absolute bottom-4 right-4 rounded-2xl border border-white/10 bg-slate-950/85 px-3.5 py-2 text-[11px] text-slate-300 shadow-xl backdrop-blur-xl">
+          <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#fb923c]">
+            Last Ping
+          </p>
+          <p className="text-sm font-bold text-white">2s ago</p>
+        </div>
+
+        {/* Pickup → Dropoff label strip (bottom-left) */}
+        <div className="absolute bottom-4 left-4 max-w-[60%] rounded-2xl border border-white/10 bg-slate-950/85 px-3.5 py-2 shadow-xl backdrop-blur-xl">
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="h-2 w-2 rounded-full bg-teal-400 shadow-[0_0_6px_rgba(45,212,191,0.8)]" />
+            <span className="truncate font-semibold text-teal-200">{shipment.pickup_address}</span>
+            <span className="text-slate-600">→</span>
+            <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_6px_rgba(251,146,60,0.8)]" />
+            <span className="truncate font-semibold text-orange-200">{shipment.dropoff_address}</span>
+          </div>
         </div>
       </div>
     </section>
