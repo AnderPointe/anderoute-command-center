@@ -171,6 +171,50 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
       ? `${shipment.quantity} ${shipment.quantity_unit}`
       : "—";
 
+  // Telemetry derivations
+  const mileage =
+    vehicle?.mileage != null
+      ? `${Math.round(vehicle.mileage).toLocaleString()} mi`
+      : "—";
+  const battery =
+    vehicle?.battery_level != null ? `${vehicle.battery_level}%` : "—";
+  const temperature =
+    vehicle?.temperature_f != null ? `${Math.round(vehicle.temperature_f)}°F` : "—";
+  const signal =
+    vehicle?.signal_strength != null ? `${vehicle.signal_strength}%` : "—";
+
+  // ETA / countdown derivations
+  const etaMins = shipment?.eta_minutes ?? null;
+  const countdown =
+    etaMins != null
+      ? etaMins >= 60
+        ? `${Math.floor(etaMins / 60)}h ${etaMins % 60}m`
+        : `${etaMins} min`
+      : "—";
+  const currentEtaClock =
+    etaMins != null
+      ? new Date(Date.now() + etaMins * 60_000).toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        })
+      : "—";
+  const scheduledClock = shipment?.scheduled_arrival_at
+    ? new Date(shipment.scheduled_arrival_at).toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+      })
+    : "—";
+  const delayMinutes = shipment?.delay_minutes ?? null;
+  const delayLabel =
+    delayMinutes == null
+      ? "—"
+      : delayMinutes === 0
+        ? "On time"
+        : delayMinutes > 0
+          ? `+${delayMinutes} min late`
+          : `${Math.abs(delayMinutes)} min early`;
+
+
   return (
     <section className="grid grid-cols-1 gap-5 xl:grid-cols-12">
       {/* Shipment Load Overview */}
