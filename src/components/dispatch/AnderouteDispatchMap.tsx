@@ -141,14 +141,24 @@ function poiEl(cat: PoiCategory): HTMLElement {
 export type DispatchLayerKey =
   | "drivers"
   | "loads"
+  | "pickups"
+  | "dropoffs"
   | "depots"
   | "warehouses"
   | "customers"
+  | "truck_stops"
+  | "fuel"
+  | "maintenance"
   | "airports"
+  | "ports"
+  | "rail_yards"
   | "stores"
   | "landmarks"
+  | "lakes"
+  | "rivers"
   | "waterways"
   | "custom_pins"
+  | "geofences"
   | "buildings_3d"
   | "traffic"
   | "weather";
@@ -173,11 +183,11 @@ const POI_LAYER_FOR_CATEGORY: Partial<Record<PoiCategory, DispatchLayerKey>> = {
   store: "stores",
   landmark: "landmarks",
   water: "waterways",
-  truck_stop: "stores",
-  fuel: "stores",
-  maintenance: "stores",
-  rail_yard: "landmarks",
-  port: "landmarks",
+  truck_stop: "truck_stops",
+  fuel: "fuel",
+  maintenance: "maintenance",
+  rail_yard: "rail_yards",
+  port: "ports",
 };
 
 export function AnderouteDispatchMap({
