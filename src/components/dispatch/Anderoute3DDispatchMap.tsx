@@ -34,7 +34,9 @@ import { MapGeofencePanel } from "./MapGeofencePanel";
 import { SelectedMapObjectCard } from "./SelectedMapObjectCard";
 import { useMapLayerPreferences } from "@/hooks/useMapLayerPreferences";
 import { useMapSavedViews, type SavedMapView } from "@/hooks/useMapSavedViews";
-import { useMapGeofences, type MapGeofence } from "@/hooks/useMapGeofences";
+import { useMapGeofences, type MapGeofence, type GeofenceInput } from "@/hooks/useMapGeofences";
+import { MapGeofenceFormDialog } from "./MapGeofenceFormDialog";
+import { toast } from "sonner";
 import type { DispatchDriver } from "@/types/dispatch";
 import type { LogisticsPoi } from "@/types/map";
 import type { DispatchLoad } from "@/types/loads";
@@ -59,10 +61,43 @@ type ObjectSel =
 export function Anderoute3DDispatchMap(props: Props) {
   const { visible, toggle } = useMapLayerPreferences();
   const savedViews = useMapSavedViews();
-  const { geofences } = useMapGeofences();
+  const { geofences, canEdit, create: createGeofence, update: updateGeofence, remove: removeGeofence } = useMapGeofences();
 
   const [railOpen, setRailOpen] = useState(true);
   const [objectSel, setObjectSel] = useState<ObjectSel>(null);
+  const [geofenceDialog, setGeofenceDialog] = useState<
+    { open: false } | { open: true; mode: "create" | "edit"; initial: MapGeofence | null }
+  >({ open: false });
+
+  const openCreateGeofence = useCallback(() => {
+    setGeofenceDialog({ open: true, mode: "create", initial: null });
+  }, []);
+  const openEditGeofence = useCallback((g: MapGeofence) => {
+    setGeofenceDialog({ open: true, mode: "edit", initial: g });
+  }, []);
+  const closeGeofenceDialog = useCallback(() => setGeofenceDialog({ open: false }), []);
+
+  const handleGeofenceSubmit = useCallback(
+    async (input: GeofenceInput) => {
+      if (geofenceDialog.open && geofenceDialog.mode === "edit" && geofenceDialog.initial) {
+        const updated = await updateGeofence(geofenceDialog.initial.id, input);
+        toast.success("Geofence updated");
+        setObjectSel({ type: "geofence", geofence: updated });
+      } else {
+        const created = await createGeofence(input);
+        toast.success("Geofence created");
+        setObjectSel({ type: "geofence", geofence: created });
+      }
+    },
+    [geofenceDialog, createGeofence, updateGeofence],
+  );
+
+  const handleGeofenceDelete = useCallback(async () => {
+    if (!(geofenceDialog.open && geofenceDialog.mode === "edit" && geofenceDialog.initial)) return;
+    await removeGeofence(geofenceDialog.initial.id);
+    toast.success("Geofence deleted");
+    setObjectSel(null);
+  }, [geofenceDialog, removeGeofence]);
 
   const flyTo = useCallback(
     (lng: number, lat: number, opts?: { zoom?: number; pitch?: number; bearing?: number }) => {
@@ -150,6 +185,9 @@ export function Anderoute3DDispatchMap(props: Props) {
             {visible.has("geofences") && (
               <MapGeofencePanel
                 geofences={geofences}
+                canEdit={canEdit}
+                onCreate={openCreateGeofence}
+                onEdit={openEditGeofence}
                 onFocus={(g) => {
                   flyTo(g.center[0], g.center[1], { zoom: 12 });
                   setObjectSel({ type: "geofence", geofence: g });
@@ -169,12 +207,36 @@ export function Anderoute3DDispatchMap(props: Props) {
               if (cardSelection.type === "driver") props.onSelectDriver(null);
               setObjectSel(null);
             }}
+            onEditZone={
+              cardSelection.type === "geofence" && canEdit
+                ? () => openEditGeofence(cardSelection.geofence)
+                : undefined
+            }
           />
         </div>
       )}
+
+      <MapGeofenceFormDialog
+        open={geofenceDialog.open}
+        mode={geofenceDialog.open ? geofenceDialog.mode : "create"}
+        initial={geofenceDialog.open ? geofenceDialog.initial : null}
+        defaultCenter={(() => {
+          const c = props.mapRef.current?.getCenter();
+          return c ? [c.lng, c.lat] : undefined;
+        })()}
+        canEdit={canEdit}
+        onClose={closeGeofenceDialog}
+        onSubmit={handleGeofenceSubmit}
+        onDelete={
+          geofenceDialog.open && geofenceDialog.mode === "edit"
+            ? handleGeofenceDelete
+            : undefined
+        }
+      />
     </div>
   );
 }
+
 
 function RealtimeBadge({ status }: { status: "connected" | "connecting" | "offline" }) {
   const cfg =
