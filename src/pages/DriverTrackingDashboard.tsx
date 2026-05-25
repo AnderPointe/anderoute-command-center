@@ -8,6 +8,8 @@ import {
   Package,
   Route,
 } from "lucide-react";
+import AnderRouteLiveMap from "@/components/anderroute/AnderRouteLiveMap";
+
 
 const driver = {
   id: "AR-00346582",
