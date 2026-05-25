@@ -9,6 +9,7 @@ import {
   Route,
 } from "lucide-react";
 import AnderRouteLiveMap from "@/components/anderroute/AnderRouteLiveMap";
+import DriverLocationMap from "@/components/anderroute/DriverLocationMap";
 
 
 const driver = {
@@ -164,7 +165,12 @@ export default function DriverTrackingDashboard() {
                 </div>
                 <MapPinned className="h-5 w-5 text-orange-500" />
               </div>
-              <AnderRouteLiveMap
+              <DriverLocationMap
+                driverId={driver.id}
+                pickupLat={32.7555}
+                pickupLng={-97.3308}
+                dropoffLat={32.7767}
+                dropoffLng={-96.7970}
                 etaMinutes={driver.etaMinutes}
                 speedMph={telemetry.speedMph}
                 signalPercent={telemetry.signalPercent}
