@@ -14,7 +14,14 @@ import {
   RadioTower,
   Route as RouteIcon,
   ShieldCheck,
+  Snowflake,
+  Thermometer,
   Truck,
+  TriangleAlert,
+  Weight,
+  Box,
+  Layers,
+  Percent,
 } from "lucide-react";
 import {
   getDriverProfile,
