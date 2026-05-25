@@ -21,17 +21,23 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const STORAGE_KEY = "anderroute-theme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeMode>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === "light" || saved === "dark") return saved;
+  const [theme, setThemeState] = useState<ThemeMode>("dark");
 
+  useEffect(() => {
+    const saved = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
+    if (saved === "light" || saved === "dark") {
+      setThemeState(saved);
+      return;
+    }
     const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-    return prefersDark ? "dark" : "light";
-  });
+    setThemeState(prefersDark ? "dark" : "light");
+  }, []);
 
   const setTheme = (nextTheme: ThemeMode) => {
     setThemeState(nextTheme);
-    localStorage.setItem(STORAGE_KEY, nextTheme);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(STORAGE_KEY, nextTheme);
+    }
   };
 
   const toggleTheme = () => {
