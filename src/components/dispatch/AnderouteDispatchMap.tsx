@@ -352,6 +352,7 @@ export function AnderouteDispatchMap({
         el.addEventListener("click", (ev) => {
           ev.stopPropagation();
           onSelectDriver(d.driver_id);
+          navigate({ to: "/drivers/$driverId", params: { driverId: d.driver_id } });
         });
         const m = new maplibregl.Marker({ element: el, anchor: "bottom" })
           .setLngLat([d.longitude, d.latitude])
