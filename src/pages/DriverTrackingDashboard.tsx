@@ -9,6 +9,7 @@ import {
   Route,
 } from "lucide-react";
 import AnderRouteLiveMap from "@/components/anderroute/AnderRouteLiveMap";
+import DriverLocationMap from "@/components/anderroute/DriverLocationMap";
 
 
 const driver = {
