@@ -366,7 +366,7 @@ export function AnderouteDispatchMap({
         bag.delete(id);
       }
     });
-  }, [drivers, styleReady, mapRef, onSelectDriver, visibleLayers]);
+  }, [drivers, styleReady, mapRef, onSelectDriver, visibleLayers, navigate]);
 
   // --- POI markers (filtered by per-category layer toggles)
   useEffect(() => {
