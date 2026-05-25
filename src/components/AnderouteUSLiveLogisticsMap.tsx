@@ -272,7 +272,7 @@ export function AnderouteUSLiveLogisticsMap() {
 
   const onSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    const r = await searchMapLocation(search);
+    const r = searchMapLocation({ query: search, drivers, pois });
     setResults(r);
   };
 
