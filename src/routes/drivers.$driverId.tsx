@@ -243,7 +243,7 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
       <div className="rounded-[2rem] bg-slate-100 p-5 shadow-sm xl:col-span-3">
         <div className="mb-5 flex items-center gap-2">
           <Clock3 className="h-5 w-5 text-orange-500" />
-          <h2 className="text-lg font-bold">Arrival Time</h2>
+          <h2 className="text-lg font-bold">ETA / Delivery Countdown</h2>
         </div>
 
         <p className="text-sm text-slate-500">Arriving in</p>
@@ -268,7 +268,10 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
       <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-sm xl:col-span-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-sm tracking-wide text-slate-400">
+            <p className="text-sm font-semibold text-slate-400 uppercase tracking-wide">
+              Driver Profile
+            </p>
+            <p className="mt-2 text-sm tracking-wide text-slate-400">
               {driver.id.slice(0, 8).toUpperCase()}
             </p>
             <h2 className="mt-3 text-4xl font-semibold">{driver.name}</h2>
@@ -303,7 +306,10 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
           </div>
         </div>
 
-        <div className="mt-7 space-y-4">
+        <p className="mt-7 text-sm font-semibold text-slate-400 uppercase tracking-wide">
+          Route Details
+        </p>
+        <div className="mt-3 space-y-4">
           <RouteStop
             label="Departure"
             value={shipment?.pickup_address ?? "—"}
