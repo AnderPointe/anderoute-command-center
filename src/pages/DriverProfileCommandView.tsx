@@ -10,7 +10,7 @@ import { VehicleTelemetryCard } from "@/components/anderroute/VehicleTelemetryCa
 import { EtaArrivalCard } from "@/components/anderroute/EtaArrivalCard";
 import { RouteTimelineCard } from "@/components/anderroute/RouteTimelineCard";
 import { CargoManifestCard } from "@/components/anderroute/CargoManifestCard";
-import { LiveStatusStrip } from "@/components/anderroute/LiveStatusStrip";
+import LiveStatusStrip from "@/components/anderroute/LiveStatusStrip";
 import { OperationsPanel } from "@/components/anderroute/OperationsPanel";
 import { DriverActivityLog } from "@/components/anderroute/DriverActivityLog";
 import {
@@ -36,7 +36,7 @@ export default function DriverProfileCommandView() {
 
         <div className="space-y-5 p-4 md:p-6">
           {/* Live status strip across the top */}
-          <LiveStatusStrip driver={driver} shipment={shipment} />
+          <LiveStatusStrip />
 
           <div className="grid gap-5 xl:grid-cols-[1fr_360px]">
             {/* Main column */}
