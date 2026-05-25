@@ -1,29 +1,40 @@
 /**
- * Anderoute3DDispatchMap
+ * Anderoute3DDispatchMap — Map Intelligence Layer
  *
- * Main premium 3D-capable live dispatch map. Wraps AnderouteDispatchMap
- * (MapLibre GL + OpenStreetMap-based vector tiles) with the Anderoute
- * layer-toggle control panel.
+ * Wraps the MapLibre dispatch map with the full Anderoute intelligence
+ * control suite:
+ *   - Search (drivers, units, POIs, places)
+ *   - Layer toggles (operations, places, world, overlays)
+ *   - POI panel (filter + jump)
+ *   - Saved views (US, TX, DFW, dispatch presets)
+ *   - Geofences (delivery, customer, yard, restricted, airport, port)
+ *   - Selected-object card (driver / POI / geofence)
+ *   - Realtime connection badge
+ *
+ * Safety:
+ *   - Browser uses VITE_SUPABASE_ANON_KEY only.
+ *   - RLS remains enforced on logistics_map_pois / driver_location_current.
+ *   - No Google Maps, no paid Google APIs — OpenStreetMap vector tiles only.
+ *   - Service role keys never reach the browser.
  *
  * Tile style:
- *   - Reads VITE_MAP_STYLE_URL at runtime (inside AnderouteDispatchMap).
- *   - Dev fallback: https://demotiles.maplibre.org/style.json
- *   - PRODUCTION: point VITE_MAP_STYLE_URL at a self-hosted OpenMapTiles /
- *     OpenFreeMap deployment or a commercial OSM-based vector tile provider.
- *
- * 3D buildings:
- *   - Requires vector tiles whose source layer is named "building" and
- *     exposes height attributes (e.g. render_height, render_min_height).
- *   - If the style does not include building height data, the layer renders
- *     nothing — the rest of the map keeps working.
+ *   - Reads VITE_MAP_STYLE_URL at runtime (resolved in AnderouteDispatchMap).
+ *   - Production: point at OpenMapTiles / OpenFreeMap / commercial OSM
+ *     vector provider; public demo tiles are not for production scale.
  */
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { Map as MLMap } from "maplibre-gl";
+import { Wifi, WifiOff, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnderouteDispatchMap, type DispatchLayerKey } from "./AnderouteDispatchMap";
-import {
-  Anderoute3DLayerPanel,
-  DEFAULT_VISIBLE_LAYERS,
-} from "./Anderoute3DLayerPanel";
+import { MapLayerControlPanel } from "./MapLayerControlPanel";
+import { MapPoiPanel } from "./MapPoiPanel";
+import { MapSearchPanel } from "./MapSearchPanel";
+import { MapSavedViewsPanel } from "./MapSavedViewsPanel";
+import { MapGeofencePanel } from "./MapGeofencePanel";
+import { SelectedMapObjectCard } from "./SelectedMapObjectCard";
+import { useMapLayerPreferences } from "@/hooks/useMapLayerPreferences";
+import { useMapSavedViews, type SavedMapView } from "@/hooks/useMapSavedViews";
+import { useMapGeofences, type MapGeofence } from "@/hooks/useMapGeofences";
 import type { DispatchDriver } from "@/types/dispatch";
 import type { LogisticsPoi } from "@/types/map";
 import type { DispatchLoad } from "@/types/loads";
@@ -37,26 +48,148 @@ interface Props {
   selectedLoadId?: string | null;
   onSelectLoad?: (id: string | null) => void;
   mapRef: React.MutableRefObject<MLMap | null>;
+  realtimeStatus?: "connected" | "connecting" | "offline";
 }
 
+type ObjectSel =
+  | { type: "poi"; poi: LogisticsPoi }
+  | { type: "geofence"; geofence: MapGeofence }
+  | null;
+
 export function Anderoute3DDispatchMap(props: Props) {
-  const [visibleLayers, setVisibleLayers] = useState<Set<DispatchLayerKey>>(
-    () => new Set(DEFAULT_VISIBLE_LAYERS),
+  const { visible, toggle } = useMapLayerPreferences();
+  const savedViews = useMapSavedViews();
+  const { geofences } = useMapGeofences();
+
+  const [railOpen, setRailOpen] = useState(true);
+  const [objectSel, setObjectSel] = useState<ObjectSel>(null);
+
+  const flyTo = useCallback(
+    (lng: number, lat: number, opts?: { zoom?: number; pitch?: number; bearing?: number }) => {
+      props.mapRef.current?.flyTo({
+        center: [lng, lat],
+        zoom: opts?.zoom ?? 11,
+        pitch: opts?.pitch ?? 45,
+        bearing: opts?.bearing ?? 0,
+        duration: 1000,
+      });
+    },
+    [props.mapRef],
   );
 
-  const toggleLayer = useCallback((key: DispatchLayerKey) => {
-    setVisibleLayers((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
-  }, []);
+  const applyView = useCallback(
+    (v: SavedMapView) => {
+      props.mapRef.current?.flyTo({
+        center: v.center,
+        zoom: v.zoom,
+        pitch: v.pitch ?? 35,
+        bearing: v.bearing ?? 0,
+        duration: 1200,
+      });
+    },
+    [props.mapRef],
+  );
+
+  const selectedDriver = useMemo(
+    () => props.drivers.find((d) => d.driver_id === props.selectedDriverId) ?? null,
+    [props.drivers, props.selectedDriverId],
+  );
+
+  const cardSelection =
+    selectedDriver != null
+      ? ({ type: "driver" as const, driver: selectedDriver })
+      : objectSel?.type === "poi"
+      ? ({ type: "poi" as const, poi: objectSel.poi as any })
+      : objectSel?.type === "geofence"
+      ? ({ type: "geofence" as const, geofence: objectSel.geofence })
+      : null;
 
   return (
     <div className="relative h-full w-full">
-      <AnderouteDispatchMap {...props} visibleLayers={visibleLayers} />
-      <Anderoute3DLayerPanel visible={visibleLayers} onToggle={toggleLayer} />
+      <AnderouteDispatchMap {...props} visibleLayers={visible} />
+
+      {/* Top-left: search + realtime badge */}
+      <div className="pointer-events-none absolute left-4 top-4 z-[450] flex flex-col gap-2">
+        <RealtimeBadge status={props.realtimeStatus ?? "connecting"} />
+        <MapSearchPanel
+          drivers={props.drivers}
+          pois={props.pois}
+          onResult={(r) => {
+            flyTo(r.lng, r.lat, { zoom: r.zoom ?? 11 });
+            if (r.id.startsWith("driver:")) {
+              props.onSelectDriver(r.id.split(":")[1]);
+            } else if (r.id.startsWith("poi:")) {
+              const id = r.id.split(":")[1];
+              const poi = props.pois.find((p) => p.id === id);
+              if (poi) setObjectSel({ type: "poi", poi });
+            }
+          }}
+        />
+      </div>
+
+      {/* Right rail: collapsible stack of control panels */}
+      <div className="pointer-events-none absolute right-4 top-4 z-[450] flex max-h-[calc(100%-2rem)] items-start gap-2">
+        <button
+          onClick={() => setRailOpen((o) => !o)}
+          className="pointer-events-auto grid size-8 place-items-center rounded-full border border-slate-700/60 bg-slate-900/95 text-slate-100 shadow-lg hover:bg-slate-800"
+          title={railOpen ? "Collapse panels" : "Expand panels"}
+        >
+          {railOpen ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}
+        </button>
+        {railOpen && (
+          <div className="flex max-h-full flex-col gap-2 overflow-y-auto pr-1">
+            <MapLayerControlPanel visible={visible} onToggle={toggle} />
+            <MapPoiPanel
+              pois={props.pois}
+              onFocus={(poi) => {
+                flyTo(poi.longitude, poi.latitude, { zoom: 12 });
+                setObjectSel({ type: "poi", poi });
+              }}
+            />
+            <MapSavedViewsPanel views={savedViews} onApply={applyView} />
+            {visible.has("geofences") && (
+              <MapGeofencePanel
+                geofences={geofences}
+                onFocus={(g) => {
+                  flyTo(g.center[0], g.center[1], { zoom: 12 });
+                  setObjectSel({ type: "geofence", geofence: g });
+                }}
+              />
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Bottom: selected object card */}
+      {cardSelection && (
+        <div className="pointer-events-none absolute bottom-6 left-1/2 z-[500] -translate-x-1/2">
+          <SelectedMapObjectCard
+            selected={cardSelection}
+            onClose={() => {
+              if (cardSelection.type === "driver") props.onSelectDriver(null);
+              setObjectSel(null);
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RealtimeBadge({ status }: { status: "connected" | "connecting" | "offline" }) {
+  const cfg =
+    status === "connected"
+      ? { icon: Wifi, text: "Realtime Connected", cls: "bg-teal-500/20 text-teal-200 border-teal-500/40" }
+      : status === "offline"
+      ? { icon: WifiOff, text: "Realtime Offline", cls: "bg-rose-500/20 text-rose-200 border-rose-500/40" }
+      : { icon: Loader2, text: "Connecting…", cls: "bg-slate-700/60 text-slate-200 border-slate-600" };
+  const Icon = cfg.icon;
+  return (
+    <div
+      className={`pointer-events-auto inline-flex items-center gap-1.5 self-start rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur ${cfg.cls}`}
+    >
+      <Icon className={`size-3 ${status === "connecting" ? "animate-spin" : ""}`} />
+      {cfg.text}
     </div>
   );
 }
