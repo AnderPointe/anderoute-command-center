@@ -6,7 +6,19 @@ export type DriverStatus =
   | "offline"
   | "break";
 
+export type ShipmentStatus =
+  | "pending"
+  | "assigned"
+  | "accepted"
+  | "pickup_confirmed"
+  | "in_transit"
+  | "near_destination"
+  | "delivered"
+  | "cancelled";
+
 export type ArrivalStatus = "on_time" | "delayed" | "early";
+
+export type TimelineState = "completed" | "current" | "upcoming";
 
 export interface Driver {
   id: string;
@@ -77,9 +89,43 @@ export interface CargoManifest {
   priority: "low" | "standard" | "high" | "critical";
 }
 
+export interface CargoManifestItem {
+  id: string;
+  shipment_id: string;
+  category: string;
+  item_count: number;
+  weight: string;
+  volume: string;
+  special_handling_notes: string;
+  temperature_requirement: string;
+  hazmat: boolean;
+  priority: string;
+}
+
+export interface RouteTimelineStep {
+  id: string;
+  label: string;
+  description: string;
+  timestamp?: string;
+  state: TimelineState;
+}
+
+export interface DriverActivityEvent {
+  id: string;
+  label: string;
+  description: string;
+  timestamp: string;
+  type: "gps" | "shipment" | "message" | "eta" | "route" | "system";
+}
+
 export interface DriverDossier {
   driver: Driver;
   vehicle: Vehicle;
   shipment: Shipment;
   manifest: CargoManifest;
 }
+
+// Alias exports for component code that uses the AnderRoute prefix
+export type { Driver as AnderRouteDriver };
+export type { Vehicle as AnderRouteVehicle };
+export type { Shipment as AnderRouteShipment };
