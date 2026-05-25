@@ -190,6 +190,7 @@ export default function AnderouteDispatchBoard() {
               selectedLoadId={selectedLoadId}
               onSelectLoad={setSelectedLoadId}
               mapRef={mapRef}
+              realtimeStatus={connected ? "connected" : liveDrivers.length > 0 ? "connecting" : "offline"}
             />
             <LoadsDispatchPanel
               loads={filteredLoads}
