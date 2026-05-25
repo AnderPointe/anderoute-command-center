@@ -102,7 +102,7 @@ function DriverProfileViewPage() {
                 Drivers &gt; Active Shipments &gt; {driverId}
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight">
-                Driver Profile Command View
+                Driver Command Center
               </h1>
             </div>
 
@@ -152,11 +152,14 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
 
   return (
     <section className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-      {/* Shipment / cargo card */}
+      {/* Shipment Load Overview */}
       <div className="rounded-[2rem] bg-gradient-to-br from-orange-400 to-orange-500 p-6 text-slate-950 shadow-sm xl:col-span-7">
         <div className="flex flex-col justify-between gap-4 md:flex-row">
           <div>
-            <div className="inline-flex rounded-full bg-white/60 px-3 py-1 text-xs font-bold uppercase tracking-wide">
+            <p className="text-sm font-semibold text-slate-900/60 uppercase tracking-wide">
+              Shipment Load Overview
+            </p>
+            <div className="mt-2 inline-flex rounded-full bg-white/60 px-3 py-1 text-xs font-bold uppercase tracking-wide">
               {driver.status}
             </div>
             <h2 className="mt-4 text-3xl font-bold">{vehicle?.make ?? "—"}</h2>
@@ -176,7 +179,10 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
           )}
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <p className="mt-6 text-sm font-semibold text-slate-900/60 uppercase tracking-wide">
+          Cargo Manifest
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-4 md:grid-cols-4">
           <CargoMetric label="Capacity" value={capacity} />
           <CargoMetric label="Weight" value={weight} />
           <CargoMetric label="Load Volume" value={volume} />
@@ -184,11 +190,11 @@ function ProfileContent({ data }: { data: DriverProfilePayload }) {
         </div>
       </div>
 
-      {/* Live map placeholder */}
+      {/* Live Route Map */}
       <div className="rounded-[2rem] bg-slate-100 p-4 shadow-sm xl:col-span-5">
         <div className="mb-3 flex items-center justify-between px-2">
           <div>
-            <p className="text-sm text-slate-500">Live Location</p>
+            <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Live Route Map</p>
             <h2 className="text-xl font-bold">Route Map</h2>
           </div>
           <MapPinned className="h-5 w-5 text-orange-500" />
