@@ -356,19 +356,19 @@
   min-width: 200px;
 }
 
-.glass-toggle {
-  --toggle-bg: rgba(255, 255, 255, 0.25);
-  --toggle-highlight: rgba(255, 255, 255, 0.75);
-  --toggle-text: #ffffff;
-  --track-width: 60px;
-  --track-height: 32px;
-  --thumb-size: 24px;
+  .glass-toggle {
+    --toggle-bg: rgba(255, 255, 255, 0.25);
+    --toggle-highlight: rgba(255, 255, 255, 0.75);
+    --toggle-text: #ffffff;
+    --track-width: 44px;
+    --track-height: 24px;
+    --thumb-size: 18px;
 
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
 
 .glass-toggle .toggle-input {
   position: absolute;
