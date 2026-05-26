@@ -33,7 +33,7 @@ function KV({ k, v, tone }: { k: string; v: React.ReactNode; tone?: string }) {
   return (
     <div className="flex items-start justify-between gap-3 py-1 text-[12px]">
       <span className="text-muted-foreground">{k}</span>
-      <span className={cn("text-right font-medium text-white", tone)}>{v}</span>
+      <span className={cn("text-right font-medium text-foreground", tone)}>{v}</span>
     </div>
   );
 }
@@ -53,13 +53,13 @@ function CtaButton({
       className={cn(
         "w-full rounded-xl border px-3 py-2 text-[12px] font-semibold transition-all",
         variant === "primary" &&
-          "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-white hover:bg-[#6D35E8]/30 shadow-[0_8px_28px_-12px_rgba(109,53,232,0.6)]",
+          "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-foreground hover:bg-[#6D35E8]/30 shadow-[0_8px_28px_-12px_rgba(109,53,232,0.6)]",
         variant === "danger" &&
           "border-[#EF4444]/40 bg-[#EF4444]/15 text-red-200 hover:bg-[#EF4444]/25",
         variant === "teal" &&
           "border-teal-400/40 bg-teal-500/15 text-teal-200 hover:bg-teal-500/25",
         variant === "default" &&
-          "border-white/[0.08] bg-white/[0.04] text-white hover:bg-white/[0.08]",
+          "border-white/[0.08] bg-white/[0.04] text-foreground hover:bg-white/[0.08]",
       )}
     >
       {children}
@@ -134,7 +134,7 @@ export function MessengerContextPanel({ active }: { active: Contact }) {
             <Section title="Route progress">
               <div className="mb-2 flex items-center justify-between text-[11px]">
                 <span className="text-muted-foreground">Austin → Dallas</span>
-                <span className="font-semibold text-white">78%</span>
+                <span className="font-semibold text-foreground">78%</span>
               </div>
               <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
                 <div

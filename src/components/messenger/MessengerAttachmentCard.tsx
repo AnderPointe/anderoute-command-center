@@ -22,7 +22,7 @@ export function MessengerAttachmentCard({
           <FileText className="size-4" />
         </div>
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm text-white">{filename}</div>
+          <div className="truncate text-sm text-foreground">{filename}</div>
           <div className="text-[11px] text-muted-foreground">
             {filetype}
             {size ? ` · ${Math.round(size / 1024)} KB` : ""}
@@ -31,7 +31,7 @@ export function MessengerAttachmentCard({
         {onRemove && (
           <button
             onClick={onRemove}
-            className="text-xs text-muted-foreground hover:text-white"
+            className="text-xs text-muted-foreground hover:text-foreground"
           >
             Remove
           </button>
@@ -46,7 +46,7 @@ export function MessengerAttachmentCard({
         <FileText className="size-5" />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-medium text-white">{filename}</div>
+        <div className="truncate text-sm font-medium text-foreground">{filename}</div>
         <div className="text-[11px] text-muted-foreground">{filetype}</div>
       </div>
       <button

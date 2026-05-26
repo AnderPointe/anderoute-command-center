@@ -32,7 +32,7 @@ function ReactionsRow({ reactions }: { reactions: Reaction[] }) {
             "flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] transition-colors",
             r.mine
               ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-primary"
-              : "border-white/10 bg-white/[0.04] text-muted-foreground hover:text-white",
+              : "border-white/10 bg-white/[0.04] text-muted-foreground hover:text-foreground",
           )}
         >
           <span>{r.emoji}</span>
@@ -41,7 +41,7 @@ function ReactionsRow({ reactions }: { reactions: Reaction[] }) {
       ))}
       <button
         onClick={() => toast.info("Add reaction")}
-        className="grid size-6 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground hover:text-white"
+        className="grid size-6 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground hover:text-foreground"
       >
         <Smile className="size-3" />
       </button>
@@ -76,7 +76,7 @@ function VoiceBubble({
       className={cn(
         "flex items-center gap-3 rounded-2xl px-3.5 py-2.5",
         mine
-          ? "bg-[#6D35E8] text-white shadow-[0_10px_30px_-12px_rgba(109,53,232,0.7)]"
+          ? "bg-[#6D35E8] text-foreground shadow-[0_10px_30px_-12px_rgba(109,53,232,0.7)]"
           : "border border-white/[0.08] bg-[#1A1E33]",
       )}
     >
@@ -131,7 +131,7 @@ function LocationBubble({
         </div>
       </div>
       <div className="bg-[#1A1E33] px-3 py-2">
-        <div className="text-[12px] font-semibold text-white">{m.label}</div>
+        <div className="text-[12px] font-semibold text-foreground">{m.label}</div>
         <div className="text-[11px] text-muted-foreground">
           {m.city} · {m.coords}
         </div>
@@ -152,7 +152,7 @@ function LoadStatusBubble({
         {m.loadId} · {m.status}
       </div>
       {m.eta && (
-        <div className="text-[13px] font-semibold text-white">ETA {m.eta}</div>
+        <div className="text-[13px] font-semibold text-foreground">ETA {m.eta}</div>
       )}
       {m.note && <div className="text-[11px] text-muted-foreground">{m.note}</div>}
     </div>
@@ -173,7 +173,7 @@ export function MessengerBubble({ m }: { m: Message }) {
           )}
         >
           {!mine && m.authorName && (
-            <span className="font-semibold text-white/80">{m.authorName}</span>
+            <span className="font-semibold text-foreground/80">{m.authorName}</span>
           )}
           <span>{m.time}</span>
           {m.pinned && <Pin className="size-3 text-primary" />}
@@ -197,7 +197,7 @@ export function MessengerBubble({ m }: { m: Message }) {
               className={cn(
                 "rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-lg",
                 mine
-                  ? "bg-[#6D35E8] text-white shadow-[0_10px_30px_-12px_rgba(109,53,232,0.7)]"
+                  ? "bg-[#6D35E8] text-foreground shadow-[0_10px_30px_-12px_rgba(109,53,232,0.7)]"
                   : "border border-white/[0.08] bg-[#1A1E33] text-foreground",
               )}
             >
@@ -240,7 +240,7 @@ export function MessengerBubble({ m }: { m: Message }) {
                 key={label}
                 title={label}
                 onClick={() => toast.success(label)}
-                className="grid size-6 place-items-center rounded-full text-muted-foreground hover:bg-white/10 hover:text-white"
+                className="grid size-6 place-items-center rounded-full text-muted-foreground hover:bg-white/10 hover:text-foreground"
               >
                 <Icon className="size-3" />
               </button>
@@ -255,7 +255,7 @@ export function MessengerBubble({ m }: { m: Message }) {
         {m.threadCount && m.threadCount > 0 ? (
           <button
             onClick={() => toast.info("Open thread")}
-            className="mt-1 inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-primary hover:text-white"
+            className="mt-1 inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-primary hover:text-foreground"
           >
             <MessageSquare className="size-3" />
             {m.threadCount} replies

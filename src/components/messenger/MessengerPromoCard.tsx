@@ -9,7 +9,7 @@ export function MessengerPromoCard() {
           <Sparkles className="size-4" />
         </div>
         <div className="min-w-0">
-          <div className="text-sm font-semibold text-white">
+          <div className="text-sm font-semibold text-foreground">
             AI Dispatch Assist
           </div>
           <p className="mt-0.5 text-xs text-muted-foreground">

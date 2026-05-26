@@ -42,7 +42,7 @@ export function MessengerCallLogModal({
           </div>
           <button
             onClick={onClose}
-            className="grid size-8 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
+            className="grid size-8 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
           >
             <X className="size-4" />
           </button>
@@ -54,7 +54,7 @@ export function MessengerCallLogModal({
               onClick={() => setType("voice")}
               className={`flex-1 rounded-xl border px-3 py-2 text-xs font-semibold ${
                 type === "voice"
-                  ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-white"
+                  ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-foreground"
                   : "border-white/10 bg-white/[0.03] text-muted-foreground"
               }`}
             >
@@ -64,7 +64,7 @@ export function MessengerCallLogModal({
               onClick={() => setType("video")}
               className={`flex-1 rounded-xl border px-3 py-2 text-xs font-semibold ${
                 type === "video"
-                  ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-white"
+                  ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-foreground"
                   : "border-white/10 bg-white/[0.03] text-muted-foreground"
               }`}
             >
@@ -78,7 +78,7 @@ export function MessengerCallLogModal({
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
               placeholder="3:42"
-              className="mt-1 w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none"
+              className="mt-1 w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-foreground outline-none"
             />
           </label>
 
@@ -88,7 +88,7 @@ export function MessengerCallLogModal({
               value={linkLoad}
               onChange={(e) => setLinkLoad(e.target.value)}
               placeholder="LD-1048"
-              className="mt-1 w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none"
+              className="mt-1 w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-foreground outline-none"
             />
           </label>
 
@@ -99,7 +99,7 @@ export function MessengerCallLogModal({
               onChange={(e) => setNotes(e.target.value)}
               rows={4}
               placeholder="Driver confirmed arrival at Dallas DC."
-              className="mt-1 w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none"
+              className="mt-1 w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-foreground outline-none"
             />
           </label>
         </div>
@@ -107,13 +107,13 @@ export function MessengerCallLogModal({
         <div className="flex items-center justify-end gap-2 border-t border-white/[0.06] px-5 py-3">
           <button
             onClick={onClose}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-xs font-semibold text-muted-foreground hover:text-white"
+            className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground"
           >
             Cancel
           </button>
           <button
             onClick={save}
-            className="rounded-xl border border-[#6D35E8]/50 bg-[#6D35E8]/25 px-3 py-2 text-xs font-semibold text-white"
+            className="rounded-xl border border-[#6D35E8]/50 bg-[#6D35E8]/25 px-3 py-2 text-xs font-semibold text-foreground"
           >
             Save call log
           </button>

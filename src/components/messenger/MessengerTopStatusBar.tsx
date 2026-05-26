@@ -22,7 +22,7 @@ export function MessengerTopStatusBar({
       <div className="hidden items-center gap-2 md:flex">
         <button
           onClick={onOpenPalette}
-          className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-md hover:text-white"
+          className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-md hover:text-foreground"
         >
           <Search className="size-3" />
           Search

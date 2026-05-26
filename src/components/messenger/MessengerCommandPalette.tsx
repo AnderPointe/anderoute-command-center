@@ -95,7 +95,7 @@ export function MessengerCommandPalette({
                 )}
               >
                 <Icon className="size-4 text-primary" />
-                <span className="flex-1 truncate text-white">{c.name}</span>
+                <span className="flex-1 truncate text-foreground">{c.name}</span>
                 <span className="text-[11px] text-muted-foreground">{c.role}</span>
                 {c.linkedLoad && (
                   <span className="rounded border border-[#F97316]/35 bg-[#F97316]/10 px-1.5 py-0.5 text-[10px] text-orange-300">
@@ -123,7 +123,7 @@ export function MessengerCommandPalette({
                 className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm hover:bg-white/5"
               >
                 <Icon className="size-4 text-orange" />
-                <span className="text-white">{c.label}</span>
+                <span className="text-foreground">{c.label}</span>
               </button>
             );
           })}

@@ -137,8 +137,8 @@ export function MessengerInputBar({
               className={cn(
                 "rounded-full px-2 py-0.5 transition-colors",
                 priority === p.id
-                  ? "bg-[#6D35E8]/25 text-white"
-                  : `${p.color} hover:text-white`,
+                  ? "bg-[#6D35E8]/25 text-foreground"
+                  : `${p.color} hover:text-foreground`,
               )}
             >
               {p.label}
@@ -157,7 +157,7 @@ export function MessengerInputBar({
         <div className="relative ml-auto">
           <button
             onClick={() => setTemplatesOpen((v) => !v)}
-            className="inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-muted-foreground hover:text-white"
+            className="inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-muted-foreground hover:text-foreground"
           >
             <FileText className="size-3" /> Templates
           </button>
@@ -173,7 +173,7 @@ export function MessengerInputBar({
                   }}
                   className="block w-full px-3 py-2 text-left text-[12px] hover:bg-white/5"
                 >
-                  <div className="font-semibold text-white">{t.label}</div>
+                  <div className="font-semibold text-foreground">{t.label}</div>
                   <div className="truncate text-muted-foreground">{t.body}</div>
                 </button>
               ))}
@@ -192,21 +192,21 @@ export function MessengerInputBar({
         <button
           onClick={() => fileInputRef.current?.click()}
           title="Attach POD or file"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
         >
           <Paperclip className="size-4" />
         </button>
         <button
           onClick={() => toast.info("Mention…")}
           title="Mention"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
         >
           <AtSign className="size-4" />
         </button>
         <button
           onClick={() => toast.success("Live location shared")}
           title="Share location"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
         >
           <MapPin className="size-4" />
         </button>
@@ -225,21 +225,21 @@ export function MessengerInputBar({
         <button
           onClick={() => toast.info("Emoji picker coming soon")}
           title="Emoji"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
         >
           <Smile className="size-4" />
         </button>
         <button
           onClick={() => toast.info("Recording voice note…")}
           title="Voice note"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
         >
           <Mic className="size-4" />
         </button>
         <button
           onClick={onSend}
           title="Send"
-          className="grid size-9 place-items-center rounded-xl bg-[#6D35E8] text-white shadow-[0_8px_30px_-8px_rgba(109,53,232,0.7)] hover:bg-[#7c47ee]"
+          className="grid size-9 place-items-center rounded-xl bg-[#6D35E8] text-foreground shadow-[0_8px_30px_-8px_rgba(109,53,232,0.7)] hover:bg-[#7c47ee]"
         >
           <Send className="size-4" />
         </button>

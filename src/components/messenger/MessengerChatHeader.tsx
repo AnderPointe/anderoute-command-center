@@ -113,7 +113,7 @@ export function MessengerChatHeader({
                     setMenuOpen(false);
                     toast.success(`Snoozed for ${s.label}`);
                   }}
-                  className="block w-full px-3 py-1.5 text-left text-[12px] text-white hover:bg-white/5"
+                  className="block w-full px-3 py-1.5 text-left text-[12px] text-foreground hover:bg-white/5"
                 >
                   {s.label}
                 </button>
@@ -131,7 +131,7 @@ export function MessengerChatHeader({
                   }}
                   className={cn(
                     "block w-full px-3 py-1.5 text-left text-[12px] hover:bg-white/5",
-                    notifLevel === lvl ? "text-primary" : "text-white",
+                    notifLevel === lvl ? "text-primary" : "text-foreground",
                   )}
                 >
                   {lvl}

@@ -33,7 +33,7 @@ export function MessengerContactRow({
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5">
           {isChannel && <span className="text-muted-foreground">#</span>}
-          <span className="truncate text-[13px] font-semibold text-white">
+          <span className="truncate text-[13px] font-semibold text-foreground">
             {isChannel ? c.name : c.name}
           </span>
           {c.pinned && <Pin className="size-3 text-primary" />}
@@ -93,7 +93,7 @@ export function MessengerContactRow({
       <div className="flex shrink-0 flex-col items-end gap-1">
         <span className="text-[10px] text-muted-foreground">{c.time}</span>
         {c.unread > 0 && (
-          <span className="grid h-5 min-w-5 place-items-center rounded-full bg-[#EF4444] px-1.5 text-[10px] font-semibold text-white shadow-[0_0_10px_-2px_rgba(239,68,68,0.7)]">
+          <span className="grid h-5 min-w-5 place-items-center rounded-full bg-[#EF4444] px-1.5 text-[10px] font-semibold text-foreground shadow-[0_0_10px_-2px_rgba(239,68,68,0.7)]">
             {c.unread}
           </span>
         )}
