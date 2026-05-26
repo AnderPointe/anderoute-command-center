@@ -1000,3 +1000,126 @@
   background: color-mix(in oklab, var(--card) 70%, transparent);
   border-left-color: rgba(255,255,255,0.08);
 }
+
+/* ============================================================
+   Apple Liquid Glass — Driver Tiles
+   ============================================================ */
+@keyframes glass-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--teal) 55%, transparent); }
+  70%  { box-shadow: 0 0 0 10px color-mix(in oklab, var(--teal) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--teal) 0%, transparent); }
+}
+@keyframes glass-amber-glow {
+  0%, 100% { box-shadow: 0 10px 30px -12px rgba(15,23,42,0.18), 0 0 0 1px rgba(255,255,255,0.45), inset 0 1px 0 rgba(255,255,255,0.55), 0 0 22px -6px color-mix(in oklab, var(--orange) 55%, transparent); }
+  50%      { box-shadow: 0 10px 30px -12px rgba(15,23,42,0.22), 0 0 0 1px rgba(255,255,255,0.55), inset 0 1px 0 rgba(255,255,255,0.6), 0 0 32px -4px color-mix(in oklab, var(--orange) 75%, transparent); }
+}
+
+.glass-tile {
+  position: relative;
+  border-radius: 1.5rem; /* rounded-3xl */
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow:
+    0 10px 30px -12px rgba(15, 23, 42, 0.18),
+    0 2px 6px -2px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transition:
+    transform 280ms cubic-bezier(.2,.7,.2,1),
+    box-shadow 280ms cubic-bezier(.2,.7,.2,1),
+    border-color 280ms ease;
+  isolation: isolate;
+}
+.glass-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 38%);
+  pointer-events: none;
+  z-index: 0;
+}
+.glass-tile > * { position: relative; z-index: 1; }
+
+.dark .glass-tile {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 14px 40px -14px rgba(2, 6, 23, 0.7),
+    0 2px 6px -2px rgba(2, 6, 23, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.dark .glass-tile::before {
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%);
+}
+
+/* Hover lift */
+.glass-tile-hover:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--teal) 55%, transparent);
+  box-shadow:
+    0 22px 48px -16px rgba(15, 23, 42, 0.28),
+    0 0 0 1px color-mix(in oklab, var(--teal) 35%, transparent),
+    0 0 28px -8px color-mix(in oklab, var(--teal) 50%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.dark .glass-tile-hover:hover {
+  box-shadow:
+    0 24px 56px -18px rgba(2, 6, 23, 0.85),
+    0 0 0 1px color-mix(in oklab, var(--teal) 45%, transparent),
+    0 0 32px -8px color-mix(in oklab, var(--teal) 60%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Teal active state */
+.glass-tile-teal {
+  border-color: color-mix(in oklab, var(--teal) 60%, transparent);
+  box-shadow:
+    0 14px 36px -14px rgba(15, 23, 42, 0.22),
+    0 0 0 1px color-mix(in oklab, var(--teal) 45%, transparent),
+    0 0 26px -8px color-mix(in oklab, var(--teal) 55%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* Orange/attention state */
+.glass-tile-orange {
+  border-color: color-mix(in oklab, var(--orange) 60%, transparent);
+  animation: glass-amber-glow 2.6s ease-in-out infinite;
+}
+
+/* Muted/offline */
+.glass-tile-muted {
+  opacity: 0.72;
+  background: rgba(241, 245, 249, 0.6);
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow:
+    0 6px 18px -10px rgba(15, 23, 42, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.dark .glass-tile-muted {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+/* Selected: orange top accent bar */
+.glass-tile-selected::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg,
+    transparent,
+    color-mix(in oklab, var(--orange) 90%, transparent),
+    transparent);
+  box-shadow: 0 0 14px color-mix(in oklab, var(--orange) 70%, transparent);
+  z-index: 2;
+}
+
+/* Avatar pulse ring */
+.glass-pulse-ring {
+  animation: glass-pulse-ring 1.8s ease-out infinite;
+}
