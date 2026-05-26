@@ -47,9 +47,9 @@ export function MessengerFilterChip({
         "shrink-0 rounded-full border px-3 py-1 text-[11px] font-medium transition-all",
         active
           ? variant === "category"
-            ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-primary shadow-[0_0_18px_-6px_rgba(109,53,232,0.7)]"
-            : "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-primary"
-          : "border-white/[0.08] bg-white/[0.03] text-muted-foreground hover:border-white/15 hover:text-white",
+            ? "border-primary/50 bg-primary/15 text-primary shadow-[0_0_18px_-6px_color-mix(in_oklab,var(--primary)_70%,transparent)]"
+            : "border-primary/50 bg-primary/15 text-primary"
+          : "border-border bg-card/50 text-muted-foreground hover:border-foreground/20 hover:text-foreground",
       )}
     >
       {children}
