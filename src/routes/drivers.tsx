@@ -283,7 +283,7 @@ function DriverCard({
           )}
         </div>
       </div>
-    </button>
+    </Link>
   );
 }
 
