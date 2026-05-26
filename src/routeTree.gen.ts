@@ -22,6 +22,7 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DriverIndexRouteImport } from './routes/driver.index'
+import { Route as DriversDriverIdRouteImport } from './routes/drivers.$driverId'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
 
 const VehiclesRoute = VehiclesRouteImport.update({
@@ -89,6 +90,11 @@ const DriverIndexRoute = DriverIndexRouteImport.update({
   path: '/driver/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DriversDriverIdRoute = DriversDriverIdRouteImport.update({
+  id: '/$driverId',
+  path: '/$driverId',
+  getParentRoute: () => DriversRoute,
+} as any)
 const DriverNavigationRoute = DriverNavigationRouteImport.update({
   id: '/driver/navigation',
   path: '/driver/navigation',
@@ -100,7 +106,7 @@ export interface FileRoutesByFullPath {
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
   '/dispatch': typeof DispatchRoute
-  '/drivers': typeof DriversRoute
+  '/drivers': typeof DriversRouteWithChildren
   '/fuel': typeof FuelRoute
   '/loads': typeof LoadsRoute
   '/map': typeof MapRoute
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/shipments': typeof ShipmentsRoute
   '/vehicles': typeof VehiclesRoute
   '/driver/navigation': typeof DriverNavigationRoute
+  '/drivers/$driverId': typeof DriversDriverIdRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRoutesByTo {
@@ -116,7 +123,7 @@ export interface FileRoutesByTo {
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
   '/dispatch': typeof DispatchRoute
-  '/drivers': typeof DriversRoute
+  '/drivers': typeof DriversRouteWithChildren
   '/fuel': typeof FuelRoute
   '/loads': typeof LoadsRoute
   '/map': typeof MapRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/shipments': typeof ShipmentsRoute
   '/vehicles': typeof VehiclesRoute
   '/driver/navigation': typeof DriverNavigationRoute
+  '/drivers/$driverId': typeof DriversDriverIdRoute
   '/driver': typeof DriverIndexRoute
 }
 export interface FileRoutesById {
@@ -133,7 +141,7 @@ export interface FileRoutesById {
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
   '/dispatch': typeof DispatchRoute
-  '/drivers': typeof DriversRoute
+  '/drivers': typeof DriversRouteWithChildren
   '/fuel': typeof FuelRoute
   '/loads': typeof LoadsRoute
   '/map': typeof MapRoute
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/shipments': typeof ShipmentsRoute
   '/vehicles': typeof VehiclesRoute
   '/driver/navigation': typeof DriverNavigationRoute
+  '/drivers/$driverId': typeof DriversDriverIdRoute
   '/driver/': typeof DriverIndexRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/vehicles'
     | '/driver/navigation'
+    | '/drivers/$driverId'
     | '/driver/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/vehicles'
     | '/driver/navigation'
+    | '/drivers/$driverId'
     | '/driver'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/shipments'
     | '/vehicles'
     | '/driver/navigation'
+    | '/drivers/$driverId'
     | '/driver/'
   fileRoutesById: FileRoutesById
 }
@@ -200,7 +212,7 @@ export interface RootRouteChildren {
   AlertsRoute: typeof AlertsRoute
   AnalyticsRoute: typeof AnalyticsRoute
   DispatchRoute: typeof DispatchRoute
-  DriversRoute: typeof DriversRoute
+  DriversRoute: typeof DriversRouteWithChildren
   FuelRoute: typeof FuelRoute
   LoadsRoute: typeof LoadsRoute
   MapRoute: typeof MapRoute
@@ -305,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/drivers/$driverId': {
+      id: '/drivers/$driverId'
+      path: '/$driverId'
+      fullPath: '/drivers/$driverId'
+      preLoaderRoute: typeof DriversDriverIdRouteImport
+      parentRoute: typeof DriversRoute
+    }
     '/driver/navigation': {
       id: '/driver/navigation'
       path: '/driver/navigation'
@@ -315,12 +334,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DriversRouteChildren {
+  DriversDriverIdRoute: typeof DriversDriverIdRoute
+}
+
+const DriversRouteChildren: DriversRouteChildren = {
+  DriversDriverIdRoute: DriversDriverIdRoute,
+}
+
+const DriversRouteWithChildren =
+  DriversRoute._addFileChildren(DriversRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertsRoute: AlertsRoute,
   AnalyticsRoute: AnalyticsRoute,
   DispatchRoute: DispatchRoute,
-  DriversRoute: DriversRoute,
+  DriversRoute: DriversRouteWithChildren,
   FuelRoute: FuelRoute,
   LoadsRoute: LoadsRoute,
   MapRoute: MapRoute,
