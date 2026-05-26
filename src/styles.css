@@ -479,8 +479,17 @@
 
 /* Dark mode */
 .dark .glass-toggle {
-  --toggle-bg: rgba(0, 0, 0, 0.25);
-  --toggle-highlight: rgba(255, 255, 255, 0.15);
+  --toggle-bg: rgba(255, 255, 255, 0.25);
+  --toggle-highlight: rgba(255, 255, 255, 0.75);
+  --toggle-text: #ffffff;
+}
+
+.dark .glass-toggle .toggle-input:checked + .toggle-track .glass-overlay {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass-toggle:hover .toggle-track .glass-overlay {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .dark .glass-toggle .toggle-thumb .glass-overlay {
