@@ -103,17 +103,23 @@ export type Message =
 
 export type Attachment = { name: string; type: string; size?: number };
 
-export type TypeFilter =
+export type InboxFilter =
   | "all"
   | "unread"
+  | "urgent"
   | "Driver"
   | "Courier"
   | "Carrier"
-  | "Broker"
   | "Customer"
-  | "Warehouse";
+  | "Warehouse"
+  | "active_loads"
+  | "delayed_loads"
+  | "invoices"
+  | "emergency"
+  | "archived";
 
-export type CategoryFilter = "all" | Category;
+// Back-compat alias (older code may import TypeFilter)
+export type TypeFilter = InboxFilter;
 
 export const roleStyles: Record<Role, string> = {
   Carrier: "bg-[#6D35E8]/20 text-[#B79CFF] border border-[#6D35E8]/40",
@@ -132,24 +138,28 @@ export const priorityStyles: Record<Priority, string> = {
   emergency: "bg-[#EF4444]/15 text-red-300 border border-[#EF4444]/40",
 };
 
-export const typeFilters: { id: TypeFilter; label: string }[] = [
+export const etaRiskStyles: Record<EtaRisk, { label: string; cls: string }> = {
+  low: { label: "ETA Low", cls: "bg-[#22C55E]/15 text-[#5EE6A0] border border-[#22C55E]/30" },
+  medium: { label: "ETA Med", cls: "bg-amber-500/15 text-amber-300 border border-amber-500/30" },
+  high: { label: "ETA High", cls: "bg-[#F97316]/15 text-orange-300 border border-[#F97316]/35" },
+  delayed: { label: "Delayed", cls: "bg-[#EF4444]/15 text-red-300 border border-[#EF4444]/40" },
+};
+
+export const inboxFilters: { id: InboxFilter; label: string }[] = [
   { id: "all", label: "All" },
   { id: "unread", label: "Unread" },
+  { id: "urgent", label: "Urgent" },
   { id: "Driver", label: "Drivers" },
   { id: "Courier", label: "Couriers" },
   { id: "Carrier", label: "Carriers" },
-  { id: "Broker", label: "Brokers" },
   { id: "Customer", label: "Customers" },
   { id: "Warehouse", label: "Warehouses" },
-];
-
-export const categoryFilters: { id: CategoryFilter; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "pinned", label: "Pinned" },
   { id: "active_loads", label: "Active Loads" },
-  { id: "dispatch", label: "Dispatch" },
+  { id: "delayed_loads", label: "Delayed Loads" },
   { id: "invoices", label: "Invoices" },
-  { id: "support", label: "Support" },
-  { id: "completed", label: "Completed" },
+  { id: "emergency", label: "Emergency" },
   { id: "archived", label: "Archived" },
 ];
+
+// Back-compat for sidebar import
+export const typeFilters = inboxFilters;
