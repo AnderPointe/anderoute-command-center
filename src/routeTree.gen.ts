@@ -20,14 +20,10 @@ import { Route as MapRouteImport } from './routes/map'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LoadsRouteImport } from './routes/loads'
 import { Route as LiveMapRouteImport } from './routes/live-map'
-import { Route as GlassDashboardRouteImport } from './routes/glass-dashboard'
 import { Route as FuelRouteImport } from './routes/fuel'
 import { Route as DriversRouteImport } from './routes/drivers'
-import { Route as DriverTrackingRouteImport } from './routes/driver-tracking'
 import { Route as DocumentsRouteImport } from './routes/documents'
-import { Route as DispatchBoardRouteImport } from './routes/dispatch-board'
 import { Route as DispatchRouteImport } from './routes/dispatch'
-import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
@@ -1135,7 +1131,6 @@ import { Route as IntegrationsEdiRouteImport } from './routes/integrations.edi'
 import { Route as IntegrationsApiRouteImport } from './routes/integrations.api'
 import { Route as EnterprisePhase7DemoRouteImport } from './routes/enterprise.phase7-demo'
 import { Route as EnterpriseOverviewRouteImport } from './routes/enterprise.overview'
-import { Route as DriversDriverIdRouteImport } from './routes/drivers.$driverId'
 import { Route as DriverPhase5DemoRouteImport } from './routes/driver.phase5-demo'
 import { Route as DriverNotificationsLabRouteImport } from './routes/driver.notifications-lab'
 import { Route as DriverNavigationRouteImport } from './routes/driver.navigation'
@@ -1204,11 +1199,6 @@ const LiveMapRoute = LiveMapRouteImport.update({
   path: '/live-map',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GlassDashboardRoute = GlassDashboardRouteImport.update({
-  id: '/glass-dashboard',
-  path: '/glass-dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const FuelRoute = FuelRouteImport.update({
   id: '/fuel',
   path: '/fuel',
@@ -1219,29 +1209,14 @@ const DriversRoute = DriversRouteImport.update({
   path: '/drivers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DriverTrackingRoute = DriverTrackingRouteImport.update({
-  id: '/driver-tracking',
-  path: '/driver-tracking',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DocumentsRoute = DocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DispatchBoardRoute = DispatchBoardRouteImport.update({
-  id: '/dispatch-board',
-  path: '/dispatch-board',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DispatchRoute = DispatchRouteImport.update({
   id: '/dispatch',
   path: '/dispatch',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
@@ -6787,11 +6762,6 @@ const EnterpriseOverviewRoute = EnterpriseOverviewRouteImport.update({
   path: '/enterprise/overview',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DriversDriverIdRoute = DriversDriverIdRouteImport.update({
-  id: '/$driverId',
-  path: '/$driverId',
-  getParentRoute: () => DriversRoute,
-} as any)
 const DriverPhase5DemoRoute = DriverPhase5DemoRouteImport.update({
   id: '/driver/phase5-demo',
   path: '/driver/phase5-demo',
@@ -6860,14 +6830,10 @@ export interface FileRoutesByFullPath {
   '/admin-login': typeof AdminLoginRoute
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
-  '/dashboard': typeof DashboardRoute
   '/dispatch': typeof DispatchRouteWithChildren
-  '/dispatch-board': typeof DispatchBoardRoute
   '/documents': typeof DocumentsRoute
-  '/driver-tracking': typeof DriverTrackingRoute
-  '/drivers': typeof DriversRouteWithChildren
+  '/drivers': typeof DriversRoute
   '/fuel': typeof FuelRoute
-  '/glass-dashboard': typeof GlassDashboardRoute
   '/live-map': typeof LiveMapRoute
   '/loads': typeof LoadsRoute
   '/login': typeof LoginRoute
@@ -6891,7 +6857,6 @@ export interface FileRoutesByFullPath {
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/notifications-lab': typeof DriverNotificationsLabRoute
   '/driver/phase5-demo': typeof DriverPhase5DemoRoute
-  '/drivers/$driverId': typeof DriversDriverIdRoute
   '/enterprise/overview': typeof EnterpriseOverviewRoute
   '/enterprise/phase7-demo': typeof EnterprisePhase7DemoRoute
   '/integrations/api': typeof IntegrationsApiRoute
@@ -8001,14 +7966,10 @@ export interface FileRoutesByTo {
   '/admin-login': typeof AdminLoginRoute
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
-  '/dashboard': typeof DashboardRoute
   '/dispatch': typeof DispatchRouteWithChildren
-  '/dispatch-board': typeof DispatchBoardRoute
   '/documents': typeof DocumentsRoute
-  '/driver-tracking': typeof DriverTrackingRoute
-  '/drivers': typeof DriversRouteWithChildren
+  '/drivers': typeof DriversRoute
   '/fuel': typeof FuelRoute
-  '/glass-dashboard': typeof GlassDashboardRoute
   '/live-map': typeof LiveMapRoute
   '/loads': typeof LoadsRoute
   '/login': typeof LoginRoute
@@ -8032,7 +7993,6 @@ export interface FileRoutesByTo {
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/notifications-lab': typeof DriverNotificationsLabRoute
   '/driver/phase5-demo': typeof DriverPhase5DemoRoute
-  '/drivers/$driverId': typeof DriversDriverIdRoute
   '/enterprise/overview': typeof EnterpriseOverviewRoute
   '/enterprise/phase7-demo': typeof EnterprisePhase7DemoRoute
   '/integrations/api': typeof IntegrationsApiRoute
@@ -9143,14 +9103,10 @@ export interface FileRoutesById {
   '/admin-login': typeof AdminLoginRoute
   '/alerts': typeof AlertsRoute
   '/analytics': typeof AnalyticsRoute
-  '/dashboard': typeof DashboardRoute
   '/dispatch': typeof DispatchRouteWithChildren
-  '/dispatch-board': typeof DispatchBoardRoute
   '/documents': typeof DocumentsRoute
-  '/driver-tracking': typeof DriverTrackingRoute
-  '/drivers': typeof DriversRouteWithChildren
+  '/drivers': typeof DriversRoute
   '/fuel': typeof FuelRoute
-  '/glass-dashboard': typeof GlassDashboardRoute
   '/live-map': typeof LiveMapRoute
   '/loads': typeof LoadsRoute
   '/login': typeof LoginRoute
@@ -9174,7 +9130,6 @@ export interface FileRoutesById {
   '/driver/navigation': typeof DriverNavigationRoute
   '/driver/notifications-lab': typeof DriverNotificationsLabRoute
   '/driver/phase5-demo': typeof DriverPhase5DemoRoute
-  '/drivers/$driverId': typeof DriversDriverIdRoute
   '/enterprise/overview': typeof EnterpriseOverviewRoute
   '/enterprise/phase7-demo': typeof EnterprisePhase7DemoRoute
   '/integrations/api': typeof IntegrationsApiRoute
@@ -10286,14 +10241,10 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/alerts'
     | '/analytics'
-    | '/dashboard'
     | '/dispatch'
-    | '/dispatch-board'
     | '/documents'
-    | '/driver-tracking'
     | '/drivers'
     | '/fuel'
-    | '/glass-dashboard'
     | '/live-map'
     | '/loads'
     | '/login'
@@ -10317,7 +10268,6 @@ export interface FileRouteTypes {
     | '/driver/navigation'
     | '/driver/notifications-lab'
     | '/driver/phase5-demo'
-    | '/drivers/$driverId'
     | '/enterprise/overview'
     | '/enterprise/phase7-demo'
     | '/integrations/api'
@@ -11427,14 +11377,10 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/alerts'
     | '/analytics'
-    | '/dashboard'
     | '/dispatch'
-    | '/dispatch-board'
     | '/documents'
-    | '/driver-tracking'
     | '/drivers'
     | '/fuel'
-    | '/glass-dashboard'
     | '/live-map'
     | '/loads'
     | '/login'
@@ -11458,7 +11404,6 @@ export interface FileRouteTypes {
     | '/driver/navigation'
     | '/driver/notifications-lab'
     | '/driver/phase5-demo'
-    | '/drivers/$driverId'
     | '/enterprise/overview'
     | '/enterprise/phase7-demo'
     | '/integrations/api'
@@ -12568,14 +12513,10 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/alerts'
     | '/analytics'
-    | '/dashboard'
     | '/dispatch'
-    | '/dispatch-board'
     | '/documents'
-    | '/driver-tracking'
     | '/drivers'
     | '/fuel'
-    | '/glass-dashboard'
     | '/live-map'
     | '/loads'
     | '/login'
@@ -12599,7 +12540,6 @@ export interface FileRouteTypes {
     | '/driver/navigation'
     | '/driver/notifications-lab'
     | '/driver/phase5-demo'
-    | '/drivers/$driverId'
     | '/enterprise/overview'
     | '/enterprise/phase7-demo'
     | '/integrations/api'
@@ -13710,14 +13650,10 @@ export interface RootRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AlertsRoute: typeof AlertsRoute
   AnalyticsRoute: typeof AnalyticsRoute
-  DashboardRoute: typeof DashboardRoute
   DispatchRoute: typeof DispatchRouteWithChildren
-  DispatchBoardRoute: typeof DispatchBoardRoute
   DocumentsRoute: typeof DocumentsRoute
-  DriverTrackingRoute: typeof DriverTrackingRoute
-  DriversRoute: typeof DriversRouteWithChildren
+  DriversRoute: typeof DriversRoute
   FuelRoute: typeof FuelRoute
-  GlassDashboardRoute: typeof GlassDashboardRoute
   LiveMapRoute: typeof LiveMapRoute
   LoadsRoute: typeof LoadsRoute
   LoginRoute: typeof LoginRoute
@@ -14915,13 +14851,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LiveMapRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/glass-dashboard': {
-      id: '/glass-dashboard'
-      path: '/glass-dashboard'
-      fullPath: '/glass-dashboard'
-      preLoaderRoute: typeof GlassDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/fuel': {
       id: '/fuel'
       path: '/fuel'
@@ -14936,13 +14865,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriversRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/driver-tracking': {
-      id: '/driver-tracking'
-      path: '/driver-tracking'
-      fullPath: '/driver-tracking'
-      preLoaderRoute: typeof DriverTrackingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/documents': {
       id: '/documents'
       path: '/documents'
@@ -14950,25 +14872,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dispatch-board': {
-      id: '/dispatch-board'
-      path: '/dispatch-board'
-      fullPath: '/dispatch-board'
-      preLoaderRoute: typeof DispatchBoardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dispatch': {
       id: '/dispatch'
       path: '/dispatch'
       fullPath: '/dispatch'
       preLoaderRoute: typeof DispatchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/analytics': {
@@ -22720,13 +22628,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnterpriseOverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/drivers/$driverId': {
-      id: '/drivers/$driverId'
-      path: '/$driverId'
-      fullPath: '/drivers/$driverId'
-      preLoaderRoute: typeof DriversDriverIdRouteImport
-      parentRoute: typeof DriversRoute
-    }
     '/driver/phase5-demo': {
       id: '/driver/phase5-demo'
       path: '/driver/phase5-demo'
@@ -22836,17 +22737,6 @@ const DispatchRouteWithChildren = DispatchRoute._addFileChildren(
   DispatchRouteChildren,
 )
 
-interface DriversRouteChildren {
-  DriversDriverIdRoute: typeof DriversDriverIdRoute
-}
-
-const DriversRouteChildren: DriversRouteChildren = {
-  DriversDriverIdRoute: DriversDriverIdRoute,
-}
-
-const DriversRouteWithChildren =
-  DriversRoute._addFileChildren(DriversRouteChildren)
-
 interface PortalRouteChildren {
   PortalNewRequestRoute: typeof PortalNewRequestRoute
 }
@@ -22885,14 +22775,10 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AlertsRoute: AlertsRoute,
   AnalyticsRoute: AnalyticsRoute,
-  DashboardRoute: DashboardRoute,
   DispatchRoute: DispatchRouteWithChildren,
-  DispatchBoardRoute: DispatchBoardRoute,
   DocumentsRoute: DocumentsRoute,
-  DriverTrackingRoute: DriverTrackingRoute,
-  DriversRoute: DriversRouteWithChildren,
+  DriversRoute: DriversRoute,
   FuelRoute: FuelRoute,
-  GlassDashboardRoute: GlassDashboardRoute,
   LiveMapRoute: LiveMapRoute,
   LoadsRoute: LoadsRoute,
   LoginRoute: LoginRoute,
