@@ -299,13 +299,19 @@ function MessengerPage() {
   );
 }
 
+type Attachment = { name: string; type: string; size?: number };
+
 function Messenger() {
   const [contacts, setContacts] = useState<Contact[]>(seedContacts);
   const [activeId, setActiveId] = useState<string>("harrold");
   const [query, setQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
   const [messagesByContact, setMessagesByContact] =
     useState<Record<string, Message[]>>(seedMessages);
   const [draft, setDraft] = useState("");
+  const [attachment, setAttachment] = useState<Attachment | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const active = contacts.find((c) => c.id === activeId)!;
@@ -313,14 +319,18 @@ function Messenger() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return contacts;
-    return contacts.filter(
-      (c) =>
+    return contacts.filter((c) => {
+      if (typeFilter !== "all" && c.role !== typeFilter) return false;
+      if (categoryFilter !== "all" && c.category !== categoryFilter) return false;
+      if (!q) return true;
+      return (
         c.name.toLowerCase().includes(q) ||
         c.preview.toLowerCase().includes(q) ||
-        c.role.toLowerCase().includes(q),
-    );
-  }, [contacts, query]);
+        c.role.toLowerCase().includes(q) ||
+        (c.company?.toLowerCase().includes(q) ?? false)
+      );
+    });
+  }, [contacts, query, typeFilter, categoryFilter]);
 
   const pinned = filtered.filter((c) => c.pinned);
   const others = filtered.filter((c) => !c.pinned);
@@ -339,31 +349,53 @@ function Messenger() {
     );
   }
 
+  function onPickFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAttachment({ name: file.name, type: file.type || "FILE", size: file.size });
+    toast.success(`Attached ${file.name}`);
+    e.target.value = "";
+  }
+
   function sendMessage() {
     const text = draft.trim();
-    if (!text) return;
+    if (!text && !attachment) return;
     const now = new Date();
-    const time = now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const msg: Message = {
-      id: `m-${Date.now()}`,
-      kind: "text",
-      from: "me",
-      time,
-      text,
-    };
+    const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const newMessages: Message[] = [];
+    if (text) {
+      newMessages.push({
+        id: `m-${Date.now()}`,
+        kind: "text",
+        from: "me",
+        time,
+        text,
+      });
+    }
+    if (attachment) {
+      newMessages.push({
+        id: `m-${Date.now()}-f`,
+        kind: "file",
+        from: "me",
+        time,
+        filename: attachment.name,
+        filetype: attachment.type.split("/").pop()?.toUpperCase() || "FILE",
+      });
+    }
     setMessagesByContact((prev) => ({
       ...prev,
-      [activeId]: [...(prev[activeId] ?? []), msg],
+      [activeId]: [...(prev[activeId] ?? []), ...newMessages],
     }));
     setContacts((prev) =>
       prev.map((c) =>
-        c.id === activeId ? { ...c, preview: text, time: "Now" } : c,
+        c.id === activeId
+          ? { ...c, preview: text || attachment?.name || c.preview, time: "Now" }
+          : c,
       ),
     );
     setDraft("");
+    setAttachment(null);
+    toast.success("Message sent");
   }
 
   return (
