@@ -286,3 +286,64 @@
     animation: ping-soft 2s cubic-bezier(0,0,0.2,1) infinite;
   }
 }
+
+/* Liquid Glass Sidebar */
+.glass-sidebar {
+  --glass-bg: color-mix(in oklab, var(--sidebar) 55%, transparent);
+  --glass-highlight: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 10px 40px -12px oklch(0 0 0 / 0.45),
+    0 2px 8px -2px oklch(0 0 0 / 0.25),
+    inset 0 1px 0 0 var(--glass-highlight);
+  background:
+    linear-gradient(135deg,
+      color-mix(in oklab, var(--teal) 8%, transparent) 0%,
+      transparent 35%,
+      color-mix(in oklab, var(--orange) 6%, transparent) 100%);
+}
+
+.dark .glass-sidebar {
+  --glass-bg: color-mix(in oklab, var(--sidebar) 65%, transparent);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+}
+
+.glass-sidebar .glass-filter,
+.glass-sidebar .glass-overlay,
+.glass-sidebar .glass-specular {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-sidebar .glass-filter {
+  z-index: 1;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  filter: url(#glass-distortion);
+  opacity: 0.6;
+}
+
+.glass-sidebar .glass-overlay {
+  z-index: 2;
+  background: var(--glass-bg);
+}
+
+.glass-sidebar .glass-specular {
+  z-index: 3;
+  box-shadow:
+    inset 1px 1px 0 var(--glass-highlight),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.glass-sidebar .glass-content {
+  position: relative;
+  z-index: 4;
+}
+
+.glass-sidebar .nav-item {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
