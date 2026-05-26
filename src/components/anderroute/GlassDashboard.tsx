@@ -7,6 +7,13 @@ import {
 } from "lucide-react";
 import cargoBg from "@/assets/cargo-bg.webp";
 
+const glass =
+  "rounded-3xl border border-white/15 bg-white/10 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5)] " +
+  "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent";
+
+const pill =
+  "inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs text-white/90 backdrop-blur-xl";
+
 export default function GlassDashboard() {
   return (
     <div
