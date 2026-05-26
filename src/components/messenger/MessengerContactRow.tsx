@@ -66,12 +66,29 @@ export function MessengerContactRow({
         >
           {c.typing ? "typing…" : c.preview}
         </p>
-        {c.linkedLoad && (
-          <div className="mt-1 inline-flex items-center gap-1 rounded-md border border-[#F97316]/30 bg-[#F97316]/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-300">
-            <Truck className="size-2.5" />
-            {c.linkedLoad.id}
-          </div>
-        )}
+        <div className="mt-1 flex flex-wrap items-center gap-1">
+          {c.linkedLoad && (
+            <span className="inline-flex items-center gap-1 rounded-md border border-[#F97316]/30 bg-[#F97316]/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-300">
+              <Truck className="size-2.5" />
+              {c.linkedLoad.id}
+            </span>
+          )}
+          {c.etaRisk && (
+            <span
+              className={cn(
+                "rounded-md px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
+                etaRiskStyles[c.etaRisk].cls,
+              )}
+            >
+              {etaRiskStyles[c.etaRisk].label}
+            </span>
+          )}
+          {c.kind === "dm" && (
+            <span className="text-[9px] uppercase tracking-wide text-[#8B90A7]">
+              · {c.online ? "Online" : "Offline"}
+            </span>
+          )}
+        </div>
       </div>
       <div className="flex shrink-0 flex-col items-end gap-1">
         <span className="text-[10px] text-[#8B90A7]">{c.time}</span>
