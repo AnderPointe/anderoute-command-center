@@ -20,6 +20,7 @@ import { Route as MapRouteImport } from './routes/map'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LoadsRouteImport } from './routes/loads'
 import { Route as LiveMapRouteImport } from './routes/live-map'
+import { Route as GlassDashboardRouteImport } from './routes/glass-dashboard'
 import { Route as FuelRouteImport } from './routes/fuel'
 import { Route as DriversRouteImport } from './routes/drivers'
 import { Route as DriverTrackingRouteImport } from './routes/driver-tracking'
@@ -1201,6 +1202,11 @@ const LoadsRoute = LoadsRouteImport.update({
 const LiveMapRoute = LiveMapRouteImport.update({
   id: '/live-map',
   path: '/live-map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlassDashboardRoute = GlassDashboardRouteImport.update({
+  id: '/glass-dashboard',
+  path: '/glass-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FuelRoute = FuelRouteImport.update({
@@ -6861,6 +6867,7 @@ export interface FileRoutesByFullPath {
   '/driver-tracking': typeof DriverTrackingRoute
   '/drivers': typeof DriversRouteWithChildren
   '/fuel': typeof FuelRoute
+  '/glass-dashboard': typeof GlassDashboardRoute
   '/live-map': typeof LiveMapRoute
   '/loads': typeof LoadsRoute
   '/login': typeof LoginRoute
@@ -8001,6 +8008,7 @@ export interface FileRoutesByTo {
   '/driver-tracking': typeof DriverTrackingRoute
   '/drivers': typeof DriversRouteWithChildren
   '/fuel': typeof FuelRoute
+  '/glass-dashboard': typeof GlassDashboardRoute
   '/live-map': typeof LiveMapRoute
   '/loads': typeof LoadsRoute
   '/login': typeof LoginRoute
@@ -9142,6 +9150,7 @@ export interface FileRoutesById {
   '/driver-tracking': typeof DriverTrackingRoute
   '/drivers': typeof DriversRouteWithChildren
   '/fuel': typeof FuelRoute
+  '/glass-dashboard': typeof GlassDashboardRoute
   '/live-map': typeof LiveMapRoute
   '/loads': typeof LoadsRoute
   '/login': typeof LoginRoute
@@ -10284,6 +10293,7 @@ export interface FileRouteTypes {
     | '/driver-tracking'
     | '/drivers'
     | '/fuel'
+    | '/glass-dashboard'
     | '/live-map'
     | '/loads'
     | '/login'
@@ -11424,6 +11434,7 @@ export interface FileRouteTypes {
     | '/driver-tracking'
     | '/drivers'
     | '/fuel'
+    | '/glass-dashboard'
     | '/live-map'
     | '/loads'
     | '/login'
@@ -12564,6 +12575,7 @@ export interface FileRouteTypes {
     | '/driver-tracking'
     | '/drivers'
     | '/fuel'
+    | '/glass-dashboard'
     | '/live-map'
     | '/loads'
     | '/login'
@@ -13705,6 +13717,7 @@ export interface RootRouteChildren {
   DriverTrackingRoute: typeof DriverTrackingRoute
   DriversRoute: typeof DriversRouteWithChildren
   FuelRoute: typeof FuelRoute
+  GlassDashboardRoute: typeof GlassDashboardRoute
   LiveMapRoute: typeof LiveMapRoute
   LoadsRoute: typeof LoadsRoute
   LoginRoute: typeof LoginRoute
@@ -14900,6 +14913,13 @@ declare module '@tanstack/react-router' {
       path: '/live-map'
       fullPath: '/live-map'
       preLoaderRoute: typeof LiveMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glass-dashboard': {
+      id: '/glass-dashboard'
+      path: '/glass-dashboard'
+      fullPath: '/glass-dashboard'
+      preLoaderRoute: typeof GlassDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fuel': {
@@ -22872,6 +22892,7 @@ const rootRouteChildren: RootRouteChildren = {
   DriverTrackingRoute: DriverTrackingRoute,
   DriversRoute: DriversRouteWithChildren,
   FuelRoute: FuelRoute,
+  GlassDashboardRoute: GlassDashboardRoute,
   LiveMapRoute: LiveMapRoute,
   LoadsRoute: LoadsRoute,
   LoginRoute: LoginRoute,
@@ -23992,13 +24013,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
