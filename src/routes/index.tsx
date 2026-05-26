@@ -181,43 +181,31 @@ function CommandCenter() {
 
 function CommandTile({ tile, active, onClick }: { tile: Tile; active: boolean; onClick: () => void }) {
   const Icon = tile.icon;
-  const color = accentColor(colorToAccent(tile.color));
   return (
-    <button onClick={onClick} className={`cc-tile ${active ? "is-active" : ""}`}>
-      <div className="flex items-start justify-between gap-2">
-        <div
-          className="size-11 rounded-xl grid place-items-center shrink-0"
-          style={{
-            background: `color-mix(in oklab, ${color} 18%, transparent)`,
-            color,
-            boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${color} 35%, transparent)`,
-          }}
-        >
+    <button
+      onClick={onClick}
+      className={`rounded-3xl border border-white/20 bg-white/70 p-5 text-left shadow-xl backdrop-blur-2xl transition hover:-translate-y-1 hover:border-teal-400 hover:shadow-2xl dark:bg-slate-950/70 ${active ? "ring-2 ring-teal-400" : ""}`}
+    >
+      <div className="flex items-center justify-between">
+        <span className="rounded-2xl bg-teal-500/10 p-3 text-teal-500">
           <Icon className="size-5" />
-        </div>
-        <span
-          className="text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
-          style={{
-            background: `color-mix(in oklab, ${accentColor(badgeAccent(tile.color))} 16%, transparent)`,
-            color: accentColor(badgeAccent(tile.color)),
-          }}
-        >
+        </span>
+        <span className="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-semibold text-orange-500">
           {tile.badge}
         </span>
       </div>
-
-      <div className="mt-4">
-        <div className="text-[12px] text-muted-foreground font-medium">{tile.title}</div>
-        <div className="mt-1 text-[30px] font-semibold tracking-tight tabular-nums leading-none">
-          {tile.value.toLocaleString()}
-        </div>
-        <div className="mt-2 text-[11px] text-muted-foreground line-clamp-2 min-h-[28px]">{tile.status}</div>
-      </div>
-
-      <div className="mt-3 pt-3 border-t border-border/70 flex items-center justify-between text-[11px] font-medium" style={{ color }}>
-        <span>View details</span>
-        <ChevronRight className="size-3.5" />
-      </div>
+      <h3 className="mt-4 text-sm font-semibold text-slate-500">
+        {tile.title}
+      </h3>
+      <p className="mt-2 text-4xl font-bold text-slate-950 dark:text-white tabular-nums">
+        {tile.value.toLocaleString()}
+      </p>
+      <p className="mt-2 text-sm text-slate-500 line-clamp-2 min-h-[40px]">
+        {tile.status}
+      </p>
+      <p className="mt-4 text-sm font-semibold text-teal-500">
+        View Details →
+      </p>
     </button>
   );
 }
