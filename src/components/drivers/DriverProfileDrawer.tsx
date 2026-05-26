@@ -47,7 +47,7 @@ export function DriverProfileDrawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 260 }}
-            className="fixed top-0 right-0 h-screen w-full sm:w-[500px] z-50 bg-card border-l border-border overflow-y-auto shadow-[var(--shadow-lg)]"
+            className="glass-tile fixed top-3 right-3 bottom-3 w-[calc(100%-1.5rem)] sm:w-[500px] z-50 overflow-y-auto"
           >
             {/* Gradient header */}
             <div className="relative">
