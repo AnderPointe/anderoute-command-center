@@ -59,13 +59,12 @@ export function TopBar() {
 
         <div className="h-6 w-px bg-border mx-1 hidden md:block" />
 
-        <button
-          onClick={() => setDark((d) => !d)}
-          className="size-9 rounded-md grid place-items-center hover:bg-secondary text-foreground/80 transition"
-          aria-label="Toggle theme"
-        >
-          {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-        </button>
+        <LiquidGlassToggle
+          checked={dark}
+          onChange={setDark}
+          aria-label="Toggle dark mode"
+        />
+
 
         <button className="size-9 rounded-md grid place-items-center hover:bg-secondary relative transition" aria-label="Alerts">
           <Bell className="size-4" />
