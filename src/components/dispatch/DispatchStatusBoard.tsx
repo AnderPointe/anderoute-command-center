@@ -24,7 +24,7 @@ export function DispatchStatusBoard() {
           const list = drivers.filter((d) => d.status === status);
           const color = `var(--${statusMeta[status].token})`;
           return (
-            <div key={status} className="w-72 shrink-0 rounded-xl border border-border bg-surface-2/50 overflow-hidden">
+            <div key={status} className="glass-column w-72 shrink-0">
               <div
                 className="h-1"
                 style={{ backgroundColor: color }}
