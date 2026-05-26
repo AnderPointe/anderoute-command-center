@@ -209,23 +209,43 @@ function DriverCard({
   const vehicleLabel = driver.currentLoadId
     ? loads.find((l) => l.id === driver.currentLoadId)?.requiredVehicleType
     : null;
+  const isDelayed = driver.status === "delayed";
+  const isOffline = driver.status === "offduty" || driver.status === "break";
+  const isActive = ["transit", "pickup", "loaded"].includes(driver.status);
+  const stateClass = isDelayed
+    ? "glass-tile-orange"
+    : isOffline
+      ? "glass-tile-muted"
+      : active
+        ? "glass-tile-teal glass-tile-selected"
+        : isActive
+          ? "glass-tile-teal"
+          : "";
   return (
     <Link
       to="/drivers/$driverId"
       params={{ driverId: driver.id }}
       onMouseEnter={onClick}
       onFocus={onClick}
-      className={`block text-left rounded-2xl border p-5 transition group ${
-        active
-          ? "border-teal/50 bg-teal/5 shadow-[var(--shadow-sm)]"
-          : "border-border bg-card hover:border-teal/30 hover:shadow-[var(--shadow-sm)]"
-      }`}
+      className={`glass-tile glass-tile-hover ${stateClass} block text-left p-5`}
     >
       <div className="flex flex-col items-center text-center">
         <div className="relative">
-          <div className="size-20 rounded-full bg-gradient-to-br from-teal/30 to-orange/30 grid place-items-center text-foreground font-semibold text-lg ring-4 ring-card">
+          <div className="size-20 rounded-full bg-gradient-to-br from-teal/40 to-orange/40 grid place-items-center text-foreground font-semibold text-lg ring-4 ring-white/60 dark:ring-white/10">
             {initials}
           </div>
+          {isActive && (
+            <span className="absolute inset-0 rounded-full glass-pulse-ring pointer-events-none" />
+          )}
+          <span
+            className={`absolute bottom-1 right-1 size-3 rounded-full ring-2 ring-white/80 dark:ring-slate-900/80 ${
+              isDelayed
+                ? "bg-orange animate-pulse"
+                : isOffline
+                  ? "bg-slate-400"
+                  : "bg-teal animate-pulse"
+            }`}
+          />
         </div>
         <h3 className="mt-3 font-semibold text-[15px]">{driver.name}</h3>
         <div className="mt-1.5 flex items-center gap-2">
@@ -235,6 +255,7 @@ function DriverCard({
           <DriverStatusBadge status={driver.status} size="xs" />
         </div>
       </div>
+
 
       <div className="mt-4 pt-4 border-t border-border space-y-1.5 text-[11px]">
         <div className="flex items-center justify-between">
