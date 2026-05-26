@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
 import { drivers, loads, shipments } from "@/data/mock";
@@ -210,9 +210,12 @@ function DriverCard({
     ? loads.find((l) => l.id === driver.currentLoadId)?.requiredVehicleType
     : null;
   return (
-    <button
-      onClick={onClick}
-      className={`text-left rounded-2xl border p-5 transition group ${
+    <Link
+      to="/drivers/$driverId"
+      params={{ driverId: driver.id }}
+      onMouseEnter={onClick}
+      onFocus={onClick}
+      className={`block text-left rounded-2xl border p-5 transition group ${
         active
           ? "border-teal/50 bg-teal/5 shadow-[var(--shadow-sm)]"
           : "border-border bg-card hover:border-teal/30 hover:shadow-[var(--shadow-sm)]"
