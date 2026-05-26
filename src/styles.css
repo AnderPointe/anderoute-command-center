@@ -458,9 +458,9 @@
 }
 
 /* Checked state */
-.glass-toggle .toggle-input:checked + .toggle-track .toggle-thumb {
-  transform: translateX(calc(var(--track-width) - var(--thumb-size) - 8px));
-}
+  .glass-toggle .toggle-input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(calc(var(--track-width) - var(--thumb-size) - 6px));
+  }
 
 .glass-toggle .toggle-input:checked + .toggle-track .glass-overlay {
   background: rgba(255, 255, 255, 0.4);
