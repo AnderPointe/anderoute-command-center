@@ -35,6 +35,7 @@ const nav = [
     { to: "/fuel", label: "Fuel & Mileage", icon: Fuel },
   ]},
   { group: "Insights", items: [
+    { to: "/messenger", label: "Messenger", icon: MessageCircle },
     { to: "/alerts", label: "Exceptions", icon: Bell, badgeKey: "alerts" as const },
     { to: "/analytics", label: "Analytics", icon: BarChart3 },
   ]},
