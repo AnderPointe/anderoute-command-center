@@ -356,19 +356,19 @@
   min-width: 200px;
 }
 
-.glass-toggle {
-  --toggle-bg: rgba(255, 255, 255, 0.25);
-  --toggle-highlight: rgba(255, 255, 255, 0.75);
-  --toggle-text: #ffffff;
-  --track-width: 60px;
-  --track-height: 32px;
-  --thumb-size: 24px;
+  .glass-toggle {
+    --toggle-bg: rgba(255, 255, 255, 0.25);
+    --toggle-highlight: rgba(255, 255, 255, 0.75);
+    --toggle-text: #ffffff;
+    --track-width: 44px;
+    --track-height: 24px;
+    --thumb-size: 18px;
 
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
 
 .glass-toggle .toggle-input {
   position: absolute;
@@ -376,14 +376,14 @@
   pointer-events: none;
 }
 
-.glass-toggle .toggle-track {
-  position: relative;
-  width: var(--track-width);
-  height: var(--track-height);
-  border-radius: 16px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
+  .glass-toggle .toggle-track {
+    position: relative;
+    width: var(--track-width);
+    height: var(--track-height);
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
 
 .glass-toggle .toggle-track .glass-filter {
   position: absolute;
@@ -412,17 +412,17 @@
   box-shadow: inset 1px 1px 1px var(--toggle-highlight);
 }
 
-.glass-toggle .toggle-thumb {
-  position: absolute;
-  z-index: 4;
-  top: 4px;
-  left: 4px;
-  width: var(--thumb-size);
-  height: var(--thumb-size);
-  border-radius: 50%;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
+  .glass-toggle .toggle-thumb {
+    position: absolute;
+    z-index: 4;
+    top: 3px;
+    left: 3px;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
 
 .glass-toggle .toggle-thumb .glass-filter {
   position: absolute;
@@ -451,16 +451,16 @@
   box-shadow: inset 1px 1px 1px var(--toggle-highlight);
 }
 
-.glass-toggle .toggle-label {
-  color: var(--toggle-text);
-  font-size: 16px;
-  user-select: none;
-}
+  .glass-toggle .toggle-label {
+    color: var(--toggle-text);
+    font-size: 14px;
+    user-select: none;
+  }
 
 /* Checked state */
-.glass-toggle .toggle-input:checked + .toggle-track .toggle-thumb {
-  transform: translateX(calc(var(--track-width) - var(--thumb-size) - 8px));
-}
+  .glass-toggle .toggle-input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(calc(var(--track-width) - var(--thumb-size) - 6px));
+  }
 
 .glass-toggle .toggle-input:checked + .toggle-track .glass-overlay {
   background: rgba(255, 255, 255, 0.4);
