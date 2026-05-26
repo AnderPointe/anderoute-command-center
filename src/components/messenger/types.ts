@@ -30,6 +30,8 @@ export type LinkedLoad = {
   eta?: string;
 };
 
+export type EtaRisk = "low" | "medium" | "high" | "delayed";
+
 export type Contact = {
   id: string;
   kind: ConversationKind;
@@ -47,6 +49,7 @@ export type Contact = {
   priority?: Priority;
   linkedLoad?: LinkedLoad;
   channelTopic?: string;
+  etaRisk?: EtaRisk;
 };
 
 export type BaseMsg = {
