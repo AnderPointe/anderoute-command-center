@@ -14,7 +14,6 @@ export const LiquidGlassToggle = React.forwardRef<
 >(({ className, label, checked, onChange, ...props }, ref) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.checked);
-    props.onCheckedChange?.(e.target.checked);
   };
 
   return (
