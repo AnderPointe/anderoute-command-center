@@ -93,6 +93,7 @@ const seedContacts: Contact[] = [
     typing: true,
     company: "PSP Cargo Group",
     avatar: "https://i.pravatar.cc/80?img=12",
+    category: "pinned",
   },
   {
     id: "mate",
@@ -102,6 +103,7 @@ const seedContacts: Contact[] = [
     time: "04:17 PM",
     unread: 4,
     avatar: "https://i.pravatar.cc/80?img=13",
+    category: "active_loads",
   },
   {
     id: "shannon",
@@ -111,6 +113,7 @@ const seedContacts: Contact[] = [
     time: "16:01 PM",
     unread: 2,
     avatar: "https://i.pravatar.cc/80?img=47",
+    category: "active_loads",
   },
   {
     id: "kynie",
@@ -120,6 +123,7 @@ const seedContacts: Contact[] = [
     time: "03:29 PM",
     unread: 3,
     avatar: "https://i.pravatar.cc/80?img=14",
+    category: "dispatch",
   },
   {
     id: "savina",
@@ -129,6 +133,7 @@ const seedContacts: Contact[] = [
     time: "02:11 PM",
     unread: 1,
     avatar: "https://i.pravatar.cc/80?img=45",
+    category: "dispatch",
   },
   {
     id: "marcel",
@@ -138,6 +143,7 @@ const seedContacts: Contact[] = [
     time: "Yesterday",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=15",
+    category: "invoices",
   },
   {
     id: "gilbertine",
@@ -147,6 +153,7 @@ const seedContacts: Contact[] = [
     time: "Yesterday",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=33",
+    category: "dispatch",
   },
   {
     id: "nisa",
@@ -156,6 +163,7 @@ const seedContacts: Contact[] = [
     time: "Yesterday",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=44",
+    category: "completed",
   },
   {
     id: "rafi",
@@ -165,6 +173,7 @@ const seedContacts: Contact[] = [
     time: "Dec 20, 2024",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=16",
+    category: "completed",
   },
   {
     id: "wenston",
@@ -174,6 +183,29 @@ const seedContacts: Contact[] = [
     time: "Dec 18, 2024",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=17",
+    category: "completed",
+  },
+  {
+    id: "warehouse-atl",
+    name: "ATL Hub Receiving",
+    role: "Warehouse",
+    company: "Anderoute Atlanta Hub",
+    preview: "Dock 4 open at 14:00.",
+    time: "Yesterday",
+    unread: 0,
+    avatar: "https://i.pravatar.cc/80?img=58",
+    category: "dispatch",
+  },
+  {
+    id: "broker-jane",
+    name: "Jane Whitlow",
+    role: "Broker",
+    company: "Whitlow Logistics",
+    preview: "Confirmed rate on lane.",
+    time: "Yesterday",
+    unread: 0,
+    avatar: "https://i.pravatar.cc/80?img=49",
+    category: "active_loads",
   },
 ];
 
