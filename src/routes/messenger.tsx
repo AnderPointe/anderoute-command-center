@@ -34,7 +34,20 @@ export const Route = createFileRoute("/messenger")({
   component: MessengerPage,
 });
 
-type Role = "Carrier" | "Driver" | "Broker" | "Dispatcher" | "Customer";
+type Role =
+  | "Carrier"
+  | "Driver"
+  | "Broker"
+  | "Dispatcher"
+  | "Customer"
+  | "Warehouse";
+
+type Category =
+  | "pinned"
+  | "active_loads"
+  | "dispatch"
+  | "invoices"
+  | "completed";
 
 type Contact = {
   id: string;
@@ -47,6 +60,7 @@ type Contact = {
   typing?: boolean;
   company?: string;
   avatar: string;
+  category: Category;
 };
 
 type Message =
@@ -79,6 +93,7 @@ const seedContacts: Contact[] = [
     typing: true,
     company: "PSP Cargo Group",
     avatar: "https://i.pravatar.cc/80?img=12",
+    category: "pinned",
   },
   {
     id: "mate",
@@ -88,6 +103,7 @@ const seedContacts: Contact[] = [
     time: "04:17 PM",
     unread: 4,
     avatar: "https://i.pravatar.cc/80?img=13",
+    category: "active_loads",
   },
   {
     id: "shannon",
@@ -97,6 +113,7 @@ const seedContacts: Contact[] = [
     time: "16:01 PM",
     unread: 2,
     avatar: "https://i.pravatar.cc/80?img=47",
+    category: "active_loads",
   },
   {
     id: "kynie",
@@ -106,6 +123,7 @@ const seedContacts: Contact[] = [
     time: "03:29 PM",
     unread: 3,
     avatar: "https://i.pravatar.cc/80?img=14",
+    category: "dispatch",
   },
   {
     id: "savina",
@@ -115,6 +133,7 @@ const seedContacts: Contact[] = [
     time: "02:11 PM",
     unread: 1,
     avatar: "https://i.pravatar.cc/80?img=45",
+    category: "dispatch",
   },
   {
     id: "marcel",
@@ -124,6 +143,7 @@ const seedContacts: Contact[] = [
     time: "Yesterday",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=15",
+    category: "invoices",
   },
   {
     id: "gilbertine",
@@ -133,6 +153,7 @@ const seedContacts: Contact[] = [
     time: "Yesterday",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=33",
+    category: "dispatch",
   },
   {
     id: "nisa",
@@ -142,6 +163,7 @@ const seedContacts: Contact[] = [
     time: "Yesterday",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=44",
+    category: "completed",
   },
   {
     id: "rafi",
@@ -151,6 +173,7 @@ const seedContacts: Contact[] = [
     time: "Dec 20, 2024",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=16",
+    category: "completed",
   },
   {
     id: "wenston",
@@ -160,6 +183,29 @@ const seedContacts: Contact[] = [
     time: "Dec 18, 2024",
     unread: 0,
     avatar: "https://i.pravatar.cc/80?img=17",
+    category: "completed",
+  },
+  {
+    id: "warehouse-atl",
+    name: "ATL Hub Receiving",
+    role: "Warehouse",
+    company: "Anderoute Atlanta Hub",
+    preview: "Dock 4 open at 14:00.",
+    time: "Yesterday",
+    unread: 0,
+    avatar: "https://i.pravatar.cc/80?img=58",
+    category: "dispatch",
+  },
+  {
+    id: "broker-jane",
+    name: "Jane Whitlow",
+    role: "Broker",
+    company: "Whitlow Logistics",
+    preview: "Confirmed rate on lane.",
+    time: "Yesterday",
+    unread: 0,
+    avatar: "https://i.pravatar.cc/80?img=49",
+    category: "active_loads",
   },
 ];
 
@@ -220,7 +266,30 @@ const roleStyles: Record<Role, string> = {
   Broker: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
   Dispatcher: "bg-sky-500/15 text-sky-300 border border-sky-500/30",
   Customer: "bg-pink-500/15 text-pink-300 border border-pink-500/30",
+  Warehouse: "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30",
 };
+
+type TypeFilter = "all" | "Driver" | "Courier" | "Carrier" | "Broker" | "Customer" | "Warehouse";
+type CategoryFilter = "all" | Category;
+
+const typeFilters: { id: TypeFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "Driver", label: "Drivers" },
+  { id: "Courier", label: "Couriers" },
+  { id: "Carrier", label: "Carriers" },
+  { id: "Broker", label: "Brokers" },
+  { id: "Customer", label: "Customers" },
+  { id: "Warehouse", label: "Warehouses" },
+];
+
+const categoryFilters: { id: CategoryFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "pinned", label: "Pinned" },
+  { id: "active_loads", label: "Active Loads" },
+  { id: "dispatch", label: "Dispatch" },
+  { id: "invoices", label: "Invoices" },
+  { id: "completed", label: "Completed" },
+];
 
 function MessengerPage() {
   return (
@@ -230,13 +299,19 @@ function MessengerPage() {
   );
 }
 
+type Attachment = { name: string; type: string; size?: number };
+
 function Messenger() {
   const [contacts, setContacts] = useState<Contact[]>(seedContacts);
   const [activeId, setActiveId] = useState<string>("harrold");
   const [query, setQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
   const [messagesByContact, setMessagesByContact] =
     useState<Record<string, Message[]>>(seedMessages);
   const [draft, setDraft] = useState("");
+  const [attachment, setAttachment] = useState<Attachment | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const active = contacts.find((c) => c.id === activeId)!;
@@ -244,14 +319,18 @@ function Messenger() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return contacts;
-    return contacts.filter(
-      (c) =>
+    return contacts.filter((c) => {
+      if (typeFilter !== "all" && c.role !== typeFilter) return false;
+      if (categoryFilter !== "all" && c.category !== categoryFilter) return false;
+      if (!q) return true;
+      return (
         c.name.toLowerCase().includes(q) ||
         c.preview.toLowerCase().includes(q) ||
-        c.role.toLowerCase().includes(q),
-    );
-  }, [contacts, query]);
+        c.role.toLowerCase().includes(q) ||
+        (c.company?.toLowerCase().includes(q) ?? false)
+      );
+    });
+  }, [contacts, query, typeFilter, categoryFilter]);
 
   const pinned = filtered.filter((c) => c.pinned);
   const others = filtered.filter((c) => !c.pinned);
@@ -270,31 +349,53 @@ function Messenger() {
     );
   }
 
+  function onPickFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAttachment({ name: file.name, type: file.type || "FILE", size: file.size });
+    toast.success(`Attached ${file.name}`);
+    e.target.value = "";
+  }
+
   function sendMessage() {
     const text = draft.trim();
-    if (!text) return;
+    if (!text && !attachment) return;
     const now = new Date();
-    const time = now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const msg: Message = {
-      id: `m-${Date.now()}`,
-      kind: "text",
-      from: "me",
-      time,
-      text,
-    };
+    const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const newMessages: Message[] = [];
+    if (text) {
+      newMessages.push({
+        id: `m-${Date.now()}`,
+        kind: "text",
+        from: "me",
+        time,
+        text,
+      });
+    }
+    if (attachment) {
+      newMessages.push({
+        id: `m-${Date.now()}-f`,
+        kind: "file",
+        from: "me",
+        time,
+        filename: attachment.name,
+        filetype: attachment.type.split("/").pop()?.toUpperCase() || "FILE",
+      });
+    }
     setMessagesByContact((prev) => ({
       ...prev,
-      [activeId]: [...(prev[activeId] ?? []), msg],
+      [activeId]: [...(prev[activeId] ?? []), ...newMessages],
     }));
     setContacts((prev) =>
       prev.map((c) =>
-        c.id === activeId ? { ...c, preview: text, time: "Now" } : c,
+        c.id === activeId
+          ? { ...c, preview: text || attachment?.name || c.preview, time: "Now" }
+          : c,
       ),
     );
     setDraft("");
+    setAttachment(null);
+    toast.success("Message sent");
   }
 
   return (
@@ -340,6 +441,34 @@ function Messenger() {
               />
             </div>
           </div>
+
+          {/* Type filter chips */}
+          <div className="flex gap-1.5 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {typeFilters.map((f) => (
+              <FilterChip
+                key={f.id}
+                active={typeFilter === f.id}
+                onClick={() => setTypeFilter(f.id)}
+              >
+                {f.label}
+              </FilterChip>
+            ))}
+          </div>
+
+          {/* Category filter chips */}
+          <div className="flex gap-1.5 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {categoryFilters.map((f) => (
+              <FilterChip
+                key={f.id}
+                active={categoryFilter === f.id}
+                onClick={() => setCategoryFilter(f.id)}
+                variant="category"
+              >
+                {f.label}
+              </FilterChip>
+            ))}
+          </div>
+
 
           <div className="flex-1 overflow-y-auto px-3 pb-3">
             {pinned.length > 0 && (
@@ -427,10 +556,36 @@ function Messenger() {
           </div>
 
           {/* Composer */}
-          <div className="border-t border-white/[0.06] p-3">
+          <div className="border-t border-white/[0.06] p-3 space-y-2">
+            {attachment && (
+              <div className="flex items-center gap-3 rounded-xl border border-[#6D35E8]/30 bg-[#6D35E8]/10 px-3 py-2">
+                <div className="grid size-9 place-items-center rounded-lg bg-[#6D35E8]/25 text-[#B79CFF]">
+                  <FileText className="size-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-sm text-white">{attachment.name}</div>
+                  <div className="text-[11px] text-[#8B90A7]">
+                    {attachment.type}
+                    {attachment.size ? ` · ${Math.round(attachment.size / 1024)} KB` : ""}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setAttachment(null)}
+                  className="text-xs text-[#8B90A7] hover:text-white"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
             <div className="flex items-center gap-2 rounded-2xl border border-white/[0.08] bg-[#0D1020] px-3 py-2">
+              <input
+                ref={fileInputRef}
+                type="file"
+                className="hidden"
+                onChange={onPickFile}
+              />
               <button
-                onClick={() => toast.info("Attach file")}
+                onClick={() => fileInputRef.current?.click()}
                 className="grid size-9 place-items-center rounded-lg text-[#8B90A7] hover:bg-white/5 hover:text-white"
               >
                 <Paperclip className="size-4" />
@@ -447,10 +602,16 @@ function Messenger() {
                 placeholder="Write a message…"
                 className="flex-1 bg-transparent px-2 text-sm outline-none placeholder:text-[#8B90A7]"
               />
-              <button className="grid size-9 place-items-center rounded-lg text-[#8B90A7] hover:bg-white/5 hover:text-white">
+              <button
+                onClick={() => toast.info("Emoji picker coming soon")}
+                className="grid size-9 place-items-center rounded-lg text-[#8B90A7] hover:bg-white/5 hover:text-white"
+              >
                 <Smile className="size-4" />
               </button>
-              <button className="grid size-9 place-items-center rounded-lg text-[#8B90A7] hover:bg-white/5 hover:text-white">
+              <button
+                onClick={() => toast.info("Recording voice note…")}
+                className="grid size-9 place-items-center rounded-lg text-[#8B90A7] hover:bg-white/5 hover:text-white"
+              >
                 <Mic className="size-4" />
               </button>
               <button
@@ -461,6 +622,7 @@ function Messenger() {
               </button>
             </div>
           </div>
+
         </section>
       </div>
     </div>
@@ -611,6 +773,34 @@ function IconChip({
     <button
       onClick={onClick}
       className="grid size-9 place-items-center rounded-xl border border-white/[0.08] bg-[#0D1020] text-[#B79CFF] transition-all hover:border-[#6D35E8]/40 hover:bg-[#6D35E8]/15"
+    >
+      {children}
+    </button>
+  );
+}
+
+function FilterChip({
+  children,
+  active,
+  onClick,
+  variant = "type",
+}: {
+  children: React.ReactNode;
+  active: boolean;
+  onClick: () => void;
+  variant?: "type" | "category";
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "shrink-0 rounded-full border px-3 py-1 text-[11px] font-medium transition-all",
+        active
+          ? variant === "category"
+            ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-[#D4C4FF] shadow-[0_0_18px_-6px_rgba(109,53,232,0.7)]"
+            : "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-[#D4C4FF]"
+          : "border-white/[0.08] bg-[#0D1020] text-[#8B90A7] hover:border-white/15 hover:text-white",
+      )}
     >
       {children}
     </button>

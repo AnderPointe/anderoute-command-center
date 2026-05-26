@@ -2737,6 +2737,294 @@ export type Database = {
           },
         ]
       }
+      message_read_receipts: {
+        Row: {
+          id: string
+          message_id: string
+          read_at: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          message_id: string
+          read_at?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          message_id?: string
+          read_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_read_receipts_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messenger_attachments: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_size_bytes: number | null
+          height: number | null
+          id: string
+          message_id: string
+          mime_type: string | null
+          storage_bucket: string
+          storage_path: string
+          width: number | null
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_size_bytes?: number | null
+          height?: number | null
+          id?: string
+          message_id: string
+          mime_type?: string | null
+          storage_bucket?: string
+          storage_path: string
+          width?: number | null
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_size_bytes?: number | null
+          height?: number | null
+          id?: string
+          message_id?: string
+          mime_type?: string | null
+          storage_bucket?: string
+          storage_path?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messenger_attachments_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messenger_contacts: {
+        Row: {
+          avatar_url: string | null
+          company_id: string
+          company_name: string | null
+          contact_type: Database["public"]["Enums"]["messenger_contact_type"]
+          created_at: string
+          display_name: string
+          email: string | null
+          id: string
+          is_online: boolean
+          last_seen_at: string | null
+          metadata: Json
+          phone: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          company_id: string
+          company_name?: string | null
+          contact_type?: Database["public"]["Enums"]["messenger_contact_type"]
+          created_at?: string
+          display_name: string
+          email?: string | null
+          id?: string
+          is_online?: boolean
+          last_seen_at?: string | null
+          metadata?: Json
+          phone?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          company_id?: string
+          company_name?: string | null
+          contact_type?: Database["public"]["Enums"]["messenger_contact_type"]
+          created_at?: string
+          display_name?: string
+          email?: string | null
+          id?: string
+          is_online?: boolean
+          last_seen_at?: string | null
+          metadata?: Json
+          phone?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messenger_contacts_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messenger_conversation_participants: {
+        Row: {
+          contact_id: string | null
+          conversation_id: string
+          id: string
+          is_muted: boolean
+          joined_at: string
+          user_id: string | null
+        }
+        Insert: {
+          contact_id?: string | null
+          conversation_id: string
+          id?: string
+          is_muted?: boolean
+          joined_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          contact_id?: string | null
+          conversation_id?: string
+          id?: string
+          is_muted?: boolean
+          joined_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messenger_conversation_participants_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messenger_conversation_participants_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messenger_conversations: {
+        Row: {
+          category: Database["public"]["Enums"]["messenger_conversation_category"]
+          company_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          is_pinned: boolean
+          last_message_at: string | null
+          last_message_preview: string | null
+          load_id: string | null
+          order_ref: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["messenger_conversation_category"]
+          company_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_pinned?: boolean
+          last_message_at?: string | null
+          last_message_preview?: string | null
+          load_id?: string | null
+          order_ref?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["messenger_conversation_category"]
+          company_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_pinned?: boolean
+          last_message_at?: string | null
+          last_message_preview?: string | null
+          load_id?: string | null
+          order_ref?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messenger_conversations_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messenger_messages: {
+        Row: {
+          body: string | null
+          conversation_id: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          is_system: boolean
+          reply_to_id: string | null
+          sender_contact_id: string | null
+          sender_user_id: string | null
+        }
+        Insert: {
+          body?: string | null
+          conversation_id: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          is_system?: boolean
+          reply_to_id?: string | null
+          sender_contact_id?: string | null
+          sender_user_id?: string | null
+        }
+        Update: {
+          body?: string | null
+          conversation_id?: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          is_system?: boolean
+          reply_to_id?: string | null
+          sender_contact_id?: string | null
+          sender_user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messenger_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messenger_messages_reply_to_id_fkey"
+            columns: ["reply_to_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messenger_messages_sender_contact_id_fkey"
+            columns: ["sender_contact_id"]
+            isOneToOne: false
+            referencedRelation: "messenger_contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mobile_device_sessions: {
         Row: {
           app_version: string | null
@@ -4732,6 +5020,10 @@ export type Database = {
         Args: { _company_id: string; _user_id: string }
         Returns: boolean
       }
+      is_conversation_participant: {
+        Args: { _conversation_id: string; _user_id: string }
+        Returns: boolean
+      }
       is_customer_user: {
         Args: { _customer_id: string; _user_id: string }
         Returns: boolean
@@ -4830,6 +5122,22 @@ export type Database = {
         | "prompt"
         | "restricted"
         | "unknown"
+      messenger_contact_type:
+        | "driver"
+        | "courier"
+        | "carrier"
+        | "broker"
+        | "customer"
+        | "warehouse"
+        | "dispatcher"
+        | "other"
+      messenger_conversation_category:
+        | "pinned"
+        | "active_loads"
+        | "dispatch"
+        | "invoices"
+        | "completed"
+        | "general"
       offer_response: "pending" | "accepted" | "denied" | "expired"
       route_status: "planned" | "active" | "completed"
       tracking_mode:
@@ -5072,6 +5380,24 @@ export const Constants = {
         "prompt",
         "restricted",
         "unknown",
+      ],
+      messenger_contact_type: [
+        "driver",
+        "courier",
+        "carrier",
+        "broker",
+        "customer",
+        "warehouse",
+        "dispatcher",
+        "other",
+      ],
+      messenger_conversation_category: [
+        "pinned",
+        "active_loads",
+        "dispatch",
+        "invoices",
+        "completed",
+        "general",
       ],
       offer_response: ["pending", "accepted", "denied", "expired"],
       route_status: ["planned", "active", "completed"],
