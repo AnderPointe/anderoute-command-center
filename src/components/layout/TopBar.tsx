@@ -4,13 +4,13 @@ import {
   Plus,
   Bell,
   Filter,
-  Moon,
-  Sun,
   ChevronDown,
   Radio,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LiquidGlassToggle } from "@/components/ui/liquid-glass-toggle";
 import { alerts } from "@/data/mock";
+
 
 export function TopBar() {
   const [dark, setDark] = useState(false);
