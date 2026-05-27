@@ -55,7 +55,7 @@ function SystemBubble({ m }: { m: Extract<Message, { kind: "system" }> }) {
   return (
     <div className="flex justify-center">
       <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[11px] text-muted-foreground">
-        <Icon className="size-3 text-primary" />
+        <span className="text-primary"><Icon className="size-3" /></span>
         {m.text}
       </div>
     </div>
