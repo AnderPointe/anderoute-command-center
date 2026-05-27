@@ -115,8 +115,8 @@ export function MessengerAvatar({
       {online !== undefined && (
         <span
           className={cn(
-            "absolute -bottom-0.5 -right-0.5 size-2.5 rounded-full ring-2 ring-[#101326]",
-            online ? "bg-[#22C55E]" : "bg-[#8B90A7]",
+            "absolute -bottom-0.5 -right-0.5 size-2.5 rounded-full ring-2 ring-background",
+            online ? "bg-success" : "bg-muted-foreground",
           )}
         />
       )}
