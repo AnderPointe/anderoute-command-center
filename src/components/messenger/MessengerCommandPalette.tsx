@@ -63,7 +63,7 @@ export function MessengerCommandPalette({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
-          <Search className="size-4 text-muted-foreground" />
+          <span className="text-muted-foreground"><Search className="size-4" /></span>
           <input
             autoFocus
             value={q}
