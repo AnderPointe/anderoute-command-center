@@ -192,21 +192,21 @@ export function MessengerInputBar({
         <button
           onClick={() => fileInputRef.current?.click()}
           title="Attach POD or file"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <Paperclip className="size-4" />
         </button>
         <button
           onClick={() => toast.info("Mention…")}
           title="Mention"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <AtSign className="size-4" />
         </button>
         <button
           onClick={() => toast.success("Live location shared")}
           title="Share location"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <MapPin className="size-4" />
         </button>
@@ -225,21 +225,21 @@ export function MessengerInputBar({
         <button
           onClick={() => toast.info("Emoji picker coming soon")}
           title="Emoji"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <Smile className="size-4" />
         </button>
         <button
           onClick={() => toast.info("Recording voice note…")}
           title="Voice note"
-          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-white/5 hover:text-foreground"
+          className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <Mic className="size-4" />
         </button>
         <button
           onClick={onSend}
           title="Send"
-          className="grid size-9 place-items-center rounded-xl bg-[#6D35E8] text-foreground shadow-[0_8px_30px_-8px_rgba(109,53,232,0.7)] hover:bg-[#7c47ee]"
+          className="grid size-9 place-items-center rounded-xl bg-primary text-foreground shadow-[0_8px_30px_-8px_color-mix(in_oklab,var(--primary)_70%,transparent)] hover:bg-primary/90"
         >
           <Send className="size-4" />
         </button>
