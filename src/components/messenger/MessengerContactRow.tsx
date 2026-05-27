@@ -36,7 +36,7 @@ export function MessengerContactRow({
           <span className="truncate text-[13px] font-semibold text-foreground">
             {isChannel ? c.name : c.name}
           </span>
-          {c.pinned && <Pin className="size-3 text-primary" />}
+          {c.pinned && <span className="text-primary"><Pin className="size-3" /></span>}
           {!isChannel && !isLoad && (
             <span
               className={cn(
