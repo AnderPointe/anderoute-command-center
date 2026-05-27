@@ -68,7 +68,7 @@ export function MessengerContactRow({
         </p>
         <div className="mt-1 flex flex-wrap items-center gap-1">
           {c.linkedLoad && (
-            <span className="inline-flex items-center gap-1 rounded-md border border-[#F97316]/30 bg-[#F97316]/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-300">
+            <span className="inline-flex items-center gap-1 rounded-md border border-orange/30 bg-orange/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange">
               <Truck className="size-2.5" />
               {c.linkedLoad.id}
             </span>
