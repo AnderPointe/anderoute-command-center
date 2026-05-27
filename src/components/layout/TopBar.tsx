@@ -8,7 +8,7 @@ import {
   Radio,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LiquidGlassToggle } from "@/components/ui/liquid-glass-toggle";
+import { PremiumToggle } from "@/components/ui/premium-toggle";
 import { alerts } from "@/data/mock";
 
 
@@ -59,7 +59,7 @@ export function TopBar() {
 
         <div className="h-6 w-px bg-border mx-1 hidden md:block" />
 
-        <LiquidGlassToggle
+        <PremiumToggle
           checked={dark}
           onChange={setDark}
           aria-label="Toggle dark mode"
