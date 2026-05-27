@@ -71,7 +71,7 @@ export function MessengerCommandPalette({
             placeholder="Search drivers, loads, customers, channels…"
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
           />
-          <span className="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[10px] text-muted-foreground">
+          <span className="rounded border border-border/60 bg-muted/50 px-1.5 py-0.5 text-[10px] text-muted-foreground">
             ESC
           </span>
         </div>

@@ -31,8 +31,8 @@ function ReactionsRow({ reactions }: { reactions: Reaction[] }) {
           className={cn(
             "flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] transition-colors",
             r.mine
-              ? "border-[#6D35E8]/50 bg-[#6D35E8]/20 text-primary"
-              : "border-white/10 bg-white/[0.04] text-muted-foreground hover:text-foreground",
+              ? "border-primary/50 bg-primary/20 text-primary"
+              : "border-border/60 bg-muted/40 text-muted-foreground hover:text-foreground",
           )}
         >
           <span>{r.emoji}</span>
@@ -41,7 +41,7 @@ function ReactionsRow({ reactions }: { reactions: Reaction[] }) {
       ))}
       <button
         onClick={() => toast.info("Add reaction")}
-        className="grid size-6 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground hover:text-foreground"
+        className="grid size-6 place-items-center rounded-full border border-border/60 bg-muted/40 text-muted-foreground hover:text-foreground"
       >
         <Smile className="size-3" />
       </button>
@@ -54,7 +54,7 @@ function SystemBubble({ m }: { m: Extract<Message, { kind: "system" }> }) {
     m.icon === "alert" ? AlertTriangle : m.icon === "check" ? CheckCircle2 : Info;
   return (
     <div className="flex justify-center">
-      <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[11px] text-muted-foreground">
+      <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-[11px] text-muted-foreground">
         <span className="text-primary"><Icon className="size-3" /></span>
         {m.text}
       </div>
