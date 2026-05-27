@@ -146,8 +146,8 @@ function LoadStatusBubble({
   m: Extract<Message, { kind: "load_status" }>;
 }) {
   return (
-    <div className="w-[260px] rounded-2xl border border-[#F97316]/30 bg-[#F97316]/10 p-3">
-      <div className="mb-1 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-orange-300">
+    <div className="w-[260px] rounded-2xl border border-orange/30 bg-orange/10 p-3">
+      <div className="mb-1 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-orange">
         <Truck className="size-3.5" />
         {m.loadId} · {m.status}
       </div>
