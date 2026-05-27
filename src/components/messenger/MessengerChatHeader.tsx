@@ -113,12 +113,12 @@ export function MessengerChatHeader({
                     setMenuOpen(false);
                     toast.success(`Snoozed for ${s.label}`);
                   }}
-                  className="block w-full px-3 py-1.5 text-left text-[12px] text-foreground hover:bg-white/5"
+                  className="block w-full px-3 py-1.5 text-left text-[12px] text-foreground hover:bg-muted"
                 >
                   {s.label}
                 </button>
               ))}
-              <div className="border-b border-t border-white/[0.06] px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <div className="border-b border-t border-border/60 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                 <BellOff className="mr-1 inline size-3" /> Notifications
               </div>
               {NOTIFICATION_LEVELS.map((lvl) => (
@@ -130,7 +130,7 @@ export function MessengerChatHeader({
                     toast.success(`Notifications: ${lvl}`);
                   }}
                   className={cn(
-                    "block w-full px-3 py-1.5 text-left text-[12px] hover:bg-white/5",
+                    "block w-full px-3 py-1.5 text-left text-[12px] hover:bg-muted",
                     notifLevel === lvl ? "text-primary" : "text-foreground",
                   )}
                 >
