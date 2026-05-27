@@ -78,7 +78,7 @@ export function MessengerInputBar({
   }
 
   return (
-    <div className="border-t border-white/[0.06] p-3 space-y-2">
+    <div className="border-t border-border/60 p-3 space-y-2">
       {attachment && (
         <MessengerAttachmentCard
           variant="composer"
@@ -99,7 +99,7 @@ export function MessengerInputBar({
           <button
             key={s}
             onClick={() => applySuggestion(s)}
-            className="rounded-full border border-[#6D35E8]/30 bg-[#6D35E8]/10 px-2.5 py-0.5 text-[11px] text-primary hover:bg-[#6D35E8]/25"
+            className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[11px] text-primary hover:bg-primary/25"
           >
             {s}
           </button>
@@ -119,7 +119,7 @@ export function MessengerInputBar({
                 onDraftChange(s);
                 setTimeout(onSend, 0);
               }}
-              className="rounded-full border border-[#22C55E]/30 bg-[#22C55E]/10 px-2.5 py-0.5 text-[11px] text-success hover:bg-[#22C55E]/20"
+              className="rounded-full border border-success/30 bg-success/10 px-2.5 py-0.5 text-[11px] text-success hover:bg-success/20"
             >
               {s}
             </button>

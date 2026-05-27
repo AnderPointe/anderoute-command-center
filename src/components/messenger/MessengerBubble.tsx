@@ -240,7 +240,7 @@ export function MessengerBubble({ m }: { m: Message }) {
                 key={label}
                 title={label}
                 onClick={() => toast.success(label)}
-                className="grid size-6 place-items-center rounded-full text-muted-foreground hover:bg-white/10 hover:text-foreground"
+                className="grid size-6 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
               >
                 <Icon className="size-3" />
               </button>
@@ -255,7 +255,7 @@ export function MessengerBubble({ m }: { m: Message }) {
         {m.threadCount && m.threadCount > 0 ? (
           <button
             onClick={() => toast.info("Open thread")}
-            className="mt-1 inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-primary hover:text-foreground"
+            className="mt-1 inline-flex items-center gap-1 rounded-full border border-border/60 bg-muted/50 px-2 py-0.5 text-[11px] text-primary hover:text-foreground"
           >
             <MessageSquare className="size-3" />
             {m.threadCount} replies
