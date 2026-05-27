@@ -4,14 +4,14 @@
   --handle-size: 1.5em;
   --track-height: 0.9em;
 
-  --off-light: #e2e8f0;
-  --off-dark: #94a3b8;
-  --off-shadow: #64748b;
+  --off-light: color-mix(in oklab, var(--muted) 80%, white);
+  --off-dark: var(--muted-foreground);
+  --off-shadow: color-mix(in oklab, var(--muted-foreground) 60%, black);
 
-  --on-primary: #3f5efb;
-  --on-secondary: #fc466b;
-  --on-highlight: #5e72eb;
-  --on-shadow: #333;
+  --on-primary: var(--primary);
+  --on-secondary: var(--accent);
+  --on-highlight: color-mix(in oklab, var(--primary) 70%, white);
+  --on-shadow: color-mix(in oklab, var(--primary) 60%, black);
 
   position: relative;
   display: inline-block;
