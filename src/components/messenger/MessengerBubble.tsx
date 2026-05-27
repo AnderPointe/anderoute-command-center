@@ -127,7 +127,7 @@ function LocationBubble({
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <span className="absolute -inset-3 animate-ping rounded-full bg-[#14B8A6]/30" />
-          <MapPin className="relative size-5 text-teal drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
+          <span className="relative text-teal drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]"><MapPin className="size-5" /></span>
         </div>
       </div>
       <div className="bg-[#1A1E33] px-3 py-2">
