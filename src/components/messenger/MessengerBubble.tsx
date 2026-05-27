@@ -197,12 +197,12 @@ export function MessengerBubble({ m }: { m: Message }) {
               className={cn(
                 "rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-lg",
                 mine
-                  ? "bg-[#6D35E8] text-foreground shadow-[0_10px_30px_-12px_rgba(109,53,232,0.7)]"
-                  : "border border-white/[0.08] bg-[#1A1E33] text-foreground",
+                  ? "bg-primary text-foreground shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--primary)_70%,transparent)]"
+                  : "border border-border/60 bg-card text-foreground",
               )}
             >
               {m.quote && (
-                <div className="mb-2 border-l-2 border-white/40 pl-2 text-[12px] opacity-90">
+                <div className="mb-2 border-l-2 border-primary-foreground/40 pl-2 text-[12px] opacity-90">
                   <div className="font-semibold">{m.quote.name}</div>
                   <div className="opacity-90">{m.quote.text}</div>
                 </div>
