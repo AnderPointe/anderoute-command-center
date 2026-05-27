@@ -115,7 +115,7 @@ export function MessengerContextPanel({ active }: { active: Contact }) {
                 k="GPS"
                 v={
                   <span className="inline-flex items-center gap-1">
-                    <MapPin className="size-3 text-teal" />
+                    <span className="text-teal"><MapPin className="size-3" /></span>
                     Round Rock, TX
                   </span>
                 }

@@ -55,7 +55,7 @@ function SystemBubble({ m }: { m: Extract<Message, { kind: "system" }> }) {
   return (
     <div className="flex justify-center">
       <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[11px] text-muted-foreground">
-        <Icon className="size-3 text-primary" />
+        <span className="text-primary"><Icon className="size-3" /></span>
         {m.text}
       </div>
     </div>
@@ -127,7 +127,7 @@ function LocationBubble({
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <span className="absolute -inset-3 animate-ping rounded-full bg-[#14B8A6]/30" />
-          <MapPin className="relative size-5 text-teal drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
+          <span className="relative text-teal drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]"><MapPin className="size-5" /></span>
         </div>
       </div>
       <div className="bg-[#1A1E33] px-3 py-2">
@@ -176,7 +176,7 @@ export function MessengerBubble({ m }: { m: Message }) {
             <span className="font-semibold text-foreground/80">{m.authorName}</span>
           )}
           <span>{m.time}</span>
-          {m.pinned && <Pin className="size-3 text-primary" />}
+          {m.pinned && <span className="text-primary"><Pin className="size-3" /></span>}
           {m.edited && <span className="italic">edited</span>}
           {m.priority && m.priority !== "normal" && (
             <span
@@ -188,7 +188,7 @@ export function MessengerBubble({ m }: { m: Message }) {
               {m.priority}
             </span>
           )}
-          {mine && <CheckCheck className="size-3 text-primary" />}
+          {mine && <span className="text-primary"><CheckCheck className="size-3" /></span>}
         </div>
 
         <div className="relative">
