@@ -330,7 +330,7 @@ export async function loadThemePermissions(
     .select("role_id, roles(role_key)")
     .eq("user_id", auth.user.id)
     .eq("company_id", companyId);
-  const roleList = (roles ?? []).map((r) => r.role as string);
+  const roleList = (roles ?? []).map((r) => r.roles?.role_key as string);
   const role = roleList[0] ?? null;
   const canPublish = roleList.some((r) => PUBLISH_ROLES.has(r));
   const canEdit = canPublish;
