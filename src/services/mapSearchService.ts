@@ -1,27 +1,26 @@
 /**
- * mapSearchService — local and future geocoding search.
+ * mapSearchService — search helpers for drivers, POIs, and Google Places.
  *
- * Production geocoding should use self-hosted Nominatim, Pelias, Photon,
- * or a proper geocoding provider.
+ * Google Places Autocomplete is attached directly to the search input via
+ * google.maps.places.Autocomplete in the map component. This service handles
+ * local data search (drivers, POIs) as a complement.
  */
 
 import type { MapSearchResult, LiveDriverLocation, MapPoi } from "@/types/map";
 
 /**
- * Search drivers and POIs locally.
- * If no match is found, returns a placeholder indicating geocoding is not connected.
+ * Search local drivers and POIs.
+ * Returns matches ranked by relevance.
  */
-export async function searchMapLocation(
+export function searchLocal(
   query: string,
   drivers: LiveDriverLocation[],
   pois: MapPoi[],
-): Promise<MapSearchResult[]> {
+): MapSearchResult[] {
   if (!query.trim()) return [];
-
   const q = query.toLowerCase();
   const results: MapSearchResult[] = [];
 
-  // Search drivers
   for (const d of drivers) {
     if (
       d.driver_name?.toLowerCase().includes(q) ||
@@ -40,7 +39,6 @@ export async function searchMapLocation(
     }
   }
 
-  // Search POIs
   for (const p of pois) {
     if (
       p.name.toLowerCase().includes(q) ||
@@ -60,15 +58,8 @@ export async function searchMapLocation(
     }
   }
 
-  if (results.length === 0) {
-    // Placeholder — real geocoding not connected yet
-    results.push({
-      id: "geocode-placeholder",
-      label: "Geocoding provider not connected yet.",
-      type: "location",
-      meta: "Connect Nominatim, Pelias, or Photon for address search.",
-    });
-  }
-
   return results;
 }
+
+// Re-export type for convenience
+export type { MapSearchResult };

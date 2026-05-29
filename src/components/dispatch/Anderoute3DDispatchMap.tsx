@@ -1,17 +1,40 @@
 /**
- * Anderoute3DDispatchMap — the primary MapLibre GL-powered logistics intelligence map.
+ * Anderoute3DDispatchMap — Google Maps-powered logistics intelligence map.
  *
- * For production, replace the demo style with OpenMapTiles, OpenFreeMap, or another
- * OpenStreetMap-based vector tile provider. Public demo tiles are not for production scale.
+ * Uses the Google Maps JavaScript API (v=beta) with:
+ *   • AdvancedMarkerElement (when Map ID is configured, falls back to standard Marker)
+ *   • google.maps.places.Autocomplete for address/POI search
+ *   • google.maps.Polygon for geofence overlays
+ *   • TrafficLayer for real-time traffic
+ *   • Tilt (45°) for 3D perspective view
+ *   • Logistics-optimised dark style (applied when no Map ID is used)
  *
- * The map style controls which road layers are visible. A production Anderoute logistics
- * style should emphasize highways, interstates, industrial roads, warehouses, ports,
- * airports, and truck routes.
+ * Required env:
+ *   VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY — Maps JS API key
+ *
+ * Optional env:
+ *   VITE_GOOGLE_MAPS_MAP_ID — Map ID for AdvancedMarkerElement and Cloud-based
+ *   styling. When set, Cloud Console dark style replaces the inline DARK_LOGISTICS_STYLE.
+ *   When not set, inline dark styles are applied and standard Markers are used.
+ *
+ * Note: `styles` and `mapId` are mutually exclusive in the Google Maps JS API.
+ * Set VITE_GOOGLE_MAPS_MAP_ID and configure dark styling in Cloud Console for
+ * production deployments that require AdvancedMarkerElement.
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Plus, Minus, Compass, Maximize2, Wifi, WifiOff, Loader2, Building2 } from "lucide-react";
+import {
+  Plus,
+  Minus,
+  Compass,
+  Maximize2,
+  Wifi,
+  WifiOff,
+  Loader2,
+  Building2,
+  Layers,
+} from "lucide-react";
 
 import { useLiveDriverLocations } from "@/hooks/useLiveDriverLocations";
 import { useLogisticsMapPois } from "@/hooks/useLogisticsMapPois";
@@ -21,16 +44,10 @@ import { useMapGeofences } from "@/hooks/useMapGeofences";
 
 import { MapLayerControlPanel } from "./MapLayerControlPanel";
 import { MapPoiPanel } from "./MapPoiPanel";
-import { MapSearchPanel } from "./MapSearchPanel";
 import { MapSavedViewsPanel } from "./MapSavedViewsPanel";
 import { MapGeofencePanel } from "./MapGeofencePanel";
 import { SelectedMapObjectCard } from "./SelectedMapObjectCard";
-import { driverMarkerSvg, poiMarkerSvg } from "./poiHelpers";
-import {
-  getMapStyleUrl,
-  build3dBuildingsLayer,
-  build3dBuildingsLayerAlt,
-} from "@/services/mapStyleService";
+import { POI_CATEGORY_META } from "./poiHelpers";
 
 import type {
   LayerKey,
@@ -38,12 +55,122 @@ import type {
   MapGeofence,
   MapPoi,
   MapSavedView,
-  MapSearchResult,
   PoiCategory,
   SelectedObjectType,
 } from "@/types/map";
 
-// ─── Status color map ─────────────────────────────────────────────────────────
+// ─── Google Maps loader ───────────────────────────────────────────────────────
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    google: any;
+    __anderouteGmInit?: () => void;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type GMap = any;
+
+let gmPromise: Promise<void> | null = null;
+
+function loadGoogleMaps(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if (window.google?.maps?.Map) return Promise.resolve();
+  if (gmPromise) return gmPromise;
+
+  const key = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY as string | undefined;
+  const channel = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID as
+    | string
+    | undefined;
+
+  if (!key) {
+    return Promise.reject(
+      new Error(
+        "VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY is not set. " +
+          "Add your Google Maps API key in project settings.",
+      ),
+    );
+  }
+
+  gmPromise = new Promise<void>((resolve, reject) => {
+    window.__anderouteGmInit = () => {
+      if (window.google?.maps) {
+        resolve();
+      } else {
+        reject(new Error("Google Maps loaded but google.maps is unavailable."));
+      }
+    };
+    const s = document.createElement("script");
+    s.src = [
+      `https://maps.googleapis.com/maps/api/js?key=${key}`,
+      `v=beta`,
+      `libraries=marker,places`,
+      `callback=__anderouteGmInit`,
+      channel ? `channel=${channel}` : "",
+    ]
+      .filter(Boolean)
+      .join("&");
+    s.async = true;
+    s.defer = true;
+    s.onerror = () => {
+      gmPromise = null;
+      reject(
+        new Error(
+          "Google Maps script failed to load. Check your API key and referrer restrictions.",
+        ),
+      );
+    };
+    document.head.appendChild(s);
+  });
+
+  return gmPromise;
+}
+
+// ─── Logistics dark map style (used when mapId is NOT configured) ─────────────
+// Emphasises interstates and highways for truck route visibility.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DARK_LOGISTICS_STYLE: any[] = [
+  { elementType: "geometry", stylers: [{ color: "#0b1526" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#0b1526" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#6b8099" }] },
+  {
+    featureType: "administrative.country",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#1e3a5f" }],
+  },
+  { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#0f1e33" }] },
+  { featureType: "road", elementType: "geometry", stylers: [{ color: "#1a2d48" }] },
+  { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#20364f" }] },
+  { featureType: "road.local", elementType: "geometry", stylers: [{ color: "#162540" }] },
+  // Highways teal — truck route visibility
+  { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#2a4a6e" }] },
+  {
+    featureType: "road.highway",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#14b8a6" }],
+  },
+  {
+    featureType: "road.highway.controlled_access",
+    elementType: "geometry",
+    stylers: [{ color: "#1d5c8f" }],
+  },
+  {
+    featureType: "road.highway.controlled_access",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#38d9c8" }],
+  },
+  { featureType: "poi", stylers: [{ visibility: "off" }] },
+  { featureType: "transit", elementType: "geometry", stylers: [{ color: "#0f1e33" }] },
+  { featureType: "water", elementType: "geometry", stylers: [{ color: "#060e1c" }] },
+  {
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#1e4068" }],
+  },
+];
+
+// ─── Status colors ─────────────────────────────────────────────────────────────
 
 const STATUS_COLORS: Record<string, string> = {
   driving: "#14b8a6",
@@ -51,24 +178,49 @@ const STATUS_COLORS: Record<string, string> = {
   loading: "#3b82f6",
   unloading: "#8b5cf6",
   break: "#f97316",
-  offline: "#6b7280",
+  offline: "#475569",
 };
 
-// ─── MapLibre dynamic import helper ───────────────────────────────────────────
+// ─── Marker content builders ──────────────────────────────────────────────────
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type MapLibreMap = any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type MapLibreMarker = any;
+function createDriverContent(driver: LiveDriverLocation, selected: boolean): HTMLElement {
+  const color = STATUS_COLORS[driver.status] ?? "#475569";
+  const size = selected ? 40 : 30;
+  const ring = selected ? `box-shadow:0 0 0 3px ${color}40,0 0 12px ${color}60;` : "";
+  const opacity = driver.is_stale ? "0.45" : "1";
+  const heading = driver.heading ?? 0;
 
-let maplibrePromise: Promise<typeof import("maplibre-gl")> | null = null;
+  const el = document.createElement("div");
+  el.style.cssText = `
+    width:${size}px;height:${size}px;border-radius:50%;
+    background:${color};border:2px solid white;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;${ring}opacity:${opacity};
+    transition:transform 0.2s;transform:scale(${selected ? 1.15 : 1});
+  `;
+  el.innerHTML = `
+    <svg width="${size * 0.55}" height="${size * 0.55}" viewBox="0 0 12 12"
+         style="transform:rotate(${heading}deg)" fill="none">
+      <polygon points="6,1 9.5,10 6,8 2.5,10" fill="white" opacity="0.95"/>
+    </svg>`;
+  return el;
+}
 
-function loadMapLibre() {
-  if (typeof window === "undefined") return null;
-  if (!maplibrePromise) {
-    maplibrePromise = import("maplibre-gl");
-  }
-  return maplibrePromise;
+function createPoiContent(poi: MapPoi, selected: boolean): HTMLElement {
+  const meta = POI_CATEGORY_META[poi.category] ?? POI_CATEGORY_META.custom;
+  const size = selected ? 38 : 30;
+  const ring = selected ? `box-shadow:0 0 0 3px ${meta.color}50,0 0 10px ${meta.color}60;` : "";
+
+  const el = document.createElement("div");
+  el.style.cssText = `
+    width:${size}px;height:${size}px;border-radius:${selected ? "10px" : "8px"};
+    background:${meta.color};border:2px solid white;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:${size * 0.45}px;line-height:1;${ring}
+    transition:transform 0.2s;transform:scale(${selected ? 1.15 : 1});
+  `;
+  el.textContent = meta.emoji;
+  return el;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -76,20 +228,24 @@ function loadMapLibre() {
 interface Props {
   className?: string;
   compact?: boolean;
-  onSelectDriver?: (driver: LiveDriverLocation) => void;
 }
 
 export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<MapLibreMap>(null);
-  const driverMarkersRef = useRef<Map<string, MapLibreMarker>>(new Map());
-  const poiMarkersRef = useRef<Map<string, MapLibreMarker>>(new Map());
-  const buildings3dAddedRef = useRef(false);
-  const geofencesAddedRef = useRef(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const mapRef = useRef<GMap>(null);
+  const trafficLayerRef = useRef<GMap>(null);
+  const driverMarkersRef = useRef<Map<string, GMap>>(new Map());
+  const poiMarkersRef = useRef<Map<string, GMap>>(new Map());
+  const geofencePolygonsRef = useRef<GMap[]>([]);
+  const usingAdvancedMarkers = useRef(false);
+
   const [mapReady, setMapReady] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
-  const [buildings3dSupported, setBuildings3dSupported] = useState<boolean | null>(null);
   const [currentViewId, setCurrentViewId] = useState<string | null>("usa");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [is3D, setIs3D] = useState(false);
 
   const [selectedObj, setSelectedObj] = useState<{
     type: SelectedObjectType;
@@ -100,421 +256,459 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
     new Set<PoiCategory>(["depot", "warehouse", "truck_stop", "airport", "fuel"]),
   );
 
-  // ─── Hooks ────────────────────────────────────────────────────────────────
-
   const { drivers, loading: driversLoading, realtimeStatus } = useLiveDriverLocations();
   const { pois, loading: poisLoading } = useLogisticsMapPois();
   const { layers, toggleLayer, isEnabled, applyViewLayerSettings } = useMapLayerPreferences();
   const { views, loading: viewsLoading } = useMapSavedViews();
   const { geofences, loading: geofencesLoading } = useMapGeofences();
 
-  // ─── Init map ─────────────────────────────────────────────────────────────
+  // ─── Init map ───────────────────────────────────────────────────────────────
 
   useEffect(() => {
     if (typeof window === "undefined" || !mapContainerRef.current) return;
     let cancelled = false;
 
-    const styleUrl = getMapStyleUrl();
+    const mapId = import.meta.env.VITE_GOOGLE_MAPS_MAP_ID as string | undefined;
 
-    loadMapLibre()
-      ?.then((maplibre) => {
-        if (cancelled || !mapContainerRef.current) return;
+    loadGoogleMaps()
+      .then(() => {
+        if (cancelled || !mapContainerRef.current || !window.google?.maps?.Map) return;
+        const g = window.google.maps;
 
-        const map = new maplibre.Map({
-          container: mapContainerRef.current,
-          style: styleUrl,
-          center: [-98.5795, 39.8283],
-          zoom: 3.5,
-          pitch: 35,
-          bearing: 0,
-          attributionControl: false,
-        });
+        // When mapId is provided use it (Cloud styling + AdvancedMarker support).
+        // When not provided use inline dark styles — styles and mapId are mutually exclusive.
+        const mapOptions: Record<string, unknown> = {
+          center: { lat: 39.8283, lng: -98.5795 },
+          zoom: 4,
+          disableDefaultUI: true,
+          gestureHandling: "greedy",
+          backgroundColor: "#0b1526",
+        };
 
+        if (mapId) {
+          mapOptions.mapId = mapId;
+        } else {
+          mapOptions.styles = DARK_LOGISTICS_STYLE;
+        }
+
+        const map: GMap = new g.Map(mapContainerRef.current, mapOptions);
         mapRef.current = map;
 
-        map.on("load", () => {
-          if (cancelled) return;
-          setMapReady(true);
-          geofencesAddedRef.current = false;
-          buildings3dAddedRef.current = false;
-        });
+        // Determine marker strategy
+        usingAdvancedMarkers.current = !!(mapId && g.marker?.AdvancedMarkerElement);
 
-        map.on("error", (e: { error?: { message?: string } }) => {
-          // Non-fatal tile errors are common with demo tiles — swallow them
-          if (e?.error?.message?.includes("tiles")) return;
-          console.warn("[Anderoute Map]", e?.error?.message);
-        });
+        try {
+          trafficLayerRef.current = new g.TrafficLayer();
+        } catch {
+          // TrafficLayer unavailable — skip silently
+        }
+
+        setMapReady(true);
       })
-      .catch((e) => {
-        setMapError(e?.message ?? "Failed to initialize map.");
+      .catch((e: Error) => {
+        if (!cancelled) setMapError(e?.message ?? "Failed to load Google Maps");
       });
 
     const driverMarkers = driverMarkersRef.current;
     const poiMarkers = poiMarkersRef.current;
     return () => {
       cancelled = true;
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-        setMapReady(false);
-        buildings3dAddedRef.current = false;
-        geofencesAddedRef.current = false;
-        driverMarkers.clear();
-        poiMarkers.clear();
+      for (const m of driverMarkers.values()) {
+        try {
+          if (usingAdvancedMarkers.current) {
+            m.map = null;
+          } else {
+            m.setMap(null);
+          }
+        } catch {
+          /* ignore */
+        }
       }
+      for (const m of poiMarkers.values()) {
+        try {
+          if (usingAdvancedMarkers.current) {
+            m.map = null;
+          } else {
+            m.setMap(null);
+          }
+        } catch {
+          /* ignore */
+        }
+      }
+      driverMarkers.clear();
+      poiMarkers.clear();
+      mapRef.current = null;
+      setMapReady(false);
     };
   }, []);
 
-  // ─── 3D buildings layer ───────────────────────────────────────────────────
-
-  const toggle3dBuildings = useCallback(
-    (enabled: boolean) => {
-      const map = mapRef.current;
-      if (!map || !mapReady) return;
-
-      const layerId = "anderoute-3d-buildings";
-      const layerIdAlt = "anderoute-3d-buildings-alt";
-
-      if (!enabled) {
-        if (map.getLayer(layerId)) map.removeLayer(layerId);
-        if (map.getLayer(layerIdAlt)) map.removeLayer(layerIdAlt);
-        buildings3dAddedRef.current = false;
-        return;
-      }
-
-      if (buildings3dAddedRef.current) return;
-
-      try {
-        const style = map.getStyle();
-        const sources = style?.sources ?? {};
-
-        // Try to find a building source layer
-        let sourceWithBuildings: string | null = null;
-        for (const srcId of Object.keys(sources)) {
-          const src = sources[srcId] as { type?: string };
-          if (src.type === "vector") {
-            sourceWithBuildings = srcId;
-            break;
-          }
-        }
-
-        if (!sourceWithBuildings) {
-          setBuildings3dSupported(false);
-          return;
-        }
-
-        const buildingLayer = build3dBuildingsLayer();
-        const buildingLayerAlt = build3dBuildingsLayerAlt();
-
-        // Patch source to match the actual source id
-        const layerSpec = { ...buildingLayer, source: sourceWithBuildings };
-        const altSpec = { ...buildingLayerAlt, source: sourceWithBuildings };
-
-        try {
-          map.addLayer(layerSpec as Parameters<typeof map.addLayer>[0]);
-          setBuildings3dSupported(true);
-          buildings3dAddedRef.current = true;
-        } catch {
-          try {
-            map.addLayer(altSpec as Parameters<typeof map.addLayer>[0]);
-            setBuildings3dSupported(true);
-            buildings3dAddedRef.current = true;
-          } catch {
-            setBuildings3dSupported(false);
-          }
-        }
-      } catch {
-        setBuildings3dSupported(false);
-      }
-    },
-    [mapReady],
-  );
+  // ─── Places Autocomplete ─────────────────────────────────────────────────────
 
   useEffect(() => {
-    if (!mapReady) return;
-    toggle3dBuildings(isEnabled("buildings_3d"));
-  }, [mapReady, isEnabled, toggle3dBuildings]);
-
-  // ─── Geofence layers ──────────────────────────────────────────────────────
-
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapReady || geofences.length === 0) return;
-    if (geofencesAddedRef.current) return;
-
+    if (!mapReady || !searchInputRef.current || !window.google?.maps?.places?.Autocomplete) return;
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const geoFeatures: any[] = geofences
-        .filter((g) => g.geometry?.type === "Polygon")
-        .map((g) => ({
-          type: "Feature",
-          id: g.id,
-          properties: {
-            id: g.id,
-            name: g.name,
-            color: g.color,
-            is_active: g.is_active,
-          },
-          geometry: g.geometry,
-        }));
+      const ac = new window.google.maps.places.Autocomplete(searchInputRef.current, {
+        fields: ["geometry", "name", "formatted_address"],
+      });
 
-      if (geoFeatures.length === 0) return;
+      ac.addListener("place_changed", () => {
+        try {
+          const place = ac.getPlace();
+          if (!place?.geometry?.location) return;
+          if (place.geometry.viewport) {
+            mapRef.current?.fitBounds(place.geometry.viewport);
+          } else {
+            mapRef.current?.setCenter(place.geometry.location);
+            mapRef.current?.setZoom(14);
+          }
+          setSearchQuery(place.name ?? place.formatted_address ?? "");
+        } catch {
+          /* ignore */
+        }
+      });
 
-      if (!map.getSource("anderoute-geofences")) {
-        map.addSource("anderoute-geofences", {
-          type: "geojson",
-          data: { type: "FeatureCollection", features: geoFeatures },
-        });
-
-        map.addLayer({
-          id: "anderoute-geofences-fill",
-          type: "fill",
-          source: "anderoute-geofences",
-          paint: {
-            "fill-color": ["get", "color"],
-            "fill-opacity": 0.12,
-          },
-        });
-
-        map.addLayer({
-          id: "anderoute-geofences-outline",
-          type: "line",
-          source: "anderoute-geofences",
-          paint: {
-            "line-color": ["get", "color"],
-            "line-width": 2,
-            "line-opacity": 0.7,
-            "line-dasharray": [3, 2],
-          },
-        });
-
-        // Click on geofence
-        map.on(
-          "click",
-          "anderoute-geofences-fill",
-          (e: { features?: { properties?: { id: string } }[] }) => {
-            const id = e.features?.[0]?.properties?.id;
-            if (!id) return;
-            const found = geofences.find((g) => g.id === id);
-            if (found) setSelectedObj({ type: "geofence", data: found });
-          },
-        );
-
-        map.on("mouseenter", "anderoute-geofences-fill", () => {
-          map.getCanvas().style.cursor = "pointer";
-        });
-        map.on("mouseleave", "anderoute-geofences-fill", () => {
-          map.getCanvas().style.cursor = "";
-        });
-      }
-
-      geofencesAddedRef.current = true;
-    } catch (e) {
-      console.warn("[Anderoute] Geofences failed to render:", e);
+      return () => {
+        try {
+          window.google?.maps?.event?.clearInstanceListeners(ac);
+        } catch {
+          /* ignore */
+        }
+      };
+    } catch {
+      /* Autocomplete unavailable — search input still works for local search */
     }
-  }, [mapReady, geofences]);
+  }, [mapReady]);
 
-  // Toggle geofences visibility
+  // ─── Traffic layer ─────────────────────────────────────────────────────────
+
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapReady) return;
-    const visible = isEnabled("geofences") ? "visible" : "none";
-    if (map.getLayer("anderoute-geofences-fill")) {
-      map.setLayoutProperty("anderoute-geofences-fill", "visibility", visible);
-    }
-    if (map.getLayer("anderoute-geofences-outline")) {
-      map.setLayoutProperty("anderoute-geofences-outline", "visibility", visible);
+    if (!mapReady || !trafficLayerRef.current) return;
+    try {
+      trafficLayerRef.current.setMap(isEnabled("traffic") ? mapRef.current : null);
+    } catch {
+      /* ignore */
     }
   }, [mapReady, isEnabled]);
 
-  // ─── Driver markers ───────────────────────────────────────────────────────
+  // ─── 3D perspective (tilt) ─────────────────────────────────────────────────
 
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapReady || typeof window === "undefined") return;
+    if (!mapReady) return;
+    const enable = isEnabled("buildings_3d");
+    setIs3D(enable);
+    try {
+      mapRef.current?.setTilt(enable ? 45 : 0);
+    } catch {
+      /* ignore */
+    }
+  }, [mapReady, isEnabled]);
 
-    loadMapLibre()?.then((maplibre) => {
-      const showDrivers = isEnabled("drivers");
-      const existing = driverMarkersRef.current;
-      const keepIds = new Set(showDrivers ? drivers.map((d) => d.driver_id) : []);
+  // ─── Geofence polygons ─────────────────────────────────────────────────────
 
-      // Remove markers not in current driver list or hidden
-      for (const [id, marker] of existing) {
-        if (!keepIds.has(id)) {
-          marker.remove();
-          existing.delete(id);
-        }
+  useEffect(() => {
+    if (!mapReady || !window.google?.maps?.Polygon) return;
+    const g = window.google.maps;
+
+    for (const p of geofencePolygonsRef.current) {
+      try {
+        p.setMap(null);
+      } catch {
+        /* ignore */
+      }
+    }
+    geofencePolygonsRef.current = [];
+
+    if (!isEnabled("geofences")) return;
+
+    for (const gf of geofences) {
+      if (!gf.is_active) continue;
+
+      let paths: { lat: number; lng: number }[][] = [];
+
+      if (gf.geometry?.type === "Polygon") {
+        paths = gf.geometry.coordinates.map((ring) => ring.map(([lng, lat]) => ({ lat, lng })));
+      } else if (gf.latitude != null && gf.longitude != null && gf.radius_m != null) {
+        const steps = 36;
+        const earthR = 6_371_000;
+        const ring = Array.from({ length: steps }, (_, i) => {
+          const angle = (i / steps) * 2 * Math.PI;
+          const dLat = (gf.radius_m! / earthR) * (180 / Math.PI);
+          const dLng =
+            (gf.radius_m! / (earthR * Math.cos((Math.PI * gf.latitude!) / 180))) * (180 / Math.PI);
+          return {
+            lat: gf.latitude! + dLat * Math.sin(angle),
+            lng: gf.longitude! + dLng * Math.cos(angle),
+          };
+        });
+        paths = [ring];
+      } else {
+        continue;
       }
 
-      if (!showDrivers) return;
+      try {
+        const poly: GMap = new g.Polygon({
+          paths,
+          fillColor: gf.color,
+          fillOpacity: 0.12,
+          strokeColor: gf.color,
+          strokeWeight: 2,
+          strokeOpacity: 0.7,
+          map: mapRef.current,
+          clickable: true,
+        });
+        poly.addListener("click", () => setSelectedObj({ type: "geofence", data: gf }));
+        geofencePolygonsRef.current.push(poly);
+      } catch {
+        /* ignore individual polygon failures */
+      }
+    }
+  }, [mapReady, geofences, isEnabled]);
 
-      for (const driver of drivers) {
-        const color = STATUS_COLORS[driver.status] ?? "#6b7280";
-        const isSelected =
-          selectedObj.type === "driver" &&
-          (selectedObj.data as LiveDriverLocation)?.driver_id === driver.driver_id;
+  // ─── Driver markers ────────────────────────────────────────────────────────
 
-        const imgUrl = driverMarkerSvg(color, isSelected, driver.heading, driver.is_stale ?? false);
+  useEffect(() => {
+    if (!mapReady || !window.google?.maps) return;
+    const g = window.google.maps;
+    const existing = driverMarkersRef.current;
+    const showDrivers = isEnabled("drivers");
+    const keepIds = new Set(showDrivers ? drivers.map((d) => d.driver_id) : []);
 
-        const existing_marker = existing.get(driver.driver_id);
+    for (const [id, marker] of existing) {
+      if (!keepIds.has(id)) {
+        try {
+          if (usingAdvancedMarkers.current) {
+            marker.map = null;
+          } else {
+            marker.setMap(null);
+          }
+        } catch {
+          /* ignore */
+        }
+        existing.delete(id);
+      }
+    }
 
-        if (existing_marker) {
-          existing_marker.setLngLat([driver.longitude, driver.latitude]);
-          const el = existing_marker.getElement() as HTMLImageElement;
-          if (el) el.src = imgUrl;
+    if (!showDrivers) return;
+
+    for (const driver of drivers) {
+      const isSelected =
+        selectedObj.type === "driver" &&
+        (selectedObj.data as LiveDriverLocation)?.driver_id === driver.driver_id;
+      const pos = { lat: driver.latitude, lng: driver.longitude };
+
+      try {
+        if (usingAdvancedMarkers.current && g.marker?.AdvancedMarkerElement) {
+          const content = createDriverContent(driver, isSelected);
+          const m = existing.get(driver.driver_id);
+          if (m) {
+            m.position = pos;
+            m.content = content;
+          } else {
+            const marker: GMap = new g.marker.AdvancedMarkerElement({
+              position: pos,
+              map: mapRef.current,
+              content,
+              title: driver.driver_name ?? driver.driver_id,
+              zIndex: isSelected ? 999 : 10,
+            });
+            marker.addListener("click", () => setSelectedObj({ type: "driver", data: driver }));
+            existing.set(driver.driver_id, marker);
+          }
         } else {
-          const el = document.createElement("img");
-          el.src = imgUrl;
-          el.style.width = isSelected ? "36px" : "26px";
-          el.style.height = isSelected ? "36px" : "26px";
-          el.style.cursor = "pointer";
-          el.title = driver.driver_name ?? `Driver ${driver.driver_id}`;
-
-          const marker = new maplibre.Marker({ element: el })
-            .setLngLat([driver.longitude, driver.latitude])
-            .addTo(map);
-
-          el.addEventListener("click", (e) => {
-            e.stopPropagation();
-            setSelectedObj({ type: "driver", data: driver });
-          });
-
-          existing.set(driver.driver_id, marker);
+          // Fallback: standard Marker with custom icon
+          const color = STATUS_COLORS[driver.status] ?? "#475569";
+          const size = isSelected ? 30 : 22;
+          const svg = encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="${isSelected ? 10 : 8}" fill="${color}" stroke="white" stroke-width="2"/>
+              <polygon points="12,5 15,17 12,14 9,17" fill="white" opacity="0.9"
+                transform="rotate(${driver.heading ?? 0},12,12)"/>
+            </svg>`,
+          );
+          const icon = {
+            url: `data:image/svg+xml;charset=UTF-8,${svg}`,
+            scaledSize: new g.Size(size, size),
+            anchor: new g.Point(size / 2, size / 2),
+          };
+          const m = existing.get(driver.driver_id);
+          if (m) {
+            m.setPosition(pos);
+            m.setIcon(icon);
+          } else {
+            const marker: GMap = new g.Marker({
+              position: pos,
+              map: mapRef.current,
+              icon,
+              title: driver.driver_name ?? driver.driver_id,
+              zIndex: isSelected ? 999 : 10,
+              opacity: driver.is_stale ? 0.4 : 1,
+            });
+            marker.addListener("click", () => setSelectedObj({ type: "driver", data: driver }));
+            existing.set(driver.driver_id, marker);
+          }
         }
+      } catch {
+        /* ignore individual marker failures */
       }
-    });
+    }
   }, [mapReady, drivers, isEnabled, selectedObj]);
 
   // ─── POI markers ──────────────────────────────────────────────────────────
 
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapReady || typeof window === "undefined") return;
+    if (!mapReady || !window.google?.maps) return;
+    const g = window.google.maps;
+    const existing = poiMarkersRef.current;
 
-    loadMapLibre()?.then((maplibre) => {
-      const existing = poiMarkersRef.current;
+    const categoryLayerMap: Partial<Record<PoiCategory, LayerKey>> = {
+      depot: "depots",
+      warehouse: "warehouses",
+      customer: "customers",
+      truck_stop: "truck_stops",
+      fuel: "fuel",
+      maintenance: "maintenance",
+      airport: "airports",
+      port: "ports",
+      rail_yard: "rail_yards",
+      store: "stores",
+      landmark: "landmarks",
+      lake: "lakes",
+      river: "rivers",
+      custom: "custom_pins",
+    };
 
-      // Determine which categories should show
-      const categoryLayerMap: Partial<Record<PoiCategory, LayerKey>> = {
-        depot: "depots",
-        warehouse: "warehouses",
-        customer: "customers",
-        truck_stop: "truck_stops",
-        fuel: "fuel",
-        maintenance: "maintenance",
-        airport: "airports",
-        port: "ports",
-        rail_yard: "rail_yards",
-        store: "stores",
-        landmark: "landmarks",
-        lake: "lakes",
-        river: "rivers",
-        custom: "custom_pins",
-      };
+    const visibleCats = new Set<string>(
+      (Object.entries(categoryLayerMap) as [PoiCategory, LayerKey][])
+        .filter(([, lk]) => isEnabled(lk))
+        .map(([cat]) => cat),
+    );
 
-      const visibleCategories = new Set<string>(
-        (Object.entries(categoryLayerMap) as [PoiCategory, LayerKey][])
-          .filter(([, layerKey]) => isEnabled(layerKey))
-          .map(([cat]) => cat),
-      );
+    const keepIds = new Set(
+      pois
+        .filter((p) => activePoiCategories.has(p.category) && visibleCats.has(p.category))
+        .map((p) => p.id),
+    );
 
-      const keepIds = new Set(
-        pois
-          .filter((p) => activePoiCategories.has(p.category) && visibleCategories.has(p.category))
-          .map((p) => p.id),
-      );
-
-      // Remove markers no longer visible
-      for (const [id, marker] of existing) {
-        if (!keepIds.has(id)) {
-          marker.remove();
-          existing.delete(id);
+    for (const [id, marker] of existing) {
+      if (!keepIds.has(id)) {
+        try {
+          if (usingAdvancedMarkers.current) {
+            marker.map = null;
+          } else {
+            marker.setMap(null);
+          }
+        } catch {
+          /* ignore */
         }
+        existing.delete(id);
       }
+    }
 
-      // Add/update markers
-      for (const poi of pois) {
-        if (!keepIds.has(poi.id)) continue;
+    for (const poi of pois) {
+      if (!keepIds.has(poi.id)) continue;
+      const isSelected = selectedObj.type === "poi" && (selectedObj.data as MapPoi)?.id === poi.id;
+      const pos = { lat: poi.latitude, lng: poi.longitude };
 
-        const isSelected =
-          selectedObj.type === "poi" && (selectedObj.data as MapPoi)?.id === poi.id;
-
-        const imgUrl = poiMarkerSvg(poi.category, isSelected);
-
-        const existing_marker = existing.get(poi.id);
-        if (existing_marker) {
-          existing_marker.setLngLat([poi.longitude, poi.latitude]);
+      try {
+        if (usingAdvancedMarkers.current && g.marker?.AdvancedMarkerElement) {
+          const content = createPoiContent(poi, isSelected);
+          const m = existing.get(poi.id);
+          if (m) {
+            m.position = pos;
+            m.content = content;
+          } else {
+            const marker: GMap = new g.marker.AdvancedMarkerElement({
+              position: pos,
+              map: mapRef.current,
+              content,
+              title: poi.name,
+              zIndex: 5,
+            });
+            marker.addListener("click", () => setSelectedObj({ type: "poi", data: poi }));
+            existing.set(poi.id, marker);
+          }
         } else {
-          const el = document.createElement("img");
-          el.src = imgUrl;
-          el.style.width = isSelected ? "36px" : "28px";
-          el.style.height = isSelected ? "44px" : "36px";
-          el.style.cursor = "pointer";
-          el.title = `${poi.name} (${poi.category})`;
-
-          const marker = new maplibre.Marker({ element: el, anchor: "bottom" })
-            .setLngLat([poi.longitude, poi.latitude])
-            .addTo(map);
-
-          el.addEventListener("click", (e) => {
-            e.stopPropagation();
-            setSelectedObj({ type: "poi", data: poi });
-          });
-
-          existing.set(poi.id, marker);
+          const meta = POI_CATEGORY_META[poi.category] ?? POI_CATEGORY_META.custom;
+          const size = isSelected ? 32 : 26;
+          const svg = encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32">
+              <rect x="1" y="1" width="30" height="30" rx="8" fill="${meta.color}" stroke="white" stroke-width="2"/>
+              <text x="16" y="22" text-anchor="middle" font-size="16">${meta.emoji}</text>
+            </svg>`,
+          );
+          const icon = {
+            url: `data:image/svg+xml;charset=UTF-8,${svg}`,
+            scaledSize: new g.Size(size, size),
+            anchor: new g.Point(size / 2, size / 2),
+          };
+          const m = existing.get(poi.id);
+          if (m) {
+            m.setPosition(pos);
+            m.setIcon(icon);
+          } else {
+            const marker: GMap = new g.Marker({
+              position: pos,
+              map: mapRef.current,
+              icon,
+              title: poi.name,
+              zIndex: 5,
+            });
+            marker.addListener("click", () => setSelectedObj({ type: "poi", data: poi }));
+            existing.set(poi.id, marker);
+          }
         }
+      } catch {
+        /* ignore individual marker failures */
       }
-    });
+    }
   }, [mapReady, pois, isEnabled, activePoiCategories, selectedObj]);
 
-  // ─── Layer visibility syncing for 3D buildings ────────────────────────────
-
-  useEffect(() => {
-    if (!mapReady) return;
-    const enabled = isEnabled("buildings_3d");
-    if (enabled && !buildings3dAddedRef.current) {
-      toggle3dBuildings(true);
-    } else if (!enabled) {
-      toggle3dBuildings(false);
-    }
-  }, [isEnabled, mapReady, toggle3dBuildings]);
-
-  // ─── Map controls ─────────────────────────────────────────────────────────
+  // ─── Map controls ──────────────────────────────────────────────────────────
 
   const zoom = (delta: number) => {
-    mapRef.current?.zoomTo((mapRef.current.getZoom() ?? 3.5) + delta, { duration: 200 });
+    if (!mapRef.current) return;
+    try {
+      mapRef.current.setZoom((mapRef.current.getZoom() ?? 4) + delta);
+    } catch {
+      /* ignore */
+    }
   };
 
-  const resetNorth = () => {
-    mapRef.current?.easeTo({ bearing: 0, pitch: 35, duration: 500 });
+  const resetView = () => {
+    try {
+      mapRef.current?.setCenter({ lat: 39.8283, lng: -98.5795 });
+      mapRef.current?.setZoom(4);
+      mapRef.current?.setTilt(0);
+      mapRef.current?.setHeading(0);
+    } catch {
+      /* ignore */
+    }
   };
 
   const fitAll = () => {
-    if (!mapRef.current || drivers.length === 0) return;
-    const lngs = drivers.map((d) => d.longitude);
-    const lats = drivers.map((d) => d.latitude);
-    mapRef.current.fitBounds(
-      [
-        [Math.min(...lngs) - 1, Math.min(...lats) - 1],
-        [Math.max(...lngs) + 1, Math.max(...lats) + 1],
-      ],
-      { padding: 60, duration: 800, maxZoom: 12 },
-    );
+    if (!mapRef.current || !window.google?.maps?.LatLngBounds || drivers.length === 0) return;
+    try {
+      const bounds = new window.google.maps.LatLngBounds();
+      for (const d of drivers) bounds.extend({ lat: d.latitude, lng: d.longitude });
+      mapRef.current.fitBounds(bounds, 80);
+    } catch {
+      /* ignore */
+    }
   };
 
-  // ─── Saved view handler ───────────────────────────────────────────────────
+  // ─── Saved view handler ─────────────────────────────────────────────────────
 
   const handleSelectView = useCallback(
     (view: MapSavedView) => {
       setCurrentViewId(view.id);
-      mapRef.current?.flyTo({
-        center: [view.center_lng, view.center_lat],
-        zoom: view.zoom,
-        pitch: view.pitch,
-        bearing: view.bearing,
-        duration: 1200,
-        essential: true,
-      });
+      try {
+        mapRef.current?.panTo({ lat: view.center_lat, lng: view.center_lng });
+        mapRef.current?.setZoom(view.zoom);
+        mapRef.current?.setTilt(view.pitch > 0 ? Math.min(view.pitch, 67.5) : 0);
+        mapRef.current?.setHeading(view.bearing);
+      } catch {
+        /* ignore */
+      }
       if (Object.keys(view.layer_settings).length > 0) {
         applyViewLayerSettings(view.layer_settings);
       }
@@ -522,32 +716,7 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
     [applyViewLayerSettings],
   );
 
-  // ─── Search handler ───────────────────────────────────────────────────────
-
-  const handleSearchResult = useCallback(
-    (result: MapSearchResult) => {
-      if (result.lat != null && result.lng != null) {
-        mapRef.current?.flyTo({
-          center: [result.lng, result.lat],
-          zoom: 12,
-          duration: 800,
-        });
-      }
-
-      if (result.type === "driver") {
-        const driverId = result.id.replace("driver-", "");
-        const found = drivers.find((d) => d.driver_id === driverId);
-        if (found) setSelectedObj({ type: "driver", data: found });
-      } else if (result.type === "poi") {
-        const poiId = result.id.replace("poi-", "");
-        const found = pois.find((p) => p.id === poiId);
-        if (found) setSelectedObj({ type: "poi", data: found });
-      }
-    },
-    [drivers, pois],
-  );
-
-  // ─── POI category toggle ──────────────────────────────────────────────────
+  // ─── POI category toggle ────────────────────────────────────────────────────
 
   const togglePoiCategory = useCallback((cat: PoiCategory) => {
     setActivePoiCategories((prev) => {
@@ -561,11 +730,7 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
     });
   }, []);
 
-  // ─── Loading state ────────────────────────────────────────────────────────
-
-  const isLoading = !mapReady && !mapError;
-
-  // ─── Render ───────────────────────────────────────────────────────────────
+  // ─── Render ─────────────────────────────────────────────────────────────────
 
   return (
     <div
@@ -575,27 +740,19 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
       )}
       style={{ boxShadow: "0 0 0 1px rgba(20,184,166,0.08), 0 20px 60px rgba(0,0,0,0.5)" }}
     >
-      {/* MapLibre container */}
+      {/* Google Maps surface */}
       <div ref={mapContainerRef} className="absolute inset-0" />
 
-      {/* Import MapLibre CSS (inline style tag for SSR safety) */}
-      <style>{`
-        .maplibregl-canvas { border-radius: 1rem; }
-        .maplibregl-ctrl-attrib { display: none !important; }
-      `}</style>
-
       {/* Loading overlay */}
-      {isLoading && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0b1526]/90 backdrop-blur-sm">
+      {!mapReady && !mapError && (
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0b1526]/95 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-4">
-            <div className="relative">
-              <div className="size-16 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
-                <Loader2 className="size-7 text-teal-400 animate-spin" />
-              </div>
+            <div className="size-16 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+              <Loader2 className="size-7 text-teal-400 animate-spin" />
             </div>
             <div className="text-center">
               <div className="text-sm font-semibold text-slate-200">Loading Map Intelligence</div>
-              <div className="text-xs text-slate-500 mt-1">Connecting to Anderoute systems…</div>
+              <div className="text-xs text-slate-500 mt-1">Connecting to Google Maps…</div>
             </div>
           </div>
         </div>
@@ -604,22 +761,73 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
       {/* Error overlay */}
       {mapError && (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-[#0b1526]/95">
-          <div className="max-w-sm w-full rounded-2xl border border-red-500/20 bg-red-500/5 p-6 text-center">
-            <div className="text-sm font-bold text-red-400 mb-2">Map failed to load</div>
-            <div className="text-xs text-slate-500">{mapError}</div>
+          <div className="max-w-sm w-full rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 text-center space-y-3">
+            <div className="text-sm font-bold text-amber-400">Google Maps Unavailable</div>
+            <div className="text-xs text-slate-400 leading-relaxed">{mapError}</div>
+            <div className="text-[10px] text-slate-600 leading-relaxed">
+              Ensure{" "}
+              <code className="bg-slate-800 px-1 py-0.5 rounded">
+                VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY
+              </code>{" "}
+              is set and your API key is authorised for this domain in Google Cloud Console.
+            </div>
           </div>
         </div>
       )}
 
-      {/* ── Overlaid Controls (only when map is ready) ── */}
+      {/* ── Overlaid controls ── */}
       {mapReady && (
         <>
-          {/* Search Panel */}
+          {/* Google Places search input */}
           {!compact && (
-            <MapSearchPanel drivers={drivers} pois={pois} onSelectResult={handleSearchResult} />
+            <div className="absolute top-3 left-14 z-30 w-64">
+              <div
+                className={cn(
+                  "flex items-center gap-2 rounded-xl border px-3 py-2 transition-all",
+                  "bg-[#0f1a2e]/95 border-[#1e3a5f] backdrop-blur-md shadow-lg",
+                  searchQuery && "border-teal-500/40",
+                )}
+              >
+                <svg
+                  className="size-3.5 shrink-0 text-slate-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input
+                  ref={searchInputRef}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search addresses, places, drivers…"
+                  className="flex-1 bg-transparent text-[11px] text-slate-200 placeholder:text-slate-600 outline-none"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery("");
+                      if (searchInputRef.current) searchInputRef.current.value = "";
+                    }}
+                    className="text-slate-600 hover:text-slate-300"
+                  >
+                    <svg className="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            </div>
           )}
 
-          {/* Saved Views Panel */}
+          {/* Saved Views */}
           {!compact && (
             <MapSavedViewsPanel
               views={views}
@@ -629,7 +837,7 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
             />
           )}
 
-          {/* Layer Control Panel */}
+          {/* Layer Control */}
           <MapLayerControlPanel layers={layers} onToggle={toggleLayer} />
 
           {/* POI Panel */}
@@ -638,11 +846,12 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
               pois={pois}
               onSelectPoi={(poi) => {
                 setSelectedObj({ type: "poi", data: poi });
-                mapRef.current?.flyTo({
-                  center: [poi.longitude, poi.latitude],
-                  zoom: 14,
-                  duration: 800,
-                });
+                try {
+                  mapRef.current?.panTo({ lat: poi.latitude, lng: poi.longitude });
+                  mapRef.current?.setZoom(14);
+                } catch {
+                  /* ignore */
+                }
               }}
               activeCategories={activePoiCategories}
               onToggleCategory={togglePoiCategory}
@@ -654,33 +863,31 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
           {!compact && (
             <MapGeofencePanel
               geofences={geofences}
-              onSelectGeofence={(g) => {
-                setSelectedObj({ type: "geofence", data: g });
-                // Fly to geofence center
-                if (g.geometry?.type === "Polygon") {
-                  const coords = g.geometry.coordinates[0];
-                  const lngs = coords.map((c) => c[0]);
-                  const lats = coords.map((c) => c[1]);
-                  const centerLng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
-                  const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
-                  mapRef.current?.flyTo({
-                    center: [centerLng, centerLat],
-                    zoom: 10,
-                    duration: 800,
-                  });
-                } else if (g.latitude != null && g.longitude != null) {
-                  mapRef.current?.flyTo({
-                    center: [g.longitude, g.latitude],
-                    zoom: 12,
-                    duration: 800,
-                  });
+              onSelectGeofence={(gf) => {
+                setSelectedObj({ type: "geofence", data: gf });
+                try {
+                  if (gf.geometry?.type === "Polygon") {
+                    const coords = gf.geometry.coordinates[0];
+                    const lngs = coords.map((c) => c[0]);
+                    const lats = coords.map((c) => c[1]);
+                    const bounds = new window.google.maps.LatLngBounds(
+                      { lat: Math.min(...lats), lng: Math.min(...lngs) },
+                      { lat: Math.max(...lats), lng: Math.max(...lngs) },
+                    );
+                    mapRef.current?.fitBounds(bounds, 80);
+                  } else if (gf.latitude != null && gf.longitude != null) {
+                    mapRef.current?.panTo({ lat: gf.latitude, lng: gf.longitude });
+                    mapRef.current?.setZoom(13);
+                  }
+                } catch {
+                  /* ignore */
                 }
               }}
               loading={geofencesLoading}
             />
           )}
 
-          {/* Map Controls — right side */}
+          {/* Zoom / compass / fit controls */}
           <div className="absolute right-3 top-16 z-20 flex flex-col gap-1.5">
             <div className="flex flex-col rounded-xl border border-[#1e3a5f] bg-[#0f1a2e]/90 backdrop-blur-md shadow-lg overflow-hidden">
               <button
@@ -697,9 +904,9 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
               </button>
             </div>
             <button
-              onClick={resetNorth}
+              onClick={resetView}
               className="size-8 grid place-items-center rounded-xl border border-[#1e3a5f] bg-[#0f1a2e]/90 backdrop-blur-md shadow-lg hover:bg-white/5 transition-colors"
-              title="Reset north"
+              title="Reset view"
             >
               <Compass className="size-3.5 text-slate-300" />
             </button>
@@ -712,9 +919,8 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
             </button>
           </div>
 
-          {/* Bottom bar */}
+          {/* Bottom status bar */}
           <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between px-3 py-2 bg-[#080f1d]/80 backdrop-blur-md border-t border-[#1e3a5f]">
-            {/* Left — realtime status */}
             <div className="flex items-center gap-2">
               {realtimeStatus === "connected" ? (
                 <div className="flex items-center gap-1.5 text-[10px] text-teal-400 font-semibold">
@@ -735,7 +941,6 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
               )}
             </div>
 
-            {/* Center — driver count */}
             <div className="flex items-center gap-3 text-[10px] text-slate-500">
               {driversLoading ? (
                 <Loader2 className="size-3 animate-spin" />
@@ -761,20 +966,20 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
               )}
             </div>
 
-            {/* Right — 3D buildings note */}
-            {buildings3dSupported === false && isEnabled("buildings_3d") && (
-              <div className="flex items-center gap-1.5 text-[9px] text-slate-600">
-                <Building2 className="size-3" />
-                <span>3D building data depends on the active vector tile style.</span>
-              </div>
-            )}
-
-            {buildings3dSupported === true && isEnabled("buildings_3d") && (
-              <div className="flex items-center gap-1.5 text-[9px] text-teal-600">
-                <Building2 className="size-3" />
-                <span>3D buildings active</span>
-              </div>
-            )}
+            <div className="flex items-center gap-2">
+              {is3D && (
+                <div className="flex items-center gap-1 text-[9px] text-teal-500">
+                  <Building2 className="size-3" />
+                  <span>3D active</span>
+                </div>
+              )}
+              {!compact && (
+                <div className="flex items-center gap-1 text-[9px] text-slate-600">
+                  <Layers className="size-2.5" />
+                  <span>Google Maps</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Selected object card */}
@@ -787,16 +992,10 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
               />
             </div>
           )}
-
-          {/* Dismiss on map click */}
-          <div
-            className="absolute inset-0 z-10 pointer-events-none"
-            onClick={() => setSelectedObj({ type: null, data: null })}
-          />
         </>
       )}
 
-      {/* Top-left branding pill */}
+      {/* Anderoute branding pill */}
       <div className="absolute top-3 left-3 z-30">
         <div className="flex items-center gap-1.5 rounded-xl border border-[#1e3a5f] bg-[#0f1a2e]/90 px-2.5 py-1.5 text-[10px] font-bold tracking-widest text-teal-400 backdrop-blur-md shadow-lg uppercase">
           <span className="size-1.5 rounded-full bg-teal-400 animate-pulse" />

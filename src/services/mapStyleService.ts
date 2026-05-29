@@ -1,83 +1,96 @@
 /**
- * mapStyleService — resolves the MapLibre GL style URL.
+ * mapStyleService — Google Maps style and configuration helpers.
  *
- * For production, replace the demo style with OpenMapTiles, OpenFreeMap,
- * or another OpenStreetMap-based vector tile provider.
- * Public demo tiles are not for production scale.
+ * The logistics dark style emphasises highways, interstates, industrial roads,
+ * warehouses, ports, airports, and truck routes over residential areas.
  */
 
-export function getMapStyleUrl(): string {
-  // VITE_MAP_STYLE_URL can point to a self-hosted or licensed vector tile style.
-  // Examples:
-  //   OpenFreeMap:  https://tiles.openfreemap.org/styles/liberty
-  //   OpenMapTiles: https://your-server/styles/basic/style.json
-  //   Maptiler:     https://api.maptiler.com/maps/basic/style.json?key=<KEY>
-  const custom = import.meta.env.VITE_MAP_STYLE_URL as string | undefined;
-  if (custom) return custom;
-
-  // Fallback: MapLibre demo tiles (not for production scale).
-  return "https://demotiles.maplibre.org/style.json";
+/**
+ * Returns a Google Maps Map ID from env or falls back to DEMO_MAP_ID.
+ * AdvancedMarkerElement requires a Map ID registered in Google Cloud Console.
+ * DEMO_MAP_ID works for development but does not support custom marker styling.
+ */
+export function getGoogleMapId(): string {
+  return (import.meta.env.VITE_GOOGLE_MAPS_MAP_ID as string | undefined) ?? "DEMO_MAP_ID";
 }
 
 /**
- * Returns a MapLibre-compatible 3D buildings layer spec.
- * Attempts common source-layer names used by OpenMapTiles / MapTiler / OpenFreeMap.
+ * Returns a tilt value for "3D perspective" mode.
+ * Google Maps supports tilt up to 67.5° for satellite/hybrid and 45° for roadmap.
  */
-export function build3dBuildingsLayer() {
-  return {
-    id: "anderoute-3d-buildings",
-    source: "composite",
-    "source-layer": "building",
-    filter: ["==", "extrude", "true"] as unknown[],
-    type: "fill-extrusion" as const,
-    minzoom: 14,
-    paint: {
-      "fill-extrusion-color": "#94a3b8",
-      "fill-extrusion-height": [
-        "interpolate",
-        ["linear"],
-        ["zoom"],
-        14,
-        0,
-        14.5,
-        ["coalesce", ["get", "render_height"], ["get", "height"], 5],
-      ] as unknown[],
-      "fill-extrusion-base": [
-        "coalesce",
-        ["get", "render_min_height"],
-        ["get", "min_height"],
-        0,
-      ] as unknown[],
-      "fill-extrusion-opacity": 0.72,
-    },
-  };
+export function get3DTilt(): number {
+  return 45;
 }
 
 /**
- * Alternative 3D buildings layer for styles that use different property names.
+ * Logistics-optimised Google Maps dark style.
+ * Interstates and highways are highlighted in teal for truck route visibility.
  */
-export function build3dBuildingsLayerAlt() {
-  return {
-    id: "anderoute-3d-buildings-alt",
-    source: "openmaptiles",
-    "source-layer": "building",
-    type: "fill-extrusion" as const,
-    minzoom: 14,
-    paint: {
-      "fill-extrusion-color": "#94a3b8",
-      "fill-extrusion-height": [
-        "coalesce",
-        ["get", "render_height"],
-        ["get", "height"],
-        5,
-      ] as unknown[],
-      "fill-extrusion-base": [
-        "coalesce",
-        ["get", "render_min_height"],
-        ["get", "min_height"],
-        0,
-      ] as unknown[],
-      "fill-extrusion-opacity": 0.72,
-    },
-  };
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DARK_LOGISTICS_STYLE: any[] = [
+  { elementType: "geometry", stylers: [{ color: "#0b1526" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#0b1526" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#6b8099" }] },
+  {
+    featureType: "administrative.country",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#1e3a5f" }],
+  },
+  {
+    featureType: "landscape",
+    elementType: "geometry",
+    stylers: [{ color: "#0f1e33" }],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ color: "#1a2d48" }],
+  },
+  {
+    featureType: "road.arterial",
+    elementType: "geometry",
+    stylers: [{ color: "#20364f" }],
+  },
+  {
+    featureType: "road.local",
+    elementType: "geometry",
+    stylers: [{ color: "#162540" }],
+  },
+  // Highways prominently teal — for truck route navigation
+  {
+    featureType: "road.highway",
+    elementType: "geometry",
+    stylers: [{ color: "#2a4a6e" }],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#14b8a6" }],
+  },
+  {
+    featureType: "road.highway.controlled_access",
+    elementType: "geometry",
+    stylers: [{ color: "#1d5c8f" }],
+  },
+  {
+    featureType: "road.highway.controlled_access",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#38d9c8" }],
+  },
+  { featureType: "poi", stylers: [{ visibility: "off" }] },
+  {
+    featureType: "transit",
+    elementType: "geometry",
+    stylers: [{ color: "#0f1e33" }],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [{ color: "#060e1c" }],
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#1e4068" }],
+  },
+];

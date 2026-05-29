@@ -1,15 +1,15 @@
 /**
- * MapSearchPanel — search drivers, POIs, and locations on the map.
+ * MapSearchPanel — local search across drivers and POIs.
  *
- * Uses local search first. Geocoding placeholder for future provider integration.
- * Production geocoding should use self-hosted Nominatim, Pelias, Photon,
- * or a proper geocoding provider.
+ * The primary search in Anderoute3DDispatchMap uses Google Places Autocomplete
+ * attached directly to the input element. This panel is available as a standalone
+ * component for embedded use cases where Google Places is not available.
  */
 
 import { useCallback, useRef, useState } from "react";
 import { Search, X, MapPin, Truck, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { searchMapLocation } from "@/services/mapSearchService";
+import { searchLocal } from "@/services/mapSearchService";
 import type { LiveDriverLocation, MapPoi, MapSearchResult } from "@/types/map";
 
 interface Props {
@@ -40,8 +40,8 @@ export function MapSearchPanel({ drivers, pois, onSelectResult }: Props) {
         return;
       }
       setLoading(true);
-      debounceRef.current = setTimeout(async () => {
-        const res = await searchMapLocation(q, drivers, pois);
+      debounceRef.current = setTimeout(() => {
+        const res = searchLocal(q, drivers, pois);
         setResults(res);
         setLoading(false);
       }, 280);

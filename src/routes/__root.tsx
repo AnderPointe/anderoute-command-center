@@ -10,7 +10,6 @@ import {
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 import appCss from "../styles.css?url";
-import maplibreCss from "maplibre-gl/dist/maplibre-gl.css?url";
 
 function NotFoundComponent() {
   return (
@@ -89,10 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "stylesheet", href: maplibreCss },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
