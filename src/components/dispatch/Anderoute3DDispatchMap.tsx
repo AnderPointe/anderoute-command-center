@@ -827,10 +827,21 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
                   referrers:
                 </li>
               </ol>
-              <div className="ml-5 mt-1 rounded-lg bg-[#060e1c] border border-[#1e3a5f] px-3 py-2 font-mono text-[10px] text-teal-300 space-y-0.5">
-                <div className="text-slate-500">— localhost —</div>
-                <div>http://localhost:*</div>
+              {/* Show the exact current origin so the user adds the right referrer */}
+              <div className="ml-5 mt-1 rounded-lg bg-teal-950/60 border border-teal-500/30 px-3 py-1.5 text-[10px]">
+                <div className="text-teal-400 font-semibold mb-0.5">← This page is running on:</div>
+                <div className="font-mono text-white">
+                  {typeof window !== "undefined" ? window.location.origin + "/*" : ""}
+                </div>
+                <div className="text-slate-500 mt-0.5">Add this exact value first.</div>
+              </div>
+              <div className="ml-5 mt-2 rounded-lg bg-[#060e1c] border border-[#1e3a5f] px-3 py-2 font-mono text-[10px] text-teal-300 space-y-0.5">
+                <div className="text-slate-500">— all localhost variants —</div>
+                <div>http://localhost/*</div>
+                <div>http://localhost:8080/*</div>
                 <div>http://localhost:5173/*</div>
+                <div>http://127.0.0.1/*</div>
+                <div>http://127.0.0.1:8080/*</div>
                 <div>http://127.0.0.1:5173/*</div>
                 <div className="text-slate-500 mt-1">— production —</div>
                 <div>https://andetrack.com/*</div>
@@ -838,7 +849,8 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
                 <div>https://app.andetrack.com/*</div>
               </div>
               <div className="text-[10px] text-slate-500">
-                After saving in Cloud Console, refresh this page — the map loads immediately.
+                After saving in Cloud Console, hard-refresh (Ctrl+Shift+R) — the map loads
+                immediately.
               </div>
             </div>
 
