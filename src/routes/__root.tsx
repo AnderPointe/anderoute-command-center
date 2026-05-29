@@ -74,18 +74,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Anderoute — Fleet & Dispatch Command Center" },
-      { name: "description", content: "Real-time logistics platform for dispatch teams managing CDL and Non-CDL drivers, live shipments, and fleet operations." },
+      {
+        name: "description",
+        content:
+          "Real-time logistics platform for dispatch teams managing CDL and Non-CDL drivers, live shipments, and fleet operations.",
+      },
       { property: "og:title", content: "Anderoute — Fleet & Dispatch Command Center" },
-      { property: "og:description", content: "Modern logistics command center for dispatching drivers, tracking shipments, and managing fleet operations in real time." },
+      {
+        property: "og:description",
+        content:
+          "Modern logistics command center for dispatching drivers, tracking shipments, and managing fleet operations in real time.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
