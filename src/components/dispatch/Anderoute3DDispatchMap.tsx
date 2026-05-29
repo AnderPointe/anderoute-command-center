@@ -270,6 +270,20 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
 
     const mapId = import.meta.env.VITE_GOOGLE_MAPS_MAP_ID as string | undefined;
 
+    // Google Maps calls this global when the API key is invalid or the referrer
+    // is not authorised. We intercept it to show our own friendly error overlay.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).gm_authFailure = () => {
+      if (!cancelled) {
+        setMapError(
+          "API key authorisation failed. Your key is valid but this domain is not in the allowed HTTP referrers list.\n\n" +
+            "Fix: Google Cloud Console → Credentials → your key → Website restrictions → add:\n" +
+            "  localhost/*\n  localhost:8080/*\n  127.0.0.1/*\n  your-production-domain.com/*",
+        );
+        setMapReady(false);
+      }
+    };
+
     loadGoogleMaps()
       .then(() => {
         if (cancelled || !mapContainerRef.current || !window.google?.maps?.Map) return;
@@ -760,16 +774,74 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
 
       {/* Error overlay */}
       {mapError && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-[#0b1526]/95">
-          <div className="max-w-sm w-full rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 text-center space-y-3">
-            <div className="text-sm font-bold text-amber-400">Google Maps Unavailable</div>
-            <div className="text-xs text-slate-400 leading-relaxed">{mapError}</div>
-            <div className="text-[10px] text-slate-600 leading-relaxed">
-              Ensure{" "}
-              <code className="bg-slate-800 px-1 py-0.5 rounded">
-                VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY
-              </code>{" "}
-              is set and your API key is authorised for this domain in Google Cloud Console.
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-[#0b1526]/97">
+          <div className="max-w-md w-full rounded-2xl border border-amber-500/25 bg-[#0f1a2e] p-5 space-y-4 shadow-2xl">
+            {/* Header */}
+            <div className="flex items-center gap-2.5">
+              <div className="size-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0">
+                <svg
+                  className="size-4 text-amber-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div className="text-sm font-bold text-amber-400">
+                  Google Maps — Referrer Not Authorised
+                </div>
+                <div className="text-[10px] text-slate-500">
+                  API key is valid but this domain is blocked
+                </div>
+              </div>
+            </div>
+
+            {/* Fix steps */}
+            <div className="space-y-2">
+              <div className="text-[11px] font-semibold text-slate-300">
+                Fix in Google Cloud Console:
+              </div>
+              <ol className="space-y-1.5 text-[10px] text-slate-400">
+                <li className="flex gap-2">
+                  <span className="shrink-0 font-bold text-teal-500">1.</span>Open{" "}
+                  <span className="text-teal-400 underline">
+                    console.cloud.google.com/apis/credentials
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0 font-bold text-teal-500">2.</span>Click your API key →{" "}
+                  <strong className="text-slate-300">Website restrictions</strong>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0 font-bold text-teal-500">3.</span>Add these HTTP
+                  referrers:
+                </li>
+              </ol>
+              <div className="ml-5 mt-1 rounded-lg bg-[#060e1c] border border-[#1e3a5f] px-3 py-2 font-mono text-[10px] text-teal-300 space-y-0.5">
+                <div>localhost/*</div>
+                <div>localhost:8080/*</div>
+                <div>127.0.0.1/*</div>
+                <div>your-production-domain.com/*</div>
+              </div>
+              <div className="text-[10px] text-slate-500">
+                After saving, refresh this page. The map will load immediately.
+              </div>
+            </div>
+
+            {/* Also ensure APIs are enabled */}
+            <div className="rounded-lg bg-[#060e1c] border border-[#1e3a5f] px-3 py-2 text-[10px] text-slate-500 space-y-0.5">
+              <div className="font-semibold text-slate-400 mb-1">
+                Also confirm these APIs are enabled on your key:
+              </div>
+              <div>✓ Maps JavaScript API</div>
+              <div>✓ Places API</div>
             </div>
           </div>
         </div>
