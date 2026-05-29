@@ -79,17 +79,18 @@ function loadGoogleMaps(): Promise<void> {
   if (window.google?.maps?.Map) return Promise.resolve();
   if (gmPromise) return gmPromise;
 
-  const key = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY as string | undefined;
+  // Primary: VITE_GOOGLE_MAPS_API_KEY
+  // Fallback: legacy VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY
+  const key =
+    (import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined) ||
+    (import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY as string | undefined);
   const channel = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID as
     | string
     | undefined;
 
   if (!key) {
     return Promise.reject(
-      new Error(
-        "VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY is not set. " +
-          "Add your Google Maps API key in project settings.",
-      ),
+      new Error("Google Maps API key not set. Add VITE_GOOGLE_MAPS_API_KEY to your .env file."),
     );
   }
 
@@ -272,14 +273,12 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
 
     // Google Maps calls this global when the API key is invalid or the referrer
     // is not authorised. We intercept it to show our own friendly error overlay.
+    // Google Maps calls this global when the API key is rejected or the referrer
+    // is not in the allowed list. We intercept it to show our actionable error card.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).gm_authFailure = () => {
       if (!cancelled) {
-        setMapError(
-          "API key authorisation failed. Your key is valid but this domain is not in the allowed HTTP referrers list.\n\n" +
-            "Fix: Google Cloud Console → Credentials → your key → Website restrictions → add:\n" +
-            "  localhost/*\n  localhost:8080/*\n  127.0.0.1/*\n  your-production-domain.com/*",
-        );
+        setMapError("referrer_restriction");
         setMapReady(false);
       }
     };
@@ -795,10 +794,14 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
               </div>
               <div>
                 <div className="text-sm font-bold text-amber-400">
-                  Google Maps — Referrer Not Authorised
+                  {mapError === "referrer_restriction"
+                    ? "Google Maps — Referrer Not Authorised"
+                    : "Google Maps Unavailable"}
                 </div>
                 <div className="text-[10px] text-slate-500">
-                  API key is valid but this domain is blocked
+                  {mapError === "referrer_restriction"
+                    ? "Add andetrack.com + localhost to your API key's allowed referrers"
+                    : mapError}
                 </div>
               </div>
             </div>
@@ -825,13 +828,17 @@ export function Anderoute3DDispatchMap({ className, compact = false }: Props) {
                 </li>
               </ol>
               <div className="ml-5 mt-1 rounded-lg bg-[#060e1c] border border-[#1e3a5f] px-3 py-2 font-mono text-[10px] text-teal-300 space-y-0.5">
-                <div>localhost/*</div>
-                <div>localhost:8080/*</div>
-                <div>127.0.0.1/*</div>
-                <div>your-production-domain.com/*</div>
+                <div className="text-slate-500">— localhost —</div>
+                <div>http://localhost:*</div>
+                <div>http://localhost:5173/*</div>
+                <div>http://127.0.0.1:5173/*</div>
+                <div className="text-slate-500 mt-1">— production —</div>
+                <div>https://andetrack.com/*</div>
+                <div>https://www.andetrack.com/*</div>
+                <div>https://app.andetrack.com/*</div>
               </div>
               <div className="text-[10px] text-slate-500">
-                After saving, refresh this page. The map will load immediately.
+                After saving in Cloud Console, refresh this page — the map loads immediately.
               </div>
             </div>
 
