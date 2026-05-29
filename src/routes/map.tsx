@@ -1,34 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
-import { LiveMapPanel } from "@/components/map/LiveMapPanel";
-import { DriverProfileDrawer } from "@/components/drivers/DriverProfileDrawer";
-import type { Driver } from "@/types";
+import { Anderoute3DDispatchMap } from "@/components/dispatch/Anderoute3DDispatchMap";
 
 export const Route = createFileRoute("/map")({
   head: () => ({
     meta: [
-      { title: "Live Map — Anderoute" },
-      { name: "description", content: "Full-screen live fleet map with status filters, route overlays and driver markers." },
+      { title: "Map Intelligence — Anderoute" },
+      {
+        name: "description",
+        content:
+          "Anderoute Map Intelligence Layer — live drivers, POIs, geofences, 3D buildings, and logistics layers on an OpenStreetMap-based vector tile map.",
+      },
     ],
   }),
   component: MapPage,
 });
 
 function MapPage() {
-  const [selected, setSelected] = useState<Driver | null>(null);
   return (
     <AppShell>
-      <div className="p-4 md:p-6">
-        <div className="mb-4">
-          <h1 className="text-2xl font-semibold tracking-tight">Live Map</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            Map-ready surface · Will connect to Mapbox, MapLibre or Google Maps once tokens are configured.
-          </p>
+      <div className="p-4 md:p-6 h-full flex flex-col">
+        <div className="mb-4 flex items-start justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight">Map Intelligence</h1>
+            <p className="text-sm text-muted-foreground mt-0.5">
+              Live dispatch map · OpenStreetMap vector tiles · Anderoute logistics overlay
+            </p>
+          </div>
         </div>
-        <LiveMapPanel className="h-[calc(100vh-12rem)]" onSelectDriver={setSelected} selectedId={selected?.id} />
+        <Anderoute3DDispatchMap className="flex-1 min-h-[calc(100vh-13rem)]" />
       </div>
-      <DriverProfileDrawer driver={selected} onClose={() => setSelected(null)} />
     </AppShell>
   );
 }
