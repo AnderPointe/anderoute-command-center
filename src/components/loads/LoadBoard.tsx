@@ -1,140 +1,126 @@
-import { loads, drivers } from "@/data/mock";
-import { Button } from "@/components/ui/button";
-import {
-  MapPin, Package, Truck, Clock, ShieldAlert, ShieldCheck, ArrowRight,
-  Snowflake, Flame, MoreHorizontal, Inbox,
-} from "lucide-react";
-import { DriverStatusBadge } from "@/components/drivers/DriverStatusBadge";
-import { Link } from "@tanstack/react-router";
-import { cn } from "@/lib/utils";
+/**
+ * LoadBoard — Anderoute / Andetrack logistics command center.
+ *
+ * Features: Kanban board, Supabase Realtime, filters, driver assignment,
+ * load creation, load detail drawer, timeline, notes, documents, map preview.
+ *
+ * All dispatch actions are human-approved — no autonomous assignment.
+ */
 
-const commodityIcon = (c: string) => {
-  const x = c.toLowerCase();
-  if (x.includes("frozen") || x.includes("reefer") || x.includes("cold") || x.includes("pharma")) return Snowflake;
-  if (x.includes("hazmat") || x.includes("fuel")) return Flame;
-  return Package;
-};
+import { useState } from "react";
+import { AlertTriangle, RefreshCw } from "lucide-react";
+import { LoadBoardHeader } from "./LoadBoardHeader";
+import { LoadBoardFilters } from "./LoadBoardFilters";
+import { LoadKanban } from "./LoadKanban";
+import { LoadDetailsDrawer } from "./LoadDetailsDrawer";
+import { AssignDriverModal } from "./AssignDriverModal";
+import { CreateLoadModal } from "./CreateLoadModal";
+import { useLoads } from "@/hooks/useLoads";
+import type { Load, LoadFilters } from "@/types/loads";
+import { DEFAULT_FILTERS } from "@/types/loads";
 
 export function LoadBoard() {
+  const [filters, setFilters] = useState<LoadFilters>(DEFAULT_FILTERS);
+  const [selectedLoad, setSelectedLoad] = useState<Load | null>(null);
+  const [assignLoad, setAssignLoad] = useState<Load | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
+
+  const { loads, allLoads, loading, error, realtimeStatus, refresh, usingDemo } = useLoads({
+    ...filters,
+    search: filters.search,
+  });
+
+  const handleSearch = (q: string) => setFilters((f) => ({ ...f, search: q }));
+
   return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden shadow-[var(--shadow-sm)]">
-      <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-        <div>
-          <h3 className="font-semibold">Active Load Board</h3>
-          <p className="text-[11px] text-muted-foreground">Live loads tendered, in-transit and pending POD</p>
+    <div className="space-y-4">
+      {/* Header with metrics, search, create button */}
+      <LoadBoardHeader
+        loads={allLoads}
+        realtimeStatus={realtimeStatus}
+        usingDemo={usingDemo}
+        onSearch={handleSearch}
+        searchQuery={filters.search}
+        onCreateLoad={() => setShowCreate(true)}
+      />
+
+      {/* Filters row */}
+      <div className="flex items-center gap-2">
+        <LoadBoardFilters filters={filters} onChange={setFilters} />
+        <button
+          onClick={refresh}
+          className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 px-2.5 py-2 rounded-xl border border-slate-200 dark:border-[#1e3a5f] bg-white dark:bg-[#0f1a2e] transition-colors"
+        >
+          <RefreshCw className="size-3.5" />
+          Refresh
+        </button>
+      </div>
+
+      {/* Error banner */}
+      {error && !usingDemo && (
+        <div className="flex items-start gap-2.5 rounded-xl border border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10 px-4 py-3">
+          <AlertTriangle className="size-4 text-amber-500 shrink-0 mt-0.5" />
+          <div className="text-xs text-amber-700 dark:text-amber-300">
+            <strong>Note:</strong> {error}
+          </div>
         </div>
-        <Link to="/loads" className="text-xs text-teal font-medium hover:underline inline-flex items-center gap-1">
-          View all <ArrowRight className="size-3" />
-        </Link>
-      </div>
-
-      {loads.length === 0 ? (
-        <EmptyState />
-      ) : (
-        <ul className="divide-y divide-border">
-          {loads.map((l) => {
-            const driver = drivers.find((d) => d.id === l.assignedDriverId);
-            const CIcon = commodityIcon(l.commodity);
-            return (
-              <li key={l.id} className="group hover:bg-secondary/30 transition-colors">
-                <div className="px-4 py-3.5 grid grid-cols-12 gap-3 items-center">
-                  {/* ID + commodity */}
-                  <div className="col-span-12 md:col-span-3 flex items-center gap-3 min-w-0">
-                    <div className="size-9 rounded-lg bg-gradient-to-br from-teal/15 to-orange/15 border border-border grid place-items-center text-teal shrink-0">
-                      <CIcon className="size-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-semibold text-sm tabular-nums">{l.id}</span>
-                        {l.requiresCDL && (
-                          <span className="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wider text-orange bg-orange/10 px-1.5 py-0.5 rounded">
-                            <ShieldAlert className="size-2.5" /> CDL
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-xs text-muted-foreground truncate">{l.customer} · {l.commodity}</div>
-                    </div>
-                  </div>
-
-                  {/* Route */}
-                  <div className="col-span-12 md:col-span-4">
-                    <div className="flex items-center gap-2">
-                      <div className="flex flex-col items-center pt-0.5">
-                        <span className="size-1.5 rounded-full bg-teal" />
-                        <span className="w-px h-3 bg-border my-0.5" />
-                        <span className="size-1.5 rounded-full bg-orange" />
-                      </div>
-                      <div className="flex-1 min-w-0 leading-tight">
-                        <div className="text-[13px] truncate">{l.pickupLocation}</div>
-                        <div className="text-[13px] text-muted-foreground truncate">{l.dropoffLocation}</div>
-                      </div>
-                    </div>
-                    <div className="mt-1.5 flex items-center gap-3 text-[10px] text-muted-foreground">
-                      <span className="inline-flex items-center gap-1"><MapPin className="size-2.5" />{l.estimatedMiles} mi</span>
-                      <span className="inline-flex items-center gap-1"><Clock className="size-2.5" />{l.estimatedDuration}</span>
-                      <span className="inline-flex items-center gap-1"><Truck className="size-2.5" />{l.requiredVehicleType}</span>
-                    </div>
-                  </div>
-
-                  {/* Driver */}
-                  <div className="col-span-7 md:col-span-3">
-                    {driver ? (
-                      <div className="flex items-center gap-2.5">
-                        <div className="size-7 rounded-full bg-gradient-to-br from-teal to-orange grid place-items-center text-white text-[10px] font-semibold shrink-0">
-                          {driver.name.split(" ").map((n) => n[0]).join("")}
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-[13px] font-medium truncate leading-tight">{driver.name}</div>
-                          <div className="mt-0.5"><DriverStatusBadge status={driver.status} size="xs" /></div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground rounded-md border border-dashed border-border px-2 py-1">
-                        <ShieldCheck className="size-3" /> Unassigned
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Rate + action */}
-                  <div className="col-span-5 md:col-span-2 flex items-center justify-end gap-2">
-                    <div className="text-right">
-                      <div className="text-sm font-semibold tabular-nums">${l.rate.toLocaleString()}</div>
-                      <div className="text-[10px] text-muted-foreground tabular-nums">
-                        ${(l.rate / Math.max(l.estimatedMiles, 1)).toFixed(2)}/mi
-                      </div>
-                    </div>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className={cn(
-                        "h-8 text-xs gap-1 opacity-90 group-hover:opacity-100 transition",
-                        !driver && "border-teal/40 text-teal hover:bg-teal/10",
-                      )}
-                    >
-                      {driver ? "Track" : "Assign"} <ArrowRight className="size-3" />
-                    </Button>
-                    <button className="hidden md:grid size-8 place-items-center rounded-md hover:bg-secondary text-muted-foreground">
-                      <MoreHorizontal className="size-4" />
-                    </button>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
       )}
-    </div>
-  );
-}
 
-function EmptyState() {
-  return (
-    <div className="py-16 text-center">
-      <div className="mx-auto size-12 rounded-full bg-secondary grid place-items-center text-muted-foreground">
-        <Inbox className="size-5" />
-      </div>
-      <div className="mt-3 text-sm font-medium">No active loads</div>
-      <div className="text-xs text-muted-foreground mt-1">Tendered loads will appear here in real time.</div>
+      {/* Loading */}
+      {loading && (
+        <div className="flex items-center justify-center py-16 text-sm text-slate-400 dark:text-slate-500 gap-2">
+          <RefreshCw className="size-4 animate-spin" />
+          Loading loads…
+        </div>
+      )}
+
+      {/* Kanban board */}
+      {!loading && (
+        <LoadKanban
+          loads={loads}
+          onView={setSelectedLoad}
+          onAssign={setAssignLoad}
+          onOffer={(load) => {
+            setSelectedLoad(load);
+          }}
+        />
+      )}
+
+      {/* Load Detail Drawer */}
+      {selectedLoad && (
+        <LoadDetailsDrawer
+          load={selectedLoad}
+          onClose={() => setSelectedLoad(null)}
+          onRefresh={refresh}
+          onAssign={(load) => {
+            setSelectedLoad(null);
+            setAssignLoad(load);
+          }}
+        />
+      )}
+
+      {/* Assign Driver Modal */}
+      {assignLoad && (
+        <AssignDriverModal
+          load={assignLoad}
+          onClose={() => setAssignLoad(null)}
+          onAssigned={() => {
+            setAssignLoad(null);
+            refresh();
+          }}
+        />
+      )}
+
+      {/* Create Load Modal */}
+      {showCreate && (
+        <CreateLoadModal
+          onClose={() => setShowCreate(false)}
+          onCreated={() => {
+            setShowCreate(false);
+            refresh();
+          }}
+        />
+      )}
     </div>
   );
 }

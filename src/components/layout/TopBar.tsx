@@ -1,34 +1,13 @@
-import { useState, useEffect } from "react";
-import {
-  Search,
-  Plus,
-  Bell,
-  Filter,
-  ChevronDown,
-  Radio,
-} from "lucide-react";
+import { Search, Plus, Bell, Filter, ChevronDown, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PremiumToggle } from "@/components/ui/premium-toggle";
+import { useTheme } from "@/hooks/useTheme";
 import { alerts } from "@/data/mock";
 
-
 export function TopBar() {
-  const [dark, setDark] = useState(false);
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const dark = resolvedTheme === "dark";
   const openAlerts = alerts.filter((a) => !a.resolved).length;
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const stored = localStorage.getItem("ar-theme");
-    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-    const initial = stored ? stored === "dark" : !!prefersDark;
-    setDark(initial);
-  }, []);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    document.documentElement.classList.toggle("dark", dark);
-    localStorage.setItem("ar-theme", dark ? "dark" : "light");
-  }, [dark]);
 
   return (
     <header className="h-16 shrink-0 border-b border-border bg-surface/85 backdrop-blur-xl sticky top-0 z-30">
@@ -53,7 +32,10 @@ export function TopBar() {
           <Filter className="size-4" /> Filters
         </Button>
 
-        <Button size="sm" className="gap-2 h-9 bg-orange text-orange-foreground hover:bg-orange/90 shadow-[var(--shadow-sm)]">
+        <Button
+          size="sm"
+          className="gap-2 h-9 bg-orange text-orange-foreground hover:bg-orange/90 shadow-[var(--shadow-sm)]"
+        >
           <Plus className="size-4" /> Tender Load
         </Button>
 
@@ -61,12 +43,14 @@ export function TopBar() {
 
         <PremiumToggle
           checked={dark}
-          onChange={setDark}
-          aria-label="Toggle dark mode"
+          onChange={toggleTheme}
+          aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
         />
 
-
-        <button className="size-9 rounded-md grid place-items-center hover:bg-secondary relative transition" aria-label="Alerts">
+        <button
+          className="size-9 rounded-md grid place-items-center hover:bg-secondary relative transition"
+          aria-label="Alerts"
+        >
           <Bell className="size-4" />
           {openAlerts > 0 && (
             <span className="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-1 rounded-full bg-orange text-orange-foreground text-[9px] font-bold grid place-items-center tabular-nums">
@@ -81,9 +65,7 @@ export function TopBar() {
           </div>
           <div className="hidden md:flex flex-col leading-tight">
             <span className="text-sm font-medium">L. Howard</span>
-            <span className="text-[11px] text-muted-foreground">
-              Senior Dispatcher
-            </span>
+            <span className="text-[11px] text-muted-foreground">Senior Dispatcher</span>
           </div>
           <ChevronDown className="size-4 text-muted-foreground hidden md:block" />
         </div>

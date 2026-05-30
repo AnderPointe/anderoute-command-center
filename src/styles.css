@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./styles/theme.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -14,25 +15,26 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  /* RGB-triplet variables from theme.css — wrapped in rgb() for valid CSS colors */
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
 
   --color-teal: var(--teal);
   --color-teal-foreground: var(--teal-foreground);
@@ -230,8 +232,9 @@
 
   html,
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    /* background + color now set by theme.css via rgb(var(--background/foreground)) */
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
     font-family: var(--font-display);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -284,6 +287,70 @@
     border-radius: 9999px;
     background: currentColor;
     animation: ping-soft 2s cubic-bezier(0,0,0.2,1) infinite;
+  }
+}
+
+/* ─── Theme transition ───────────────────────────────────────────────────────
+ * Only transition color-related properties, never layout (width/height/margin).
+ * Triggered by .theme-transitioning class applied during theme switch (~450 ms).
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-delay: 0s !important;
+  /* Explicitly keep layout properties instant */
+  width: auto;
+}
+
+/* Exclude elements that must never animate (canvas, video, img) */
+html.theme-transitioning canvas,
+html.theme-transitioning video,
+html.theme-transitioning img {
+  transition: none !important;
+}
+
+/* ─── View Transitions API — crossfade ────────────────────────────────────── */
+
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes theme-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+::view-transition-old(root) {
+  animation: theme-fade-out 0.22s ease forwards;
+}
+
+::view-transition-new(root) {
+  animation: theme-fade-in 0.28s ease forwards;
+}
+
+/* Preserve motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition: none !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
 

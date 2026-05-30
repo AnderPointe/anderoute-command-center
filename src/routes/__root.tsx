@@ -8,8 +8,16 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { AndetrackThemeProvider } from "@/providers/ThemeProvider";
 
 import appCss from "../styles.css?url";
+
+/**
+ * Flash-prevention script executed synchronously before React hydrates.
+ * Reads localStorage and sets .dark on <html> to avoid a white flash
+ * on dark-mode reloads. Supports both "andetrack-theme" and legacy "ar-theme".
+ */
+const FLASH_PREVENTION_SCRIPT = `(function(){try{var t=localStorage.getItem('andetrack-theme')||localStorage.getItem('ar-theme');var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches)||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
 
 function NotFoundComponent() {
   return (
@@ -100,6 +108,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* Flash prevention — must run before any CSS or React hydration */}
+        <script dangerouslySetInnerHTML={{ __html: FLASH_PREVENTION_SCRIPT }} />
         <HeadContent />
       </head>
       <body>
@@ -115,9 +125,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <Outlet />
-      </ThemeProvider>
+      {/* AndetrackThemeProvider: smooth transitions, View Transitions API, flash prevention */}
+      <AndetrackThemeProvider>
+        {/* ThemeProvider: company-level Supabase theming (existing) */}
+        <ThemeProvider>
+          <Outlet />
+        </ThemeProvider>
+      </AndetrackThemeProvider>
     </QueryClientProvider>
   );
 }
