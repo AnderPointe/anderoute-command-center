@@ -287,6 +287,70 @@
   }
 }
 
+/* ─── Theme transition ───────────────────────────────────────────────────────
+ * Only transition color-related properties, never layout (width/height/margin).
+ * Triggered by .theme-transitioning class applied during theme switch (~450 ms).
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-delay: 0s !important;
+  /* Explicitly keep layout properties instant */
+  width: auto;
+}
+
+/* Exclude elements that must never animate (canvas, video, img) */
+html.theme-transitioning canvas,
+html.theme-transitioning video,
+html.theme-transitioning img {
+  transition: none !important;
+}
+
+/* ─── View Transitions API — crossfade ────────────────────────────────────── */
+
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes theme-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+::view-transition-old(root) {
+  animation: theme-fade-out 0.22s ease forwards;
+}
+
+::view-transition-new(root) {
+  animation: theme-fade-in 0.28s ease forwards;
+}
+
+/* Preserve motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition: none !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
 /* Liquid Glass Sidebar */
 .glass-sidebar {
   --glass-bg: color-mix(in oklab, var(--sidebar) 55%, transparent);
